@@ -6,7 +6,7 @@ relevant information extracted from a dataset. The services will be provided thr
 ## Links Dataset
 
 https://www.kaggle.com/najzeko/steam-reviews-2021   
-https://www.kaggle.com/trolukovich/steam-games-complet  
+https://www.kaggle.com/trolukovich/steam-games-complete-dataset  
 
 ## Elementos do Grupo
 
