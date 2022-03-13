@@ -1,5 +1,5 @@
-import SwaggerUI from 'swagger-ui'
-import 'swagger-ui/dist/swagger-ui.css';
+import SwaggerUI from 'API-swagger'
+import 'API-swagger/dist/swagger-ui.css';
 
 const spec = require('./swagger-config.yaml');
 

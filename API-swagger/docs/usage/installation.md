@@ -9,12 +9,12 @@ We publish two modules to npm: **`swagger-ui`** and **`swagger-ui-dist`**.
 **`swagger-ui`** is meant for consumption by JavaScript web projects that include module bundlers, such as Webpack, Browserify, and Rollup. Its main file exports Swagger UI's main function, and the module also includes a namespaced stylesheet at `swagger-ui/dist/swagger-ui.css`. Here's an example:
 
 ```javascript
-import SwaggerUI from 'swagger-ui'
+import SwaggerUI from 'API-swagger'
 // or use require if you prefer
-const SwaggerUI = require('swagger-ui')
+const SwaggerUI = require('API-swagger')
 
 SwaggerUI({
-  dom_id: '#myDomId'
+    dom_id: '#myDomId'
 })
 ```
 
