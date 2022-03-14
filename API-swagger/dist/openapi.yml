@@ -13,32 +13,80 @@ info:
     url: "https://openweathermap.org/price"
 
 servers:
-  - url: "https://api.openweathermap.org/data/2.5"
+- url: "http://localhost/"
 
 paths:
-  ############################EXAMPLE##################################
-  /weather:
+  /searchGames:
     get:
       tags:
-        - Example Current Weather Data
-      summary: "Call current weather data for one location"
-      description: "Access current weather data for any location on Earth including over 200,000 cities! Current weather is frequently updated based on global models and data from more than 40,000 weather stations."
-      operationId: CurrentWeatherData
+      - Searchs
+      summary: "Get a game"
+      description: "Get all information about a specific game"
+      operationId: GameSearch
       parameters:
-        - $ref: '#/components/schemas/Game'
+        - $ref: '#/components/parameters/review_id'
       responses:
         "200":
           description: Successful response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/200'
+                $ref: '#/components/schemas/Game'
         "404":
           description: Not found response
           content:
             text/plain:
               schema:
-                title: Weather not found
+                title: Game not found
+                type: string
+                example: Not found
+  /searchReviews:
+    get:
+      tags:
+        - Searchs
+      summary: "Get a review"
+      description: "Get all information about a specific review"
+      operationId: ReviewSearch
+      parameters:
+        - $ref: '#/components/parameters/app_id'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+        "404":
+          description: Not found response
+          content:
+            text/plain:
+              schema:
+                title: Review not found
+                type: string
+                example: Not found
+  /searchReview/{id}:
+    get:
+      tags:
+      - Example Current Weather Data
+      summary: "Call current weather data for one location"
+      description: "Access current weather data for any location on Earth including over 200,000 cities! Current weather is frequently updated based on global models and data from more than 40,000 weather stations."
+      operationId: CurrentWeatherData
+      parameters:
+        - $ref: '#/components/parameters/review_id'
+        - $ref: '#/components/parameters/app_id'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+        "404":
+          description: Not found response
+          content:
+            text/plain:
+              schema:
+                title: Review not found
                 type: string
                 example: Not found
 
@@ -106,21 +154,171 @@ security:
   - app_id: []
 
 tags:
-  - name: Example Current Weather Data
-    description: "Get current weather details"
+  - name: Searchs
+    description: "Search Game or Reviews"
 
 externalDocs:
-  description: API Documentation
-  url: https://openweathermap.org/api
+  description: GitHub
+  url: https://github.com/mdmourao/CloudProject
 
 components:
   parameters:
+    review_id:
+      name: review_id
+      in: query
+      description: The unique id of the recommendation
+      example: 85184605
+      schema:
+        type: number
+    app_id:
+      name: app_id
+      in: query
+      description: The unique id of the app (game)
+      example: 292030
+      schema:
+        type: number
+    app_name:
+      name: app_name
+      in: query
+      description: The name of the app (game)
+      example: 'The Witcher 3: Wild Hunt'
+      schema:
+        type: string
+    language:
+      name: language
     lang:
       name: lang
       in: query
-      description: '**Language**. *Example: en*. You can use lang parameter to get the output in your language. We support the following languages that you can use with the corresponded lang values: Arabic - `ar`, Bulgarian - `bg`, Catalan - `ca`, Czech - `cz`, German - `de`, Greek - `el`, English - `en`, Persian (Farsi) - `fa`, Finnish - `fi`, French - `fr`, Galician - `gl`, Croatian - `hr`, Hungarian - `hu`, Italian - `it`, Japanese - `ja`, Korean - `kr`, Latvian - `la`, Lithuanian - `lt`, Macedonian - `mk`, Dutch - `nl`, Polish - `pl`, Portuguese - `pt`, Romanian - `ro`, Russian - `ru`, Swedish - `se`, Slovak - `sk`, Slovenian - `sl`, Spanish - `es`, Turkish - `tr`, Ukrainian - `ua`, Vietnamese - `vi`, Chinese Simplified - `zh_cn`, Chinese Traditional - `zh_tw`.'
+      description: Language the user indicated when authoring the review
+      example: 'english'
       schema:
         type: string
+    review:
+      name: review
+      in: query
+      description: Text of written review
+      example: 'One of the best RPGs of all time, worthy of any collection'
+      schema:
+        type: string
+    timestamp_created:
+      name: timestamp_created
+      in: query
+      description: Date the review was created (unix timestamp)
+      example: 1611379970
+      schema:
+        type: number
+    timestamp_updated:
+      name: timestamp_updated
+      in: query
+      description: Date the review was last updated (unix timestamp)
+      example: 1611379970
+      schema:
+        type: number
+    recommended:
+      name: name_name
+      in: query
+      description: TRUE if the user recommends the game
+      example: true
+      schema:
+        type: boolean
+    votes_helpful:
+      name: votes_helpful
+      in: query
+      description: The number of users that found this review helpful
+      example: 0
+      schema:
+        type: number
+    votes_funny:
+      name: votes_funny
+      in: query
+      description: The number of users that found this review funny
+      example: 0
+      schema:
+        type: number
+    weighted_vote_score:
+      name: weighted_vote_score
+      in: query
+      description: Helpfulness score
+      example: 0.0
+      schema:
+        type: number
+    comment_count:
+      name: comment_count
+      in: query
+      description: Number of comments posted on this review
+      example: 0
+      schema:
+        type: number
+    steam_purchase:
+      name: steam_purchase
+      in: query
+      description: TRUE if the user purchased the game on Steam
+      example: true
+      schema:
+        type: boolean
+    received_for_free:
+      name: received_for_free
+      in: query
+      description: TRUE if the user checked a box saying they got the app for free
+      example: false
+      schema:
+        type: boolean
+    written_during_early_access:
+      name: written_during_early_access
+      in: query
+      description: TRUE if the user posted this review while the game was in Early Access
+      example: false
+      schema:
+        type: boolean
+    author_steamid:
+      name: author_steamid
+      in: query
+      description: The user’s SteamID
+      example: 76561199054755373
+      schema:
+        type: number
+    author_num_games_owned:
+      name: author_num_games_owned
+      in: query
+      description: Number of games owned by the user
+      example: 5
+      schema:
+        type: number
+    author_num_reviews:
+      name: author_num_reviews
+      in: query
+      description: Number of reviews written by the user
+      example: 3
+      schema:
+        type: number
+    author_playtime_forever:
+      name: author_playtime_forever
+      in: query
+      description: Lifetime playtime tracked
+      example: 5587.0
+      schema:
+        type: number
+    author_playtime_last_two_weeks:
+      name: author_playtime_last_two_weeks
+      in: query
+      description: Playtime tracked in the past two weeks
+      example: 3200.0
+      schema:
+        type: number
+    author_playtime_at_review:
+      name: name_name
+      in: query
+      description: Playtime when the review was written
+      example: 5524.0
+      schema:
+        type: number
+    author_last_played:
+      name: author_last_played
+      in: query
+      description: Time for when the user last played
+      example: 1611383744.0
+      schema:
+        type: number
         enum: [ar, bg, ca, cz, de, el, en, fa, fi, fr, gl, hr, hu, it, ja, kr, la, lt, mk, nl, pl, pt, ro, ru, se, sk, sl, es, tr, ua, vi, zh_cn, zh_tw]
         default: "en"
     url:
@@ -360,6 +558,7 @@ components:
           type: number
           description: Time for when the user last played
           example: 1611383744.0
+
     Game:
       title: Game
       type: object
