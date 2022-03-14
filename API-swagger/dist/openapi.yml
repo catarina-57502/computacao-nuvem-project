@@ -17,6 +17,7 @@ paths:
       description: "Search games with specific filters"
       operationId: GameSearch
       parameters:
+        -
         - $ref: '#/components/parameters/types'
         - $ref: '#/components/parameters/name'
         - $ref: '#/components/parameters/release_date'
@@ -153,7 +154,6 @@ paths:
         - $ref: '#/components/parameters/popular_tags'
         - $ref: '#/components/parameters/genre'
         - $ref: '#/components/parameters/original_price'
-
       responses:
         "200":
           description: Successful response
@@ -199,10 +199,128 @@ paths:
                 type: string
                 example: Not found
 
+######################USERS############################
+  /addUser:
+    post:
+      tags:
+        - User Management
+      summary: Gets the user's login
+      description: ''
+      operationId: ''
+      parameters:
+        - name: id
+          in: query
+          description: Unique ID for each user
+          required: true
+          schema:
+            type: string
+        - name: nickname
+          in: query
+          description: Unique nickname for each user
+          required: true
+          schema:
+            type: string
+        - name: email
+          in: query
+          description: Unique email for each user
+          required: true
+          schema:
+            type: string
+        - name: password
+          in: query
+          description: Unique password for each user
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+        '404':
+          description: Not found
+  /editUser:
+    summary: Enable user's to edit their accounts
+    post:
+      summary: Enables the users to edit their accounts
+      description: ''
+      operationId: ''
+      parameters:
+        - name: id
+          in: query
+          description: Unique ID for each user
+          required: false
+          schema:
+            type: string
+        - name: nickname
+          in: query
+          description: Unique nickname for each user
+          required: false
+          schema:
+            type: string
+        - name: email
+          in: query
+          description: Unique email for each user
+          required: false
+          schema:
+            type: string
+        - name: password
+          in: query
+          description: Unique password for each user
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+        '404':
+          description: Not found
+      tags:
+        - User Management
+  /login:
+    summary: login user's
+    post:
+      summary: Enables already registred users to login
+      description: ''
+      operationId: ''
+      parameters:
+        - name: email
+          in: query
+          description: Unique email for each user
+          required: true
+          schema:
+            type: string
+        - name: password
+          in: query
+          description: Unique password for each user
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response + generate login token
+        '404':
+          description: Not found
+      tags:
+        - User Management
+  /logout:
+    summary: Enables user's to logout
+    get:
+      summary: Enables users to logout
+      description: ''
+      operationId: ''
+      responses:
+        '200':
+          description: Successful response + force the expire of the login token
+        '404':
+          description: Not found
+      tags:
+        - User Management
+
+
 security:
   - app_id: []
 
 tags:
+  - name: User Management
   - name: Searchs
     description: "Search Game or Reviews"
 
@@ -697,4 +815,3 @@ components:
       description: "API key to authorize requests."
       name: appid
       in: query
-
