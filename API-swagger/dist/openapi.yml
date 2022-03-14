@@ -140,10 +140,10 @@ paths:
                 example: Not found
 
 ######################SUGESTIONS############################
-  /sugestionsGames:
+  /suggestionsGames:
     get:
       tags:
-        - Sugestions
+        - Suggestions
       summary: "Call personalized top 10 games"
       description: "Return personalized top 10 games on Steam"
       operationId: BestGamesByFilters
@@ -173,10 +173,10 @@ paths:
                 type: string
                 example: Not found
 
-  /sugestionsReviews:
+  /suggestionsReviews:
     get:
       tags:
-        - Sugestions
+        - Suggestions
       summary: "Call personalized top 10 reviews of a given game"
       description: "Return personalized top 10 reviews of a given game on Steam"
       operationId: BestGameReviewsByFilters
