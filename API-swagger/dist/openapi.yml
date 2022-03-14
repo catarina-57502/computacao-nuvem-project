@@ -141,10 +141,10 @@ paths:
                 example: Not found
 
 ######################SUGESTIONS############################
-  /sugestionsGames:
+  /suggestionsGames:
     get:
       tags:
-        - Top 10 Games by preferences Data
+        - Suggestions
       summary: "Call personalized top 10 games"
       description: "Return personalized top 10 games on Steam"
       operationId: BestGamesByFilters
@@ -160,7 +160,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/200'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Game'
+
         "404":
           description: Not found response
           content:
@@ -170,10 +173,10 @@ paths:
                 type: string
                 example: Not found
 
-  /sugestionsReviews:
+  /suggestionsReviews:
     get:
       tags:
-        - Top 10 Reviews of a given game by preferences Data
+        - Suggestions
       summary: "Call personalized top 10 reviews of a given game"
       description: "Return personalized top 10 reviews of a given game on Steam"
       operationId: BestGameReviewsByFilters
@@ -189,7 +192,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/200'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Review'
         "404":
           description: Not found response
           content:
