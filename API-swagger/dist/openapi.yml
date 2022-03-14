@@ -20,11 +20,51 @@ paths:
     get:
       tags:
       - Searchs
-      summary: "Get a game"
-      description: "Get all information about a specific game"
+      summary: "Get multiple games"
+      description: "Get all games with specific data"
       operationId: GameSearch
       parameters:
-        - $ref: '#/components/parameters/review_id'
+        - $ref: '#/components/parameters/types'
+        - $ref: '#/components/parameters/name'
+        - $ref: '#/components/parameters/release_date'
+        - $ref: '#/components/parameters/developer'
+        - $ref: '#/components/parameters/publisher'
+        - $ref: '#/components/parameters/popular_tags'
+        - $ref: '#/components/parameters/languages'
+        - $ref: '#/components/parameters/genre'
+        - $ref: '#/components/parameters/original_price'
+        - $ref: '#/components/parameters/discount_price'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Game'
+        "404":
+          description: Not found response
+          content:
+            text/plain:
+              schema:
+                title: Game not found
+                type: string
+                example: Not found
+  /searchGame/{url}:
+    get:
+      tags:
+        - Searchs
+      summary: "Get game information from URL"
+      description: "Get specific game data with the game URL"
+      operationId: GameSearchFromID
+      parameters:
+        - name: url
+          in: path
+          description: URL of the game
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: Successful response
@@ -40,22 +80,34 @@ paths:
                 title: Game not found
                 type: string
                 example: Not found
+
   /searchReviews:
     get:
       tags:
         - Searchs
-      summary: "Get a review"
-      description: "Get all information about a specific review"
+      summary: "Get multiple reviews"
+      description: "Get all reviews about a specific data"
       operationId: ReviewSearch
       parameters:
         - $ref: '#/components/parameters/app_id'
+        - $ref: '#/components/parameters/app_name'
+        - $ref: '#/components/parameters/language'
+        - $ref: '#/components/parameters/timestamp_created'
+        - $ref: '#/components/parameters/timestamp_updated'
+        - $ref: '#/components/parameters/votes_helpful'
+        - $ref: '#/components/parameters/votes_funny'
+        - $ref: '#/components/parameters/weighted_vote_score'
+        - $ref: '#/components/parameters/comment_count'
+        - $ref: '#/components/parameters/author_steamid'
       responses:
         "200":
           description: Successful response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Review'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Review'
         "404":
           description: Not found response
           content:
@@ -67,13 +119,17 @@ paths:
   /searchReview/{id}:
     get:
       tags:
-      - Example Current Weather Data
-      summary: "Call current weather data for one location"
-      description: "Access current weather data for any location on Earth including over 200,000 cities! Current weather is frequently updated based on global models and data from more than 40,000 weather stations."
-      operationId: CurrentWeatherData
+        - Searchs
+      summary: "Get review from id"
+      description: "Get specific review with the review id"
+      operationId: ReviewSearchFromID
       parameters:
-        - $ref: '#/components/parameters/review_id'
-        - $ref: '#/components/parameters/app_id'
+        - name: id
+          in: path
+          description: ID of the game
+          required: true
+          schema:
+            type: number
       responses:
         "200":
           description: Successful response
@@ -186,8 +242,6 @@ components:
         type: string
     language:
       name: language
-    lang:
-      name: lang
       in: query
       description: Language the user indicated when authoring the review
       example: 'english'
@@ -215,7 +269,7 @@ components:
       schema:
         type: number
     recommended:
-      name: name_name
+      name: recommended
       in: query
       description: TRUE if the user recommends the game
       example: true
@@ -306,7 +360,7 @@ components:
       schema:
         type: number
     author_playtime_at_review:
-      name: name_name
+      name: author_playtime_at_review
       in: query
       description: Playtime when the review was written
       example: 5524.0
@@ -319,6 +373,7 @@ components:
       example: 1611383744.0
       schema:
         type: number
+
     url:
       name: url
       in: query
