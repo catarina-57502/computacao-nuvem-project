@@ -16,12 +16,13 @@ servers:
 - url: "http://localhost/"
 
 paths:
+######################SEARCHS############################
   /searchGames:
     get:
       tags:
       - Searchs
-      summary: "Get multiple games"
-      description: "Get all games with specific data"
+      summary: "Search multiple games"
+      description: "Search games with specific filters"
       operationId: GameSearch
       parameters:
         - $ref: '#/components/parameters/types'
@@ -85,8 +86,8 @@ paths:
     get:
       tags:
         - Searchs
-      summary: "Get multiple reviews"
-      description: "Get all reviews about a specific data"
+      summary: "Search multiple reviews"
+      description: "Search all reviews using filters"
       operationId: ReviewSearch
       parameters:
         - $ref: '#/components/parameters/app_id'
