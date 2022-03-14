@@ -143,7 +143,7 @@ paths:
   /sugestionsGames:
     get:
       tags:
-        - Top 10 Games by preferences Data
+        - Sugestions
       summary: "Call personalized top 10 games"
       description: "Return personalized top 10 games on Steam"
       operationId: BestGamesByFilters
@@ -176,7 +176,7 @@ paths:
   /sugestionsReviews:
     get:
       tags:
-        - Top 10 Reviews of a given game by preferences Data
+        - Sugestions
       summary: "Call personalized top 10 reviews of a given game"
       description: "Return personalized top 10 reviews of a given game on Steam"
       operationId: BestGameReviewsByFilters
