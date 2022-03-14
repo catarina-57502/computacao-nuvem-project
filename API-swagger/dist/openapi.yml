@@ -160,7 +160,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/200'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Game'
+
         "404":
           description: Not found response
           content:
@@ -189,7 +192,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/200'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Review'
         "404":
           description: Not found response
           content:
