@@ -13,13 +13,14 @@ info:
     url: "https://openweathermap.org/price"
 
 servers:
-- url: "https://api.openweathermap.org/data/2.5"
+  - url: "https://api.openweathermap.org/data/2.5"
 
 paths:
+  ############################EXAMPLE##################################
   /weather:
     get:
       tags:
-      - Example Current Weather Data
+        - Example Current Weather Data
       summary: "Call current weather data for one location"
       description: "Access current weather data for any location on Earth including over 200,000 cities! Current weather is frequently updated based on global models and data from more than 40,000 weather stations."
       operationId: CurrentWeatherData
@@ -40,8 +41,69 @@ paths:
                 title: Weather not found
                 type: string
                 example: Not found
+
+######################SUGESTIONS############################
+  /sugestionsGames:
+    get:
+      tags:
+        - Example Top 10 Games by preferences Data
+      summary: "Call personalized top 10 games"
+      description: "Return personalized top 10 games on Steam"
+      operationId: BestGamesByFilters
+      parameters:
+        - $ref: '#/components/parameters/release_date'
+        - $ref: '#/components/parameters/developer'
+        - $ref: '#/components/parameters/popular_tags'
+        - $ref: '#/components/parameters/genre'
+        - $ref: '#/components/parameters/original_price'
+
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/200'
+        "404":
+          description: Not found response
+          content:
+            text/plain:
+              schema:
+                title: Games not found
+                type: string
+                example: Not found
+
+  /sugestionsReviews:
+    get:
+      tags:
+        - Example Top 10 Reviews of a given game by preferences Data
+      summary: "Call personalized top 10 reviews of a given game"
+      description: "Return personalized top 10 reviews of a given game on Steam"
+      operationId: BestGameReviewsByFilters
+      parameters:
+        - $ref: '#/components/parameters/app_name'
+        - $ref: '#/components/parameters/timestamp_updated'
+        - $ref: '#/components/parameters/recommended'
+        - $ref: '#/components/parameters/author_playtime_at_review'
+
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/200'
+        "404":
+          description: Not found response
+          content:
+            text/plain:
+              schema:
+                title: Reviews not found
+                type: string
+                example: Not found
+
 security:
-- app_id: []
+  - app_id: []
 
 tags:
   - name: Example Current Weather Data
@@ -52,10 +114,7 @@ externalDocs:
   url: https://openweathermap.org/api
 
 components:
-
   parameters:
-
-
     lang:
       name: lang
       in: query
@@ -64,6 +123,146 @@ components:
         type: string
         enum: [ar, bg, ca, cz, de, el, en, fa, fi, fr, gl, hr, hu, it, ja, kr, la, lt, mk, nl, pl, pt, ro, ru, se, sk, sl, es, tr, ua, vi, zh_cn, zh_tw]
         default: "en"
+    url:
+      name: url
+      in: query
+      description: URL to the game on the steam store
+      example: 'https://store.steampowered.com/app/379720/DOOM/'
+      schema:
+        type: string
+    types:
+      name: types
+      in: query
+      description: Type of the product
+      example: 'app'
+      schema:
+        type: string
+    name:
+      name: name
+      in: query
+      description: Name of the game
+      example: 'DOOM'
+      schema:
+        type: string
+    desc_snippet:
+      name: desc_snippet
+      in: query
+      description: Description of the game
+      example: 'Now includes all three premium DLC packs (Unto the Evil, Hell Followed, and Bloodfall), maps, modes, and weapons, as well as all feature updates including Arcade Mode, Photo Mode, and the latest Update 6.66, which brings further multiplayer improvements as well as revamps multiplayer progression.'
+      schema:
+        type: string
+    recent_reviews:
+      name: recent_reviews
+      in: query
+      description: Recent reviews of the game
+      example: 'Very Positive,(554),- 89% of the 554 user reviews in the last 30 days are positive.'
+      schema:
+        type: string
+    all_reviews:
+      name: all_reviews
+      in: query
+      description: All reviews of the game
+      example: 'Very Positive,(42,550),- 92% of the 42,550 user reviews for this game are positive.'
+      schema:
+        type: string
+    release_date:
+      name: release_date
+      in: query
+      description: Date of release
+      example: 'May 12, 2016'
+      schema:
+        type: string
+    developer:
+      name: developer
+      in: query
+      description: Developer name
+      example: 'id Software'
+      schema:
+        type: string
+    publisher:
+      name: publisher
+      in: query
+      description: Publisher name
+      example: 'Bethesda Softworks,Bethesda Softworks'
+      schema:
+        type: string
+    popular_tags:
+      name: popular_tags
+      in: query
+      description: All tags of the game
+      example: 'FPS,Gore,Action,Demons,Shooter,First-Person,Great Soundtrack,Multiplayer,Singleplayer,Fast-Paced,Sci-fi,Horror,Classic,Atmospheric,Difficult,Blood,Remake,Zombies,Co-op,Memes'
+      schema:
+        type: string
+    game_details:
+      name: game_details
+      in: query
+      description: Game details
+      example: 'Single-player,Multi-player,Co-op,Steam Achievements,Steam Trading Cards,Partial Controller Support,Steam Cloud'
+      schema:
+        type: string
+    languages:
+      name: languages
+      in: query
+      description: All supported languages
+      example: 'English,French,Italian,German,Spanish - Spain,Japanese,Polish,Portuguese - Brazil,Russian,Traditional Chinese'
+      schema:
+        type: string
+    achievements:
+      name: achievements
+      in: query
+      description: Total number of achievements
+      example: 54
+      schema:
+        type: number
+    genre:
+      name: genre
+      in: query
+      description: Game genre
+      example: 'Action'
+      schema:
+        type: string
+    game_description:
+      name: game_description
+      in: query
+      description: Description of the game
+      example: 'About This Game Developed by id software, the studio that pioneered the first-person shooter genre and created multiplayer Deathmatch, DOOM returns as a brutally fun and challenging modern-day shooter experience. Relentless demons, impossibly destructive guns, and fast, fluid movement provide the foundation for intense, first-person combat – whether you’re obliterating demon hordes through the depths of Hell in the single-player campaign, or competing against your friends in numerous multiplayer modes. Expand your gameplay experience using DOOM SnapMap game editor to easily create, play, and share your content with the world. STORY: You’ve come here for a reason.'
+      schema:
+        type: string
+    mature_content:
+      name: mature_content
+      in: query
+      description: Mature Content Description
+      example: 'The developers describe the content like this:  This Game may contain content not appropriate for all ages, or may not be appropriate for viewing at work: Frequent Violence or Gore, General Mature Content'
+      schema:
+        type: string
+    minimum_requirements:
+      name: minimum_requirements
+      in: query
+      description: Specification of minimum requirements
+      example: 'Minimum:,OS:,Windows 7/8.1/10 (64-bit versions),Processor:,Intel Core i5-2400/AMD FX-8320 or better,Memory:,8 GB RAM,Graphics:,NVIDIA GTX 670 2GB/AMD Radeon HD 7870 2GB or better,Storage:,55 GB available space,Additional Notes:,Requires Steam activation and broadband internet connection for Multiplayer and SnapMap'
+      schema:
+        type: string
+    recommended_requirements:
+      name: recommended_requirements
+      in: query
+      description: Specification of recommended requirements
+      example: 'Recommended:,OS:,Windows 7/8.1/10 (64-bit versions),Processor:,Intel Core i7-3770/AMD FX-8350 or better,Memory:,8 GB RAM,Graphics:,NVIDIA GTX 970 4GB/AMD Radeon R9 290 4GB or better,Storage:,55 GB available space,Additional Notes:,Requires Steam activation and broadband internet connection for Multiplayer and SnapMap'
+      schema:
+        type: string
+    original_price:
+      name: original_price
+      in: query
+      description: Original price (USD)
+      example: '$19.99'
+      schema:
+        type: string
+    discount_price:
+      name: discount_price
+      in: query
+      description: Discount price (USD)
+      example: '$14.99'
+      schema:
+        type: string
 
   schemas:
     "200":
