@@ -8,7 +8,7 @@ servers:
 - url: "http://localhost/"
 
 paths:
-######################SEARCHS############################
+  ######SEARCHS######
   /searchGames:
     get:
       tags:
@@ -44,8 +44,9 @@ paths:
                 title: Game not found
                 type: string
                 example: Not found
-
-  /searchGame/{url}:
+        '500':
+          description: Server Error
+  /getGame/{url}:
     get:
       tags:
         - Searchs
@@ -74,6 +75,8 @@ paths:
                 title: Game not found
                 type: string
                 example: Not found
+        '500':
+          description: Server Error
 
   /searchReviews:
     get:
@@ -110,8 +113,9 @@ paths:
                 title: Review not found
                 type: string
                 example: Not found
-
-  /searchReview/{id}:
+        '500':
+          description: Server Error
+  /getReview/{id}:
     get:
       tags:
         - Searchs
@@ -133,15 +137,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/Review'
         "404":
-          description: Not found response
+          description: Review not found
           content:
             text/plain:
               schema:
                 title: Review not found
                 type: string
                 example: Not found
+        '500':
+          description: Server Error
 
-######################SUGESTIONS############################
+  ######SUGESTIONS######
   /suggestionsGames:
     get:
       tags:
@@ -172,6 +178,8 @@ paths:
                 title: Games not found
                 type: string
                 example: Not found
+        '500':
+          description: Server Error
 
   /suggestionsReviews:
     get:
@@ -202,15 +210,17 @@ paths:
                 title: Reviews not found
                 type: string
                 example: Not found
+        '500':
+          description: Server Error
 
-######################USERS############################
+  ######USERS######
   /addUser:
     post:
       tags:
         - User Management
-      summary: Gets the user's login
-      description: ''
-      operationId: ''
+      summary: 'User register'
+      description: 'Allows the user to register'
+      operationId: AddUser
       parameters:
         - name: id
           in: query
@@ -220,7 +230,7 @@ paths:
             type: string
         - name: nickname
           in: query
-          description: Unique nickname for each user
+          description: Nickname for each user
           required: true
           schema:
             type: string
@@ -238,20 +248,31 @@ paths:
             type: string
       responses:
         '200':
-          description: Successful response
+          description: User created
         '404':
           description: Not found
 
   /editUser:
-    summary: Enable user's to edit their accounts
     post:
-      summary: Enables the users to edit their accounts
-      description: ''
-      operationId: ''
+      summary: 'User edit account'
+      description: 'Enables the users to edit their accounts'
+      operationId: EditUser
       parameters:
-        - name: id
+        - name: token
           in: query
-          description: Unique ID for each user
+          description: Token for each user
+          required: true
+          schema:
+            type: string
+        - name: password
+          in: query
+          description: Unique password for each user
+          required: true
+          schema:
+            type: string
+        - name: new_password
+          in: query
+          description: New Password
           required: false
           schema:
             type: string
@@ -264,12 +285,6 @@ paths:
         - name: email
           in: query
           description: Unique email for each user
-          required: false
-          schema:
-            type: string
-        - name: password
-          in: query
-          description: Unique password for each user
           required: false
           schema:
             type: string
@@ -282,11 +297,13 @@ paths:
         - User Management
 
   /login:
-    summary: login user's
     post:
-      summary: Enables already registred users to login
-      description: ''
-      operationId: ''
+      summary: 'Users login'
+      description: 'Enables already registered users to login'
+      operationId: UserLogin
+      security:
+        - AuthUser:
+            - operations_user
       parameters:
         - name: email
           in: query
@@ -305,22 +322,405 @@ paths:
           description: Successful response + generate login token
         '404':
           description: Not found
+        '500':
+          description: Server Error
       tags:
         - User Management
 
   /logout:
-    summary: Enables user's to logout
     get:
-      summary: Enables users to logout
-      description: ''
-      operationId: ''
+      summary: Users logout
+      description: 'Enables users to logout'
+      operationId: UserLogout
+      security:
+        - AuthUser:
+            - operations_user
       responses:
         '200':
-          description: Successful response + force the expire of the login token
+          description: Successful logout
         '404':
           description: Not found
+        '500':
+          description: Server Error
       tags:
         - User Management
+  ######LIBRARY######
+
+  /getGames:
+    get:
+      tags:
+        - Library
+      summary: "List all games in your library"
+      operationId: getGame
+      ## Auth User to get library info
+      security:
+        - AuthUser:
+            - operations_library
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Game'
+        "404":
+          description: Not found response
+          content:
+            text/plain:
+              schema:
+                title: Library not found
+                type: string
+                example: Not found
+        "500":
+          description: Error
+          content:
+            text/plain:
+              schema:
+                title: Error
+                type: string
+                example: Internal Server Error
+
+  /addGame:
+    post:
+      tags:
+        - Library
+      summary: "Add a game to your library"
+      operationId: AddGame
+      security:
+        - AuthUser:
+            - operations_library
+      parameters:
+        - $ref: '#/components/parameters/app_name'
+        - $ref: '#/components/parameters/app_id'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+        "404":
+          description: Game not found
+          content:
+            text/plain:
+              schema:
+                title: Game not found
+                type: string
+                example: Not found
+        "500":
+          description: Error
+          content:
+            text/plain:
+              schema:
+                title: Error
+                type: string
+                example: Internal Server Error
+
+  /delGame:
+    delete:
+      tags:
+        - Library
+      summary: "Remove a game in your library"
+      operationId: DelGame
+      security:
+        - AuthUser:
+            - operations_library
+      parameters:
+        - $ref: '#/components/parameters/app_name'
+        - $ref: '#/components/parameters/app_id'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                title: Ok
+                type: string
+                example: Game removed
+        "404":
+          description: Game not found
+          content:
+            text/plain:
+              schema:
+                title: Game not found
+                type: string
+                example: Not found
+        "500":
+          description: Error
+          content:
+            text/plain:
+              schema:
+                title: Error
+                type: string
+                example: Internal Server Error
+
+  ######REVIEWS######
+
+  /getReview:
+    get:
+      tags:
+        - Reviews
+      summary: "List all your reviews"
+      operationId: GetReview
+      security:
+        - AuthUser:
+            - operations_reviews
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Review'
+        "404":
+          description: Reviews not found
+          content:
+            text/plain:
+              schema:
+                title: Reviews not found
+                type: string
+                example: Not found
+        "500":
+          description: Error
+          content:
+            text/plain:
+              schema:
+                title: Error
+                type: string
+                example: Internal Server Error
+
+  /addReview:
+    post:
+      tags:
+        - Reviews
+      summary: "Add a review"
+      operationId: AddReview
+      security:
+        - AuthUser:
+            - operations_reviews
+      parameters:
+        - $ref: '#/components/parameters/review_id'
+        - $ref: '#/components/parameters/app_id'
+        - $ref: '#/components/parameters/app_name'
+        - $ref: '#/components/parameters/language'
+        - $ref: '#/components/parameters/review'
+        - $ref: '#/components/parameters/timestamp_created'
+        - $ref: '#/components/parameters/timestamp_updated'
+        - $ref: '#/components/parameters/recommended'
+        - $ref: '#/components/parameters/steam_purchase'
+        - $ref: '#/components/parameters/received_for_free'
+        - $ref: '#/components/parameters/written_during_early_access'
+        - $ref: '#/components/parameters/author_steamid'
+        - $ref: '#/components/parameters/author_playtime_at_review'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+        "500":
+          description: Error
+          content:
+            text/plain:
+              schema:
+                title: Error
+                type: string
+                example: Internal Server Error
+
+  /editReview:
+    post:
+      tags:
+        - Reviews
+      summary: "Edit a review"
+      operationId: EditReview
+      security:
+        - AuthUser:
+            - operations_reviews
+      parameters:
+        - $ref: '#/components/parameters/review_id'
+        - $ref: '#/components/parameters/language'
+        - $ref: '#/components/parameters/review'
+        - $ref: '#/components/parameters/timestamp_updated'
+        - $ref: '#/components/parameters/recommended'
+        - $ref: '#/components/parameters/steam_purchase'
+        - $ref: '#/components/parameters/received_for_free'
+        - $ref: '#/components/parameters/written_during_early_access'
+        - $ref: '#/components/parameters/author_playtime_at_review'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+        "404":
+          description: Not found response
+          content:
+            text/plain:
+              schema:
+                title: Review not found
+                type: string
+                example: Not found
+        "500":
+          description: Error
+          content:
+            text/plain:
+              schema:
+                title: Error
+                type: string
+                example: Internal Server Error
+
+  /delReview:
+    delete:
+      tags:
+        - Reviews
+      summary: "Delete a review"
+      operationId: DelReview
+      security:
+        - AuthUser:
+            - operations_reviews
+      parameters:
+        - $ref: '#/components/parameters/review_id'
+      responses:
+        "200":
+          description: Review deleted
+          content:
+            application/json:
+              schema:
+                title: Ok
+                type: string
+                example: Review deleted
+        "404":
+          description: Review not found
+          content:
+            text/plain:
+              schema:
+                title: Review not found
+                type: string
+                example: Not found
+        "500":
+          description: Error
+          content:
+            text/plain:
+              schema:
+                title: Error
+                type: string
+                example: Internal Server Error
+
+  ######WISHLIST######
+
+  /getGame_wish:
+    get:
+      tags:
+        - WishList
+      summary: "List all games in your wishlist"
+      operationId: GetGameWish
+      security:
+        - AuthUser:
+            - operations_wishlist
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Game'
+        "404":
+          description: Wishlist not found
+          content:
+            text/plain:
+              schema:
+                title: Wishlist not found
+                type: string
+                example: Not found
+        "500":
+          description: Error
+          content:
+            text/plain:
+              schema:
+                title: Error
+                type: string
+                example: Internal Server Error
+
+  /addGame_wish:
+    post:
+      tags:
+        - WishList
+      summary: "Add a game to your wish list"
+      operationId: AddGame_wish
+      security:
+        - AuthUser:
+            - operations_wishlist
+      parameters:
+        - $ref: '#/components/parameters/app_id'
+        - $ref: '#/components/parameters/app_name'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+        "404":
+          description: Wishlist or Game not found
+          content:
+            text/plain:
+              schema:
+                title: Wishlist or Game not found
+                type: string
+                example: Not found
+        "500":
+          description: Error
+          content:
+            text/plain:
+              schema:
+                title: Error
+                type: string
+                example: Internal Server Error
+
+  /delGame_wish:
+    delete:
+      tags:
+        - WishList
+      summary: "Delete a game from your wishlist"
+      operationId: DelGame_wish
+      security:
+        - AuthUser:
+            - operations_wishlist
+      parameters:
+        - $ref: '#/components/parameters/app_id'
+        - $ref: '#/components/parameters/app_name'
+      responses:
+        "200":
+          description: Game removed from wishlist
+          content:
+            application/json:
+              schema:
+                title: Ok
+                type: string
+        "404":
+          description: Not found response
+          content:
+            text/plain:
+              schema:
+                title: Game or wishlist not found
+                type: string
+                example: Not found
+        "500":
+          description: Error
+          content:
+            text/plain:
+              schema:
+                title: Error
+                type: string
+                example: Internal Server Error
 
 ######################ADMIN############################
   /admin/games:
@@ -429,6 +829,12 @@ tags:
     description: "Search Game or Reviews"
   - name: Admin
     description: Administrative Operations
+  - name: Library
+    description: "Edit your library"
+  - name: Reviews
+    description: "Edit your reviews"
+  - name: WishList
+    description: "Edit your wish list"
 
 externalDocs:
   description: GitHub
@@ -448,7 +854,33 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Response'
+
+  securitySchemes:
+    AuthUser:
+      type: oauth2
+      description: This API uses OAuth 2 for users
+      flows:
+        implicit:
+          authorizationUrl: https://localhost/
+          scopes:
+            operations_library: Library (add/delete)
+            operations_wishlist: Wishlist (add/delelte)
+            operations_reviews: Wishlist (create/edit/delelte)
+            operations_user: Edit user info / Logout
+    app_id:
+      type: apiKey
+      description: "API key to authorize requests."
+      name: appid
+      in: query
+
   parameters:
+    token:
+      name: token
+      in: query
+      description: User token
+      example: 'ljkdfnv0293asd4asd78asdasdha29347nv297'
+      schema:
+        type: string
     review_id:
       name: review_id
       in: query
@@ -922,6 +1354,7 @@ components:
           type: string
           description: Discount price (USD)
           example: '$14.99'
+
     
     User:
       type: object
@@ -950,10 +1383,3 @@ components:
           format: int32
         message:
           type: string
-  
-  securitySchemes:
-    app_id:
-      type: apiKey
-      description: "API key to authorize requests."
-      name: appid
-      in: query
