@@ -17,7 +17,6 @@ paths:
       description: "Search games with specific filters"
       operationId: GameSearch
       parameters:
-        -
         - $ref: '#/components/parameters/types'
         - $ref: '#/components/parameters/name'
         - $ref: '#/components/parameters/release_date'
@@ -319,6 +318,326 @@ paths:
           description: Not found
       tags:
         - User Management
+  # Edit Library
+
+  /getGame:
+    get:
+      tags:
+        - Library
+      summary: "List all games in your library"
+      operationId: getGame
+      parameters:
+        - name: token
+          in: query
+          description: Session token
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+        "500":
+          description: Error
+          content:
+            text/plain:
+              schema:
+                title: Error
+                type: string
+                example: Internal Server Error
+
+  /addGame:
+    post:
+      tags:
+        - Library
+      summary: "Add a game to your library"
+      operationId: AddGame
+      parameters:
+        - $ref: '#/components/parameters/app_name'
+        - $ref: '#/components/parameters/app_id'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+        "500":
+          description: Error
+          content:
+            text/plain:
+              schema:
+                title: Error
+                type: string
+                example: Internal Server Error
+
+  /editGame:
+    post:
+      tags:
+        - Library
+      summary: "Edit a game in your library"
+      operationId: EditGame
+      parameters:
+        - $ref: '#/components/parameters/app_id'
+        - $ref: '#/components/parameters/app_name'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                title: Ok
+                type: string
+                example: Game deleted
+        "404":
+          description: Not found response
+          content:
+            text/plain:
+              schema:
+                title: Game not found
+                type: string
+                example: Not found
+        "500":
+          description: Error
+          content:
+            text/plain:
+              schema:
+                title: Error
+                type: string
+                example: Internal Server Error
+  /delGame:
+    delete:
+      tags:
+        - Library
+      summary: "Delete a game in your library"
+      operationId: DelGame
+      parameters:
+        - $ref: '#/components/parameters/app_id'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                title: Ok
+                type: string
+                example: Game deleted
+        "404":
+          description: Not found response
+          content:
+            text/plain:
+              schema:
+                title: Game not found
+                type: string
+                example: Not found
+        "500":
+          description: Error
+          content:
+            text/plain:
+              schema:
+                title: Error
+                type: string
+                example: Internal Server Error
+
+  # Edit reviews
+
+  /getReview:
+    get:
+      tags:
+        - Reviews
+      summary: "List all your reviews"
+      operationId: GetReview
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+        "500":
+          description: Error
+          content:
+            text/plain:
+              schema:
+                title: Error
+                type: string
+                example: Internal Server Error
+
+  /addReview:
+    post:
+      tags:
+        - Reviews
+      summary: "Add a review"
+      operationId: AddReview
+      parameters:
+        - $ref: '#/components/parameters/review'
+        - $ref: '#/components/parameters/app_id'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+        "500":
+          description: Error
+          content:
+            text/plain:
+              schema:
+                title: Error
+                type: string
+                example: Internal Server Error
+
+  /editReview:
+    post:
+      tags:
+        - Reviews
+      summary: "Edit a review"
+      operationId: EditReview
+      parameters:
+        - $ref: '#/components/parameters/app_id'
+        - $ref: '#/components/parameters/review_id'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+        "404":
+          description: Not found response
+          content:
+            text/plain:
+              schema:
+                title: Review not found
+                type: string
+                example: Not found
+        "500":
+          description: Error
+          content:
+            text/plain:
+              schema:
+                title: Error
+                type: string
+                example: Internal Server Error
+  /delReview:
+    delete:
+      tags:
+        - Reviews
+      summary: "Delete a review"
+      operationId: DelReview
+      parameters:
+        - $ref: '#/components/parameters/review_id'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                title: Ok
+                type: string
+                example: Review deleted
+        "404":
+          description: Not found response
+          content:
+            text/plain:
+              schema:
+                title: Review not found
+                type: string
+                example: Not found
+        "500":
+          description: Error
+          content:
+            text/plain:
+              schema:
+                title: Error
+                type: string
+                example: Internal Server Error
+
+  # Edit wish list
+
+  /getGame_wish:
+    get:
+      tags:
+        - WishList
+      summary: "List all games in your wish list"
+      operationId: GetGame_wish
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+        "500":
+          description: Error
+          content:
+            text/plain:
+              schema:
+                title: Error
+                type: string
+                example: Internal Server Error
+
+  /addGame_wish:
+    post:
+      tags:
+        - WishList
+      summary: "Add a game to your wish list"
+      operationId: AddGame_wish
+      parameters:
+        - $ref: '#/components/parameters/app_id'
+        - $ref: '#/components/parameters/app_name'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+        "500":
+          description: Error
+          content:
+            text/plain:
+              schema:
+                title: Error
+                type: string
+                example: Internal Server Error
+
+  /delGame_wish:
+    delete:
+      tags:
+        - WishList
+      summary: "Delete a game from your wish list"
+      operationId: DelGame_wish
+      parameters:
+        - $ref: '#/components/parameters/app_id'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                title: Ok
+                type: string
+        "404":
+          description: Not found response
+          content:
+            text/plain:
+              schema:
+                title: Review not found
+                type: string
+                example: Not found
+        "500":
+          description: Error
+          content:
+            text/plain:
+              schema:
+                title: Error
+                type: string
+                example: Internal Server Error
 
 
 security:
@@ -328,6 +647,12 @@ tags:
   - name: User Management
   - name: Searchs
     description: "Search Game or Reviews"
+  - name: Library
+    description: "Edit your library"
+  - name: Reviews
+    description: "Edit your reviews"
+  - name: WishList
+    description: "Edit your wish list"
 
 externalDocs:
   description: GitHub
