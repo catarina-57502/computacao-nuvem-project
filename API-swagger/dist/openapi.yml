@@ -17,7 +17,6 @@ paths:
       description: "Search games with specific filters"
       operationId: GameSearch
       parameters:
-        -
         - $ref: '#/components/parameters/types'
         - $ref: '#/components/parameters/name'
         - $ref: '#/components/parameters/release_date'
@@ -45,6 +44,7 @@ paths:
                 title: Game not found
                 type: string
                 example: Not found
+
   /searchGame/{url}:
     get:
       tags:
@@ -110,6 +110,7 @@ paths:
                 title: Review not found
                 type: string
                 example: Not found
+
   /searchReview/{id}:
     get:
       tags:
@@ -163,7 +164,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Game'
-
         "404":
           description: Not found response
           content:
@@ -185,7 +185,6 @@ paths:
         - $ref: '#/components/parameters/timestamp_updated'
         - $ref: '#/components/parameters/recommended'
         - $ref: '#/components/parameters/author_playtime_at_review'
-
       responses:
         "200":
           description: Successful response
@@ -242,6 +241,7 @@ paths:
           description: Successful response
         '404':
           description: Not found
+
   /editUser:
     summary: Enable user's to edit their accounts
     post:
@@ -280,6 +280,7 @@ paths:
           description: Not found
       tags:
         - User Management
+
   /login:
     summary: login user's
     post:
@@ -306,6 +307,7 @@ paths:
           description: Not found
       tags:
         - User Management
+
   /logout:
     summary: Enables user's to logout
     get:
@@ -320,6 +322,103 @@ paths:
       tags:
         - User Management
 
+######################ADMIN############################
+  /admin/games:
+    post:
+      tags:
+        - Admin
+      summary: Add game
+      description: Add a new game or update an existing one
+      operationId: addGame
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body 
+          description: Game to be added
+          required: true
+          schema:
+              $ref: '#/components/schemas/Game'
+      responses:
+        '200':
+          description: Game added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+  
+  /admin/games/{url}:
+    delete:
+      tags:
+        - Admin
+      summary: Delete game from URL
+      description: Deletes a single game based on the URL supplied
+      operationId: deleteGame
+      parameters:
+        - name: url
+          in: path
+          description: URL of the game to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Game deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+
+  /admin/users/{id}:
+    delete:
+      tags:
+        - Admin
+      summary: Delete user
+      description: Deletes a single user based on the id supplied
+      operationId: deleteUser
+      parameters:
+        - name: id
+          in: path
+          description: id of the user to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: User deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
 
 security:
   - app_id: []
@@ -328,12 +427,27 @@ tags:
   - name: User Management
   - name: Searchs
     description: "Search Game or Reviews"
+  - name: Admin
+    description: Administrative Operations
 
 externalDocs:
   description: GitHub
   url: https://github.com/mdmourao/CloudProject
 
 components:
+  responses:
+    NotFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Response'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Response'
   parameters:
     review_id:
       name: review_id
@@ -489,7 +603,6 @@ components:
       example: 1611383744.0
       schema:
         type: number
-
     url:
       name: url
       in: query
@@ -630,11 +743,8 @@ components:
       example: '$14.99'
       schema:
         type: string
-
   schemas:
-    "200":
-      title: Successful response
-      type: object
+
     Review:
       title: Review
       type: object
@@ -812,8 +922,35 @@ components:
           type: string
           description: Discount price (USD)
           example: '$14.99'
-
-
+    
+    User:
+      type: object
+      required:
+        - id
+        - username
+      properties:
+        id:
+          type: integer
+          format: int64
+        username:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+  
+    Response:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+  
   securitySchemes:
     app_id:
       type: apiKey
