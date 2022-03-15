@@ -723,6 +723,7 @@ paths:
                 example: Internal Server Error
 
 ######################ADMIN############################
+
   /admin/games:
     post:
       tags:
@@ -730,15 +731,13 @@ paths:
       summary: Add game
       description: Add a new game or update an existing one
       operationId: addGame
-      consumes:
-        - application/json
-      parameters:
-        - in: body
-          name: body 
+      requestBody:
           description: Game to be added
           required: true
-          schema:
-              $ref: '#/components/schemas/Game'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
       responses:
         '200':
           description: Game added successfully
