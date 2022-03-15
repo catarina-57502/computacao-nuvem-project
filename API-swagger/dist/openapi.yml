@@ -247,23 +247,20 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        '204':
           description: User created
         '404':
           description: Not found
 
   /editUser:
-    post:
+    put:
       summary: 'User edit account'
       description: 'Enables the users to edit their accounts'
       operationId: EditUser
+      security:
+        - AuthUser:
+            - operations_user
       parameters:
-        - name: token
-          in: query
-          description: Token for each user
-          required: true
-          schema:
-            type: string
         - name: password
           in: query
           description: Unique password for each user
@@ -278,19 +275,19 @@ paths:
             type: string
         - name: nickname
           in: query
-          description: Unique nickname for each user
+          description: New nickname for each user
           required: false
           schema:
             type: string
         - name: email
           in: query
-          description: Unique email for each user
+          description: New email
           required: false
           schema:
             type: string
       responses:
-        '200':
-          description: Successful response
+        '204':
+          description: User info updated
         '404':
           description: Not found
       tags:
@@ -318,8 +315,8 @@ paths:
           schema:
             type: string
       responses:
-        '200':
-          description: Successful response + generate login token
+        '204':
+          description: Successful response - Login OK
         '404':
           description: Not found
         '500':
@@ -336,10 +333,10 @@ paths:
         - AuthUser:
             - operations_user
       responses:
-        '200':
+        '204':
           description: Successful logout
         '404':
-          description: Not found
+          description: User not found
         '500':
           description: Server Error
       tags:
@@ -431,14 +428,8 @@ paths:
         - $ref: '#/components/parameters/app_name'
         - $ref: '#/components/parameters/app_id'
       responses:
-        "200":
+        "204":
           description: Successful response
-          content:
-            application/json:
-              schema:
-                title: Ok
-                type: string
-                example: Game removed
         "404":
           description: Game not found
           content:
@@ -533,7 +524,7 @@ paths:
                 example: Internal Server Error
 
   /editReview:
-    post:
+    put:
       tags:
         - Reviews
       summary: "Edit a review"
@@ -587,14 +578,8 @@ paths:
       parameters:
         - $ref: '#/components/parameters/review_id'
       responses:
-        "200":
+        "204":
           description: Review deleted
-          content:
-            application/json:
-              schema:
-                title: Ok
-                type: string
-                example: Review deleted
         "404":
           description: Review not found
           content:
@@ -698,13 +683,8 @@ paths:
         - $ref: '#/components/parameters/app_id'
         - $ref: '#/components/parameters/app_name'
       responses:
-        "200":
+        "204":
           description: Game removed from wishlist
-          content:
-            application/json:
-              schema:
-                title: Ok
-                type: string
         "404":
           description: Not found response
           content:
@@ -728,13 +708,14 @@ paths:
       tags:
         - Admin
       summary: Add game
-      description: Add a new game or update an existing one
+      description: Add a new game
       operationId: addGame
-      consumes:
-        - application/json
+      security:
+        - AuthAdmin:
+            - operations_admin
       parameters:
-        - in: body
-          name: body 
+        - in: query
+          name: body
           description: Game to be added
           required: true
           schema:
@@ -754,7 +735,39 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Response'
-  
+
+    put:
+      tags:
+        - Admin
+      summary: Update game
+      description: Updated a new game
+      operationId: UpdateGame
+      security:
+        - AuthAdmin:
+            - operations_admin
+      parameters:
+        - in: query
+          name: body
+          description: Game to be updated
+          required: true
+          schema:
+            $ref: '#/components/schemas/Game'
+      responses:
+        '200':
+          description: Game updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+
   /admin/games/{url}:
     delete:
       tags:
@@ -762,6 +775,9 @@ paths:
       summary: Delete game from URL
       description: Deletes a single game based on the URL supplied
       operationId: deleteGame
+      security:
+        - AuthAdmin:
+            - operations_admin
       parameters:
         - name: url
           in: path
@@ -794,6 +810,9 @@ paths:
       summary: Delete user
       description: Deletes a single user based on the id supplied
       operationId: deleteUser
+      security:
+        - AuthAdmin:
+            - operations_admin
       parameters:
         - name: id
           in: path
@@ -825,6 +844,7 @@ security:
 
 tags:
   - name: User Management
+    description: "User operations"
   - name: Searchs
     description: "Search Game or Reviews"
   - name: Admin
@@ -867,6 +887,14 @@ components:
             operations_wishlist: Wishlist (add/delelte)
             operations_reviews: Wishlist (create/edit/delelte)
             operations_user: Edit user info / Logout
+    AuthAdmin:
+      type: oauth2
+      description: This API uses OAuth 2 for admins
+      flows:
+        implicit:
+          authorizationUrl: https://localhost/
+          scopes:
+            operations_admin: Admin Operations
     app_id:
       type: apiKey
       description: "API key to authorize requests."
@@ -1355,7 +1383,7 @@ components:
           description: Discount price (USD)
           example: '$14.99'
 
-    
+
     User:
       type: object
       required:
@@ -1371,7 +1399,7 @@ components:
           type: string
         password:
           type: string
-  
+
     Response:
       type: object
       required:
