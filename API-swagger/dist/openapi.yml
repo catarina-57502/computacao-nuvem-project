@@ -1,7 +1,6 @@
 openapi: "3.0.2"
 info:
-  title: "Steam Games and reviews"
-  description: "DESCRIPTION TBD"
+  title: "Steam Games and Reviews"
   version: "1.0"
 
 servers:
