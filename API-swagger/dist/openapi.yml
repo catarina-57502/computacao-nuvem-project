@@ -907,7 +907,7 @@ components:
     review_id:
       name: review_id
       in: query
-      description: The unique id of the recommendation
+      description: The unique id of the review
       example: 85184605
       schema:
         type: number
