@@ -15,3 +15,11 @@ Catarina Moita
 Martim Mourão  
 Thomas Marques  
 Tomás Dias  
+
+## Organização
+
+1. System and API Architect (CEO) - Martim
+2. Networking  - Catarina
+3. Security Specialist - Thomas
+4. DevOps Officer - Tomas
+5. Data Scientist - Andre
