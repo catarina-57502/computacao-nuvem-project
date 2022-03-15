@@ -712,12 +712,10 @@ paths:
       security:
         - AuthAdmin:
             - operations_admin
-      parameters:
-        - in: query
-          name: body
-          description: Game to be added
-          required: true
-          schema:
+      requestBody:
+        content:
+          application/json:
+            schema:
               $ref: '#/components/schemas/Game'
       responses:
         '200':
@@ -744,13 +742,11 @@ paths:
       security:
         - AuthAdmin:
             - operations_admin
-      parameters:
-        - in: query
-          name: body
-          description: Game to be updated
-          required: true
-          schema:
-            $ref: '#/components/schemas/Game'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Game'
       responses:
         '200':
           description: Game updated successfully
