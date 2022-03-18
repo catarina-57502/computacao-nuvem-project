@@ -1,8 +1,14 @@
 # Instructions
 
 ### 0. CSV files 
+Download csv files from: https://drive.google.com/drive/folders/1ZVbqZE5hMbdWC0wFuhdqsv5UuY5MiL_J?usp=sharing  
+Unzip the file csvFiles.zip!  
 
-Unzip the file Arquivo.zip!
+Should have the following structure:  
+DB/app.py  
+DB/README.ME  
+DB/csvFiles/steam_games.csv  
+DB/csvFiles/steam_reviews_eng.csv  
 
 ### 1. Docker
 Get mongoDB Container:
