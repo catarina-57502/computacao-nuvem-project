@@ -701,7 +701,8 @@ paths:
                 type: string
                 example: Internal Server Error
 
-######################ADMIN############################
+  #########ADMIN#########
+
   /admin/games:
     post:
       tags:
