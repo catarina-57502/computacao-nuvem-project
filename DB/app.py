@@ -20,11 +20,11 @@ def writeCSVtoDB(CSVFile,tableDB):
 
     print("Opening file:",CSVFile)
     try:
-        file = open(CSVFile, 'r')
+        file = open(CSVFile, 'r',encoding="utf8")
     except OSError:
         print ("Could not open/read file:", CSVFile)
         sys.exit()
-    num = 1;
+    num = 1
     listDocs = []
     numberWriteToDB = 500000
     print("Writing to DB!")
