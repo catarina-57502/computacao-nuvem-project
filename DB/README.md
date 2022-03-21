@@ -35,6 +35,8 @@ pip install pymongo
 ### 4. Run the python script
 ```bash
 python3 app.py
+or
+python app.py
 ```
 
 ### Notes
