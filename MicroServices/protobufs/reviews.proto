@@ -1,0 +1,55 @@
+syntax = "proto3";
+import "util.proto";
+
+// Single review fields
+message ReviewObject {
+    int32 review_id = 1;
+    int32 app_id = 2;
+    string app_name = 3;
+    string language = 4;
+    string review = 5;
+    int32 timestamp_created = 6;
+    int32 timestamp_updated = 7;
+    bool recommended = 8;
+    int32 votes_helpful = 9;
+    int32 votes_funny = 10;
+    int32 weighted_vote_score = 11;
+    int32 comment_count = 12;
+    bool steam_purchase = 13;
+    bool received_for_free = 14;
+    bool written_during_early_access = 15;
+    int32 author_steamid = 16;
+    int32 author_num_games_owned = 17;
+    int32 author_num_reviews = 18;
+    int32 author_playtime_forever = 19;
+    int32 author_playtime_last_two_weeks = 20;
+    int32 author_playtime_at_review = 21;
+    int32 author_last_played = 22;
+}
+
+// All reviews response
+message ListReviewsResponse {
+    repeated ReviewObject reviews = 1;
+}
+
+// Message to search all reviews
+message ListReviewsRequest {
+    int32 maxResults = 1;
+}
+
+// Message to search a review by id
+message GetReviewRequest {
+    int32 review_id = 1;
+    int32 maxResults = 2;
+}
+
+// TODO: Add more messages related to review requests (Maybe? Needs discussion)
+
+// Operations provided by Reviews service
+service Reviews {
+    rpc GetReview (GetReviewRequest) returns (ReviewObject);
+    rpc AddReview (ReviewObject) returns (ReviewObject);
+    rpc UpdateReview (ReviewObject) returns (ReviewObject);
+    rpc DeleteReview (GetReviewRequest) returns (SimpleResponse);
+    rpc ListReviews (ListReviewsRequest) returns (ListReviewsResponse);
+}
