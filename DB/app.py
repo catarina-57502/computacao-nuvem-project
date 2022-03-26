@@ -3,17 +3,17 @@
 ## Cloud Computing - 2022
 ## Group 7 
 
-STEAM_REVIEWS = './csvFiles/steam_reviews_eng.csv'
-STEAM_GAMES = './csvFiles/steam_games.csv'
+import csv
+from csv import reader
+from pymongo import MongoClient
+
+STEAM_REVIEWS = 'steam_reviews_eng.csv'
+# STEAM_GAMES = './csvFiles/steam_games.csv'
 
 CONNECTION_STRING = "mongodb://admin:admin@localhost:27017/admin"
 
 def writeCSVtoDB(CSVFile,tableDB):
     
-    import csv
-    from csv import reader
-    import pymongo
-
     #Allow big reviews inputs
     csv.field_size_limit(100000000)
     atributes = []
@@ -54,26 +54,21 @@ def writeCSVtoDB(CSVFile,tableDB):
     print("DONE", CSVFile)
     
 def get_database():
-    from pymongo import MongoClient
-    import pymongo
 
-    from pymongo import MongoClient
     client = MongoClient(CONNECTION_STRING)
     print("DataBase Created")
-    return client['steam']
+    return client['reviews']
 
 def get_table(db,table):
+
     print("Table:",table,"created!")
     return db[table]
 
-    
-if __name__ == "__main__":    
+if __name__ == "__main__":
+
     print("WELCOME")
     db = get_database()
-    dbReviews = get_table(db,'Reviews')
-    dbGames = get_table(db,'Games')
+    dbReviews = get_table(db,'data')
+    # dbGames = get_table(db,'Games')
     writeCSVtoDB(STEAM_REVIEWS,dbReviews)
-    writeCSVtoDB(STEAM_GAMES,dbGames)
-    
-
-
+    # writeCSVtoDB(STEAM_GAMES,dbGames)
