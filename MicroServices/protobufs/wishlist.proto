@@ -27,33 +27,33 @@ message Game {
 
 }
 
-message ListGamesWhishResponse {
+message ListGamesWishResponse {
   repeated Game games = 1;
 }
 
-message ListGamesWhishRequest {
+message ListGamesWishRequest {
   int64 user_id = 1;
 }
 
-message AddGameWhishRequest {
+message AddGameWishRequest {
   int64  user_id = 1;
   optional Game game = 2;
 }
 
-message DeleteGameWhishRequest {
+message DeleteGameWishRequest {
   int64  user_id = 1;
   string name = 2;
   string _id = 3;
 }
 
-service Whishlist {
+service Wishlist {
 
-  // Returns a list of games in the whislist
-  rpc ListGames(ListGamesWhishRequest) returns (ListGamesWhishResponse) {}
+  // Returns a list of games in the wishlist
+  rpc ListGames(ListGamesWishRequest) returns (ListGamesWishResponse) {}
 
-  // Add a new game to the whislist
-  rpc AddGame(AddGameWhishRequest) returns (Game) {}
+  // Add a new game to the wishlist
+  rpc AddGame(AddGameWishRequest) returns (Game) {}
 
-  // Deletes a game from the whislist
-  rpc DeleteGame(DeleteGameWhishRequest) returns (google.protobuf.Empty) {}
+  // Deletes a game from the wishlist
+  rpc DeleteGame(DeleteGameWishRequest) returns (google.protobuf.Empty) {}
 }

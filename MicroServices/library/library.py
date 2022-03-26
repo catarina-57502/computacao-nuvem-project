@@ -1,40 +1,49 @@
+from concurrent import futures
 import os
 
-from flask import Flask, render_template
 import grpc
+from library_pb2 import *
+from library_pb2_grpc import LibraryStub
+from grpc_interceptor import ExceptionToStatusInterceptor
+from grpc_interceptor.exceptions import NotFound
 
-from recommendations_pb2 import BookCategory, RecommendationRequest
-from recommendations_pb2_grpc import RecommendationsStub
+class LibraryService(library_pb2_grpc.LibraryServicer):
 
-app = Flask(__name__)
-
-recommendations_host = os.getenv("RECOMMENDATIONS_HOST", "localhost")
-"""
-with open("client.key", "rb") as fp:
-    client_key = fp.read()
-with open("client.pem", "rb") as fp:
-    client_cert = fp.read()
-with open("ca.pem", "rb") as fp:
-    ca_cert = fp.read()
-creds = grpc.ssl_channel_credentials(ca_cert, client_key, client_cert)
-"""
-recommendations_host = os.getenv("RECOMMENDATIONS_HOST", "localhost")
-recommendations_channel = grpc.insecure_channel(
- f"{recommendations_host}:50051"
-)
-
-recommendations_client = RecommendationsStub(recommendations_channel)
+    def AddGameLib(self, request, context):
 
 
-@app.route("/")
-def render_homepage():
-    recommendations_request = RecommendationRequest(
-        user_id=1, category=BookCategory.MYSTERY, max_results=3
+    def ListGamesLib(self, request, context):
+
+
+    def RemoveGameLib(self, request, context):
+
+
+def serve():
+    interceptors = [ExceptionToStatusInterceptor()]
+    server = grpc.server(
+        futures.ThreadPoolExecutor(max_workers=10), interceptors=interceptors
     )
-    recommendations_response = recommendations_client.Recommend(
-        recommendations_request
+    library_pb2_grpc.add_LibraryServicer_to_server(
+        LibraryService(), server
     )
-    return render_template(
-        "homepage.html",
-        recommendations=recommendations_response.recommendations,
+    """
+    with open("server.key", "rb") as fp:
+        server_key = fp.read()
+    with open("server.pem", "rb") as fp:
+        server_cert = fp.read()
+    with open("ca.pem", "rb") as fp:
+        ca_cert = fp.read()
+
+    creds = grpc.ssl_server_credentials(
+        [(server_key, server_cert)],
+        root_certificates=ca_cert,
+        require_client_auth=True,
     )
+    """
+    server.add_insecure_port("[::]:50051")
+    server.start()
+    server.wait_for_termination()
+
+
+if __name__ == "__main__":
+    serve()

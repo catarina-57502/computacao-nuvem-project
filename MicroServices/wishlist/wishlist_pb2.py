@@ -15,15 +15,15 @@ _sym_db = _symbol_database.Default()
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0ewishlist.proto\x1a\x1bgoogle/protobuf/empty.proto\"\xc2\x03\n\x04Game\x12\x0b\n\x03_id\x18\x15 \x01(\t\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\r\n\x05types\x18\x02 \x01(\t\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x14\n\x0c\x64\x65sc_snippet\x18\x04 \x01(\t\x12\x16\n\x0erecent_reviews\x18\x05 \x01(\t\x12\x13\n\x0b\x61ll_reviews\x18\x06 \x01(\t\x12\x14\n\x0crelease_date\x18\x07 \x01(\t\x12\x11\n\tdeveloper\x18\x08 \x01(\t\x12\x11\n\tpublisher\x18\t \x01(\t\x12\x14\n\x0cpopular_tags\x18\n \x01(\t\x12\x14\n\x0cgame_details\x18\x0b \x01(\t\x12\x11\n\tlanguages\x18\x0c \x01(\t\x12\x14\n\x0c\x61\x63hievements\x18\r \x01(\t\x12\r\n\x05genre\x18\x0e \x01(\t\x12\x18\n\x10game_description\x18\x0f \x01(\t\x12\x16\n\x0emature_content\x18\x10 \x01(\t\x12\x1c\n\x14minimum_requirements\x18\x11 \x01(\t\x12 \n\x18recommended_requirements\x18\x12 \x01(\t\x12\x16\n\x0eoriginal_price\x18\x13 \x01(\t\x12\x16\n\x0e\x64iscount_price\x18\x14 \x01(\t\".\n\x16ListGamesWhishResponse\x12\x14\n\x05games\x18\x01 \x03(\x0b\x32\x05.Game\"(\n\x15ListGamesWhishRequest\x12\x0f\n\x07user_id\x18\x01 \x01(\x03\"I\n\x13\x41\x64\x64GameWhishRequest\x12\x0f\n\x07user_id\x18\x01 \x01(\x03\x12\x18\n\x04game\x18\x02 \x01(\x0b\x32\x05.GameH\x00\x88\x01\x01\x42\x07\n\x05_game\"D\n\x16\x44\x65leteGameWhishRequest\x12\x0f\n\x07user_id\x18\x01 \x01(\x03\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0b\n\x03_id\x18\x03 \x01(\t2\xb6\x01\n\tWhishlist\x12>\n\tListGames\x12\x16.ListGamesWhishRequest\x1a\x17.ListGamesWhishResponse\"\x00\x12(\n\x07\x41\x64\x64Game\x12\x14.AddGameWhishRequest\x1a\x05.Game\"\x00\x12?\n\nDeleteGame\x12\x17.DeleteGameWhishRequest\x1a\x16.google.protobuf.Empty\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0ewishlist.proto\x1a\x1bgoogle/protobuf/empty.proto\"\xc2\x03\n\x04Game\x12\x0b\n\x03_id\x18\x15 \x01(\t\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\r\n\x05types\x18\x02 \x01(\t\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x14\n\x0c\x64\x65sc_snippet\x18\x04 \x01(\t\x12\x16\n\x0erecent_reviews\x18\x05 \x01(\t\x12\x13\n\x0b\x61ll_reviews\x18\x06 \x01(\t\x12\x14\n\x0crelease_date\x18\x07 \x01(\t\x12\x11\n\tdeveloper\x18\x08 \x01(\t\x12\x11\n\tpublisher\x18\t \x01(\t\x12\x14\n\x0cpopular_tags\x18\n \x01(\t\x12\x14\n\x0cgame_details\x18\x0b \x01(\t\x12\x11\n\tlanguages\x18\x0c \x01(\t\x12\x14\n\x0c\x61\x63hievements\x18\r \x01(\t\x12\r\n\x05genre\x18\x0e \x01(\t\x12\x18\n\x10game_description\x18\x0f \x01(\t\x12\x16\n\x0emature_content\x18\x10 \x01(\t\x12\x1c\n\x14minimum_requirements\x18\x11 \x01(\t\x12 \n\x18recommended_requirements\x18\x12 \x01(\t\x12\x16\n\x0eoriginal_price\x18\x13 \x01(\t\x12\x16\n\x0e\x64iscount_price\x18\x14 \x01(\t\"-\n\x15ListGamesWishResponse\x12\x14\n\x05games\x18\x01 \x03(\x0b\x32\x05.Game\"\'\n\x14ListGamesWishRequest\x12\x0f\n\x07user_id\x18\x01 \x01(\x03\"H\n\x12\x41\x64\x64GameWishRequest\x12\x0f\n\x07user_id\x18\x01 \x01(\x03\x12\x18\n\x04game\x18\x02 \x01(\x0b\x32\x05.GameH\x00\x88\x01\x01\x42\x07\n\x05_game\"C\n\x15\x44\x65leteGameWishRequest\x12\x0f\n\x07user_id\x18\x01 \x01(\x03\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0b\n\x03_id\x18\x03 \x01(\t2\xb1\x01\n\x08Wishlist\x12<\n\tListGames\x12\x15.ListGamesWishRequest\x1a\x16.ListGamesWishResponse\"\x00\x12\'\n\x07\x41\x64\x64Game\x12\x13.AddGameWishRequest\x1a\x05.Game\"\x00\x12>\n\nDeleteGame\x12\x16.DeleteGameWishRequest\x1a\x16.google.protobuf.Empty\"\x00\x62\x06proto3')
 
 
 
 _GAME = DESCRIPTOR.message_types_by_name['Game']
-_LISTGAMESWHISHRESPONSE = DESCRIPTOR.message_types_by_name['ListGamesWhishResponse']
-_LISTGAMESWHISHREQUEST = DESCRIPTOR.message_types_by_name['ListGamesWhishRequest']
-_ADDGAMEWHISHREQUEST = DESCRIPTOR.message_types_by_name['AddGameWhishRequest']
-_DELETEGAMEWHISHREQUEST = DESCRIPTOR.message_types_by_name['DeleteGameWhishRequest']
+_LISTGAMESWISHRESPONSE = DESCRIPTOR.message_types_by_name['ListGamesWishResponse']
+_LISTGAMESWISHREQUEST = DESCRIPTOR.message_types_by_name['ListGamesWishRequest']
+_ADDGAMEWISHREQUEST = DESCRIPTOR.message_types_by_name['AddGameWishRequest']
+_DELETEGAMEWISHREQUEST = DESCRIPTOR.message_types_by_name['DeleteGameWishRequest']
 Game = _reflection.GeneratedProtocolMessageType('Game', (_message.Message,), {
   'DESCRIPTOR' : _GAME,
   '__module__' : 'wishlist_pb2'
@@ -31,48 +31,48 @@ Game = _reflection.GeneratedProtocolMessageType('Game', (_message.Message,), {
   })
 _sym_db.RegisterMessage(Game)
 
-ListGamesWhishResponse = _reflection.GeneratedProtocolMessageType('ListGamesWhishResponse', (_message.Message,), {
-  'DESCRIPTOR' : _LISTGAMESWHISHRESPONSE,
+ListGamesWishResponse = _reflection.GeneratedProtocolMessageType('ListGamesWishResponse', (_message.Message,), {
+  'DESCRIPTOR' : _LISTGAMESWISHRESPONSE,
   '__module__' : 'wishlist_pb2'
-  # @@protoc_insertion_point(class_scope:ListGamesWhishResponse)
+  # @@protoc_insertion_point(class_scope:ListGamesWishResponse)
   })
-_sym_db.RegisterMessage(ListGamesWhishResponse)
+_sym_db.RegisterMessage(ListGamesWishResponse)
 
-ListGamesWhishRequest = _reflection.GeneratedProtocolMessageType('ListGamesWhishRequest', (_message.Message,), {
-  'DESCRIPTOR' : _LISTGAMESWHISHREQUEST,
+ListGamesWishRequest = _reflection.GeneratedProtocolMessageType('ListGamesWishRequest', (_message.Message,), {
+  'DESCRIPTOR' : _LISTGAMESWISHREQUEST,
   '__module__' : 'wishlist_pb2'
-  # @@protoc_insertion_point(class_scope:ListGamesWhishRequest)
+  # @@protoc_insertion_point(class_scope:ListGamesWishRequest)
   })
-_sym_db.RegisterMessage(ListGamesWhishRequest)
+_sym_db.RegisterMessage(ListGamesWishRequest)
 
-AddGameWhishRequest = _reflection.GeneratedProtocolMessageType('AddGameWhishRequest', (_message.Message,), {
-  'DESCRIPTOR' : _ADDGAMEWHISHREQUEST,
+AddGameWishRequest = _reflection.GeneratedProtocolMessageType('AddGameWishRequest', (_message.Message,), {
+  'DESCRIPTOR' : _ADDGAMEWISHREQUEST,
   '__module__' : 'wishlist_pb2'
-  # @@protoc_insertion_point(class_scope:AddGameWhishRequest)
+  # @@protoc_insertion_point(class_scope:AddGameWishRequest)
   })
-_sym_db.RegisterMessage(AddGameWhishRequest)
+_sym_db.RegisterMessage(AddGameWishRequest)
 
-DeleteGameWhishRequest = _reflection.GeneratedProtocolMessageType('DeleteGameWhishRequest', (_message.Message,), {
-  'DESCRIPTOR' : _DELETEGAMEWHISHREQUEST,
+DeleteGameWishRequest = _reflection.GeneratedProtocolMessageType('DeleteGameWishRequest', (_message.Message,), {
+  'DESCRIPTOR' : _DELETEGAMEWISHREQUEST,
   '__module__' : 'wishlist_pb2'
-  # @@protoc_insertion_point(class_scope:DeleteGameWhishRequest)
+  # @@protoc_insertion_point(class_scope:DeleteGameWishRequest)
   })
-_sym_db.RegisterMessage(DeleteGameWhishRequest)
+_sym_db.RegisterMessage(DeleteGameWishRequest)
 
-_WHISHLIST = DESCRIPTOR.services_by_name['Whishlist']
+_WISHLIST = DESCRIPTOR.services_by_name['Wishlist']
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
   _GAME._serialized_start=48
   _GAME._serialized_end=498
-  _LISTGAMESWHISHRESPONSE._serialized_start=500
-  _LISTGAMESWHISHRESPONSE._serialized_end=546
-  _LISTGAMESWHISHREQUEST._serialized_start=548
-  _LISTGAMESWHISHREQUEST._serialized_end=588
-  _ADDGAMEWHISHREQUEST._serialized_start=590
-  _ADDGAMEWHISHREQUEST._serialized_end=663
-  _DELETEGAMEWHISHREQUEST._serialized_start=665
-  _DELETEGAMEWHISHREQUEST._serialized_end=733
-  _WHISHLIST._serialized_start=736
-  _WHISHLIST._serialized_end=918
+  _LISTGAMESWISHRESPONSE._serialized_start=500
+  _LISTGAMESWISHRESPONSE._serialized_end=545
+  _LISTGAMESWISHREQUEST._serialized_start=547
+  _LISTGAMESWISHREQUEST._serialized_end=586
+  _ADDGAMEWISHREQUEST._serialized_start=588
+  _ADDGAMEWISHREQUEST._serialized_end=660
+  _DELETEGAMEWISHREQUEST._serialized_start=662
+  _DELETEGAMEWISHREQUEST._serialized_end=729
+  _WISHLIST._serialized_start=732
+  _WISHLIST._serialized_end=909
 # @@protoc_insertion_point(module_scope)
