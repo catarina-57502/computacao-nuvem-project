@@ -8,7 +8,7 @@ from grpc_interceptor.exceptions import NotFound
 from adminOperations_pb2 import (
     Game,
     AddGameResponse,
-    UpdateGameResponse,DeleteUserResponse
+    UpdateGameResponse,DeleteUserResponse,DeleteGameResponse
 )
 import adminOperations_pb2_grpc
 import pymongo
@@ -17,7 +17,7 @@ from pymongo import MongoClient
 def get_table(db,table):
     return db[table]
 
-client = MongoClient('172.22.0.2', 27017 ,username='admin', password='admin' )
+client = MongoClient('172.23.0.3', 27017 ,username='admin', password='admin' )
 db = client['steam']
 gamesDB = get_table(db,"Games")
 reviewsDB = get_table(db,"Reviews")
@@ -62,15 +62,15 @@ class AdminOperationService(adminOperations_pb2_grpc.AdminOperationsServicer):
             gamesDB.insert_one(createdoc(request))
             return UpdateGameResponse(message="Game updated")
         else:
-            return UpdateGameResponsemessage(message="Error - Game not found")
+            return UpdateGameResponse(message="Error - Game not found")
 
     def DeleteGame(self, request, context):
         myquery = { "url": request.url }
         if gamesDB.count_documents(myquery) >= 1:
             gamesDB.delete_one(myquery);
-            return UpdateGameResponse(message="Game deleted")
+            return DeleteGameResponse(message="Game deleted")
         else:
-            return UpdateGameResponsemessage(message="Error - Game not found")
+            return DeleteGameResponse(message="Error - Game not found")
 
     def DeleteUser(self, request, context):
         myquery = { "_id": request.id }

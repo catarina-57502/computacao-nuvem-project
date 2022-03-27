@@ -8,6 +8,7 @@ from adminOperations_pb2_grpc import AdminOperationsStub
 
 api = Flask(__name__)
 
+
 adminoperations_host = os.getenv("ADMINOPERATIONS_HOST", "localhost")
 
 adminoperations_channel = grpc.insecure_channel(
@@ -47,7 +48,6 @@ def addGame():
     )
     return json.dumps(addGame_response.message)
 
-
 @api.route('/admin/games', methods=['PUT'])
 def updateGame():
     data = json.loads(request.data)
@@ -78,7 +78,6 @@ def updateGame():
     )
     return json.dumps(updateGame_response.message)
 
-
 @api.route('/admin/games', methods=['DELETE'])
 def deleteGame():
     url = request.args.get('url')
@@ -89,14 +88,3 @@ def deleteGame():
         deleteGame_request
     )
     return json.dumps(deleteGame_response.message)
-
-@api.route('/admin/users', methods=['DELETE'])
-def deleteGame():
-    id = request.args.get('id')
-    deleteUser_request = DeleteUserRequest(
-        id=id,
-    )
-    deleteUser_response = adminoperations_client.DeleteUser(
-        deleteUser_request
-    )
-    return json.dumps(deleteUser_response.message)
