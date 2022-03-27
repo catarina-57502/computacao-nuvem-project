@@ -6,10 +6,10 @@
 STEAM_REVIEWS = './csvFiles/steam_reviews_eng.csv'
 STEAM_GAMES = './csvFiles/steam_games.csv'
 
-CONNECTION_STRING = "mongodb://admin:admin@localhost:27017/admin"
+CONNECTION_STRING = "mongodb://admin:admin@127.0.0.1:27017/admin"
 
 def writeCSVtoDB(CSVFile,tableDB):
-    
+
     import csv
     from csv import reader
     import pymongo
@@ -40,7 +40,7 @@ def writeCSVtoDB(CSVFile,tableDB):
                 for value in row:
                     if(atributes[n] != ''):
                         doc[atributes[n]] = value
-                    n = n + 1  
+                    n = n + 1
                 listDocs.append(doc)
                 if num == numberWriteToDB:
                     print("Added: ",num)
@@ -52,8 +52,6 @@ def writeCSVtoDB(CSVFile,tableDB):
         listDocs = []
     file.close()
     print("DONE", CSVFile)
-    
-    
 def get_database():
     from pymongo import MongoClient
     import pymongo
@@ -76,6 +74,7 @@ def get_table(db,table):
     print("Table:",table,"created!")
     return db[table]
 
+if __name__ == "__main__":
 def writeUser(dbUsers):
     library = [
         "6240977ffee051363df02ff9",
@@ -94,6 +93,7 @@ def writeUser(dbUsers):
     dbUsers.insert_one(myquery)
     
 if __name__ == "__main__":    
+
     print("WELCOME")
     db = get_database()
     dbReviews = get_table(db,'Reviews')
@@ -104,6 +104,3 @@ if __name__ == "__main__":
     writeCSVtoDB(STEAM_GAMES,dbGames)
     # User default
     writeUser(dbUsers)
-    
-
-

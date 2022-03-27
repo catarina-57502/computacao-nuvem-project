@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+message Game {
+    string url = 1;
+    string types = 2;
+    string name = 3;
+    string desc_snippet = 4;
+    string recent_reviews = 5;
+    string all_reviews = 6;
+    string release_date = 7;
+    string developer = 8;
+    string publisher = 9;
+    string popular_tags = 10;
+    string game_details = 11;
+    string languages = 12;
+    string achievements = 13;
+    string genre = 14;
+    string game_description = 15;
+    string mature_content = 16;
+    string minimum_requirements = 17;
+    string recommended_requirements = 18;
+    string original_price = 19;
+    string discount_price = 20;
+
+}
+
+message ListGamesLibResponse {
+    repeated Game games = 1;
+}
+
+message ListGamesLibRequest {
+    int32 page_number = 1;
+    int32 result_per_page = 2;
+}
+
+message AddGameLibResponse {
+    string message = 1;
+}
+
+message DeleteGameLibRequest {
+    string url = 1;
+}
+
+message DeleteGameLibResponse {
+    string message = 1;
+}
+
+
+service Library {
+
+    // Returns a list of games in the library
+    rpc ListGames(ListGamesLibRequest) returns (ListGamesLibResponse);
+
+    // Add a new game to the library
+    rpc AddGame(Game) returns (AddGameLibResponse);
+
+    // Deletes a game from the library
+    rpc DeleteGame(DeleteGameLibRequest) returns (DeleteGameLibResponse);
+}
