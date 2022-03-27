@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+message User {
+  string userid = 1;
+  string nickname = 2;
+  string password = 3;
+  string email = 4;
+  repeated Wishlist wishlist = 5;
+  repeated Library library = 6;
+}
+
+message Wishlist{
+  string id = 1;
+}
+
+message Library{
+  string id = 1;
+}
+
+message DefaultResponse {
+  int32 code = 1;
+  string message = 2;
+}
+
+message AddUserRequest {
+  string id = 1;
+  string nickname = 2;
+  string email = 3;
+  string password = 4;
+}
+
+message EditUserRequest {
+  string password = 1;
+  string new_password = 2;
+  string nickname = 3;
+  string email = 4;
+  string new_email = 5;
+}
+
+message LoginRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message LogoutRequest {
+  string email = 1;
+}
+
+service UserManagement {
+  rpc AddUser (AddUserRequest) returns (DefaultResponse);
+  rpc EditUser (EditUserRequest) returns (DefaultResponse);
+  rpc LoginUser (LoginRequest) returns (DefaultResponse);
+  rpc Logout (LogoutRequest) returns (DefaultResponse);
+}
+
+
+

@@ -1,0 +1,59 @@
+version: "3.9"
+
+services:
+
+  mongoDB:
+    image: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+    expose:
+      - "27017"
+    volumes:
+      - dbData:/data/db
+
+  adminOperationsServer:
+    build:
+      dockerfile: ./server/Dockerfile
+      context: ./adminOperations
+    environment:
+      ADMINOPERATIONS_HOST: adminOperations
+    image: serveradminoperations
+    ports:
+      - "5003:5003"
+    expose:
+      - "5003"
+
+  adminOperations:
+    build:
+      dockerfile: ./main/Dockerfile
+      context: ./adminOperations
+    image: adminoperations
+    ports:
+      - "50052:50052"
+
+  userManagementServer:
+    build:
+      dockerfile: ./server/Dockerfile
+      context: ./userManagement
+    environment:
+      USERMANAGEMENT_HOST: userManagement
+    image: serverusermanagement
+    ports:
+      - "5004:5004"
+    expose:
+      - "5004"
+
+  userManagement:
+    build:
+      dockerfile: ./main/Dockerfile
+      context: ./userManagement
+    image: usermanagement
+    ports:
+      - "50054:50054"
+
+volumes:
+  dbData:
+    external: false

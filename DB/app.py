@@ -52,8 +52,6 @@ def writeCSVtoDB(CSVFile,tableDB):
         listDocs = []
     file.close()
     print("DONE", CSVFile)
-
-
 def get_database():
     from pymongo import MongoClient
     import pymongo
@@ -63,15 +61,46 @@ def get_database():
     print("DataBase Created")
     return client['steam']
 
+def get_databaseUsers():
+    from pymongo import MongoClient
+    import pymongo
+
+    from pymongo import MongoClient
+    client = MongoClient(CONNECTION_STRING)
+    print("DataBase Created")
+    return client['users']
+
 def get_table(db,table):
     print("Table:",table,"created!")
     return db[table]
 
-
 if __name__ == "__main__":
+def writeUser(dbUsers):
+    library = [
+        "6240977ffee051363df02ff9",
+        "6240977ffee051363df03003",
+    ]
+    wishlist = [
+        "6240977ffee051363df0300c",
+    ]
+    myquery = { "userid": "00000000000000000",
+                "nickname": "userTest",
+                "email": "teste@teste.com",
+                "password": "qwerty",
+                "library": library,
+                "wishlist": wishlist
+                }
+    dbUsers.insert_one(myquery)
+    
+if __name__ == "__main__":    
+
     print("WELCOME")
     db = get_database()
     dbReviews = get_table(db,'Reviews')
     dbGames = get_table(db,'Games')
+    dbUsers = get_table(get_databaseUsers(),'users')
+    # Reviews and games
     writeCSVtoDB(STEAM_REVIEWS,dbReviews)
     writeCSVtoDB(STEAM_GAMES,dbGames)
+    # User default
+    writeUser(dbUsers)

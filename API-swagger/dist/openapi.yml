@@ -4,7 +4,7 @@ info:
   version: "1.0"
 
 servers:
-- url: "http://localhost/"
+- url: "http://0.0.0.0:5000"
 
 paths:
   ######SEARCHS######
@@ -776,7 +776,7 @@ paths:
             - operations_admin
       parameters:
         - name: url
-          in: path
+          in: query
           description: URL of the game to delete
           required: true
           schema:
