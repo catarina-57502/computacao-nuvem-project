@@ -6,7 +6,7 @@
 STEAM_REVIEWS = './csvFiles/steam_reviews_eng.csv'
 STEAM_GAMES = './csvFiles/steam_games.csv'
 
-CONNECTION_STRING = "mongodb://admin:admin@127.0.0.1:27017/admin"
+CONNECTION_STRING = "mongodb://admin:admin@localhost:27017/admin"
 
 def writeCSVtoDB(CSVFile,tableDB):
     
