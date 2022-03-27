@@ -17,7 +17,7 @@ wishlist_channel = grpc.insecure_channel(
 wishlist_client = WishlistStub(wishlist_channel)
 
 
-@api.route('/addGame', methods=['POST'])
+@api.route('/addGame_wish', methods=['POST'])
 def addGame():
     data = json.loads(request.data)
     addGameLib_request = Game(
@@ -48,7 +48,7 @@ def addGame():
     return json.dumps(addGameWish_response.message)
 
 
-@api.route('/delGame', methods=['DELETE'])
+@api.route('/delGame_wish', methods=['DELETE'])
 def deleteGame():
     url = request.args.get('url')
     deleteGameWish_request = DeleteGameWishRequest(
@@ -59,7 +59,7 @@ def deleteGame():
     )
     return json.dumps(deleteGameWish_response.message)
 
-@api.route('/getGames', methods=['GET'])
+@api.route('/getGame_wish', methods=['GET'])
 def listGames():
 
     listGamesWish_request = ListGamesWishRequest(
