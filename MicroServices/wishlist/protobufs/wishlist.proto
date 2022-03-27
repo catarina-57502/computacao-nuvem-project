@@ -1,7 +1,5 @@
 syntax = "proto3";
 
-import "google/protobuf/empty.proto";
-
 message Game {
   string url = 1;
   string types = 2;
@@ -35,22 +33,27 @@ message ListGamesWishRequest {
   int32 result_per_page = 2;
 }
 
-message AddGameWishRequest {
-  string url = 1;
+message AddGameWishResponse {
+  string message = 1;
 }
 
 message DeleteGameWishRequest {
-  string  url = 1;
+  string url = 1;
 }
+
+message DeleteGameWishResponse {
+  string message = 1;
+}
+
 
 service Wishlist {
 
-  // Returns a list of games in the wishlist
-  rpc ListGames(ListGamesWishRequest) returns (ListGamesWishResponse) {}
+  // Returns a list of games in the library
+  rpc ListGames(ListGamesWishRequest) returns (ListGamesWishResponse);
 
-  // Add a new game to the wishlist
-  rpc AddGame(AddGameWishRequest) returns (Game) {}
+  // Add a new game to the library
+  rpc AddGame(Game) returns (AddGameWishResponse);
 
-  // Deletes a game from the wishlist
-  rpc DeleteGame(DeleteGameWishRequest) returns (google.protobuf.Empty) {}
+  // Deletes a game from the library
+  rpc DeleteGame(DeleteGameWishRequest) returns (DeleteGameWishResponse);
 }
