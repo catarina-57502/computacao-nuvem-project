@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+message gameRequest {
+  string release_date = 1;
+  string developer = 2;
+  string popular_tags = 3;
+  string genre = 4;
+  string original_piece = 5;
+}
+message Game{
+  string url = 1;
+  string types = 2;
+  string name = 3;
+  string desc_snippet = 4;
+  string recent_reviews = 5;
+  string all_reviews = 6;
+  string release_date = 7;
+  string developer = 8;
+  string publisher = 9;
+  string popular_tags = 10;
+  string game_details = 11;
+  string languages = 12;
+  string achievements = 13;
+  string genre = 14;
+  string game_description = 15;
+  string mature_content = 16;
+  string minimum_requirements = 17;
+  string recommended_requirements = 18;
+  string original_price = 19;
+  string discount_price = 20;
+}
+message reviewRequest{
+  string app_name = 1;
+  int32 timestamp_updated = 2;
+  bool recommended = 3;
+  int32 author_playtime_at_review = 4;
+}
+message Review {
+  int32 review_id = 1;
+  int32 app_id = 2;
+  string app_name = 3;
+  string language = 4;
+  string review = 5;
+  int32 timestamp_created = 6;
+  int32 timestamp_updated = 7;
+  bool recommended = 8;
+  int32 votes_helpful = 9;
+  int32 votes_funny = 10;
+  int32 weighted_vote_score = 11;
+  int32 comment_count = 12;
+  bool steam_purchase = 13;
+  bool received_for_free = 14;
+  bool written_during_early_access = 15;
+  int32 author_steamid = 16;
+  int32 author_num_games_owned = 17;
+  int32 author_num_reviews = 18;
+  int32 author_playtime_forever = 19;
+  int32 author_playtime_last_two_weeks = 20;
+  int32 author_playtime_at_review = 21;
+  int32 author_last_played = 22;
+}
+message GameResponse {
+  repeated Game games =1;
+}
+message ReviewResponse {
+  repeated Review reviews = 1;
+}
+service Suggestions {
+  rpc getSuggGames (gameRequest) returns (GameResponse);
+  rpc getSuggReviews (reviewRequest) returns (ReviewResponse);
+}

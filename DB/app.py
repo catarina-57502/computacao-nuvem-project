@@ -13,6 +13,7 @@ def writeCSVtoDB(CSVFile,tableDB):
     import csv
     from csv import reader
     import pymongo
+    import sys
 
     #Allow big reviews inputs
     csv.field_size_limit(100000000)
