@@ -2,20 +2,20 @@ from concurrent import futures
 import os
 
 import grpc
-from library_pb2 import *
-from library_pb2_grpc import LibraryStub
+from wishlist_pb2 import *
+from wishlist_pb2_grpc import WishlistStub
 from grpc_interceptor import ExceptionToStatusInterceptor
 from grpc_interceptor.exceptions import NotFound
 
-class LibraryService(library_pb2_grpc.LibraryServicer):
+class WishlistService(wishlist_pb2_grpc.WishlistServicer):
 
-    def AddGameLib(self, request, context):
-
-
-    def ListGamesLib(self, request, context):
+    def AddGameWish(self, request, context):
 
 
-    def RemoveGameLib(self, request, context):
+    def ListGamesWish(self, request, context):
+
+
+    def RemoveGameWish(self, request, context):
 
 
 def serve():
@@ -23,8 +23,8 @@ def serve():
     server = grpc.server(
         futures.ThreadPoolExecutor(max_workers=10), interceptors=interceptors
     )
-    library_pb2_grpc.add_LibraryServicer_to_server(
-        LibraryService(), server
+    wishlist_pb2_grpc.add_WishlistServicer_to_server(
+        WishlistService(), server
     )
     """
     with open("server.key", "rb") as fp:
@@ -40,7 +40,7 @@ def serve():
         require_client_auth=True,
     )
     """
-    server.add_insecure_port("[::]:27018")
+    server.add_insecure_port("[::]:27019")
     server.start()
     server.wait_for_termination()
 

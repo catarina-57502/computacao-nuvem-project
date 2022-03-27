@@ -2,11 +2,10 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
-import wishlist_pb2 as wishlist__pb2
+import library_pb2 as library__pb2
 
 
-class WishlistStub(object):
+class LibraryStub(object):
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -16,72 +15,72 @@ class WishlistStub(object):
             channel: A grpc.Channel.
         """
         self.ListGames = channel.unary_unary(
-                '/Wishlist/ListGames',
-                request_serializer=wishlist__pb2.ListGamesWishRequest.SerializeToString,
-                response_deserializer=wishlist__pb2.ListGamesWishResponse.FromString,
+                '/Library/ListGames',
+                request_serializer=library__pb2.ListGamesLibRequest.SerializeToString,
+                response_deserializer=library__pb2.ListGamesLibResponse.FromString,
                 )
         self.AddGame = channel.unary_unary(
-                '/Wishlist/AddGame',
-                request_serializer=wishlist__pb2.AddGameWishRequest.SerializeToString,
-                response_deserializer=wishlist__pb2.Game.FromString,
+                '/Library/AddGame',
+                request_serializer=library__pb2.Game.SerializeToString,
+                response_deserializer=library__pb2.AddGameLibResponse.FromString,
                 )
         self.DeleteGame = channel.unary_unary(
-                '/Wishlist/DeleteGame',
-                request_serializer=wishlist__pb2.DeleteGameWishRequest.SerializeToString,
-                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                '/Library/DeleteGame',
+                request_serializer=library__pb2.DeleteGameLibRequest.SerializeToString,
+                response_deserializer=library__pb2.DeleteGameLibResponse.FromString,
                 )
 
 
-class WishlistServicer(object):
+class LibraryServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def ListGames(self, request, context):
-        """Returns a list of games in the wishlist
+        """Returns a list of games in the library
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def AddGame(self, request, context):
-        """Add a new game to the wishlist
+        """Add a new game to the library
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def DeleteGame(self, request, context):
-        """Deletes a game from the wishlist
+        """Deletes a game from the library
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
 
-def add_WishlistServicer_to_server(servicer, server):
+def add_LibraryServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'ListGames': grpc.unary_unary_rpc_method_handler(
                     servicer.ListGames,
-                    request_deserializer=wishlist__pb2.ListGamesWishRequest.FromString,
-                    response_serializer=wishlist__pb2.ListGamesWishResponse.SerializeToString,
+                    request_deserializer=library__pb2.ListGamesLibRequest.FromString,
+                    response_serializer=library__pb2.ListGamesLibResponse.SerializeToString,
             ),
             'AddGame': grpc.unary_unary_rpc_method_handler(
                     servicer.AddGame,
-                    request_deserializer=wishlist__pb2.AddGameWishRequest.FromString,
-                    response_serializer=wishlist__pb2.Game.SerializeToString,
+                    request_deserializer=library__pb2.Game.FromString,
+                    response_serializer=library__pb2.AddGameLibResponse.SerializeToString,
             ),
             'DeleteGame': grpc.unary_unary_rpc_method_handler(
                     servicer.DeleteGame,
-                    request_deserializer=wishlist__pb2.DeleteGameWishRequest.FromString,
-                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                    request_deserializer=library__pb2.DeleteGameLibRequest.FromString,
+                    response_serializer=library__pb2.DeleteGameLibResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'Wishlist', rpc_method_handlers)
+            'Library', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
  # This class is part of an EXPERIMENTAL API.
-class Wishlist(object):
+class Library(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
@@ -95,9 +94,9 @@ class Wishlist(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Wishlist/ListGames',
-            wishlist__pb2.ListGamesWishRequest.SerializeToString,
-            wishlist__pb2.ListGamesWishResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/Library/ListGames',
+            library__pb2.ListGamesLibRequest.SerializeToString,
+            library__pb2.ListGamesLibResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -112,9 +111,9 @@ class Wishlist(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Wishlist/AddGame',
-            wishlist__pb2.AddGameWishRequest.SerializeToString,
-            wishlist__pb2.Game.FromString,
+        return grpc.experimental.unary_unary(request, target, '/Library/AddGame',
+            library__pb2.Game.SerializeToString,
+            library__pb2.AddGameLibResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -129,8 +128,8 @@ class Wishlist(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Wishlist/DeleteGame',
-            wishlist__pb2.DeleteGameWishRequest.SerializeToString,
-            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+        return grpc.experimental.unary_unary(request, target, '/Library/DeleteGame',
+            library__pb2.DeleteGameLibRequest.SerializeToString,
+            library__pb2.DeleteGameLibResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

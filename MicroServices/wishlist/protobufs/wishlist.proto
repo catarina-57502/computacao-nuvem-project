@@ -3,7 +3,6 @@ syntax = "proto3";
 import "google/protobuf/empty.proto";
 
 message Game {
-  string _id = 21;
   string url = 1;
   string types = 2;
   string name = 3;
@@ -32,18 +31,16 @@ message ListGamesWishResponse {
 }
 
 message ListGamesWishRequest {
-  int64 user_id = 1;
+  int32 page_number = 1;
+  int32 result_per_page = 2;
 }
 
 message AddGameWishRequest {
-  int64  user_id = 1;
-  optional Game game = 2;
+  string url = 1;
 }
 
 message DeleteGameWishRequest {
-  int64  user_id = 1;
-  string name = 2;
-  string _id = 3;
+  string  url = 1;
 }
 
 service Wishlist {

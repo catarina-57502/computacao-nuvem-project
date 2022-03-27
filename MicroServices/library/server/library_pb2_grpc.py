@@ -2,7 +2,6 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 import library_pb2 as library__pb2
 
 
@@ -22,13 +21,13 @@ class LibraryStub(object):
                 )
         self.AddGame = channel.unary_unary(
                 '/Library/AddGame',
-                request_serializer=library__pb2.AddGameLibRequest.SerializeToString,
-                response_deserializer=library__pb2.Game.FromString,
+                request_serializer=library__pb2.Game.SerializeToString,
+                response_deserializer=library__pb2.AddGameLibResponse.FromString,
                 )
         self.DeleteGame = channel.unary_unary(
                 '/Library/DeleteGame',
                 request_serializer=library__pb2.DeleteGameLibRequest.SerializeToString,
-                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                response_deserializer=library__pb2.DeleteGameLibResponse.FromString,
                 )
 
 
@@ -66,13 +65,13 @@ def add_LibraryServicer_to_server(servicer, server):
             ),
             'AddGame': grpc.unary_unary_rpc_method_handler(
                     servicer.AddGame,
-                    request_deserializer=library__pb2.AddGameLibRequest.FromString,
-                    response_serializer=library__pb2.Game.SerializeToString,
+                    request_deserializer=library__pb2.Game.FromString,
+                    response_serializer=library__pb2.AddGameLibResponse.SerializeToString,
             ),
             'DeleteGame': grpc.unary_unary_rpc_method_handler(
                     servicer.DeleteGame,
                     request_deserializer=library__pb2.DeleteGameLibRequest.FromString,
-                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                    response_serializer=library__pb2.DeleteGameLibResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -113,8 +112,8 @@ class Library(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Library/AddGame',
-            library__pb2.AddGameLibRequest.SerializeToString,
-            library__pb2.Game.FromString,
+            library__pb2.Game.SerializeToString,
+            library__pb2.AddGameLibResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -131,6 +130,6 @@ class Library(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Library/DeleteGame',
             library__pb2.DeleteGameLibRequest.SerializeToString,
-            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            library__pb2.DeleteGameLibResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
