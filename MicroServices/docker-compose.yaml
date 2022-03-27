@@ -34,6 +34,26 @@ services:
     ports:
       - "50052:50052"
 
+  userManagementServer:
+    build:
+      dockerfile: ./server/Dockerfile
+      context: ./userManagement
+    environment:
+      USERMANAGEMENT_HOST: userManagement
+    image: serverusermanagement
+    ports:
+      - "5004:5004"
+    expose:
+      - "5004"
+
+  userManagement:
+    build:
+      dockerfile: ./main/Dockerfile
+      context: ./userManagement
+    image: usermanagement
+    ports:
+      - "50054:50054"
+
 volumes:
   dbData:
     external: false
