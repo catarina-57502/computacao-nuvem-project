@@ -3,7 +3,7 @@ import os
 from flask import Flask, json, request
 import grpc
 
-from adminOperations_pb2 import Game,DeleteGameRequest,DeleteUserRequest
+from adminOperations_pb2 import GameObject
 from adminOperations_pb2_grpc import AdminOperationsStub
 
 api = Flask(__name__)
@@ -21,7 +21,7 @@ adminoperations_client = AdminOperationsStub(adminoperations_channel)
 @api.route('/admin/games', methods=['POST'])
 def addGame():
     data = json.loads(request.data)
-    addGame_request = Game(
+    addGame_request = GameObject(
         url=data['url'],
         types=data['types'],
         name=data['name'],
@@ -51,7 +51,7 @@ def addGame():
 @api.route('/admin/games', methods=['PUT'])
 def updateGame():
     data = json.loads(request.data)
-    updateGame_request = Game(
+    updateGame_request = GameObject(
         url=data['url'],
         types=data['types'],
         name=data['name'],

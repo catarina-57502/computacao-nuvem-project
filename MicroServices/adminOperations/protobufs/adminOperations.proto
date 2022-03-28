@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-message Game {
+message GameObject {
   string url = 1;
   string types = 2;
   string name = 3;
@@ -22,7 +22,6 @@ message Game {
   string original_price = 19;
   string discount_price = 20;
 }
-
 
 message AddGameResponse {
   string message = 1;
@@ -49,8 +48,8 @@ message DeleteUserResponse {
 }
 
 service AdminOperations {
-  rpc AddGame (Game) returns (AddGameResponse);
-  rpc UpdateGame (Game) returns (UpdateGameResponse);
+  rpc AddGame (GameObject) returns (AddGameResponse);
+  rpc UpdateGame (GameObject) returns (UpdateGameResponse);
   rpc DeleteGame (DeleteGameRequest) returns (DeleteGameResponse);
   rpc DeleteUser (DeleteUserRequest) returns (DeleteUserResponse);
 }
