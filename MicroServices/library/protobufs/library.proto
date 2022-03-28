@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+message Wish{
+    string id = 1;
+}
+
+message Lib{
+    string id = 1;
+}
+
+
+message User {
+    string userid = 1;
+    string nickname = 2;
+    string password = 3;
+    string email = 4;
+    repeated Wish wishlist = 5;
+    repeated Lib library = 6;
+}
+
+message ListGamesLibResponse {
+    string gameids = 1;
+}
+
+message ListGamesLibRequest {
+    string userid = 1;
+}
+
+message AddGameLibResponse {
+    string message = 1;
+}
+
+message AddGameLibRequest {
+    string userid = 1;
+    string id = 2;
+}
+
+message DeleteGameLibRequest {
+    string userid = 1;
+    string id = 2;
+}
+
+message DeleteGameLibResponse {
+    string message = 1;
+}
+
+
+service Library {
+
+    // Returns a list of games in the library
+    rpc ListGames(ListGamesLibRequest) returns (ListGamesLibResponse);
+
+    // Add a new game to the library
+    rpc AddGame(AddGameLibRequest) returns (AddGameLibResponse);
+
+    // Deletes a game from the library
+    rpc DeleteGame(DeleteGameLibRequest) returns (DeleteGameLibResponse);
+}

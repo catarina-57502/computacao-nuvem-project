@@ -1,0 +1,99 @@
+version: "3.9"
+
+services:
+
+  mongoDB:
+    image: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+    expose:
+      - "27017"
+    volumes:
+      - dbData:/data/db
+
+  adminOperations:
+    build:
+      dockerfile: ./main/Dockerfile
+      context: ./adminOperations
+    image: adminoperations
+    ports:
+      - "50052:50052"
+
+  adminOperationsServer:
+    build:
+      dockerfile: ./server/Dockerfile
+      context: ./adminOperations
+    environment:
+      ADMINOPERATIONS_HOST: adminOperations
+    image: serveradminoperations
+    ports:
+      - "5003:5003"
+    expose:
+      - "5003"
+
+  userManagement:
+    build:
+      dockerfile: ./main/Dockerfile
+      context: ./userManagement
+    image: usermanagement
+    ports:
+      - "50054:50054"
+
+  userManagementServer:
+    build:
+      dockerfile: ./server/Dockerfile
+      context: ./userManagement
+    environment:
+      USERMANAGEMENT_HOST: userManagement
+    image: serverusermanagement
+    ports:
+      - "5004:5004"
+    expose:
+      - "5004"
+
+  library:
+    build:
+      dockerfile: ./main/Dockerfile
+      context: ./library
+    image: library
+    ports:
+      - "50055:50055"
+
+  libraryServer:
+    build:
+      dockerfile: ./server/Dockerfile
+      context: ./library
+    environment:
+        LIBRARY_HOST: library
+    image: serverlibrary
+    ports:
+      - "5001:5001"
+    expose:
+      - "5001"
+
+  wishlist:
+    build:
+      dockerfile: ./main/Dockerfile
+      context: ./wishlist
+    image: wishlist
+    ports:
+      - "50058:50058"
+
+  wishlistServer:
+    build:
+      dockerfile: ./server/Dockerfile
+      context: ./wishlist
+    environment:
+      WISHLIST_HOST: wishlist
+    image: serverwishlist
+    ports:
+      - "5002:5002"
+    expose:
+      - "5002"
+
+volumes:
+  dbData:
+    external: false
