@@ -87,6 +87,7 @@ if __name__ == "__main__":
                 "nickname": "userTest",
                 "email": "teste@teste.com",
                 "password": "qwerty",
+                "type": "user",
                 "library": library,
                 "wishlist": wishlist
                 }
@@ -100,7 +101,7 @@ if __name__ == "__main__":
     dbGames = get_table(db,'Games')
     dbUsers = get_table(get_databaseUsers(),'users')
     # Reviews and games
-    writeCSVtoDB(STEAM_REVIEWS,dbReviews)
-    writeCSVtoDB(STEAM_GAMES,dbGames)
+    #writeCSVtoDB(STEAM_REVIEWS,dbReviews)
+    #writeCSVtoDB(STEAM_GAMES,dbGames)
     # User default
     writeUser(dbUsers)

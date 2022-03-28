@@ -27,7 +27,7 @@ class UserManagementStub(object):
         self.LoginUser = channel.unary_unary(
                 '/UserManagement/LoginUser',
                 request_serializer=userManagement__pb2.LoginRequest.SerializeToString,
-                response_deserializer=userManagement__pb2.DefaultResponse.FromString,
+                response_deserializer=userManagement__pb2.LoginResponse.FromString,
                 )
         self.Logout = channel.unary_unary(
                 '/UserManagement/Logout',
@@ -79,7 +79,7 @@ def add_UserManagementServicer_to_server(servicer, server):
             'LoginUser': grpc.unary_unary_rpc_method_handler(
                     servicer.LoginUser,
                     request_deserializer=userManagement__pb2.LoginRequest.FromString,
-                    response_serializer=userManagement__pb2.DefaultResponse.SerializeToString,
+                    response_serializer=userManagement__pb2.LoginResponse.SerializeToString,
             ),
             'Logout': grpc.unary_unary_rpc_method_handler(
                     servicer.Logout,
@@ -143,7 +143,7 @@ class UserManagement(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/UserManagement/LoginUser',
             userManagement__pb2.LoginRequest.SerializeToString,
-            userManagement__pb2.DefaultResponse.FromString,
+            userManagement__pb2.LoginResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

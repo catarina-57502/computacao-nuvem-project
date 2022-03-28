@@ -25,7 +25,8 @@ def addUser():
         id=data['id'],
         nickname=data['nickname'],
         email=data['email'],
-        password=data['password']
+        password=data['password'],
+        type=data["type"]
     )
     addUser_response = usermanagement_client.AddUser(
         addUser_request
@@ -36,11 +37,11 @@ def addUser():
 def editUser():
     data = json.loads(request.data)
     updateUser_request = EditUserRequest(
-        password=data['password'],
         new_password=data['new_password'],
         nickname=data['nickname'],
-        email=data['email'],
-        new_email=data['new_email']
+        new_email=data['new_email'],
+        type = data["type"],
+        token = request.headers.get('token')
     )
     updateUser_response = usermanagement_client.EditUser(
         updateUser_request
@@ -57,7 +58,7 @@ def login():
     login_response = usermanagement_client.LoginUser(
         login_request
     )
-    return json.dumps(login_response.message)
+    return json.dumps(login_response.token)
 
 @api.route('/logout', methods=['GET'])
 def logout():

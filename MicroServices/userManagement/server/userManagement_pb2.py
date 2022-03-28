@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x14userManagement.proto\"\x81\x01\n\x04User\x12\x0e\n\x06userid\x18\x01 \x01(\t\x12\x10\n\x08nickname\x18\x02 \x01(\t\x12\x10\n\x08password\x18\x03 \x01(\t\x12\r\n\x05\x65mail\x18\x04 \x01(\t\x12\x1b\n\x08wishlist\x18\x05 \x03(\x0b\x32\t.Wishlist\x12\x19\n\x07library\x18\x06 \x03(\x0b\x32\x08.Library\"\x16\n\x08Wishlist\x12\n\n\x02id\x18\x01 \x01(\t\"\x15\n\x07Library\x12\n\n\x02id\x18\x01 \x01(\t\"0\n\x0f\x44\x65\x66\x61ultResponse\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x05\x12\x0f\n\x07message\x18\x02 \x01(\t\"O\n\x0e\x41\x64\x64UserRequest\x12\n\n\x02id\x18\x01 \x01(\t\x12\x10\n\x08nickname\x18\x02 \x01(\t\x12\r\n\x05\x65mail\x18\x03 \x01(\t\x12\x10\n\x08password\x18\x04 \x01(\t\"m\n\x0f\x45\x64itUserRequest\x12\x10\n\x08password\x18\x01 \x01(\t\x12\x14\n\x0cnew_password\x18\x02 \x01(\t\x12\x10\n\x08nickname\x18\x03 \x01(\t\x12\r\n\x05\x65mail\x18\x04 \x01(\t\x12\x11\n\tnew_email\x18\x05 \x01(\t\"/\n\x0cLoginRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\"\x1e\n\rLogoutRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t2\xc8\x01\n\x0eUserManagement\x12,\n\x07\x41\x64\x64User\x12\x0f.AddUserRequest\x1a\x10.DefaultResponse\x12.\n\x08\x45\x64itUser\x12\x10.EditUserRequest\x1a\x10.DefaultResponse\x12,\n\tLoginUser\x12\r.LoginRequest\x1a\x10.DefaultResponse\x12*\n\x06Logout\x12\x0e.LogoutRequest\x1a\x10.DefaultResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x14userManagement.proto\"\x8f\x01\n\x04User\x12\x0e\n\x06userid\x18\x01 \x01(\t\x12\x10\n\x08nickname\x18\x02 \x01(\t\x12\x10\n\x08password\x18\x03 \x01(\t\x12\r\n\x05\x65mail\x18\x04 \x01(\t\x12\x0c\n\x04type\x18\x05 \x01(\t\x12\x1b\n\x08wishlist\x18\x06 \x03(\x0b\x32\t.Wishlist\x12\x19\n\x07library\x18\x07 \x03(\x0b\x32\x08.Library\"\x16\n\x08Wishlist\x12\n\n\x02id\x18\x01 \x01(\t\"\x15\n\x07Library\x12\n\n\x02id\x18\x01 \x01(\t\"0\n\x0f\x44\x65\x66\x61ultResponse\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x05\x12\x0f\n\x07message\x18\x02 \x01(\t\"]\n\x0e\x41\x64\x64UserRequest\x12\n\n\x02id\x18\x01 \x01(\t\x12\x10\n\x08nickname\x18\x02 \x01(\t\x12\r\n\x05\x65mail\x18\x03 \x01(\t\x12\x10\n\x08password\x18\x04 \x01(\t\x12\x0c\n\x04type\x18\x05 \x01(\t\"i\n\x0f\x45\x64itUserRequest\x12\x14\n\x0cnew_password\x18\x01 \x01(\t\x12\x10\n\x08nickname\x18\x02 \x01(\t\x12\x11\n\tnew_email\x18\x03 \x01(\t\x12\x0c\n\x04type\x18\x04 \x01(\t\x12\r\n\x05token\x18\x06 \x01(\t\"/\n\x0cLoginRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\"\x1e\n\rLogoutRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t\"\x1e\n\rLoginResponse\x12\r\n\x05token\x18\x01 \x01(\t2\xc6\x01\n\x0eUserManagement\x12,\n\x07\x41\x64\x64User\x12\x0f.AddUserRequest\x1a\x10.DefaultResponse\x12.\n\x08\x45\x64itUser\x12\x10.EditUserRequest\x1a\x10.DefaultResponse\x12*\n\tLoginUser\x12\r.LoginRequest\x1a\x0e.LoginResponse\x12*\n\x06Logout\x12\x0e.LogoutRequest\x1a\x10.DefaultResponseb\x06proto3')
 
 
 
@@ -26,6 +26,7 @@ _ADDUSERREQUEST = DESCRIPTOR.message_types_by_name['AddUserRequest']
 _EDITUSERREQUEST = DESCRIPTOR.message_types_by_name['EditUserRequest']
 _LOGINREQUEST = DESCRIPTOR.message_types_by_name['LoginRequest']
 _LOGOUTREQUEST = DESCRIPTOR.message_types_by_name['LogoutRequest']
+_LOGINRESPONSE = DESCRIPTOR.message_types_by_name['LoginResponse']
 User = _reflection.GeneratedProtocolMessageType('User', (_message.Message,), {
   'DESCRIPTOR' : _USER,
   '__module__' : 'userManagement_pb2'
@@ -82,26 +83,35 @@ LogoutRequest = _reflection.GeneratedProtocolMessageType('LogoutRequest', (_mess
   })
 _sym_db.RegisterMessage(LogoutRequest)
 
+LoginResponse = _reflection.GeneratedProtocolMessageType('LoginResponse', (_message.Message,), {
+  'DESCRIPTOR' : _LOGINRESPONSE,
+  '__module__' : 'userManagement_pb2'
+  # @@protoc_insertion_point(class_scope:LoginResponse)
+  })
+_sym_db.RegisterMessage(LoginResponse)
+
 _USERMANAGEMENT = DESCRIPTOR.services_by_name['UserManagement']
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
   _USER._serialized_start=25
-  _USER._serialized_end=154
-  _WISHLIST._serialized_start=156
-  _WISHLIST._serialized_end=178
-  _LIBRARY._serialized_start=180
-  _LIBRARY._serialized_end=201
-  _DEFAULTRESPONSE._serialized_start=203
-  _DEFAULTRESPONSE._serialized_end=251
-  _ADDUSERREQUEST._serialized_start=253
-  _ADDUSERREQUEST._serialized_end=332
-  _EDITUSERREQUEST._serialized_start=334
-  _EDITUSERREQUEST._serialized_end=443
-  _LOGINREQUEST._serialized_start=445
-  _LOGINREQUEST._serialized_end=492
-  _LOGOUTREQUEST._serialized_start=494
-  _LOGOUTREQUEST._serialized_end=524
-  _USERMANAGEMENT._serialized_start=527
-  _USERMANAGEMENT._serialized_end=727
+  _USER._serialized_end=168
+  _WISHLIST._serialized_start=170
+  _WISHLIST._serialized_end=192
+  _LIBRARY._serialized_start=194
+  _LIBRARY._serialized_end=215
+  _DEFAULTRESPONSE._serialized_start=217
+  _DEFAULTRESPONSE._serialized_end=265
+  _ADDUSERREQUEST._serialized_start=267
+  _ADDUSERREQUEST._serialized_end=360
+  _EDITUSERREQUEST._serialized_start=362
+  _EDITUSERREQUEST._serialized_end=467
+  _LOGINREQUEST._serialized_start=469
+  _LOGINREQUEST._serialized_end=516
+  _LOGOUTREQUEST._serialized_start=518
+  _LOGOUTREQUEST._serialized_end=548
+  _LOGINRESPONSE._serialized_start=550
+  _LOGINRESPONSE._serialized_end=580
+  _USERMANAGEMENT._serialized_start=583
+  _USERMANAGEMENT._serialized_end=781
 # @@protoc_insertion_point(module_scope)
