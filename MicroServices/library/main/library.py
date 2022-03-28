@@ -14,7 +14,7 @@ from pymongo import MongoClient
 def get_table(db,table):
     return db[table]
 
-client = MongoClient('172.21.0.5', 27017 ,username='admin', password='admin' )
+client = MongoClient('172.23.0.9', 27017 ,username='admin', password='admin' )
 db = client['users']
 usersDB = get_table(db,"users")
 

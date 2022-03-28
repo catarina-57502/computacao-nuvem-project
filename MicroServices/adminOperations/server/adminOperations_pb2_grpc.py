@@ -16,12 +16,12 @@ class AdminOperationsStub(object):
         """
         self.AddGame = channel.unary_unary(
                 '/AdminOperations/AddGame',
-                request_serializer=adminOperations__pb2.Game.SerializeToString,
+                request_serializer=adminOperations__pb2.GameObject.SerializeToString,
                 response_deserializer=adminOperations__pb2.AddGameResponse.FromString,
                 )
         self.UpdateGame = channel.unary_unary(
                 '/AdminOperations/UpdateGame',
-                request_serializer=adminOperations__pb2.Game.SerializeToString,
+                request_serializer=adminOperations__pb2.GameObject.SerializeToString,
                 response_deserializer=adminOperations__pb2.UpdateGameResponse.FromString,
                 )
         self.DeleteGame = channel.unary_unary(
@@ -68,12 +68,12 @@ def add_AdminOperationsServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'AddGame': grpc.unary_unary_rpc_method_handler(
                     servicer.AddGame,
-                    request_deserializer=adminOperations__pb2.Game.FromString,
+                    request_deserializer=adminOperations__pb2.GameObject.FromString,
                     response_serializer=adminOperations__pb2.AddGameResponse.SerializeToString,
             ),
             'UpdateGame': grpc.unary_unary_rpc_method_handler(
                     servicer.UpdateGame,
-                    request_deserializer=adminOperations__pb2.Game.FromString,
+                    request_deserializer=adminOperations__pb2.GameObject.FromString,
                     response_serializer=adminOperations__pb2.UpdateGameResponse.SerializeToString,
             ),
             'DeleteGame': grpc.unary_unary_rpc_method_handler(
@@ -108,7 +108,7 @@ class AdminOperations(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/AdminOperations/AddGame',
-            adminOperations__pb2.Game.SerializeToString,
+            adminOperations__pb2.GameObject.SerializeToString,
             adminOperations__pb2.AddGameResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -125,7 +125,7 @@ class AdminOperations(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/AdminOperations/UpdateGame',
-            adminOperations__pb2.Game.SerializeToString,
+            adminOperations__pb2.GameObject.SerializeToString,
             adminOperations__pb2.UpdateGameResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

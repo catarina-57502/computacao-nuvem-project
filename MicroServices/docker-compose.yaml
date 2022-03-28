@@ -14,6 +14,14 @@ services:
     volumes:
       - dbData:/data/db
 
+  adminOperations:
+    build:
+      dockerfile: ./main/Dockerfile
+      context: ./adminOperations
+    image: adminoperations
+    ports:
+      - "50052:50052"
+
   adminOperationsServer:
     build:
       dockerfile: ./server/Dockerfile
@@ -26,13 +34,13 @@ services:
     expose:
       - "5003"
 
-  adminOperations:
+  userManagement:
     build:
       dockerfile: ./main/Dockerfile
-      context: ./adminOperations
-    image: adminoperations
+      context: ./userManagement
+    image: usermanagement
     ports:
-      - "50052:50052"
+      - "50054:50054"
 
   userManagementServer:
     build:
@@ -45,14 +53,6 @@ services:
       - "5004:5004"
     expose:
       - "5004"
-
-  userManagement:
-    build:
-      dockerfile: ./main/Dockerfile
-      context: ./userManagement
-    image: usermanagement
-    ports:
-      - "50054:50054"
 
   library:
     build:
