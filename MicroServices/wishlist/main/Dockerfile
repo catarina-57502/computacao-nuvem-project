@@ -13,5 +13,5 @@ RUN pip install grpc-interceptor
 RUN python -m grpc_tools.protoc -I ../protobufs --python_out=. \
            --grpc_python_out=. ../protobufs/wishlist.proto
 
-EXPOSE 50057
+EXPOSE 50058
 ENTRYPOINT [ "python", "wishlist.py" ]

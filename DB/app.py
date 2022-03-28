@@ -75,22 +75,22 @@ def get_table(db,table):
     return db[table]
 
 if __name__ == "__main__":
-def writeUser(dbUsers):
-    library = [
-        "6240977ffee051363df02ff9",
-        "6240977ffee051363df03003",
-    ]
-    wishlist = [
-        "6240977ffee051363df0300c",
-    ]
-    myquery = { "userid": "00000000000000000",
+    def writeUser(dbUsers):
+        library = [
+            "6240977ffee051363df02ff9",
+            "6240977ffee051363df03003",
+        ]
+        wishlist = [
+            "6240977ffee051363df0300c",
+        ]
+        myquery = { "userid": "00000000000000000",
                 "nickname": "userTest",
                 "email": "teste@teste.com",
                 "password": "qwerty",
                 "library": library,
                 "wishlist": wishlist
                 }
-    dbUsers.insert_one(myquery)
+        dbUsers.insert_one(myquery)
     
 if __name__ == "__main__":    
 

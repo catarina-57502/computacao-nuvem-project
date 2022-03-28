@@ -14,59 +14,41 @@ from pymongo import MongoClient
 def get_table(db,table):
     return db[table]
 
-client = MongoClient('172.20.0.2', 27017 ,username='admin', password='admin' )
-db = client['steam']
-gamesDB = get_table(db,"Games")
-
-def createdoc(request):
-    return {
-        "url":request.url,
-        "types":request.types,
-        "name":request.name,
-        "desc_snippet":request.desc_snippet,
-        "recent_reviews":request.recent_reviews,
-        "all_reviews":request.all_reviews,
-        "release_date":request.release_date,
-        "developer":request.developer,
-        "publisher":request.publisher,
-        "popular_tags":request.popular_tags,
-        "game_details":request.game_details,
-        "languages":request.languages,
-        "achievements":request.achievements,
-        "genre":request.genre,
-        "game_description":request.game_description,
-        "mature_content":request.mature_content,
-        "minimum_requirements":request.minimum_requirements,
-        "recommended_requirements":request.recommended_requirements,
-        "original_price":request.original_price,
-        "discount_price":request.discount_price
-    }
+client = MongoClient('172.21.0.5', 27017 ,username='admin', password='admin' )
+db = client['users']
+usersDB = get_table(db,"users")
 
 class LibraryService(library_pb2_grpc.LibraryServicer):
     def AddGame(self, request, context):
-        myquery = { "url": request.url }
-        if gamesDB.count_documents(myquery) == 0:
-            gamesDB.insert_one(createdoc(request))
-            return AddGameLibResponse(message="Game Added")
-        else:
-            return AddGameLibResponse(message="Error - Game URL already exists")
+        docUser = usersDB.find({"userid": request.userid} )
+        for doc in docUser:
+            library = doc["library"]
+            wishlist = doc["wishlist"]
+            library.append(request.id)
+            doc["library"] = library
+            usersDB.delete_one({"userid": request.userid})
+            usersDB.insert_one(doc)
+        return AddGameLibResponse(message="Game added in library")
 
     def DeleteGame(self, request, context):
-        myquery = { "url": request.url }
-        if gamesDB.count_documents(myquery) >= 1:
-            gamesDB.delete_one(myquery);
-            return DeleteGame(message="Game deleted")
-        else:
-            return DeleteGame(message="Error - Game not found")
+        docUser = usersDB.find({"userid": request.userid} )
+        for doc in docUser:
+            library = doc["library"]
+            wishlist = doc["wishlist"]
+            library.remove(request.id)
+            doc["library"] = library
+            usersDB.delete_one({"userid": request.userid})
+            usersDB.insert_one(doc)
+        return DeleteGameLibResponse(message="Game deleted from library")
 
     def ListGames(self, request, context):
-        page = request.page
-        max_results = request.max_result
-
-        listGamesLib_request = ListGamesLibRequest(page=page, max_results=n)
-        g = client.ListGames(listGamesLib_request).games
-
-        return ListGamesLibResponse(games=g)
+        str = ""
+        docUser = usersDB.find({"userid": request.userid} )
+        for doc in docUser:
+            library = doc["library"]
+        for game in library:
+            str += game+"\n"
+        return ListGamesLibResponse(gameids=str)
 
 
 def serve():

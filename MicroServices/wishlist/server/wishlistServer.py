@@ -11,7 +11,7 @@ api = Flask(__name__)
 wishlist_host = os.getenv("WISHLIST_HOST", "localhost")
 
 wishlist_channel = grpc.insecure_channel(
-    f"{wishlist_host}:50056"
+    f"{wishlist_host}:50058"
 )
 
 wishlist_client = WishlistStub(wishlist_channel)
@@ -19,28 +19,11 @@ wishlist_client = WishlistStub(wishlist_channel)
 
 @api.route('/addGame_wish', methods=['POST'])
 def addGame():
+
     data = json.loads(request.data)
-    addGameLib_request = Game(
-        url=data['url'],
-        types=data['types'],
-        name=data['name'],
-        desc_snippet=data['desc_snippet'],
-        recent_reviews=data['recent_reviews'],
-        all_reviews=data['all_reviews'],
-        release_date=data['release_date'],
-        developer=data['developer'],
-        publisher=data['publisher'],
-        popular_tags=data['popular_tags'],
-        game_details=data['game_details'],
-        languages=data['languages'],
-        achievements=data['achievements'],
-        genre=data['genre'],
-        game_description=data['game_description'],
-        mature_content=data['mature_content'],
-        minimum_requirements=data['minimum_requirements'],
-        recommended_requirements=data['recommended_requirements'],
-        original_price=data['original_price'],
-        discount_price=data['discount_price']
+    addGameWish_request = AddGameWishRequest(
+        id=data['id'],
+        userid=data['userid'],
     )
     addGameWish_response = wishlist_client.AddGame(
         addGameWish_request
@@ -50,11 +33,13 @@ def addGame():
 
 @api.route('/delGame_wish', methods=['DELETE'])
 def deleteGame():
-    url = request.args.get('url')
+
+    data = json.loads(request.data)
     deleteGameWish_request = DeleteGameWishRequest(
-        url=url,
+        id=data['id'],
+        userid=data['userid'],
     )
-    deleteGame_response = wishlist_client.DeleteGame(
+    deleteGameWish_response = wishlist_client.DeleteGame(
         deleteGameWish_request
     )
     return json.dumps(deleteGameWish_response.message)
@@ -62,11 +47,13 @@ def deleteGame():
 @api.route('/getGame_wish', methods=['GET'])
 def listGames():
 
+    userid = request.args.get('userid')
     listGamesWish_request = ListGamesWishRequest(
-        page=1, max_results=3
+        userid=userid
     )
     listGamesWish_response = wishlist_client.ListGames(
         listGamesWish_request
     )
-    return json.dumps(listGamesWish_response.games)
+
+    return json.dumps(listGamesWish_response.gameids)
 

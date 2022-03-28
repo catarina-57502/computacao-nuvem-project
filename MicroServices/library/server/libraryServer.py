@@ -2,6 +2,7 @@ import os
 
 from flask import Flask, json, request
 import grpc
+from google.protobuf.json_format import MessageToJson
 
 from library_pb2 import *
 from library_pb2_grpc import LibraryStub
@@ -19,28 +20,11 @@ library_client = LibraryStub(library_channel)
 
 @api.route('/addGame', methods=['POST'])
 def addGame():
+
     data = json.loads(request.data)
-    addGameLib_request = Game(
-        url=data['url'],
-        types=data['types'],
-        name=data['name'],
-        desc_snippet=data['desc_snippet'],
-        recent_reviews=data['recent_reviews'],
-        all_reviews=data['all_reviews'],
-        release_date=data['release_date'],
-        developer=data['developer'],
-        publisher=data['publisher'],
-        popular_tags=data['popular_tags'],
-        game_details=data['game_details'],
-        languages=data['languages'],
-        achievements=data['achievements'],
-        genre=data['genre'],
-        game_description=data['game_description'],
-        mature_content=data['mature_content'],
-        minimum_requirements=data['minimum_requirements'],
-        recommended_requirements=data['recommended_requirements'],
-        original_price=data['original_price'],
-        discount_price=data['discount_price']
+    addGameLib_request = AddGameLibRequest(
+        id=data['id'],
+        userid=data['userid'],
     )
     addGameLib_response = library_client.AddGame(
         addGameLib_request
@@ -50,11 +34,13 @@ def addGame():
 
 @api.route('/delGame', methods=['DELETE'])
 def deleteGame():
-    url = request.args.get('url')
+
+    data = json.loads(request.data)
     deleteGameLib_request = DeleteGameLibRequest(
-        url=url,
+        id=data['id'],
+        userid=data['userid'],
     )
-    deleteGame_response = library_client.DeleteGame(
+    deleteGameLib_response = library_client.DeleteGame(
         deleteGameLib_request
     )
     return json.dumps(deleteGameLib_response.message)
@@ -62,11 +48,13 @@ def deleteGame():
 @api.route('/getGames', methods=['GET'])
 def listGames():
 
+    userid = request.args.get('userid')
     listGamesLib_request = ListGamesLibRequest(
-        page=1, max_results=3
+        userid=userid
     )
     listGamesLib_response = library_client.ListGames(
         listGamesLib_request
     )
-    return json.dumps(listGamesLib_response.games)
+
+    return json.dumps(listGamesLib_response.gameids)
 

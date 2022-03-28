@@ -11,6 +11,7 @@ RUN pip install -r requirements.txt
 RUN python -m grpc_tools.protoc -I ../protobufs --python_out=. \
            --grpc_python_out=. ../protobufs/library.proto
 
-EXPOSE 5000
+EXPOSE 5001
 ENV FLASK_APP=libraryServer.py
+ENV FLASK_RUN_PORT=5001
 ENTRYPOINT [ "flask", "run", "--host=0.0.0.0"]

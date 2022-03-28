@@ -14,22 +14,39 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rlibrary.proto\"\xb5\x03\n\x04Game\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\r\n\x05types\x18\x02 \x01(\t\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x14\n\x0c\x64\x65sc_snippet\x18\x04 \x01(\t\x12\x16\n\x0erecent_reviews\x18\x05 \x01(\t\x12\x13\n\x0b\x61ll_reviews\x18\x06 \x01(\t\x12\x14\n\x0crelease_date\x18\x07 \x01(\t\x12\x11\n\tdeveloper\x18\x08 \x01(\t\x12\x11\n\tpublisher\x18\t \x01(\t\x12\x14\n\x0cpopular_tags\x18\n \x01(\t\x12\x14\n\x0cgame_details\x18\x0b \x01(\t\x12\x11\n\tlanguages\x18\x0c \x01(\t\x12\x14\n\x0c\x61\x63hievements\x18\r \x01(\t\x12\r\n\x05genre\x18\x0e \x01(\t\x12\x18\n\x10game_description\x18\x0f \x01(\t\x12\x16\n\x0emature_content\x18\x10 \x01(\t\x12\x1c\n\x14minimum_requirements\x18\x11 \x01(\t\x12 \n\x18recommended_requirements\x18\x12 \x01(\t\x12\x16\n\x0eoriginal_price\x18\x13 \x01(\t\x12\x16\n\x0e\x64iscount_price\x18\x14 \x01(\t\",\n\x14ListGamesLibResponse\x12\x14\n\x05games\x18\x01 \x03(\x0b\x32\x05.Game\"C\n\x13ListGamesLibRequest\x12\x13\n\x0bpage_number\x18\x01 \x01(\x05\x12\x17\n\x0fresult_per_page\x18\x02 \x01(\x05\"%\n\x12\x41\x64\x64GameLibResponse\x12\x0f\n\x07message\x18\x01 \x01(\t\"#\n\x14\x44\x65leteGameLibRequest\x12\x0b\n\x03url\x18\x01 \x01(\t\"(\n\x15\x44\x65leteGameLibResponse\x12\x0f\n\x07message\x18\x01 \x01(\t2\xa7\x01\n\x07Library\x12\x38\n\tListGames\x12\x14.ListGamesLibRequest\x1a\x15.ListGamesLibResponse\x12%\n\x07\x41\x64\x64Game\x12\x05.Game\x1a\x13.AddGameLibResponse\x12;\n\nDeleteGame\x12\x15.DeleteGameLibRequest\x1a\x16.DeleteGameLibResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rlibrary.proto\"\x12\n\x04Wish\x12\n\n\x02id\x18\x01 \x01(\t\"\x11\n\x03Lib\x12\n\n\x02id\x18\x01 \x01(\t\"y\n\x04User\x12\x0e\n\x06userid\x18\x01 \x01(\t\x12\x10\n\x08nickname\x18\x02 \x01(\t\x12\x10\n\x08password\x18\x03 \x01(\t\x12\r\n\x05\x65mail\x18\x04 \x01(\t\x12\x17\n\x08wishlist\x18\x05 \x03(\x0b\x32\x05.Wish\x12\x15\n\x07library\x18\x06 \x03(\x0b\x32\x04.Lib\"\'\n\x14ListGamesLibResponse\x12\x0f\n\x07gameids\x18\x01 \x01(\t\"%\n\x13ListGamesLibRequest\x12\x0e\n\x06userid\x18\x01 \x01(\t\"%\n\x12\x41\x64\x64GameLibResponse\x12\x0f\n\x07message\x18\x01 \x01(\t\"/\n\x11\x41\x64\x64GameLibRequest\x12\x0e\n\x06userid\x18\x01 \x01(\t\x12\n\n\x02id\x18\x02 \x01(\t\"2\n\x14\x44\x65leteGameLibRequest\x12\x0e\n\x06userid\x18\x01 \x01(\t\x12\n\n\x02id\x18\x02 \x01(\t\"(\n\x15\x44\x65leteGameLibResponse\x12\x0f\n\x07message\x18\x01 \x01(\t2\xb4\x01\n\x07Library\x12\x38\n\tListGames\x12\x14.ListGamesLibRequest\x1a\x15.ListGamesLibResponse\x12\x32\n\x07\x41\x64\x64Game\x12\x12.AddGameLibRequest\x1a\x13.AddGameLibResponse\x12;\n\nDeleteGame\x12\x15.DeleteGameLibRequest\x1a\x16.DeleteGameLibResponseb\x06proto3')
 
 
 
-_GAME = DESCRIPTOR.message_types_by_name['Game']
+_WISH = DESCRIPTOR.message_types_by_name['Wish']
+_LIB = DESCRIPTOR.message_types_by_name['Lib']
+_USER = DESCRIPTOR.message_types_by_name['User']
 _LISTGAMESLIBRESPONSE = DESCRIPTOR.message_types_by_name['ListGamesLibResponse']
 _LISTGAMESLIBREQUEST = DESCRIPTOR.message_types_by_name['ListGamesLibRequest']
 _ADDGAMELIBRESPONSE = DESCRIPTOR.message_types_by_name['AddGameLibResponse']
+_ADDGAMELIBREQUEST = DESCRIPTOR.message_types_by_name['AddGameLibRequest']
 _DELETEGAMELIBREQUEST = DESCRIPTOR.message_types_by_name['DeleteGameLibRequest']
 _DELETEGAMELIBRESPONSE = DESCRIPTOR.message_types_by_name['DeleteGameLibResponse']
-Game = _reflection.GeneratedProtocolMessageType('Game', (_message.Message,), {
-  'DESCRIPTOR' : _GAME,
+Wish = _reflection.GeneratedProtocolMessageType('Wish', (_message.Message,), {
+  'DESCRIPTOR' : _WISH,
   '__module__' : 'library_pb2'
-  # @@protoc_insertion_point(class_scope:Game)
+  # @@protoc_insertion_point(class_scope:Wish)
   })
-_sym_db.RegisterMessage(Game)
+_sym_db.RegisterMessage(Wish)
+
+Lib = _reflection.GeneratedProtocolMessageType('Lib', (_message.Message,), {
+  'DESCRIPTOR' : _LIB,
+  '__module__' : 'library_pb2'
+  # @@protoc_insertion_point(class_scope:Lib)
+  })
+_sym_db.RegisterMessage(Lib)
+
+User = _reflection.GeneratedProtocolMessageType('User', (_message.Message,), {
+  'DESCRIPTOR' : _USER,
+  '__module__' : 'library_pb2'
+  # @@protoc_insertion_point(class_scope:User)
+  })
+_sym_db.RegisterMessage(User)
 
 ListGamesLibResponse = _reflection.GeneratedProtocolMessageType('ListGamesLibResponse', (_message.Message,), {
   'DESCRIPTOR' : _LISTGAMESLIBRESPONSE,
@@ -52,6 +69,13 @@ AddGameLibResponse = _reflection.GeneratedProtocolMessageType('AddGameLibRespons
   })
 _sym_db.RegisterMessage(AddGameLibResponse)
 
+AddGameLibRequest = _reflection.GeneratedProtocolMessageType('AddGameLibRequest', (_message.Message,), {
+  'DESCRIPTOR' : _ADDGAMELIBREQUEST,
+  '__module__' : 'library_pb2'
+  # @@protoc_insertion_point(class_scope:AddGameLibRequest)
+  })
+_sym_db.RegisterMessage(AddGameLibRequest)
+
 DeleteGameLibRequest = _reflection.GeneratedProtocolMessageType('DeleteGameLibRequest', (_message.Message,), {
   'DESCRIPTOR' : _DELETEGAMELIBREQUEST,
   '__module__' : 'library_pb2'
@@ -70,18 +94,24 @@ _LIBRARY = DESCRIPTOR.services_by_name['Library']
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _GAME._serialized_start=18
-  _GAME._serialized_end=455
-  _LISTGAMESLIBRESPONSE._serialized_start=457
-  _LISTGAMESLIBRESPONSE._serialized_end=501
-  _LISTGAMESLIBREQUEST._serialized_start=503
-  _LISTGAMESLIBREQUEST._serialized_end=570
-  _ADDGAMELIBRESPONSE._serialized_start=572
-  _ADDGAMELIBRESPONSE._serialized_end=609
-  _DELETEGAMELIBREQUEST._serialized_start=611
-  _DELETEGAMELIBREQUEST._serialized_end=646
-  _DELETEGAMELIBRESPONSE._serialized_start=648
-  _DELETEGAMELIBRESPONSE._serialized_end=688
-  _LIBRARY._serialized_start=691
-  _LIBRARY._serialized_end=858
+  _WISH._serialized_start=17
+  _WISH._serialized_end=35
+  _LIB._serialized_start=37
+  _LIB._serialized_end=54
+  _USER._serialized_start=56
+  _USER._serialized_end=177
+  _LISTGAMESLIBRESPONSE._serialized_start=179
+  _LISTGAMESLIBRESPONSE._serialized_end=218
+  _LISTGAMESLIBREQUEST._serialized_start=220
+  _LISTGAMESLIBREQUEST._serialized_end=257
+  _ADDGAMELIBRESPONSE._serialized_start=259
+  _ADDGAMELIBRESPONSE._serialized_end=296
+  _ADDGAMELIBREQUEST._serialized_start=298
+  _ADDGAMELIBREQUEST._serialized_end=345
+  _DELETEGAMELIBREQUEST._serialized_start=347
+  _DELETEGAMELIBREQUEST._serialized_end=397
+  _DELETEGAMELIBRESPONSE._serialized_start=399
+  _DELETEGAMELIBRESPONSE._serialized_end=439
+  _LIBRARY._serialized_start=442
+  _LIBRARY._serialized_end=622
 # @@protoc_insertion_point(module_scope)

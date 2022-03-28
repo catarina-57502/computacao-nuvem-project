@@ -1,44 +1,43 @@
 syntax = "proto3";
 
-message Game {
-  string url = 1;
-  string types = 2;
-  string name = 3;
-  string desc_snippet = 4;
-  string recent_reviews = 5;
-  string all_reviews = 6;
-  string release_date = 7;
-  string developer = 8;
-  string publisher = 9;
-  string popular_tags = 10;
-  string game_details = 11;
-  string languages = 12;
-  string achievements = 13;
-  string genre = 14;
-  string game_description = 15;
-  string mature_content = 16;
-  string minimum_requirements = 17;
-  string recommended_requirements = 18;
-  string original_price = 19;
-  string discount_price = 20;
+message Wish{
+  string id = 1;
+}
 
+message Lib{
+  string id = 1;
+}
+
+
+message User {
+  string userid = 1;
+  string nickname = 2;
+  string password = 3;
+  string email = 4;
+  repeated Wish wishlist = 5;
+  repeated Lib library = 6;
 }
 
 message ListGamesWishResponse {
-  repeated Game games = 1;
+  string gameids = 1;
 }
 
 message ListGamesWishRequest {
-  int32 page_number = 1;
-  int32 result_per_page = 2;
+  string userid = 1;
 }
 
 message AddGameWishResponse {
   string message = 1;
 }
 
+message AddGameWishRequest {
+  string userid = 1;
+  string id = 2;
+}
+
 message DeleteGameWishRequest {
-  string url = 1;
+  string userid = 1;
+  string id = 2;
 }
 
 message DeleteGameWishResponse {
@@ -48,12 +47,12 @@ message DeleteGameWishResponse {
 
 service Wishlist {
 
-  // Returns a list of games in the library
+  // Returns a list of games in the wish
   rpc ListGames(ListGamesWishRequest) returns (ListGamesWishResponse);
 
-  // Add a new game to the library
-  rpc AddGame(Game) returns (AddGameWishResponse);
+  // Add a new game to the wish
+  rpc AddGame(AddGameWishRequest) returns (AddGameWishResponse);
 
-  // Deletes a game from the library
+  // Deletes a game from the wish
   rpc DeleteGame(DeleteGameWishRequest) returns (DeleteGameWishResponse);
 }

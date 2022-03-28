@@ -21,7 +21,7 @@ class WishlistStub(object):
                 )
         self.AddGame = channel.unary_unary(
                 '/Wishlist/AddGame',
-                request_serializer=wishlist__pb2.Game.SerializeToString,
+                request_serializer=wishlist__pb2.AddGameWishRequest.SerializeToString,
                 response_deserializer=wishlist__pb2.AddGameWishResponse.FromString,
                 )
         self.DeleteGame = channel.unary_unary(
@@ -35,21 +35,21 @@ class WishlistServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def ListGames(self, request, context):
-        """Returns a list of games in the library
+        """Returns a list of games in the wish
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def AddGame(self, request, context):
-        """Add a new game to the library
+        """Add a new game to the wish
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def DeleteGame(self, request, context):
-        """Deletes a game from the library
+        """Deletes a game from the wish
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -65,7 +65,7 @@ def add_WishlistServicer_to_server(servicer, server):
             ),
             'AddGame': grpc.unary_unary_rpc_method_handler(
                     servicer.AddGame,
-                    request_deserializer=wishlist__pb2.Game.FromString,
+                    request_deserializer=wishlist__pb2.AddGameWishRequest.FromString,
                     response_serializer=wishlist__pb2.AddGameWishResponse.SerializeToString,
             ),
             'DeleteGame': grpc.unary_unary_rpc_method_handler(
@@ -112,7 +112,7 @@ class Wishlist(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Wishlist/AddGame',
-            wishlist__pb2.Game.SerializeToString,
+            wishlist__pb2.AddGameWishRequest.SerializeToString,
             wishlist__pb2.AddGameWishResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
