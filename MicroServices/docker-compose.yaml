@@ -1,22 +1,26 @@
+
 version: '3'
 services:
-  reviews-db:
-    container_name: reviews-database
-    image: mongo:latest
-    volumes:
-      - reviews-data:/var/lib/reviews-db
+
+  mongoDB:
+    image: mongo
     ports:
-      - 27017:27017
+      - "27017:27017"
     environment:
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=admin
+    expose:
+      - "27017"
+    volumes:
+      - dbData:/data/db
+
   reviews-server:
     container_name: reviews-server
     build: 
       dockerfile: ./server/Dockerfile
       context: ./reviews
-    # environment:
-    #   - MONGODB_CONNSTRING=mongodb://admin:admin@reviews-db
+
+
   reviews-api:
     container_name: reviews-api
     build: 
@@ -28,8 +32,107 @@ services:
       - 5012:5012
     expose:
       - "5012"
-networks:
-  default:
-    name: steam-games-and-reviews-api-network
+
+  adminOperations:
+    build:
+      dockerfile: ./server/Dockerfile
+      context: ./adminOperations
+    image: adminoperations
+    ports:
+      - "50052:50052"
+
+  adminOperations-api:
+    build:
+      dockerfile: ./api/Dockerfile
+      context: ./adminOperations
+    environment:
+      ADMINOPERATIONS_HOST: adminOperations
+    image: apiadminoperations
+    ports:
+      - "5003:5003"
+    expose:
+      - "5003"
+
+  userManagement:
+    build:
+      dockerfile: ./server/Dockerfile
+      context: ./userManagement
+    image: usermanagement
+    ports:
+      - "50054:50054"
+
+  userManagement-api:
+    build:
+      dockerfile: ./api/Dockerfile
+      context: ./userManagement
+    environment:
+      USERMANAGEMENT_HOST: userManagement
+    image: apiusermanagement
+    ports:
+      - "5004:5004"
+    expose:
+      - "5004"
+
+  library:
+    build:
+      dockerfile: ./server/Dockerfile
+      context: ./library
+    image: library
+    ports:
+      - "50055:50055"
+
+  library-api:
+    build:
+      dockerfile: ./api/Dockerfile
+      context: ./library
+    environment:
+        LIBRARY_HOST: library
+    image: apilibrary
+    ports:
+      - "5001:5001"
+    expose:
+      - "5001"
+
+  wishlist:
+    build:
+      dockerfile: ./server/Dockerfile
+      context: ./wishlist
+    image: wishlist
+    ports:
+      - "50058:50058"
+
+  wishlist-api:
+    build:
+      dockerfile: ./api/Dockerfile
+      context: ./wishlist
+    environment:
+      WISHLIST_HOST: wishlist
+    image: apiwishlist
+    ports:
+      - "5002:5002"
+    expose:
+      - "5002"
+
+  suggestions:
+    build:
+      dockerfile: ./server/Dockerfile
+      context: ./suggestions
+    image: suggestions
+    ports:
+      - "50059:50059"
+
+  suggestions-api:
+    build:
+      dockerfile: ./api/Dockerfile
+      context: ./suggestions
+    environment:
+      SUGGESTIONS_HOST: suggestions
+    image: apisuggestions
+    ports:
+      - "5008:5008"
+    expose:
+      - "5008"
+
 volumes:
-  reviews-data:
+  dbData:
+    external: false

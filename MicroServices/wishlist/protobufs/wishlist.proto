@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+message Wish{
+  string id = 1;
+}
+
+message Lib{
+  string id = 1;
+}
+
+
+message ListGamesWishResponse {
+  map<string, string> MyMap = 1;
+}
+
+message ListGamesWishRequest {
+  string token = 1;
+}
+
+message AddGameWishResponse {
+  string message = 1;
+}
+
+message AddGameWishRequest {
+  string id = 1;
+  string token = 2;
+}
+
+message DeleteGameWishRequest {
+  string id = 1;
+  string token = 2;
+}
+
+message DeleteGameWishResponse {
+  string message = 1;
+}
+
+
+service Wishlist {
+
+  // Returns a list of games in the wish
+  rpc ListGames(ListGamesWishRequest) returns (ListGamesWishResponse);
+
+  // Add a new game to the wish
+  rpc AddGame(AddGameWishRequest) returns (AddGameWishResponse);
+
+  // Deletes a game from the wish
+  rpc DeleteGame(DeleteGameWishRequest) returns (DeleteGameWishResponse);
+}

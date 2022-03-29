@@ -15,7 +15,7 @@ api = Flask(__name__)
 
 reviews_host = os.getenv("REVIEWS_SERVER_HOST", "localhost")
 reviews_channel = grpc.insecure_channel(
- f"{reviews_host}:50055"
+ f"{reviews_host}:50060"
 )
 reviews_client = ReviewsStub(reviews_channel)
 

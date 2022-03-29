@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+message User {
+  string userid = 1;
+  string nickname = 2;
+  string password = 3;
+  string email = 4;
+  string type = 5;
+  repeated UserWishlist wishlist = 6;
+  repeated UserLibrary library = 7;
+}
+
+message UserWishlist{
+  string id = 1;
+}
+
+message UserLibrary{
+  string id = 1;
+}
+
+message DefaultResponse {
+  int32 code = 1;
+  string message = 2;
+}
+
+message AddUserRequest {
+  string id = 1;
+  string nickname = 2;
+  string email = 3;
+  string password = 4;
+  string type = 5;
+}
+
+message EditUserRequest {
+  string new_password = 1;
+  string nickname = 2;
+  string new_email = 3;
+  string type = 4;
+  string token = 6;
+}
+
+message LoginRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message LogoutRequest {
+  string email = 1;
+}
+
+message LoginResponse {
+  string token = 1;
+}
+
+message TokenRequest {
+  string token = 1;
+}
+
+message TokenResponse {
+  string userID = 1;
+  string type = 2;
+  string email = 3;
+}
+
+service UserManagement {
+  rpc AddUser (AddUserRequest) returns (DefaultResponse);
+  rpc EditUser (EditUserRequest) returns (DefaultResponse);
+  rpc LoginUser (LoginRequest) returns (LoginResponse);
+  rpc Logout (LogoutRequest) returns (DefaultResponse);
+  rpc GetInfoFromToken (TokenRequest) returns (TokenResponse);
+}
+
+
+

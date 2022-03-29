@@ -13,9 +13,9 @@ from reviews_pb2 import (
 import reviews_pb2_grpc
 
 #connString = os.environ["MONGODB_CONNSTRING"]
-connection = MongoClient('reviews-db', 27017, username='admin', password='admin')
-revs = connection["reviews"]
-db = revs["data"]
+connection = MongoClient('microservices_mongoDB_1', 27017, username='admin', password='admin')
+revs = connection["steam"]
+db = revs["Reviews"]
 
 class ReviewService(reviews_pb2_grpc.ReviewsServicer):
     def GetReview(self, request, context):
@@ -153,7 +153,7 @@ def serve():
         ReviewService(), server
     )
 
-    server.add_insecure_port("[::]:50055")
+    server.add_insecure_port("[::]:50060")
     server.start()
     server.wait_for_termination()
 
