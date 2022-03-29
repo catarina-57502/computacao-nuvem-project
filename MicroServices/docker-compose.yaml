@@ -1,22 +1,35 @@
 version: '3'
 services:
-  # reviews:
-  #   container_name: reviews-service
-  #   image: /MicroServices/reviews
-  #   environment:
-  #     - MONGODB_CONNSTRING=mongodb://admin:admin@reviewsdb
-  reviewsdb:
-    container_name: reviewsdb-server
+  reviews-db:
+    container_name: reviews-database
     image: mongo:latest
     volumes:
-      - reviews-data:/var/lib/reviewsdb
+      - reviews-data:/var/lib/reviews-db
     ports:
       - 27017:27017
     environment:
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=admin
+  reviews-server:
+    container_name: reviews-server
+    build: 
+      dockerfile: ./server/Dockerfile
+      context: ./reviews
+    # environment:
+    #   - MONGODB_CONNSTRING=mongodb://admin:admin@reviews-db
+  reviews-api:
+    container_name: reviews-api
+    build: 
+      dockerfile: ./api/Dockerfile
+      context: ./reviews
+    environment:
+      REVIEWS_SERVER_HOST: reviews-server
+    ports:
+      - 5012:5012
+    expose:
+      - "5012"
 networks:
   default:
-    name: steam-games-and-reviews-network
+    name: steam-games-and-reviews-api-network
 volumes:
   reviews-data:

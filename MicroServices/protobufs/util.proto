@@ -1,6 +1,0 @@
-syntax = "proto3";
-
-message SimpleResponse {
-    int32 code = 1;
-    string description = 2;
-}

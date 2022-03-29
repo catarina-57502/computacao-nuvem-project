@@ -7,7 +7,7 @@ import csv
 from csv import reader
 from pymongo import MongoClient
 
-STEAM_REVIEWS = 'steam_reviews_eng.csv'
+STEAM_REVIEWS = 'steam_reviews_eng-1.csv'
 # STEAM_GAMES = './csvFiles/steam_games.csv'
 
 CONNECTION_STRING = "mongodb://admin:admin@localhost:27017/admin"
@@ -69,6 +69,6 @@ if __name__ == "__main__":
     print("WELCOME")
     db = get_database()
     dbReviews = get_table(db,'data')
-    # dbGames = get_table(db,'Games')
+    #dbGames = get_table(db,'Games')
     writeCSVtoDB(STEAM_REVIEWS,dbReviews)
-    # writeCSVtoDB(STEAM_GAMES,dbGames)
+    #writeCSVtoDB(STEAM_GAMES,dbGames)
