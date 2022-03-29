@@ -8,22 +8,12 @@ message Lib{
     string id = 1;
 }
 
-
-message User {
-    string userid = 1;
-    string nickname = 2;
-    string password = 3;
-    string email = 4;
-    repeated Wish wishlist = 5;
-    repeated Lib library = 6;
-}
-
 message ListGamesLibResponse {
     string gameids = 1;
 }
 
 message ListGamesLibRequest {
-    string userid = 1;
+    string token = 1;
 }
 
 message AddGameLibResponse {
@@ -31,13 +21,13 @@ message AddGameLibResponse {
 }
 
 message AddGameLibRequest {
-    string userid = 1;
-    string id = 2;
+    string id = 1;
+    string token = 2;
 }
 
 message DeleteGameLibRequest {
-    string userid = 1;
-    string id = 2;
+    string id = 1;
+    string token = 2;
 }
 
 message DeleteGameLibResponse {

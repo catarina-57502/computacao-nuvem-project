@@ -2,16 +2,12 @@ FROM python
 
 RUN mkdir /service
 COPY /protobufs/ /service/protobufs/
-COPY server/ /service/adminOperationServer/
+COPY server/ /service/adminOperations/
 
-
-WORKDIR /service/adminOperationServer
-RUN pip install markupsafe==2.0.1
+WORKDIR /service/adminOperations
 RUN pip install -r requirements.txt
-RUN python -m grpc_tools.protoc -I ../protobufs --python_out=. \
-           --grpc_python_out=. ../protobufs/adminOperations.proto
+RUN python -m grpc_tools.protoc -I ../protobufs --python_out=. --grpc_python_out=. ../protobufs/adminOperations.proto
+RUN python -m grpc_tools.protoc -I ../protobufs --python_out=. --grpc_python_out=. ../protobufs/userManagement.proto
 
-EXPOSE 5003
-ENV FLASK_APP=adminOperationServer.py
-ENV FLASK_RUN_PORT=5003
-ENTRYPOINT [ "flask", "run", "--host=0.0.0.0"]
+EXPOSE 50051
+ENTRYPOINT [ "python", "adminOperations.py" ]

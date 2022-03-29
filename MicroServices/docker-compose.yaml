@@ -16,19 +16,19 @@ services:
 
   adminOperations:
     build:
-      dockerfile: ./main/Dockerfile
+      dockerfile: ./server/Dockerfile
       context: ./adminOperations
     image: adminoperations
     ports:
       - "50052:50052"
 
-  adminOperationsServer:
+  adminOperations-api:
     build:
-      dockerfile: ./server/Dockerfile
+      dockerfile: ./api/Dockerfile
       context: ./adminOperations
     environment:
       ADMINOPERATIONS_HOST: adminOperations
-    image: serveradminoperations
+    image: apiadminoperations
     ports:
       - "5003:5003"
     expose:
@@ -36,19 +36,19 @@ services:
 
   userManagement:
     build:
-      dockerfile: ./main/Dockerfile
+      dockerfile: ./server/Dockerfile
       context: ./userManagement
     image: usermanagement
     ports:
       - "50054:50054"
 
-  userManagementServer:
+  userManagement-api:
     build:
-      dockerfile: ./server/Dockerfile
+      dockerfile: ./api/Dockerfile
       context: ./userManagement
     environment:
       USERMANAGEMENT_HOST: userManagement
-    image: serverusermanagement
+    image: apiusermanagement
     ports:
       - "5004:5004"
     expose:
@@ -56,19 +56,19 @@ services:
 
   library:
     build:
-      dockerfile: ./main/Dockerfile
+      dockerfile: ./server/Dockerfile
       context: ./library
     image: library
     ports:
       - "50055:50055"
 
-  libraryServer:
+  library-api:
     build:
-      dockerfile: ./server/Dockerfile
+      dockerfile: ./api/Dockerfile
       context: ./library
     environment:
         LIBRARY_HOST: library
-    image: serverlibrary
+    image: apilibrary
     ports:
       - "5001:5001"
     expose:
@@ -76,19 +76,19 @@ services:
 
   wishlist:
     build:
-      dockerfile: ./main/Dockerfile
+      dockerfile: ./server/Dockerfile
       context: ./wishlist
     image: wishlist
     ports:
       - "50058:50058"
 
-  wishlistServer:
+  wishlist-api:
     build:
-      dockerfile: ./server/Dockerfile
+      dockerfile: ./api/Dockerfile
       context: ./wishlist
     environment:
       WISHLIST_HOST: wishlist
-    image: serverwishlist
+    image: apiwishlist
     ports:
       - "5002:5002"
     expose:
@@ -96,43 +96,23 @@ services:
 
   suggestions:
     build:
-      dockerfile: ./main/Dockerfile
+      dockerfile: ./server/Dockerfile
       context: ./suggestions
     image: suggestions
     ports:
       - "50059:50059"
 
-  suggestionsServer:
+  suggestions-api:
     build:
-      dockerfile: ./server/Dockerfile
+      dockerfile: ./api/Dockerfile
       context: ./suggestions
     environment:
       SUGGESTIONS_HOST: suggestions
-    image: serversuggestions
+    image: apisuggestions
     ports:
       - "5008:5008"
     expose:
       - "5008"
-
-  searches:
-    build:
-      dockerfile: ./main/Dockerfile
-      context: ./searches
-    image: searches
-    ports:
-      - "50060:50060"
-
-  searchesServer:
-    build:
-      dockerfile: ./server/Dockerfile
-      context: ./searches
-    environment:
-      SEARCHES_HOST: searches
-    image: serversearches
-    ports:
-      - "5010:5010"
-    expose:
-      - "5010"
 
 volumes:
   dbData:

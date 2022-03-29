@@ -1,0 +1,91 @@
+syntax = "proto3";
+
+message GameObject {
+  string url = 1;
+  string types = 2;
+  string name = 3;
+  string desc_snippet = 4;
+  string recent_reviews = 5;
+  string all_reviews = 6;
+  string release_date = 7;
+  string developer = 8;
+  string publisher = 9;
+  string popular_tags = 10;
+  string game_details = 11;
+  string languages = 12;
+  int32 achievements = 13;
+  string genre = 14;
+  string game_description = 15;
+  string mature_content = 16;
+  string minimum_requirements = 17;
+  string recommended_requirements = 18;
+  string original_price = 19;
+  string discount_price = 20;
+}
+
+message Review{
+
+}
+
+message ListSearchGamesRequest{
+    string types = 1;
+    string name = 2;
+    string release_date = 3;
+    string developer = 4;
+    string publisher = 5;
+    string popular_tags = 6;
+    string languages = 7;
+    string genre = 8;
+    string original_price = 9;
+    string discount_price = 10;
+}
+
+message ListSearchGamesResponse{
+    string gameIds = 1;
+}
+
+message GetGameRequest{
+    string id = 1;
+}
+
+message GetGameResponse{
+    string gameId = 1;
+}
+
+message SearchReviewsRequest{
+    string id = 1;
+    string app_name = 2;
+    string language = 3;
+    string timestamp_created = 4;
+    string timestamp_updated = 5;
+    string votes_helpful = 6;
+    string votes_funny = 7;
+    string weighted_vote_score = 8;
+    string comment_count = 9;
+    string author_steamid = 10;
+}
+
+
+message SearchReviewsResponse{
+    string id = 1;
+}
+
+message GetGameReviewRequest{
+    string id = 1;
+}
+
+message GetGameReviewResponse{
+    string reviewId = 1;
+}
+
+
+service SearchOperations {
+  rpc SearchGames (ListSearchGamesRequest) returns (ListSearchGamesResponse);
+  rpc SearchGameById (GetGameRequest) returns (GetGameResponse);
+  rpc SearchReviews (SearchReviewsRequest) returns (SearchReviewsResponse);
+  rpc SearchsReviewById (GetGameReviewRequest) returns (GetGameReviewResponse);
+}
+
+
+
+

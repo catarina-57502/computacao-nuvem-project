@@ -21,6 +21,7 @@ message GameObject {
   string recommended_requirements = 18;
   string original_price = 19;
   string discount_price = 20;
+  string token = 21;
 }
 
 message AddGameResponse {
@@ -33,6 +34,7 @@ message UpdateGameResponse {
 
 message DeleteGameRequest {
   string url = 1;
+  string token = 2;
 }
 
 message DeleteGameResponse {
@@ -40,7 +42,8 @@ message DeleteGameResponse {
 }
 
 message DeleteUserRequest {
-  int64 id = 1;
+  string id = 1;
+  string token = 2;
 }
 
 message DeleteUserResponse {

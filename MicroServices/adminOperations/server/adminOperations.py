@@ -1,0 +1,138 @@
+from concurrent import futures
+import random
+
+import grpc
+from grpc_interceptor import ExceptionToStatusInterceptor
+from grpc_interceptor.exceptions import NotFound
+
+from adminOperations_pb2 import (
+    GameObject,
+    AddGameResponse,
+    UpdateGameResponse,DeleteUserResponse,DeleteGameResponse
+)
+import adminOperations_pb2_grpc
+import pymongo
+from pymongo import MongoClient
+
+from userManagement_pb2 import *
+from userManagement_pb2_grpc import UserManagementStub
+
+def get_table(db,table):
+    return db[table]
+
+client = MongoClient('microservices_mongoDB_1', 27017 ,username='admin', password='admin' )
+db = client['steam']
+gamesDB = get_table(db,"Games")
+reviewsDB = get_table(db,"Reviews")
+dbUsers = client['users']
+userDB = get_table(dbUsers,"users")
+
+def connectToClient():
+    userManagement_channel = grpc.insecure_channel("userManagement:50054")
+    userManagement_client = UserManagementStub(userManagement_channel)
+    return userManagement_client
+
+def createdoc(request):
+    return {
+        "url":request.url,
+        "types":request.types,
+        "name":request.name,
+        "desc_snippet":request.desc_snippet,
+        "recent_reviews":request.recent_reviews,
+        "all_reviews":request.all_reviews,
+        "release_date":request.release_date,
+        "developer":request.developer,
+        "publisher":request.publisher,
+        "popular_tags":request.popular_tags,
+        "game_details":request.game_details,
+        "languages":request.languages,
+        "achievements":request.achievements,
+        "genre":request.genre,
+        "game_description":request.game_description,
+        "mature_content":request.mature_content,
+        "minimum_requirements":request.minimum_requirements,
+        "recommended_requirements":request.recommended_requirements,
+        "original_price":request.original_price,
+        "discount_price":request.discount_price
+    }
+
+class AdminOperationService(adminOperations_pb2_grpc.AdminOperationsServicer):
+    def AddGame(self, request, context):
+        getToken_request = TokenRequest(
+            token = request.token
+        )
+        getToken_response = connectToClient().GetInfoFromToken(
+            getToken_request
+        )
+        if getToken_response.type != "admin":
+            return AddGameResponse(message="Not Admin :(")
+        myquery = { "url": request.url }
+        if gamesDB.count_documents(myquery) == 0:
+            gamesDB.insert_one(createdoc(request))
+            return AddGameResponse(message="Game Added")
+        else:
+            return AddGameResponse(message="Error - Game URL already exists")
+
+    def UpdateGame(self, request, context):
+        getToken_request = TokenRequest(
+            token = request.token
+        )
+        getToken_response = connectToClient().GetInfoFromToken(
+            getToken_request
+        )
+        if getToken_response.type != "admin":
+            return UpdateGameResponse(message="Not Admin :(")
+        myquery = { "url": request.url }
+        if gamesDB.count_documents(myquery) >= 1:
+            gamesDB.delete_one(myquery);
+            gamesDB.insert_one(createdoc(request))
+            return UpdateGameResponse(message="Game updated")
+        else:
+            return UpdateGameResponse(message="Error - Game not found")
+
+    def DeleteGame(self, request, context):
+        getToken_request = TokenRequest(
+            token = request.token
+        )
+        getToken_response = connectToClient().GetInfoFromToken(
+            getToken_request
+        )
+        if getToken_response.type != "admin":
+            return DeleteGameResponse(message="Not Admin :(")
+        myquery = { "url": request.url }
+        if gamesDB.count_documents(myquery) >= 1:
+            gamesDB.delete_one(myquery);
+            return DeleteGameResponse(message="Game deleted")
+        else:
+            return DeleteGameResponse(message="Error - Game not found")
+
+    def DeleteUser(self, request, context):
+        getToken_request = TokenRequest(
+            token = request.token
+        )
+        getToken_response = connectToClient().GetInfoFromToken(
+            getToken_request
+        )
+        if getToken_response.type != "admin":
+            return DeleteUserResponse(message="Not Admin :(")
+        myquery = { "userid": request.id }
+        userDB.delete_one(myquery)
+        return DeleteUserResponse(message="User deleted")
+
+
+def serve():
+    interceptors = [ExceptionToStatusInterceptor()]
+    server = grpc.server(
+        futures.ThreadPoolExecutor(max_workers=10), interceptors=interceptors
+    )
+    adminOperations_pb2_grpc.add_AdminOperationsServicer_to_server(
+        AdminOperationService(), server
+    )
+    server.add_insecure_port("[::]:50052")
+    server.start()
+    server.wait_for_termination()
+
+
+if __name__ == "__main__":
+    serve()
+

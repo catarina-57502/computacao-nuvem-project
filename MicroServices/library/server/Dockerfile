@@ -2,16 +2,16 @@ FROM python
 
 RUN mkdir /service
 COPY /protobufs/ /service/protobufs/
-COPY server/ /service/libraryServer/
+COPY server/ /service/library/
 
 
-WORKDIR /service/libraryServer
+WORKDIR /service/library
 RUN pip install markupsafe==2.0.1
 RUN pip install -r requirements.txt
-RUN python -m grpc_tools.protoc -I ../protobufs --python_out=. \
-           --grpc_python_out=. ../protobufs/library.proto
+RUN pip3 install pymongo
+RUN pip install grpc-interceptor
+RUN python -m grpc_tools.protoc -I ../protobufs --python_out=. --grpc_python_out=. ../protobufs/library.proto
+RUN python -m grpc_tools.protoc -I ../protobufs --python_out=. --grpc_python_out=. ../protobufs/userManagement.proto
 
-EXPOSE 5001
-ENV FLASK_APP=libraryServer.py
-ENV FLASK_RUN_PORT=5001
-ENTRYPOINT [ "flask", "run", "--host=0.0.0.0"]
+EXPOSE 50053
+ENTRYPOINT [ "python", "library.py" ]

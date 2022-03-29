@@ -9,21 +9,12 @@ message Lib{
 }
 
 
-message User {
-  string userid = 1;
-  string nickname = 2;
-  string password = 3;
-  string email = 4;
-  repeated Wish wishlist = 5;
-  repeated Lib library = 6;
-}
-
 message ListGamesWishResponse {
   map<string, string> MyMap = 1;
 }
 
 message ListGamesWishRequest {
-  string userid = 1;
+  string token = 1;
 }
 
 message AddGameWishResponse {
@@ -31,13 +22,13 @@ message AddGameWishResponse {
 }
 
 message AddGameWishRequest {
-  string userid = 1;
-  string id = 2;
+  string id = 1;
+  string token = 2;
 }
 
 message DeleteGameWishRequest {
-  string userid = 1;
-  string id = 2;
+  string id = 1;
+  string token = 2;
 }
 
 message DeleteGameWishResponse {
