@@ -94,6 +94,26 @@ services:
     expose:
       - "5002"
 
+  suggestions:
+    build:
+      dockerfile: ./main/Dockerfile
+      context: ./suggestions
+    image: suggestions
+    ports:
+      - "50059:50059"
+
+  suggestionsServer:
+    build:
+      dockerfile: ./server/Dockerfile
+      context: ./suggestions
+    environment:
+      SUGGESTIONS_HOST: suggestions
+    image: serversuggestions
+    ports:
+      - "5008:5008"
+    expose:
+      - "5008"
+
 volumes:
   dbData:
     external: false
