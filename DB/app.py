@@ -7,22 +7,23 @@ import csv
 from csv import reader
 from pymongo import MongoClient
 
-STEAM_REVIEWS = '/csvFiles/steam_reviews.csv'
+STEAM_REVIEWS = './csvFiles/steam_reviews_eng.csv'
 STEAM_GAMES = './csvFiles/steam_games.csv'
 
 CONNECTION_STRING = "mongodb://admin:admin@127.0.0.1:27017/admin"
 
 def writeCSVtoDB(CSVFile,tableDB):
+    import csv
+    from csv import reader
+    import pymongo
+
     #Allow big reviews inputs
     csv.field_size_limit(100000000)
     atributes = []
 
     print("Opening file:",CSVFile)
-    try:
-        file = open(CSVFile, 'r',encoding="utf8")
-    except OSError:
-        print ("Could not open/read file:", CSVFile)
-        sys.exit()
+
+    file = open(CSVFile, 'r',encoding="utf8")
     num = 1
     listDocs = []
     numberWriteToDB = 500000
@@ -38,13 +39,35 @@ def writeCSVtoDB(CSVFile,tableDB):
                 doc = {}
                 date = ""
                 for value in row:
-                    if(atributes[n] != ''):
+                    if(atributes[n] == 'author.steamid'):
+                        doc["author_steamid"] = value
+                    if(atributes[n] == 'author.num_games_owned'):
+                        doc["author_num_games_owned"] = value
+                    if(atributes[n] == 'author.num_reviews'):
+                        doc["author_num_reviews"] = value
+                    if(atributes[n] == 'author.playtime_forever'):
+                        doc["author_playtime_forever"] = value
+                    if(atributes[n] == 'author.playtime_last_two_weeks'):
+                        doc["author_playtime_last_two_weeks"] = value
+                    if(atributes[n] == 'author.playtime_at_review'):
+                        doc["author_playtime_at_review"] = value
+                    if(atributes[n] == 'author.last_played'):
+                        doc["author_last_played"] = value
+                    if(atributes[n] != ''
+                            and atributes[n] != 'author.steamid'
+                            and atributes[n] != 'author.num_games_owned'
+                            and atributes[n] != 'author.num_reviews'
+                            and atributes[n] != 'author.playtime_forever'
+                            and atributes[n] != 'author.playtime_last_two_weeks'
+                            and atributes[n] != 'author.playtime_at_review'
+                            and atributes[n] != 'author.last_played'
+                    ):
                         doc[atributes[n]] = value
-                    #if(atributes[n] == "timestamp_updated"):
-                       # date = doc[atributes[n]]
+                    if(atributes[n] == "timestamp_updated"):
+                       date = doc[atributes[n]]
                     n = n + 1
-                #if(int(date) >= 1577836801):
-                listDocs.append(doc)
+                if(int(date) >= 1577836801):
+                    listDocs.append(doc)
                 if num == numberWriteToDB:
                     print("Added: ",num)
                     tableDB.insert_many(listDocs)
@@ -59,7 +82,7 @@ def get_database():
 
     client = MongoClient(CONNECTION_STRING)
     print("DataBase Created")
-    return client['reviews']
+    return client['steam']
 
 def get_databaseUsers():
     from pymongo import MongoClient
@@ -102,7 +125,8 @@ if __name__ == "__main__":
     dbUsers = get_table(get_databaseUsers(),'users')
     # Reviews and games
     writeCSVtoDB(STEAM_REVIEWS,dbReviews)
-    writeCSVtoDB(STEAM_GAMES,dbGames)
+    #writeCSVtoDB(STEAM_GAMES,dbGames)
     # User default
-    writeUser(dbUsers)
+    #writeUser(dbUsers)
+
 

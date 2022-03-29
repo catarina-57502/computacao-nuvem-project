@@ -16,7 +16,7 @@ from suggestions_pb2 import (
 
 import suggestions_pb2_grpc
 
-myClient = MongoClient('172.18.0.2', 27017 ,username='admin', password='admin' )
+myClient = MongoClient('microservices_mongoDB_1', 27017 ,username='admin', password='admin' )
 myDB = myClient["steam"]
 myGames = myDB["Games"]
 myReviews = myDB["Reviews"]
@@ -63,13 +63,13 @@ def DocToReview(doc):
      steam_purchase = doc["steam_purchase"],
      received_for_free = doc["received_for_free"],
      written_during_early_access = doc["written_during_early_access"],
-     author_steamid = doc["author.num_games_owned"],
-     author_num_games_owned = doc["author.num_games_owned"],
-     author_num_reviews = doc["author.num_reviews"],
-     author_playtime_forever = doc["author.playtime_forever"],
-     author_playtime_last_two_weeks = doc["author.playtime_last_two_weeks"],
-     author_playtime_at_review = doc["author.playtime_at_review"],
-     author_last_played = doc["author.last_played"],
+     author_steamid = doc["author_steamid"],
+     author_num_games_owned = doc["author_num_games_owned"],
+     author_num_reviews = doc["author_num_reviews"],
+     author_playtime_forever = doc["author_playtime_forever"],
+     author_playtime_last_two_weeks = doc["author_playtime_last_two_weeks"],
+     author_playtime_at_review = doc["author_playtime_at_review"],
+     author_last_played = doc["author_last_played"],
      _id = doc["_id"]
     )
 
