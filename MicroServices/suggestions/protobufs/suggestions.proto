@@ -5,7 +5,7 @@ message gameRequest {
   string developer = 2;
   string popular_tags = 3;
   string genre = 4;
-  string original_piece = 5;
+  string original_price = 5;
 }
 message Game{
   string url = 1;
@@ -28,6 +28,7 @@ message Game{
   string recommended_requirements = 18;
   string original_price = 19;
   string discount_price = 20;
+  string _id =21;
 }
 message reviewRequest{
   string app_name = 1;
@@ -58,14 +59,15 @@ message Review {
   int32 author_playtime_last_two_weeks = 20;
   int32 author_playtime_at_review = 21;
   int32 author_last_played = 22;
+  string _id =23;
 }
 message GameResponse {
-  repeated Game games =1;
+  map<string, Game> games = 1;
 }
 message ReviewResponse {
   repeated Review reviews = 1;
 }
 service Suggestions {
-  rpc getSuggGames (gameRequest) returns (GameResponse);
-  rpc getSuggReviews (reviewRequest) returns (ReviewResponse);
+  rpc GetGames (gameRequest) returns (GameResponse);
+  rpc GetReviews (reviewRequest) returns (ReviewResponse);
 }

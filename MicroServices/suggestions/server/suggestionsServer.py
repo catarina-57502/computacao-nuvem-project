@@ -10,21 +10,25 @@ app = Flask(__name__)
 
 suggestions_host = os.getenv("SUGGESTIONS_HOST", "localhost")
 suggestions_channel = grpc.insecure_channel(
-    f"{suggestions_host}:50051")
+    f"{suggestions_host}:50059")
 suggestions_client = SuggestionsStub(suggestions_channel)
 
 @app.route("/suggestionGames", methods=['GET'])
 def suggestionsGames():
-    data = json.loads(request.data)
     suggGame = gameRequest(
-        release_date = data['release_date'],
-        developer = data['developer'],
-        popular_tags = data['popular_tags'],
-        genre = data['genre'],
-        original_price = data['original_price']
+        release_date = request.args.get('release_date'),
+        developer = request.args.get('developer'),
+        popular_tags = request.args.get('popular_tags'),
+        genre = request.args.get('genre'),
+        original_price = request.args.get('original_price')
     )
-    suggGame_response = suggestions_client.getSuggGames(suggGame)
-    return json.dumps(suggGame_response.message)
+    suggGame_response = suggestions_client.GetGames(suggGame)
+    map = {}
+    i = 0
+    for doc in suggGame_response.games:
+        map[str(i)] = doc
+        i+=1
+    return json.dumps(map)
 
 @app.route("/suggestionReviews", methods=['GET'])
 def suggestionReviews():
@@ -35,5 +39,5 @@ def suggestionReviews():
         recommended = data['recommended'],
         author_playtime_at_review = data['author_playtime_at_review']
     )
-    suggReview_response = suggestions_client.getSuggReviews(suggReview)
-    return json.dumps(suggReview_response.message)
+    suggReview_response = suggestions_client.GetReviews(suggReview)
+    return suggReview_response.reviews

@@ -47,7 +47,7 @@ def writeCSVtoDB(CSVFile,tableDB):
                     print("Added: ",num)
                     tableDB.insert_many(listDocs)
                     listDocs = []
-                    numberWriteToDB = numberWriteToDB + 500000
+                    numberWriteToDB = numberWriteToDB + 50000
                 num = num + 1
         tableDB.insert_many(listDocs)
         listDocs = []
@@ -102,7 +102,7 @@ if __name__ == "__main__":
     dbGames = get_table(db,'Games')
     dbUsers = get_table(get_databaseUsers(),'users')
     # Reviews and games
-    #writeCSVtoDB(STEAM_REVIEWS,dbReviews)
-    #writeCSVtoDB(STEAM_GAMES,dbGames)
+    writeCSVtoDB(STEAM_REVIEWS,dbReviews)
+    writeCSVtoDB(STEAM_GAMES,dbGames)
     # User default
     writeUser(dbUsers)
