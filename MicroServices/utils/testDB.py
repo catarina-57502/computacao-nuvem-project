@@ -12,3 +12,9 @@ usersDB = get_table(db,"users")
 docUser = usersDB.find({"email": "martimmourao@gmail.com"} )
 for doc in docUser:
     print(doc["userid"])
+
+dict = {}
+i = 0
+for game in games:
+    str = "" + i
+    dict[str] = game

@@ -6,15 +6,18 @@ import grpc_interceptor
 from grpc_interceptor import ExceptionToStatusInterceptor
 from grpc_interceptor.exceptions import NotFound
 
+
+
 from wishlist_pb2 import *
 import wishlist_pb2_grpc
 import pymongo
 from pymongo import MongoClient
 
+
 def get_table(db,table):
     return db[table]
 
-client = MongoClient('172.23.0.9', 27017 ,username='admin', password='admin' )
+client = MongoClient('172.18.0.2', 27017 ,username='admin', password='admin' )
 db = client['users']
 usersDB = get_table(db,"users")
 
@@ -42,11 +45,11 @@ class WishlistService(wishlist_pb2_grpc.WishlistServicer):
     def ListGames(self, request, context):
         str = ""
         docUser = usersDB.find({"userid": request.userid} )
-        for doc in docUser:
-            wishlist = doc["wishlist"]
-        for game in wishlist:
-            str += game+"\n"
-        return ListGamesWishResponse(gameids=str)
+        #for doc in docUser:
+        #    wishlist = doc["wishlist"]
+        wishlist = {"111":"111","222":"333","3333":"4444"}
+
+        return ListGamesWishResponse(MyMap=(wishlist))
 
 
 def serve():

@@ -19,7 +19,7 @@ message User {
 }
 
 message ListGamesWishResponse {
-  string gameids = 1;
+  map<string, string> MyMap = 1;
 }
 
 message ListGamesWishRequest {
