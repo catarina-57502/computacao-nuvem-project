@@ -32,40 +32,38 @@ message Game{
 }
 message reviewRequest{
   string app_name = 1;
-  int32 timestamp_updated = 2;
-  bool recommended = 3;
-  int32 author_playtime_at_review = 4;
+  string maxResults = 2;
 }
 message Review {
-  int32 review_id = 1;
-  int32 app_id = 2;
+  string review_id = 1;
+  string app_id = 2;
   string app_name = 3;
   string language = 4;
   string review = 5;
-  int32 timestamp_created = 6;
-  int32 timestamp_updated = 7;
-  bool recommended = 8;
-  int32 votes_helpful = 9;
-  int32 votes_funny = 10;
-  int32 weighted_vote_score = 11;
-  int32 comment_count = 12;
-  bool steam_purchase = 13;
-  bool received_for_free = 14;
-  bool written_during_early_access = 15;
-  int32 author_steamid = 16;
-  int32 author_num_games_owned = 17;
-  int32 author_num_reviews = 18;
-  int32 author_playtime_forever = 19;
-  int32 author_playtime_last_two_weeks = 20;
-  int32 author_playtime_at_review = 21;
-  int32 author_last_played = 22;
+  string timestamp_created = 6;
+  string timestamp_updated = 7;
+  string recommended = 8;
+  string votes_helpful = 9;
+  string votes_funny = 10;
+  string weighted_vote_score = 11;
+  string comment_count = 12;
+  string steam_purchase = 13;
+  string received_for_free = 14;
+  string written_during_early_access = 15;
+  string author_steamid = 16;
+  string author_num_games_owned = 17;
+  string author_num_reviews = 18;
+  string author_playtime_forever = 19;
+  string author_playtime_last_two_weeks = 20;
+  string author_playtime_at_review = 21;
+  string author_last_played = 22;
   string _id =23;
 }
 message GameResponse {
   map<string, Game> games = 1;
 }
 message ReviewResponse {
-  repeated Review reviews = 1;
+  map<string, Review> games = 1;
 }
 service Suggestions {
   rpc GetGames (gameRequest) returns (GameResponse);

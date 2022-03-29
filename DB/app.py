@@ -38,16 +38,20 @@ def writeCSVtoDB(CSVFile,tableDB):
             else:
                 n = 0
                 doc = {}
+                date = ""
                 for value in row:
                     if(atributes[n] != ''):
                         doc[atributes[n]] = value
+                    #if(atributes[n] == "timestamp_updated"):
+                       # date = doc[atributes[n]]
                     n = n + 1
+                #if(int(date) >= 1577836801):
                 listDocs.append(doc)
                 if num == numberWriteToDB:
                     print("Added: ",num)
                     tableDB.insert_many(listDocs)
                     listDocs = []
-                    numberWriteToDB = numberWriteToDB + 50000
+                    numberWriteToDB = numberWriteToDB + 500000
                 num = num + 1
         tableDB.insert_many(listDocs)
         listDocs = []
@@ -102,7 +106,7 @@ if __name__ == "__main__":
     dbGames = get_table(db,'Games')
     dbUsers = get_table(get_databaseUsers(),'users')
     # Reviews and games
-    writeCSVtoDB(STEAM_REVIEWS,dbReviews)
+    #writeCSVtoDB(STEAM_REVIEWS,dbReviews)
     writeCSVtoDB(STEAM_GAMES,dbGames)
     # User default
     writeUser(dbUsers)
