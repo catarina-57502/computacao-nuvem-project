@@ -2,7 +2,6 @@ from concurrent import futures
 
 import grpc
 from grpc_interceptor import ExceptionToStatusInterceptor
-from grpc_interceptor.exceptions import NotFound, AlreadyExists
 from pymongo import MongoClient
 import os
 
@@ -70,7 +69,6 @@ class ReviewService(reviews_pb2_grpc.ReviewsServicer):
             author_playtime_at_review = doc["author_playtime_at_review"],
             author_last_played = doc["author_last_played"]
         )
-        # return doc['review_id']
 
     def AddReview(self, request, context):
         doc = db.find_one({"review_id": request.review_id})
@@ -78,7 +76,7 @@ class ReviewService(reviews_pb2_grpc.ReviewsServicer):
             db.insert_one({
                 "review_id": request.review_id,
                 "app_id": request.app_id,
-                "app_name": request.name,
+                "app_name": request.app_name,
                 "language": request.language,
                 "review": request.review,
                 "timestamp_created": request.timestamp_created,
@@ -110,7 +108,7 @@ class ReviewService(reviews_pb2_grpc.ReviewsServicer):
         {
             "review_id": request.review_id,
             "app_id": request.app_id,
-            "app_name": request.name,
+            "app_name": request.app_name,
             "language": request.language,
             "review": request.review,
             "timestamp_created": request.timestamp_created,
@@ -141,15 +139,10 @@ class ReviewService(reviews_pb2_grpc.ReviewsServicer):
         return SimpleResponse(code="204", description="Review deleted")
 
     def ListReviews(self, request, context):
-        docs = db.aggregate([{"$sample": {"size": request.max_results}}]);
+        docs = db.aggregate([{"$sample": {"size": int(request.max_results)}},{"$project": {"_id": 0}}]);
         if docs is None:
-            return SimpleResponse(code="404", description="Review not found")
-        # str = ""
-        # for doc in docs:
-        #     str += str(doc['review_id']) + '\n'
-        # return ListReviewsResponse(reviews=str)
+            return ListReviewsResponse(reviews="")
         return ListReviewsResponse(reviews=docs)
-
 
 def serve():
     interceptors = [ExceptionToStatusInterceptor()]

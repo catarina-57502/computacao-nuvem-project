@@ -39,7 +39,7 @@ message ListReviewsResponse {
 
 // Message to search all reviews
 message ListReviewsRequest {
-    string maxResults = 1;
+    string max_results = 1;
 }
 
 // Message to search a review by id
@@ -50,7 +50,6 @@ message GetReviewRequest {
 // Operations provided by Reviews service
 service Reviews {
     rpc GetReview (GetReviewRequest) returns (ReviewObject);
-    //rpc GetReview (GetReviewRequest) returns (ListReviewsResponse);
     rpc AddReview (ReviewObject) returns (SimpleResponse);
     rpc UpdateReview (ReviewObject) returns (SimpleResponse);
     rpc DeleteReview (GetReviewRequest) returns (SimpleResponse);
