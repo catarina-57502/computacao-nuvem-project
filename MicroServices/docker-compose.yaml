@@ -114,6 +114,26 @@ services:
     expose:
       - "5008"
 
+  searches:
+    build:
+      dockerfile: ./main/Dockerfile
+      context: ./searches
+    image: searches
+    ports:
+      - "50060:50060"
+
+  searchesServer:
+    build:
+      dockerfile: ./server/Dockerfile
+      context: ./searches
+    environment:
+      SEARCHES_HOST: searches
+    image: serversearches
+    ports:
+      - "5010:5010"
+    expose:
+      - "5010"
+
 volumes:
   dbData:
     external: false
