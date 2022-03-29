@@ -1,5 +1,5 @@
-version: "3.9"
 
+version: '3'
 services:
 
   mongoDB:
@@ -13,6 +13,25 @@ services:
       - "27017"
     volumes:
       - dbData:/data/db
+
+  reviews-server:
+    container_name: reviews-server
+    build: 
+      dockerfile: ./server/Dockerfile
+      context: ./reviews
+
+
+  reviews-api:
+    container_name: reviews-api
+    build: 
+      dockerfile: ./api/Dockerfile
+      context: ./reviews
+    environment:
+      REVIEWS_SERVER_HOST: reviews-server
+    ports:
+      - 5012:5012
+    expose:
+      - "5012"
 
   adminOperations:
     build:

@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+// Single review fields
+message ReviewObject {
+    string review_id = 1;
+    string app_id = 2;
+    string app_name = 3;
+    string language = 4;
+    string review = 5;
+    string timestamp_created = 6;
+    string timestamp_updated = 7;
+    string recommended = 8;
+    string votes_helpful = 9;
+    string votes_funny = 10;
+    string weighted_vote_score = 11;
+    string comment_count = 12;
+    string steam_purchase = 13;
+    string received_for_free = 14;
+    string written_during_early_access = 15;
+    string author_steamid = 16;
+    string author_num_games_owned = 17;
+    string author_num_reviews = 18;
+    string author_playtime_forever = 19;
+    string author_playtime_last_two_weeks = 20;
+    string author_playtime_at_review = 21;
+    string author_last_played = 22;
+}
+
+message SimpleResponse {
+    string code = 1;
+    string description = 2;
+}
+
+// All reviews response
+message ListReviewsResponse {
+    repeated ReviewObject reviews = 1;
+    //string reviews = 1;
+}
+
+// Message to search all reviews
+message ListReviewsRequest {
+    string max_results = 1;
+}
+
+// Message to search a review by id
+message GetReviewRequest {
+    string review_id = 1;
+}
+
+// Operations provided by Reviews service
+service Reviews {
+    rpc GetReview (GetReviewRequest) returns (ReviewObject);
+    rpc AddReview (ReviewObject) returns (SimpleResponse);
+    rpc UpdateReview (ReviewObject) returns (SimpleResponse);
+    rpc DeleteReview (GetReviewRequest) returns (SimpleResponse);
+    rpc ListReviews (ListReviewsRequest) returns (ListReviewsResponse);
+}

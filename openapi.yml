@@ -447,19 +447,76 @@ paths:
                 example: Internal Server Error
 
   ######REVIEWS######
-
-  /getReview:
+  /reviews:
+    post:
+      tags:
+        - Reviews
+      summary: "Create review"
+      operationId: add_review
+      security:
+        - AuthUser:
+            - operations_reviews
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Review'
+      responses:
+        "200":
+          description: Review added
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  description:
+                    type: string
+        "400":
+          description: Review already exists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  description:
+                    type: string        
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  description:
+                    type: string
     get:
       tags:
         - Reviews
-      summary: "List all your reviews"
-      operationId: GetReview
+      summary: "Get reviews list"
+      operationId: list_reviews
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int64      
       security:
         - AuthUser:
             - operations_reviews
       responses:
         "200":
-          description: Successful response
+          description: Reviews list returned successfully
           content:
             application/json:
               schema:
@@ -467,134 +524,184 @@ paths:
                 items:
                   $ref: '#/components/schemas/Review'
         "404":
-          description: Reviews not found
-          content:
-            text/plain:
-              schema:
-                title: Reviews not found
-                type: string
-                example: Not found
-        "500":
-          description: Error
-          content:
-            text/plain:
-              schema:
-                title: Error
-                type: string
-                example: Internal Server Error
-
-  /addReview:
-    post:
-      tags:
-        - Reviews
-      summary: "Add a review"
-      operationId: AddReview
-      security:
-        - AuthUser:
-            - operations_reviews
-      parameters:
-        - $ref: '#/components/parameters/review_id'
-        - $ref: '#/components/parameters/app_id'
-        - $ref: '#/components/parameters/app_name'
-        - $ref: '#/components/parameters/language'
-        - $ref: '#/components/parameters/review'
-        - $ref: '#/components/parameters/timestamp_created'
-        - $ref: '#/components/parameters/timestamp_updated'
-        - $ref: '#/components/parameters/recommended'
-        - $ref: '#/components/parameters/steam_purchase'
-        - $ref: '#/components/parameters/received_for_free'
-        - $ref: '#/components/parameters/written_during_early_access'
-        - $ref: '#/components/parameters/author_steamid'
-        - $ref: '#/components/parameters/author_playtime_at_review'
-      responses:
-        "200":
-          description: Successful response
+          description: Review not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Review'
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  description:
+                    type: string
         "500":
-          description: Error
-          content:
-            text/plain:
-              schema:
-                title: Error
-                type: string
-                example: Internal Server Error
-
-  /editReview:
-    put:
-      tags:
-        - Reviews
-      summary: "Edit a review"
-      operationId: EditReview
-      security:
-        - AuthUser:
-            - operations_reviews
-      parameters:
-        - $ref: '#/components/parameters/review_id'
-        - $ref: '#/components/parameters/language'
-        - $ref: '#/components/parameters/review'
-        - $ref: '#/components/parameters/timestamp_updated'
-        - $ref: '#/components/parameters/recommended'
-        - $ref: '#/components/parameters/steam_purchase'
-        - $ref: '#/components/parameters/received_for_free'
-        - $ref: '#/components/parameters/written_during_early_access'
-        - $ref: '#/components/parameters/author_playtime_at_review'
-      responses:
-        "200":
-          description: Successful response
+          description: Internal server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Review'
-        "404":
-          description: Not found response
-          content:
-            text/plain:
-              schema:
-                title: Review not found
-                type: string
-                example: Not found
-        "500":
-          description: Error
-          content:
-            text/plain:
-              schema:
-                title: Error
-                type: string
-                example: Internal Server Error
-
-  /delReview:
-    delete:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  description:
+                    type: string
+  /reviews/{review_id}:
+    get:
       tags:
         - Reviews
-      summary: "Delete a review"
-      operationId: DelReview
+      summary: "Get review"
+      operationId: get_review
+      parameters:
+        - name: review_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64      
       security:
         - AuthUser:
             - operations_reviews
-      parameters:
-        - $ref: '#/components/parameters/review_id'
       responses:
-        "204":
-          description: Review deleted
+        "200":
+          description: Review returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Review'
         "404":
           description: Review not found
           content:
-            text/plain:
+            application/json:
               schema:
-                title: Review not found
-                type: string
-                example: Not found
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  description:
+                    type: string
         "500":
-          description: Error
+          description: Internal server error
           content:
-            text/plain:
+            application/json:
               schema:
-                title: Error
-                type: string
-                example: Internal Server Error
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  description:
+                    type: string       
+    put:
+      tags:
+        - Reviews
+      summary: "Update review"
+      operationId: update_review
+      parameters:
+        - name: review_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64 
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Review'      
+      security:
+        - AuthUser:
+            - operations_reviews
+      responses:
+        "200":
+          description: Review updated successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Review'
+        "404":
+          description: Review not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  description:
+                    type: string
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  description:
+                    type: string
+    delete:
+      tags:
+        - Reviews
+      summary: "Delete review"
+      operationId: delete_review
+      parameters:
+        - name: review_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64      
+      security:
+        - AuthUser:
+            - operations_reviews
+      responses:
+        "204":
+          description: Review deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  description:
+                    type: string
+        "404":
+          description: Review not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  description:
+                    type: string
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  description:
+                    type: string                   
 
   ######WISHLIST######
 
@@ -1200,7 +1307,6 @@ components:
       schema:
         type: string
   schemas:
-
     Review:
       title: Review
       type: object
@@ -1293,7 +1399,6 @@ components:
           type: number
           description: Time for when the user last played
           example: 1611383744.0
-
     Game:
       title: Game
       type: object
@@ -1378,8 +1483,6 @@ components:
           type: string
           description: Discount price (USD)
           example: '$14.99'
-
-
     User:
       type: object
       required:
@@ -1395,7 +1498,6 @@ components:
           type: string
         password:
           type: string
-
     Response:
       type: object
       required:
