@@ -12,6 +12,7 @@ RUN pip3 install pymongo
 RUN pip install grpc-interceptor
 RUN python -m grpc_tools.protoc -I ../protobufs --python_out=. --grpc_python_out=. ../protobufs/library.proto
 RUN python -m grpc_tools.protoc -I ../protobufs --python_out=. --grpc_python_out=. ../protobufs/userManagement.proto
+RUN python -m grpc_tools.protoc -I ../protobufs --python_out=. --grpc_python_out=. ../protobufs/searches.proto
 
 EXPOSE 50053
 ENTRYPOINT [ "python", "library.py" ]

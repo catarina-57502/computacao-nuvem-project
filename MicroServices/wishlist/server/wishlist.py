@@ -13,6 +13,10 @@ from userManagement_pb2 import *
 from userManagement_pb2_grpc import UserManagementStub
 
 
+from searches_pb2 import *
+from searches_pb2_grpc import SearchesStub
+
+
 import pymongo
 from pymongo import MongoClient
 
@@ -74,12 +78,46 @@ class WishlistService(wishlist_pb2_grpc.WishlistServicer):
         getToken_response = connectToClient().GetInfoFromToken(
             getToken_request
         )
-        docUser = usersDB.find({"userid": getToken_response.userID} )
+        docUser = usersDB.find({"userid": getToken_response.userID})
+        for doc in docUser:
+            library = doc["wishlist"]
 
-        #TODO
-        wishlist = {"111":"111","222":"333","3333":"4444"}
+        searches_channel = grpc.insecure_channel("searches:50060")
+        searches_client = SearchesStub(searches_channel)
 
-        return ListGamesWishResponse(MyMap=(wishlist))
+        gamesInfo = []
+        for id in library:
+            searchGame_request = SearchGameRequest(
+                id = id
+            )
+            searchGame_response = searches_client.SearchGameById(
+                searchGame_request
+            )
+            libraryGame = GameLibrary(
+                url = searchGame_response.game.url,
+                types = searchGame_response.game.types,
+                name = searchGame_response.game.name,
+                desc_snippet = searchGame_response.game.desc_snippet,
+                recent_reviews = searchGame_response.game.recent_reviews,
+                all_reviews = searchGame_response.game.all_reviews,
+                release_date = searchGame_response.game.release_date,
+                developer = searchGame_response.game.developer,
+                publisher = searchGame_response.game.publisher,
+                popular_tags = searchGame_response.game.popular_tags,
+                game_details = searchGame_response.game.game_details,
+                languages = searchGame_response.game.languages,
+                achievements = searchGame_response.game.achievements,
+                genre = searchGame_response.game.genre,
+                game_description = searchGame_response.game.game_description,
+                mature_content = searchGame_response.game.mature_content,
+                minimum_requirements = searchGame_response.game.minimum_requirements,
+                recommended_requirements = searchGame_response.game.recommended_requirements,
+                original_price = searchGame_response.game.original_price,
+                discount_price = searchGame_response.game.discount_price,
+                _id = searchGame_response.game._id
+            )
+            gamesInfo.append(libraryGame)
+        return ListGamesWishResponse(games=gamesInfo)
 
 
 def serve():

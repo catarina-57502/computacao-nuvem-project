@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="b35fd375-ff30-4249-a5b1-2c6323eae230" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/MicroServices/library/api/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/library/api/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MicroServices/library/api/library-api.py" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/library/api/library-api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MicroServices/library/api/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/library/api/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MicroServices/library/protobufs/library.proto" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/library/protobufs/library.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MicroServices/library/server/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/library/server/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MicroServices/library/server/library.py" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/library/server/library.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MicroServices/searches/api/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/searches/api/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MicroServices/searches/api/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/searches/api/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MicroServices/searches/server/searches.py" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/searches/server/searches.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MicroServices/wishlist/api/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/wishlist/api/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MicroServices/wishlist/api/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/wishlist/api/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MicroServices/wishlist/api/wishlist-api.py" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/wishlist/api/wishlist-api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MicroServices/wishlist/protobufs/wishlist.proto" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/wishlist/protobufs/wishlist.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MicroServices/wishlist/server/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/wishlist/server/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MicroServices/wishlist/server/wishlist.py" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/wishlist/server/wishlist.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2758Ljax0WmG1USWAd5w7msU33i" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/MicroServices/wishlist/protobufs" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/MicroServices/wishlist/protobufs" />
+      <recent name="$PROJECT_DIR$/MicroServices/library/protobufs" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Docker.MicroServices/docker-compose.yaml.wishlist-api: Compose Deployment">
+    <configuration name="MicroServices/docker-compose.yaml.library-api: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="library-api" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="MicroServices/docker-compose.yaml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="MicroServices/docker-compose.yaml.library: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="library" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="MicroServices/docker-compose.yaml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="MicroServices/docker-compose.yaml.searches-api: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="searches-api" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="MicroServices/docker-compose.yaml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="MicroServices/docker-compose.yaml.wishlist-api: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="wishlist-api" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="MicroServices/docker-compose.yaml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="MicroServices/docker-compose.yaml.wishlist: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="wishlist" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="MicroServices/docker-compose.yaml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Docker.MicroServices/docker-compose.yaml.wishlist-api: Compose Deployment" />
+        <item itemvalue="Docker.MicroServices/docker-compose.yaml.wishlist: Compose Deployment" />
+        <item itemvalue="Docker.MicroServices/docker-compose.yaml.library-api: Compose Deployment" />
+        <item itemvalue="Docker.MicroServices/docker-compose.yaml.library: Compose Deployment" />
+        <item itemvalue="Docker.MicroServices/docker-compose.yaml.searches-api: Compose Deployment" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b35fd375-ff30-4249-a5b1-2c6323eae230" name="Changes" comment="" />
+      <created>1648598534736</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1648598534736</updated>
+      <workItem from="1648598537854" duration="5657000" />
+    </task>
+    <task id="LOCAL-00001" summary="Final V1.0">
+      <created>1648598574810</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1648598574810</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Final V1.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="Final V1.0" />
+  </component>
+</project>

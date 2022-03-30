@@ -122,9 +122,7 @@ class SearchesService(searches_pb2_grpc.SearchesServicer):
         return SearchGamesResponse(games=dict_game)
 
     def SearchGameById(self, request, context):
-
         docGame = myGames.find_one({"_id": ObjectId(request.id)})
-
         return SearchGameResponse(game=DocToGame(docGame))
 
 
