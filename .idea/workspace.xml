@@ -2,21 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b35fd375-ff30-4249-a5b1-2c6323eae230" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/MicroServices/library/api/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/library/api/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MicroServices/library/api/library-api.py" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/library/api/library-api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MicroServices/library/api/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/library/api/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MicroServices/library/protobufs/library.proto" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/library/protobufs/library.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MicroServices/library/server/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/library/server/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MicroServices/library/server/library.py" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/library/server/library.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MicroServices/searches/api/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/searches/api/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MicroServices/searches/api/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/searches/api/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MicroServices/searches/server/searches.py" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/searches/server/searches.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MicroServices/wishlist/api/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/wishlist/api/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MicroServices/wishlist/api/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/wishlist/api/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MicroServices/wishlist/api/wishlist-api.py" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/wishlist/api/wishlist-api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MicroServices/wishlist/protobufs/wishlist.proto" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/wishlist/protobufs/wishlist.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MicroServices/wishlist/server/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/wishlist/server/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MicroServices/wishlist/server/wishlist.py" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/wishlist/server/wishlist.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MicroServices/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/docker-compose.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,7 +118,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1648598534736</updated>
-      <workItem from="1648598537854" duration="5657000" />
+      <workItem from="1648598537854" duration="6110000" />
     </task>
     <task id="LOCAL-00001" summary="Final V1.0">
       <created>1648598574810</created>
@@ -141,13 +127,28 @@
       <option name="project" value="LOCAL" />
       <updated>1648598574810</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Final V2.0">
+      <created>1648604223989</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1648604223989</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Final V1.0">
+      <created>1648604252323</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1648604252323</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="Final V2.0" />
     <MESSAGE value="Final V1.0" />
     <option name="LAST_COMMIT_MESSAGE" value="Final V1.0" />
   </component>
