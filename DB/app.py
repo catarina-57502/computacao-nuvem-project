@@ -125,8 +125,8 @@ if __name__ == "__main__":
     dbUsers = get_table(get_databaseUsers(),'users')
     # Reviews and games
     writeCSVtoDB(STEAM_REVIEWS,dbReviews)
-    #writeCSVtoDB(STEAM_GAMES,dbGames)
+    writeCSVtoDB(STEAM_GAMES,dbGames)
     # User default
-    #writeUser(dbUsers)
+    writeUser(dbUsers)
 
 
