@@ -9,12 +9,7 @@ from userManagement_pb2_grpc import UserManagementStub
 api = Flask(__name__)
 
 
-usermanagement_host = os.getenv("USERMANAGEMENT_HOST", "localhost")
-
-usermanagement_channel = grpc.insecure_channel(
-    f"{usermanagement_host}:50054"
-)
-
+userManagement_channel = grpc.insecure_channel("usermanagementserver:50054")
 usermanagement_client = UserManagementStub(usermanagement_channel)
 
 

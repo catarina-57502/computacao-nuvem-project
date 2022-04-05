@@ -18,9 +18,9 @@ import jwt
 def get_table(db,table):
     return db[table]
 
-client = MongoClient('microservices_mongoDB_1', 27017 ,username='admin', password='admin' )
-db = client['users']
-usersDB = get_table(db,"users")
+#client = MongoClient('microservices_mongoDB_1', 27017 ,username='admin', password='admin' )
+#db = client['users']
+#usersDB = get_table(db,"users")
 
 key_secret = ""
 with open("./keys/keyToken.txt", "r") as text_file:
