@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b35fd375-ff30-4249-a5b1-2c6323eae230" name="Changes" comment="Bug fixed on windows setup for DB">
+    <list default="true" id="b35fd375-ff30-4249-a5b1-2c6323eae230" name="Changes" comment="Testing deployment file for 1 microservice on grpc">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MicroServices/utils/testDB.py" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/utils/testDB.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +27,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/API-swagger" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
@@ -37,20 +37,7 @@
       <recent name="$PROJECT_DIR$/MicroServices/library/protobufs" />
     </key>
   </component>
-  <component name="RunManager" selected="Docker.MicroServices/docker-compose.yaml.wishlist-api: Compose Deployment">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="CloudProjectGroup7" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="CloudProjectGroup7" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="Docker.server/Dockerfile">
     <configuration default="true" type="SwaggerCodegen">
       <option name="activeConfigurationType" value="FILE" />
       <option name="configurationPath" value="" />
@@ -93,19 +80,6 @@
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="MicroServices/docker-compose.yaml.searches-api: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="services">
-            <list>
-              <option value="searches-api" />
-            </list>
-          </option>
-          <option name="sourceFilePath" value="MicroServices/docker-compose.yaml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
     <configuration name="MicroServices/docker-compose.yaml.wishlist-api: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
       <deployment type="docker-compose.yml">
         <settings>
@@ -132,13 +106,23 @@
       </deployment>
       <method v="2" />
     </configuration>
+    <configuration name="server/Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="imageTag" value="adminoperationserver" />
+          <option name="containerName" value="adminoperationserver" />
+          <option name="sourceFilePath" value="MicroServices/adminOperations/server/Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Docker.server/Dockerfile" />
         <item itemvalue="Docker.MicroServices/docker-compose.yaml.wishlist-api: Compose Deployment" />
         <item itemvalue="Docker.MicroServices/docker-compose.yaml.wishlist: Compose Deployment" />
         <item itemvalue="Docker.MicroServices/docker-compose.yaml.library-api: Compose Deployment" />
         <item itemvalue="Docker.MicroServices/docker-compose.yaml.library: Compose Deployment" />
-        <item itemvalue="Docker.MicroServices/docker-compose.yaml.searches-api: Compose Deployment" />
       </list>
     </recent_temporary>
   </component>
@@ -151,6 +135,7 @@
       <option name="presentableId" value="Default" />
       <updated>1648598534736</updated>
       <workItem from="1648598537854" duration="6459000" />
+      <workItem from="1649193863994" duration="403000" />
     </task>
     <task id="LOCAL-00001" summary="Final V1.0">
       <created>1648598574810</created>
@@ -180,7 +165,14 @@
       <option name="project" value="LOCAL" />
       <updated>1648604660838</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Testing deployment file for 1 microservice on grpc">
+      <created>1649181398411</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1649181398411</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -200,6 +192,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Final V2.0" />
     <MESSAGE value="Final V1.0" />
-    <option name="LAST_COMMIT_MESSAGE" value="Final V1.0" />
+    <MESSAGE value="Testing deployment file for 1 microservice on grpc" />
+    <option name="LAST_COMMIT_MESSAGE" value="Testing deployment file for 1 microservice on grpc" />
   </component>
 </project>
