@@ -19,3 +19,69 @@ spec:
           image: "gcr.io/copper-mender-345714/adminoperationsserver"
           ports:
             - containerPort: 50051
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "adminoperationsapi"
+  labels:
+    app: "adminoperationsapi"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "adminoperationsapi"
+  template:
+    metadata:
+      labels:
+        app: "adminoperationsapi"
+    spec:
+      containers:
+        - name: "adminoperationsapi"
+          image: "gcr.io/copper-mender-345714/adminoperationsapi"
+          ports:
+            - containerPort: 5003
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "usermanagementserver"
+  labels:
+    app: "usermanagementserver"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "usermanagementserver"
+  template:
+    metadata:
+      labels:
+        app: "usermanagementserver"
+    spec:
+      containers:
+        - name: "usermanagementserver"
+          image: "gcr.io/copper-mender-345714/usermanagementserver"
+          ports:
+            - containerPort: 50052
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "usermanagementapi"
+  labels:
+    app: "usermanagementapi"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "usermanagementapi"
+  template:
+    metadata:
+      labels:
+        app: "usermanagementapi"
+    spec:
+      containers:
+        - name: "usermanagementapi"
+          image: "gcr.io/copper-mender-345714/usermanagementapi"
+          ports:
+            - containerPort: 5004

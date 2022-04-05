@@ -2,7 +2,6 @@ git clone https://github.com/mdmourao/CloudProjectGroup7.git
 
 # Config
 export PROJECT_ID=$(gcloud info --format='value(config.project)')
-
 gcloud services enable cloudapis.googleapis.com  container.googleapis.com containerregistry.googleapis.com
 gcloud container clusters create cluster-steam --zone=europe-west4-a --num-nodes=1
 gcloud auth configure-docker
@@ -23,8 +22,18 @@ docker push gcr.io/${PROJECT_ID}/adminoperationsapi
 
 cd ..
 
-# MicroService ...
+# MicroService User Management Server
+cd userManagement
+docker build . -f server/Dockerfile -t usermanagementserver
+docker tag usermanagementserver gcr.io/${PROJECT_ID}/usermanagementserver
+docker push gcr.io/${PROJECT_ID}/usermanagementserver
 
+# MicroService User Management API
+docker build . -f api/Dockerfile -t usermanagementapi
+docker tag adminoperationsapi gcr.io/${PROJECT_ID}/usermanagementapi
+docker push gcr.io/${PROJECT_ID}/usermanagementapi
+
+cd ..
 
 # Deploy
 gcloud auth configure-docker
