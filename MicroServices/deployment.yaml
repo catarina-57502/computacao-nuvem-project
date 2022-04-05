@@ -116,7 +116,7 @@ spec:
     spec:
       containers:
         - name: "libraryserver"
-          image: "gcr.io/phase4-cn/libraryserver"
+          image: "gcr.io/${VAR:PROJECT_ID}/libraryserver"
           ports:
             - containerPort: 50053
 ---
@@ -138,7 +138,7 @@ spec:
     spec:
       containers:
         - name: "libraryapi"
-          image: "gcr.io/phase4-cn/libraryapi"
+          image: "gcr.io/${VAR:PROJECT_ID}/libraryapi"
           ports:
             - containerPort: 5001
 ---
@@ -160,7 +160,7 @@ spec:
     spec:
       containers:
         - name: "wishlistserver"
-          image: "gcr.io/phase4-cn/wishlistserver"
+          image: "gcr.io/${VAR:PROJECT_ID}/wishlistserver"
           ports:
             - containerPort: 50058
 ---
@@ -182,6 +182,6 @@ spec:
     spec:
       containers:
         - name: "wishlistapi"
-          image: "gcr.io/phase4-cn/wishlistapi"
+          image: "gcr.io/${VAR:PROJECT_ID}/wishlistapi"
           ports:
             - containerPort: 5002
