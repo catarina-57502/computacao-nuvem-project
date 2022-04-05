@@ -116,7 +116,6 @@ class UserManagementService(userManagement_pb2_grpc.UserManagementServicer):
 
     def Logout(self, request, context):
         email = request.email
-        password = request.password
         message = "User ", email, "logout..."
         return DefaultResponse(message=message)
 
