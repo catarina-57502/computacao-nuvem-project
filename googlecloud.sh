@@ -62,5 +62,5 @@ cd ..
 gcloud auth configure-docker
 
 kubectl get nodes
-kubectl apply -f deployment.yaml
+kubectl apply -f deployment.yaml --env=PROJECT_ID=${PROJECT_ID}
 kubectl get pods
