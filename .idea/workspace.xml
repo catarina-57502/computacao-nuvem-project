@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b35fd375-ff30-4249-a5b1-2c6323eae230" name="Changes" comment="Created .sh file to google cloud deployment">
-      <change beforePath="$PROJECT_DIR$/MicroServices/deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/deployment.yaml" afterDir="false" />
+    <list default="true" id="b35fd375-ff30-4249-a5b1-2c6323eae230" name="Changes" comment="Implementation for Microservices usermanagement and adminoperations">
       <change beforePath="$PROJECT_DIR$/googlecloud.sh" beforeDir="false" afterPath="$PROJECT_DIR$/googlecloud.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -136,7 +135,7 @@
       <option name="presentableId" value="Default" />
       <updated>1648598534736</updated>
       <workItem from="1648598537854" duration="6459000" />
-      <workItem from="1649193863994" duration="719000" />
+      <workItem from="1649193863994" duration="1109000" />
     </task>
     <task id="LOCAL-00001" summary="Final V1.0">
       <created>1648598574810</created>
@@ -180,7 +179,21 @@
       <option name="project" value="LOCAL" />
       <updated>1649194296039</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Implementation for Microservices usermanagement and adminoperations">
+      <created>1649194612547</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1649194612547</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Implementation for Microservices usermanagement and adminoperations">
+      <created>1649194700922</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1649194700922</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -202,6 +215,7 @@
     <MESSAGE value="Final V1.0" />
     <MESSAGE value="Testing deployment file for 1 microservice on grpc" />
     <MESSAGE value="Created .sh file to google cloud deployment" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created .sh file to google cloud deployment" />
+    <MESSAGE value="Implementation for Microservices usermanagement and adminoperations" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implementation for Microservices usermanagement and adminoperations" />
   </component>
 </project>

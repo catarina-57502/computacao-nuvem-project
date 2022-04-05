@@ -1,5 +1,3 @@
-git clone https://github.com/mdmourao/CloudProjectGroup7.git
-
 # Config
 export PROJECT_ID=$(gcloud info --format='value(config.project)')
 gcloud services enable cloudapis.googleapis.com  container.googleapis.com containerregistry.googleapis.com
