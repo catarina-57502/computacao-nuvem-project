@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b35fd375-ff30-4249-a5b1-2c6323eae230" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/DB/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/DB/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/openapi.yml" beforeDir="false" />
+    <list default="true" id="b35fd375-ff30-4249-a5b1-2c6323eae230" name="Changes" comment="Bug fixed on windows setup for DB">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MicroServices/utils/testDB.py" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/utils/testDB.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +28,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/API-swagger" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -37,6 +38,19 @@
     </key>
   </component>
   <component name="RunManager" selected="Docker.MicroServices/docker-compose.yaml.wishlist-api: Compose Deployment">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="CloudProjectGroup7" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="CloudProjectGroup7" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="SwaggerCodegen">
       <option name="activeConfigurationType" value="FILE" />
       <option name="configurationPath" value="" />
@@ -171,6 +185,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Final V2.0" />

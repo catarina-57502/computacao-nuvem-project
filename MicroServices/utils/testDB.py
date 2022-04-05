@@ -9,9 +9,14 @@ client = MongoClient('localhost', 27017 ,username='admin', password='admin' )
 db = client['users']
 usersDB = get_table(db,"users")
 
-docUser = usersDB.find({"email": "martimmourao@gmail.com"} )
+docUser = usersDB.find({"userid": request.userid} )
 for doc in docUser:
-    print(doc["userid"])
+    library = doc["library"]
+    wishlist = doc["wishlist"]
+    wishlist.append(request.gameid)
+    doc["wishlist"] = wishlist
+    usersDB.delete_one({"userid": userid})
+    usersDB.insert_one(doc)
 
 dict = {}
 i = 0

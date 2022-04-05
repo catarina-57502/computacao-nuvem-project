@@ -1,0 +1,21 @@
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "adminoperationsserver"
+  labels:
+    app: "adminoperationsserver"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "adminoperationsserver"
+  template:
+    metadata:
+      labels:
+        app: "adminoperationsserver"
+    spec:
+      containers:
+        - name: "adminoperationsserver"
+          image: "gcr.io/copper-mender-345714/adminoperationsserver"
+          ports:
+            - containerPort: 50051
