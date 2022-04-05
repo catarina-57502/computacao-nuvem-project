@@ -10,7 +10,7 @@ cd CloudProjectGroup7
 cd MicroServices
 
 # MicroService Admin Operations Server
-cd adminoperationsserver
+cd adminOperations
 docker build . -f server/Dockerfile -t adminoperationsserver
 docker tag adminoperationsserver gcr.io/${PROJECT_ID}/adminoperationsserver
 docker push gcr.io/${PROJECT_ID}/adminoperationsserver
@@ -30,7 +30,7 @@ docker push gcr.io/${PROJECT_ID}/usermanagementserver
 
 # MicroService User Management API
 docker build . -f api/Dockerfile -t usermanagementapi
-docker tag adminoperationsapi gcr.io/${PROJECT_ID}/usermanagementapi
+docker tag usermanagementapi gcr.io/${PROJECT_ID}/usermanagementapi
 docker push gcr.io/${PROJECT_ID}/usermanagementapi
 
 cd ..
