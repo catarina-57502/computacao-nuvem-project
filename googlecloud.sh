@@ -4,7 +4,6 @@ gcloud services enable cloudapis.googleapis.com  container.googleapis.com contai
 gcloud container clusters create cluster-steam --zone=europe-west4-a --num-nodes=1
 gcloud auth configure-docker
 
-cd CloudProjectGroup7
 cd MicroServices
 
 # MicroService Admin Operations Server
