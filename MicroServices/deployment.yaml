@@ -97,3 +97,91 @@ spec:
           image: "gcr.io/${VAR:PROJECT_ID}/usermanagementapi"
           ports:
             - containerPort: 5004
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "libraryserver"
+  labels:
+    app: "libraryserver"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "libraryserver"
+  template:
+    metadata:
+      labels:
+        app: "libraryserver"
+    spec:
+      containers:
+        - name: "libraryserver"
+          image: "gcr.io/phase4-cn/libraryserver"
+          ports:
+            - containerPort: 50053
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "libraryapi"
+  labels:
+    app: "libraryapi"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "libraryapi"
+  template:
+    metadata:
+      labels:
+        app: "libraryapi"
+    spec:
+      containers:
+        - name: "libraryapi"
+          image: "gcr.io/phase4-cn/libraryapi"
+          ports:
+            - containerPort: 5001
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "wishlistserver"
+  labels:
+    app: "wishlistserver"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "wishlistserver"
+  template:
+    metadata:
+      labels:
+        app: "wishlistserver"
+    spec:
+      containers:
+        - name: "wishlistserver"
+          image: "gcr.io/phase4-cn/wishlistserver"
+          ports:
+            - containerPort: 50058
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "wishlistapi"
+  labels:
+    app: "wishlistapi"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "wishlistapi"
+  template:
+    metadata:
+      labels:
+        app: "wishlistapi"
+    spec:
+      containers:
+        - name: "wishlistapi"
+          image: "gcr.io/phase4-cn/wishlistapi"
+          ports:
+            - containerPort: 5002

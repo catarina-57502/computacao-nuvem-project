@@ -32,6 +32,32 @@ docker push gcr.io/${PROJECT_ID}/usermanagementapi
 
 cd ..
 
+# MicroService Library Server
+cd library
+docker build . -f server/Dockerfile -t libraryserver
+docker tag libraryserver gcr.io/${PROJECT_ID}/libraryserver
+docker push gcr.io/${PROJECT_ID}/libraryserver
+
+# MicroService Library API
+docker build . -f api/Dockerfile -t libraryapi
+docker tag libraryapi gcr.io/${PROJECT_ID}/libraryapi
+docker push gcr.io/${PROJECT_ID}/libraryapi
+
+cd ..
+
+# MicroService Wishlist Server
+cd wishlist
+docker build . -f server/Dockerfile -t wishlistserver
+docker tag wishlistserver gcr.io/${PROJECT_ID}/wishlistserver
+docker push gcr.io/${PROJECT_ID}/wishlistserver
+
+# MicroService Wishlist API
+docker build . -f api/Dockerfile -t wishlistapi
+docker tag wishlistapi gcr.io/${PROJECT_ID}/wishlistapi
+docker push gcr.io/${PROJECT_ID}/wishlistapi
+
+cd ..
+
 # Deploy
 gcloud auth configure-docker
 
