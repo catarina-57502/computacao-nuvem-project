@@ -38,4 +38,3 @@ gcloud auth configure-docker
 kubectl get nodes
 kubectl apply -f deployment.yaml
 kubectl get pods
-

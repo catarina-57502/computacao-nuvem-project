@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: "adminoperationsserver"
-          image: "gcr.io/copper-mender-345714/adminoperationsserver"
+          image: "gcr.io/${VAR:PROJECT_ID}/adminoperationsserver"
           ports:
             - containerPort: 50051
 ---
@@ -38,7 +38,7 @@ spec:
     spec:
       containers:
         - name: "adminoperationsapi"
-          image: "gcr.io/copper-mender-345714/adminoperationsapi"
+          image: "gcr.io/${VAR:PROJECT_ID}/adminoperationsapi"
           ports:
             - containerPort: 5003
 ---
@@ -60,9 +60,21 @@ spec:
     spec:
       containers:
         - name: "usermanagementserver"
-          image: "gcr.io/copper-mender-345714/usermanagementserver"
+          image: "gcr.io/${VAR:PROJECT_ID}/usermanagementserver"
           ports:
             - containerPort: 50052
+---
+apiVersion: "apps/v1"
+kind: Service
+metadata:
+  name: "usermanagementapi"
+spec:
+  selector:
+    app: "usermanagementapi"
+  ports:
+    - name: api
+    port: 5004
+    targetPort: 5004
 ---
 apiVersion: "apps/v1"
 kind: "Deployment"
@@ -82,6 +94,6 @@ spec:
     spec:
       containers:
         - name: "usermanagementapi"
-          image: "gcr.io/copper-mender-345714/usermanagementapi"
+          image: "gcr.io/${VAR:PROJECT_ID}/usermanagementapi"
           ports:
             - containerPort: 5004
