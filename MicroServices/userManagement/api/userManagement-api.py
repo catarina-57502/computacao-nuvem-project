@@ -10,7 +10,7 @@ api = Flask(__name__)
 
 
 userManagement_channel = grpc.insecure_channel("usermanagementserver:50054")
-usermanagement_client = UserManagementStub(usermanagement_channel)
+usermanagement_client = UserManagementStub(userManagement_channel)
 
 
 @api.route('/addUser', methods=['POST'])
