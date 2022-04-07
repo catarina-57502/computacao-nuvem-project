@@ -135,7 +135,7 @@ def serve():
     userManagement_pb2_grpc.add_UserManagementServicer_to_server(
         UserManagementService(), server
     )
-    server.add_insecure_port("[::]:50054")
+    server.add_insecure_port("[::]:50052")
     server.start()
     server.wait_for_termination()
 
