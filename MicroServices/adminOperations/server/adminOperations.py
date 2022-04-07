@@ -20,7 +20,7 @@ from userManagement_pb2_grpc import UserManagementStub
 def get_table(db,table):
     return db[table]
 
-client = MongoClient('microservices_mongoDB_1', 27017 ,username='admin', password='admin' )
+client = MongoClient('microservices-mongoDB-1', 27017 ,username='admin', password='admin' )
 db = client['steam']
 gamesDB = get_table(db,"Games")
 reviewsDB = get_table(db,"Reviews")
@@ -28,7 +28,7 @@ dbUsers = client['users']
 userDB = get_table(dbUsers,"users")
 
 def connectToClient():
-    userManagement_channel = grpc.insecure_channel("userManagement:50054")
+    userManagement_channel = grpc.insecure_channel("usermanagementserver:50054")
     userManagement_client = UserManagementStub(userManagement_channel)
     return userManagement_client
 

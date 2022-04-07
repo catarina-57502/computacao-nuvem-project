@@ -16,7 +16,7 @@ from suggestions_pb2 import (
 
 import suggestions_pb2_grpc
 
-myClient = MongoClient('microservices_mongoDB_1', 27017 ,username='admin', password='admin' )
+myClient = MongoClient('microservices-mongoDB-1', 27017 ,username='admin', password='admin' )
 myDB = myClient["steam"]
 myGames = myDB["Games"]
 myReviews = myDB["Reviews"]

@@ -46,6 +46,7 @@ message LoginRequest {
 
 message LogoutRequest {
   string email = 1;
+  string password = 2;
 }
 
 message LoginResponse {
@@ -57,9 +58,8 @@ message TokenRequest {
 }
 
 message TokenResponse {
-  string userID = 1;
-  string type = 2;
-  string email = 3;
+  string type = 1;
+  string email = 2;
 }
 
 service UserManagement {
