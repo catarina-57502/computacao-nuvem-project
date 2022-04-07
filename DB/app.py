@@ -26,7 +26,7 @@ def writeCSVtoDB(CSVFile,tableDB):
     file = open(CSVFile, 'r',encoding="utf8")
     num = 1
     listDocs = []
-    numberWriteToDB = 50000
+    numberWriteToDB = 100000
     print("Writing to DB!")
     with file as read_obj:
         csv_reader = reader(read_obj)
@@ -72,7 +72,7 @@ def writeCSVtoDB(CSVFile,tableDB):
                     print("Added: ",num)
                     tableDB.insert_many(listDocs)
                     listDocs = []
-                    numberWriteToDB = numberWriteToDB + 50000
+                    numberWriteToDB = numberWriteToDB + 100000
                 num = num + 1
         tableDB.insert_many(listDocs)
         listDocs = []
@@ -97,7 +97,7 @@ def writeCSVtoDBGames(CSVFile,tableDB):
         sys.exit()
     num = 1
     listDocs = []
-    numberWriteToDB = 50000
+    numberWriteToDB = 100000
     print("Writing to DB!")
     with file as read_obj:
         csv_reader = reader(read_obj)
@@ -117,7 +117,7 @@ def writeCSVtoDBGames(CSVFile,tableDB):
                     print("Added: ",num)
                     tableDB.insert_many(listDocs)
                     listDocs = []
-                    numberWriteToDB = numberWriteToDB + 50000
+                    numberWriteToDB = numberWriteToDB + 100000
                 num = num + 1
         tableDB.insert_many(listDocs)
         listDocs = []
