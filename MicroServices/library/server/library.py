@@ -69,7 +69,6 @@ class LibraryService(library_pb2_grpc.LibraryServicer):
         getToken_request = TokenRequest(
             token = request.token
         )
-        raise NotFound("Vim aqui dizer ola")
         getToken_response = connectToClient().GetInfoFromToken(
             getToken_request
         )
