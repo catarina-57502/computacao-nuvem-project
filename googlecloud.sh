@@ -1,12 +1,11 @@
 # Config
 export PROJECT_ID=$(gcloud info --format='value(config.project)')
 gcloud services enable cloudapis.googleapis.com  container.googleapis.com containerregistry.googleapis.com
-gcloud container clusters create cluster-steam \
-    --enable-autoscaling \
+gcloud container clusters create cluster-steam --enable-autoscaling \
     --num-nodes 2 \
-    --min-nodes 2 \
+    --min-nodes 1 \
     --max-nodes 5 \
-    --region=europe-west4-a
+    --zone europe-west4-a
 
 gcloud auth configure-docker
 
