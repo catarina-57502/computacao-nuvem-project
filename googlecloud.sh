@@ -62,6 +62,7 @@ cd ..
 gcloud auth configure-docker
 
 kubectl get nodes
+kubectl apply -f mongo-secrets.yaml
 kubectl apply -f pv.yaml
 envsubst < "deployment.yaml" > "deploymentENV.yaml"
 kubectl apply -f deploymentENV.yaml
