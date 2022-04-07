@@ -12,7 +12,6 @@ import wishlist_pb2_grpc
 from userManagement_pb2 import *
 from userManagement_pb2_grpc import UserManagementStub
 
-
 from searches_pb2 import *
 from searches_pb2_grpc import SearchesStub
 
@@ -23,12 +22,12 @@ from pymongo import MongoClient
 def get_table(db,table):
     return db[table]
 
-client = MongoClient('microservices_mongoDB_1', 27017 ,username='admin', password='admin' )
+client = MongoClient('microservices-mongoDB-1', 27017 ,username='admin', password='admin' )
 db = client['users']
 usersDB = get_table(db,"users")
 
 def connectToClient():
-    userManagement_channel = grpc.insecure_channel("userManagement:50054")
+    userManagement_channel = grpc.insecure_channel("usermanagementserver:50054")
     userManagement_client = UserManagementStub(userManagement_channel)
     return userManagement_client
 
@@ -42,13 +41,13 @@ class WishlistService(wishlist_pb2_grpc.WishlistServicer):
         getToken_response = connectToClient().GetInfoFromToken(
             getToken_request
         )
-        docUser = usersDB.find({"userid": getToken_response.userID} )
+        docUser = usersDB.find({"email": getToken_response.email} )
 
         for doc in docUser:
             wishlist = doc["wishlist"]
             wishlist.append(request.id)
             doc["wishlist"] = wishlist
-            usersDB.delete_one({"userid": getToken_response.userID})
+            usersDB.delete_one({"email": getToken_response.email})
             usersDB.insert_one(doc)
         return AddGameWishResponse(message="Game added in wishlist")
 
@@ -60,13 +59,13 @@ class WishlistService(wishlist_pb2_grpc.WishlistServicer):
         getToken_response = connectToClient().GetInfoFromToken(
             getToken_request
         )
-        docUser = usersDB.find({"userid": getToken_response.userID} )
+        docUser = usersDB.find({"email": getToken_response.email} )
 
         for doc in docUser:
             wishlist = doc["wishlist"]
             wishlist.remove(request.id)
             doc["wishlist"] = wishlist
-            usersDB.delete_one({"userid": getToken_response.userID})
+            usersDB.delete_one({"email": getToken_response.email})
             usersDB.insert_one(doc)
         return DeleteGameWishResponse(message="Game deleted from wishlist")
 
@@ -78,7 +77,7 @@ class WishlistService(wishlist_pb2_grpc.WishlistServicer):
         getToken_response = connectToClient().GetInfoFromToken(
             getToken_request
         )
-        docUser = usersDB.find({"userid": getToken_response.userID})
+        docUser = usersDB.find({"email": getToken_response.email})
         for doc in docUser:
             library = doc["wishlist"]
 

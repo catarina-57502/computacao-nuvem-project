@@ -20,12 +20,12 @@ from userManagement_pb2_grpc import UserManagementStub
 def get_table(db,table):
     return db[table]
 
-client = MongoClient('microservices_mongoDB_1', 27017 ,username='admin', password='admin' )
+client = MongoClient('microservices-mongoDB-1', 27017 ,username='admin', password='admin' )
 db = client['users']
 usersDB = get_table(db,"users")
 
 def connectToClient():
-    userManagement_channel = grpc.insecure_channel("userManagement:50054")
+    userManagement_channel = grpc.insecure_channel("usermanagementserver:50054")
     userManagement_client = UserManagementStub(userManagement_channel)
     return userManagement_client
 
@@ -37,13 +37,13 @@ class LibraryService(library_pb2_grpc.LibraryServicer):
         getToken_response = connectToClient().GetInfoFromToken(
             getToken_request
         )
-        docUser = usersDB.find({"userid": getToken_response.userID} )
+        docUser = usersDB.find({"email": getToken_response.email} )
         for doc in docUser:
             library = doc["library"]
             wishlist = doc["wishlist"]
             library.append(request.id)
             doc["library"] = library
-            usersDB.delete_one({"userid": getToken_response.userID})
+            usersDB.delete_one({"email": getToken_response.email})
             usersDB.insert_one(doc)
         return AddGameLibResponse(message="Game added in library")
 
@@ -54,13 +54,13 @@ class LibraryService(library_pb2_grpc.LibraryServicer):
         getToken_response = connectToClient().GetInfoFromToken(
             getToken_request
         )
-        docUser = usersDB.find({"userid": getToken_response.userID} )
+        docUser = usersDB.find({"email": getToken_response.email} )
         for doc in docUser:
             library = doc["library"]
             wishlist = doc["wishlist"]
             library.remove(request.id)
             doc["library"] = library
-            usersDB.delete_one({"userid": getToken_response.userID})
+            usersDB.delete_one({"email": getToken_response.email})
             usersDB.insert_one(doc)
         return DeleteGameLibResponse(message="Game deleted from library")
 
@@ -72,7 +72,7 @@ class LibraryService(library_pb2_grpc.LibraryServicer):
         getToken_response = connectToClient().GetInfoFromToken(
             getToken_request
         )
-        docUser = usersDB.find({"userid": getToken_response.userID})
+        docUser = usersDB.find({"email": getToken_response.email})
         for doc in docUser:
             library = doc["library"]
 

@@ -6,15 +6,15 @@ message User {
   string password = 3;
   string email = 4;
   string type = 5;
-  repeated UserWishlist wishlist = 6;
-  repeated UserLibrary library = 7;
+  repeated Wishlist wishlist = 6;
+  repeated Library library = 7;
 }
 
-message UserWishlist{
+message Wishlist{
   string id = 1;
 }
 
-message UserLibrary{
+message Library{
   string id = 1;
 }
 
@@ -46,6 +46,7 @@ message LoginRequest {
 
 message LogoutRequest {
   string email = 1;
+  string password = 2;
 }
 
 message LoginResponse {
@@ -57,9 +58,8 @@ message TokenRequest {
 }
 
 message TokenResponse {
-  string userID = 1;
-  string type = 2;
-  string email = 3;
+  string type = 1;
+  string email = 2;
 }
 
 service UserManagement {

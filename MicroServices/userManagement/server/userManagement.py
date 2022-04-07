@@ -8,7 +8,6 @@ from grpc_interceptor.exceptions import NotFound
 from userManagement_pb2 import *
 import userManagement_pb2_grpc
 
-
 import pymongo
 from pymongo import MongoClient
 
@@ -29,9 +28,9 @@ default_app = firebase_admin.initialize_app(cred)
 def get_table(db,table):
     return db[table]
 
-#client = MongoClient('microservices_mongoDB_1', 27017 ,username='admin', password='admin' )
-#db = client['users']
-#usersDB = get_table(db,"users")
+client = MongoClient('microservices-mongoDB-1', 27017 ,username='admin', password='admin' )
+db = client['users']
+usersDB = get_table(db,"users")
 
 key_secret = ""
 with open("./keys/keyToken.txt", "r") as text_file:
@@ -54,34 +53,26 @@ def loginCheckGetEmail (token):
 
 class UserManagementService(userManagement_pb2_grpc.UserManagementServicer):
 
-    #TODO not adding to local db, only cloud provider
     def AddUser(self, request, context):
         library = []
         wishlist = []
-        #myquery = { "userid": uuid.uuid4().hex,
-        #            "nickname": request.nickname,
-        #            "email": request.email,
-        #            "password": request.password,
-        #            "type": request.type,
-        #            "library": library,
-        #            "wishlist": wishlist
-        #            }
-       #myqueryemail = { "email": request.email}
+        myquery = { "userid": uuid.uuid4().hex,
+                    "nickname": request.nickname,
+                    "email": request.email,
+                    "password": request.password,
+                    "type": request.type,
+                    "library": library,
+                    "wishlist": wishlist
+                    }
+        myqueryemail = { "email": request.email}
 
-        auth.create_user(
-            email=request.email,
-            password=request.password,
-            display_name=request.nickname)
-        return DefaultResponse(code=200,message="User Added")
-
-        #TODO add to bd!
-        if usersDB.count_documents(myqueryemail) == 0 :
+        if usersDB.count_documents(myqueryemail) == 0:
+            auth.create_user(email=request.email,password=request.password,display_name=request.nickname)
             usersDB.insert_one(myquery)
             return DefaultResponse(code=200,message="User Added")
         else:
             return DefaultResponse(code=409,message="Error - User already exists")
 
-    #TODO edit cloud info is missing
     def EditUser(self, request, context):
         # New Info
         new_password = request.new_password
@@ -125,7 +116,6 @@ class UserManagementService(userManagement_pb2_grpc.UserManagementServicer):
             return DefaultResponse(code=200,message="User Updated")
         return DefaultResponse(code=400,message="Not found - User")
 
-    #TODO get type from db
     def LoginUser(self, request, context):
         password = request.password
         email = request.email
@@ -138,9 +128,14 @@ class UserManagementService(userManagement_pb2_grpc.UserManagementServicer):
         if "error" in r.json():
             return LoginResponse(token="Error - Login")
 
+        #DB local to get type
+        docUser = usersDB.find({"email": request.email} )
+        for doc in docUser:
+            type = doc["type"]
+
         # ask auth to create JWT
         email = request.email
-        additional_claims = {'type': 'user'}
+        additional_claims = {'type': type}
         custom_token = auth.create_custom_token(email, additional_claims)
 
         #Pyhton...
@@ -198,7 +193,7 @@ class UserManagementService(userManagement_pb2_grpc.UserManagementServicer):
         email = info["uid"]
         #TODO needs test
         type = info["claims"]["type"]
-        return TokenResponse(userID=0,type = type,email = email)
+        return TokenResponse(type = type,email = email)
 
 def serve():
     interceptors = [ExceptionToStatusInterceptor()]

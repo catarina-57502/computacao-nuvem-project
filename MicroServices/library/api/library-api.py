@@ -9,14 +9,8 @@ from library_pb2_grpc import LibraryStub
 
 api = Flask(__name__)
 
-library_host = os.getenv("LIBRARY_HOST", "localhost")
-
-library_channel = grpc.insecure_channel(
-    f"{library_host}:50055"
-)
-
+library_channel = grpc.insecure_channel("libraryserver:50055")
 library_client = LibraryStub(library_channel)
-
 
 def DocToGame(game):
     return  {

@@ -53,11 +53,11 @@ services:
     expose:
       - "5003"
 
-  userManagement:
+  usermanagementserver:
     build:
       dockerfile: ./server/Dockerfile
       context: ./userManagement
-    image: usermanagement
+    image: usermanagementserver
     ports:
       - "50054:50054"
 
@@ -66,18 +66,18 @@ services:
       dockerfile: ./api/Dockerfile
       context: ./userManagement
     environment:
-      USERMANAGEMENT_HOST: userManagement
+      USERMANAGEMENT_HOST: usermanagementserver
     image: apiusermanagement
     ports:
       - "5004:5004"
     expose:
       - "5004"
 
-  library:
+  libraryserver:
     build:
       dockerfile: ./server/Dockerfile
       context: ./library
-    image: library
+    image: libraryserver
     ports:
       - "50055:50055"
 
@@ -86,7 +86,7 @@ services:
       dockerfile: ./api/Dockerfile
       context: ./library
     environment:
-        LIBRARY_HOST: library
+        LIBRARY_HOST: libraryserver
     image: apilibrary
     ports:
       - "5001:5001"
