@@ -11,6 +11,7 @@ spec:
   clusterIP: None
   selector:
     role: mongo
+  type: LoadBalancer
 ---
 apiVersion: apps/v1
 kind: Deployment
