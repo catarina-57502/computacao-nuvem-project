@@ -5,7 +5,7 @@ gcloud container clusters create cluster-steam --enable-autoscaling \
     --num-nodes=2 \
     --min-nodes=1 \
     --max-nodes=5 \
-    --zone=europe-west4-a
+    --region=europe-west4-a
 
 gcloud auth configure-docker
 
