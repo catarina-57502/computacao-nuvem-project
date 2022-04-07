@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "copper-mender-345714",
+  "private_key_id": "8c10683cb1ef3468ea52c262a6c5a0efd884cadd",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDIKbfsgS8CM77w\ne+0lqDIKg9dQr5cf3FdkA3oLAhnI5eOBwkil9IswwS/tUSOwIQfChBgSjk1l8f8S\nv9du041rIgL6aN+sodcVVsdaALaEvdSIr9YKzRhxRBDlce73BZdh6ijjCI2gFL0K\n6o4CLsEUBm0huGHucSpH8cbTJ27n4JtQ0GrpBCftk+NE6Urdb4H5WPUCKrPiN+10\nO9jkuDt3zH2yIqtA+kFEL+QIn3Y15M849YyAV8vwer0tprZ48OFB0AGyjSLsVp3p\nt/xMUgbuRm8/EV4Bp6vsCAu5zHtfU4rM3vqlNHeTGLK1XpnvsOF/1otS+TGbe0Jl\niQRG/BRbAgMBAAECggEAVAF2SJMbGJCBFUrdh41kmxckGZ/oDB4cq0PuR4p1KeSZ\nrA7PEJ9mf2rE45PHJ5dlO1TXCYqhnySGSecr0j6FPq5Ck7fKEBjIPRNzjSl5cJJ/\nDXLGoTfch0Tq1nEPuqqlExoEWOxxC/tIL7mrKe1XaUEdMibBKyJhfVpSeLI3EKdr\nbhD6w7cRmUst1DKDrbn/BZTTnEDbHGMhE/tDefzY1XlTqSkJ2V63Cebq1MCngjWP\nwkR3IQNdZv8AjYcEgVJrBPfN5+etLfshTPJPDolYeNiNu1irJAFPBXFoHRpS8RN2\ntyLDcL4OpXjeGUbpMayaPCFmoLyRlzHLOkBsLM8n8QKBgQD6Y2iwqpx6CoqUx6go\nrnBueb/BB1ViciGsHrf0GXR67+031k4wsBQrJuxONZ6fUCM+Xv4LmTqdqjxTRUuo\nBd+d9TW59vmAdHwmwrmXCkvqrRsNsWR00rOxENxacc5H2XbtBhkmS8PhBDwbTvFB\n/YayMPMwtfNHx+ZcnMfURapOOQKBgQDMpiTYm3sEYIx3HzMxNBcvRpBqQoO3fb96\nXmaNc3cHN6s3IT9T3xD9XDXZmpFoqXPsfmFCgsaP7v4TaxnIidfl8ULw1Q4QOWXZ\ntSiYYofm5xxfRidV+wqf40+HtarTPlJDhr4i3wY10kLWURgvjkLU5gjKYnfqqpaY\nz8QwmUJ3MwKBgQC/A08+VymAQMJvtdCnGExVOzP5wep1a7QcZmLXKQQfNSG20xpb\nMjhwowTqtSUJTE1Wq4kKuB5rYQ8cR2TsDW8GRaZy8+JrCHId77c9bnFz2hMlYwrL\nxGGo1sADj4ZacZ+0Ok69VFdeNajU/Gg4e3xiO82Kf4PUYr9uL3ySh4LgoQKBgDBB\nGL0OZEJS9av86lg2vSTDkbfMeTxh5S1YZvwBdtZ31OJJ76G6HkpvXK8zmAfCtPfV\nkN9a8LDtnHE9trWncwXgDnW09vzyW8aqxaiwyvSyF+mLJClM6WNr+Mu6FU58Cm+r\nrNeSGOfF7UaVlotYEwAaQYZfE4F8ucfMbak76gUrAoGAJiGdgtX13vC6P+ioAjLM\nAtLZbjFvj00JCfuL4QrwKIl4+yXaetVoARdvzoLGsXt+5AF9oUJjlJdVeizgsW1p\nT/Dg0Fv69DdX7aLnqF/Lt85OzKuSLSppp22mB3Gq6uXd2nHxmai3HiKpRXloxVsc\njwHIJ2gRuJTybMjRCKHufdg=\n-----END PRIVATE KEY-----\n",
+  "client_email": "authcloud@copper-mender-345714.iam.gserviceaccount.com",
+  "client_id": "108374608639259164674",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/authcloud%40copper-mender-345714.iam.gserviceaccount.com"
+}

@@ -9,8 +9,14 @@ from userManagement_pb2_grpc import UserManagementStub
 api = Flask(__name__)
 
 
-userManagement_channel = grpc.insecure_channel("usermanagementserver:50054")
-usermanagement_client = UserManagementStub(userManagement_channel)
+usermanagement_host = os.getenv("USERMANAGEMENT_HOST", "localhost")
+
+usermanagement_channel = grpc.insecure_channel(
+    f"{usermanagement_host}:50052"
+)
+
+usermanagement_client = UserManagementStub(usermanagement_channel)
+
 
 
 @api.route('/addUser', methods=['POST'])
@@ -60,6 +66,7 @@ def logout():
     data = json.loads(request.data)
     logout_request = LogoutRequest(
         email=data['email'],
+        password=data['password'],
     )
     logout_response = usermanagement_client.Logout(
         logout_request
