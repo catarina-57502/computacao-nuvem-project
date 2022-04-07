@@ -9,11 +9,9 @@ from google.protobuf.json_format import MessageToJson
 
 api = Flask(__name__)
 
-wishlist_host = os.getenv("WISHLIST_HOST", "localhost")
 
-wishlist_channel = grpc.insecure_channel(
-    f"{wishlist_host}:50058"
-)
+
+wishlist_channel = grpc.insecure_channel("wishlistserver:50058")
 
 wishlist_client = WishlistStub(wishlist_channel)
 

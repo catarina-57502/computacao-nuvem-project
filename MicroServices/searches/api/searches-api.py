@@ -10,13 +10,7 @@ from searches_pb2_grpc import SearchesStub
 
 api = Flask(__name__)
 
-
-searches_host = os.getenv("SEARCHES_HOST", "localhost")
-
-searches_channel = grpc.insecure_channel(
-    f"{searches_host}:50060"
-)
-
+searches_channel = grpc.insecure_channel("searchesserver:50060")
 searches_client = SearchesStub(searches_channel)
 
 def DocToGame(game):

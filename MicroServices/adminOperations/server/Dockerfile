@@ -9,5 +9,5 @@ RUN pip install -r requirements.txt
 RUN python -m grpc_tools.protoc -I ../protobufs --python_out=. --grpc_python_out=. ../protobufs/adminOperations.proto
 RUN python -m grpc_tools.protoc -I ../protobufs --python_out=. --grpc_python_out=. ../protobufs/userManagement.proto
 
-EXPOSE 50051
+EXPOSE 50052
 ENTRYPOINT [ "python", "adminOperations.py" ]

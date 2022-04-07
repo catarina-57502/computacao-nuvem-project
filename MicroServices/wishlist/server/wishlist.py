@@ -22,12 +22,12 @@ from pymongo import MongoClient
 def get_table(db,table):
     return db[table]
 
-client = MongoClient('microservices-mongoDB-1', 27017 ,username='admin', password='admin' )
+client = MongoClient('mongo', 27017 ,username='admin', password='admin' )
 db = client['users']
 usersDB = get_table(db,"users")
 
 def connectToClient():
-    userManagement_channel = grpc.insecure_channel("usermanagementserver:50054")
+    userManagement_channel = grpc.insecure_channel("usermanagementserver:50052")
     userManagement_client = UserManagementStub(userManagement_channel)
     return userManagement_client
 
@@ -81,7 +81,7 @@ class WishlistService(wishlist_pb2_grpc.WishlistServicer):
         for doc in docUser:
             library = doc["wishlist"]
 
-        searches_channel = grpc.insecure_channel("searches:50060")
+        searches_channel = grpc.insecure_channel("searchesserver:50060")
         searches_client = SearchesStub(searches_channel)
 
         gamesInfo = []

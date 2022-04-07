@@ -133,11 +133,11 @@ services:
     expose:
       - "5008"
 
-  searches:
+  searchesserver:
     build:
       dockerfile: ./server/Dockerfile
       context: ./searches
-    image: searches
+    image: searchesserver
     ports:
       - "50060:50060"
 
@@ -146,8 +146,8 @@ services:
       dockerfile: ./api/Dockerfile
       context: ./searches
     environment:
-      SEARCHES_HOST: searches
-    image: serversearches
+      SEARCHES_HOST: searchesserver
+    image: searches
     ports:
       - "5010:5010"
     expose:

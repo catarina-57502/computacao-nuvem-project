@@ -20,12 +20,12 @@ from userManagement_pb2_grpc import UserManagementStub
 def get_table(db,table):
     return db[table]
 
-client = MongoClient('microservices-mongoDB-1', 27017 ,username='admin', password='admin' )
+client = MongoClient('mongo', 27017 ,username='admin', password='admin' )
 db = client['users']
 usersDB = get_table(db,"users")
 
 def connectToClient():
-    userManagement_channel = grpc.insecure_channel("usermanagementserver:50054")
+    userManagement_channel = grpc.insecure_channel("usermanagementserver:50052")
     userManagement_client = UserManagementStub(userManagement_channel)
     return userManagement_client
 
@@ -69,6 +69,7 @@ class LibraryService(library_pb2_grpc.LibraryServicer):
         getToken_request = TokenRequest(
             token = request.token
         )
+        raise NotFound("Vim aqui dizer ola")
         getToken_response = connectToClient().GetInfoFromToken(
             getToken_request
         )
@@ -76,7 +77,8 @@ class LibraryService(library_pb2_grpc.LibraryServicer):
         for doc in docUser:
             library = doc["library"]
 
-        searches_channel = grpc.insecure_channel("searches:50060")
+
+        searches_channel = grpc.insecure_channel("searchesserver:50060")
         searches_client = SearchesStub(searches_channel)
 
         gamesInfo = []
@@ -123,7 +125,7 @@ def serve():
     library_pb2_grpc.add_LibraryServicer_to_server(
         LibraryService(), server
     )
-    server.add_insecure_port("[::]:50055")
+    server.add_insecure_port("[::]:50053")
     server.start()
     server.wait_for_termination()
 

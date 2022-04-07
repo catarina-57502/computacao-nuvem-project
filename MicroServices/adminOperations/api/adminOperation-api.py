@@ -8,13 +8,7 @@ from adminOperations_pb2_grpc import AdminOperationsStub
 
 api = Flask(__name__)
 
-
-adminoperations_host = os.getenv("ADMINOPERATIONS_HOST", "localhost")
-
-adminoperations_channel = grpc.insecure_channel(
-    f"{adminoperations_host}:50052"
-)
-
+adminoperations_channel = grpc.insecure_channel("adminoperationsserver:50051")
 adminoperations_client = AdminOperationsStub(adminoperations_channel)
 
 @api.route('/admin/games', methods=['POST'])

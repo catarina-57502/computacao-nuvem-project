@@ -14,7 +14,7 @@ from pymongo import MongoClient
 def get_table(db,table):
     return db[table]
 
-myClient = MongoClient('microservices-mongoDB-1', 27017 ,username='admin', password='admin' )
+myClient = MongoClient('mongo', 27017 ,username='admin', password='admin' )
 myDB = myClient["steam"]
 myGames = myDB["Games"]
 myReviews = myDB["Reviews"]
