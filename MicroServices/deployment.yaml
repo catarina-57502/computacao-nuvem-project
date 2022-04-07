@@ -20,6 +20,18 @@ spec:
           ports:
             - containerPort: 50051
 ---
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  name: "adminoperationsserver"
+spec:
+  selector:
+    app: "adminoperationsserver"
+  ports:
+    - name: "server"
+      port: 50051
+      targetPort: 50051
+---
 apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
@@ -76,6 +88,18 @@ spec:
           image: "gcr.io/${PROJECT_ID}/usermanagementserver"
           ports:
             - containerPort: 50052
+---
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  name: "usermanagementserver"
+spec:
+  selector:
+    app: "usermanagementserver"
+  ports:
+    - name: "server"
+      port: 50052
+      targetPort: 50052
 ---
 apiVersion: "apps/v1"
 kind: "Deployment"
@@ -134,6 +158,18 @@ spec:
           ports:
             - containerPort: 50053
 ---
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  name: "libraryserver"
+spec:
+  selector:
+    app: "libraryserver"
+  ports:
+    - name: "server"
+      port: 50053
+      targetPort: 50053
+---
 apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
@@ -190,6 +226,18 @@ spec:
           image: "gcr.io/${PROJECT_ID}/wishlistserver"
           ports:
             - containerPort: 50058
+---
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  name: "wishlistserver"
+spec:
+  selector:
+    app: "wishlistserver"
+  ports:
+    - name: "server"
+      port: 50058
+      targetPort: 50058
 ---
 apiVersion: "apps/v1"
 kind: "Deployment"
