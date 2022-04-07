@@ -77,6 +77,18 @@ spec:
           ports:
             - containerPort: 50052
 ---
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  name: "usermanagementserver"
+spec:
+  selector:
+    app: "usermanagementserver"
+  ports:
+    - name: "server"
+      port: 50052
+      targetPort: 50052
+---
 apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
