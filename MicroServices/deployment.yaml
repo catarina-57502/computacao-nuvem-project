@@ -392,3 +392,72 @@ spec:
       port: 5008
       targetPort: 5008
   type: LoadBalancer
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "searchesserver"
+  labels:
+    app: "searchesserver"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "searchesserver"
+  template:
+    metadata:
+      labels:
+        app: "searchesserver"
+    spec:
+      containers:
+        - name: "searchesserver"
+          image: "gcr.io/${PROJECT_ID}/searchesserver"
+          ports:
+            - containerPort: 50079
+---
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  name: "searchesserver"
+spec:
+  selector:
+    app: "searchesserver"
+  ports:
+    - name: "server"
+      port: 50079
+      targetPort: 50079
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "searchesapi"
+  labels:
+    app: "searchesapi"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "searchesapi"
+  template:
+    metadata:
+      labels:
+        app: "searchesapi"
+    spec:
+      containers:
+        - name: "searchesapi"
+          image: "gcr.io/${PROJECT_ID}/searchesapi"
+          ports:
+            - containerPort: 5078
+---
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  name: "searchesapi"
+spec:
+  selector:
+    app: "searchesapi"
+  ports:
+    - name: "api"
+      port: 5078
+      targetPort: 5078
+  type: LoadBalancer

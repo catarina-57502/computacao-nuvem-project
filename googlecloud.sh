@@ -72,6 +72,20 @@ docker push gcr.io/${PROJECT_ID}/suggestionsapi
 
 cd ..
 
+# MicroService Searches Server
+cd searches
+docker build . -f server/Dockerfile -t searchesserver
+docker tag searchesserver gcr.io/${PROJECT_ID}/searchesserver
+docker push gcr.io/${PROJECT_ID}/searchesserver
+
+# MicroService Searches API
+docker build . -f api/Dockerfile -t searchesapi
+docker tag searchesapi gcr.io/${PROJECT_ID}/searchesapi
+docker push gcr.io/${PROJECT_ID}/searchesapi
+
+cd ..
+
+
 # Deploy
 gcloud auth configure-docker
 
