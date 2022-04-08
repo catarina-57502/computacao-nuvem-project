@@ -461,3 +461,47 @@ spec:
       port: 5078
       targetPort: 5078
   type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reviews-api-d
+  labels:
+    app: reviews-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: reviews-api
+  template:
+    metadata:
+      labels:
+        app: reviews-api
+    spec:
+      containers:
+      - name: reviews-api
+        image: gcr.io/${PROJECT_ID}/reviews-api
+        ports:
+        - containerPort: 5012
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reviews-server-d
+  labels:
+    app: reviews-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: reviews-server
+  template:
+    metadata:
+      labels:
+        app: reviews-server
+    spec:
+      containers:
+      - name: reviews-server
+        image: gcr.io/${PROJECT_ID}/reviews-server
+        ports:
+        - containerPort: 50060
