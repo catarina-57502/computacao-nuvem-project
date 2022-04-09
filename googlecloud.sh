@@ -62,12 +62,12 @@ cd ..
 # MicroService Suggestions Server
 cd suggestions
 docker build . -f server/Dockerfile -t suggestionsserver
-docker tag wishlistserver gcr.io/${PROJECT_ID}/suggestionsserver
+docker tag suggestionsserver gcr.io/${PROJECT_ID}/suggestionsserver
 docker push gcr.io/${PROJECT_ID}/suggestionsserver
 
 # Microservice Suggestions API
 docker build . -f api/Dockerfile -t suggestionsapi
-docker tag wishlistapi gcr.io/${PROJECT_ID}/suggestionsapi
+docker tag suggestionsapi gcr.io/${PROJECT_ID}/suggestionsapi
 docker push gcr.io/${PROJECT_ID}/suggestionsapi
 
 cd ..
