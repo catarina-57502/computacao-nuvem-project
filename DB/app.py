@@ -10,7 +10,7 @@ from pymongo import MongoClient
 STEAM_REVIEWS = './csvFiles/steam_reviews_eng_new.csv'
 STEAM_GAMES = './csvFiles/steam_games.csv'
 
-CONNECTION_STRING = "mongodb://admin:admin@34.90.127.94:27017/admin"
+CONNECTION_STRING = "mongodb://admin:admin@34.90.136.192:27017/admin"
 
 def writeCSVtoDB(CSVFile,tableDB):
     import csv

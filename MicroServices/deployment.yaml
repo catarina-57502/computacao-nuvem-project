@@ -71,7 +71,7 @@ metadata:
   labels:
     app: "adminoperationsserver"
 spec:
-  replicas: 2
+  replicas: 1
   strategy:
     type: "RollingUpdate"
     rollingUpdate:
@@ -111,7 +111,7 @@ metadata:
   labels:
     app: "adminoperationsapi"
 spec:
-  replicas: 3
+  replicas: 1
   strategy:
     type: "RollingUpdate"
     rollingUpdate:
@@ -160,7 +160,7 @@ metadata:
   labels:
     app: "usermanagementserver"
 spec:
-  replicas: 2
+  replicas: 1
   strategy:
     type: "RollingUpdate"
     rollingUpdate:
@@ -200,7 +200,7 @@ metadata:
   labels:
     app: "usermanagementapi"
 spec:
-  replicas: 3
+  replicas: 1
   strategy:
     type: "RollingUpdate"
     rollingUpdate:
@@ -248,7 +248,7 @@ metadata:
   labels:
     app: "libraryserver"
 spec:
-  replicas: 2
+  replicas: 1
   strategy:
     type: "RollingUpdate"
     rollingUpdate:
@@ -288,7 +288,7 @@ metadata:
   labels:
     app: "libraryapi"
 spec:
-  replicas: 3
+  replicas: 1
   strategy:
     type: "RollingUpdate"
     rollingUpdate:
@@ -337,7 +337,7 @@ metadata:
   labels:
     app: "wishlistserver"
 spec:
-  replicas: 2
+  replicas: 1
   strategy:
     type: "RollingUpdate"
     rollingUpdate:
@@ -377,7 +377,7 @@ metadata:
   labels:
     app: "wishlistapi"
 spec:
-  replicas: 3
+  replicas: 1
   strategy:
     type: "RollingUpdate"
     rollingUpdate:
@@ -425,7 +425,7 @@ metadata:
   labels:
     app: "suggestionsserver"
 spec:
-  replicas: 2
+  replicas: 1
   strategy:
     type: "RollingUpdate"
     rollingUpdate:
@@ -465,7 +465,7 @@ metadata:
   labels:
     app: "suggestionsapi"
 spec:
-  replicas: 3
+  replicas: 1
   strategy:
     type: "RollingUpdate"
     rollingUpdate:
@@ -513,7 +513,7 @@ metadata:
   labels:
     app: "searchesserver"
 spec:
-  replicas: 2
+  replicas: 1
   strategy:
     type: "RollingUpdate"
     rollingUpdate:
@@ -553,7 +553,7 @@ metadata:
   labels:
     app: "searchesapi"
 spec:
-  replicas: 3
+  replicas: 1
   strategy:
     type: "RollingUpdate"
     rollingUpdate:
@@ -601,7 +601,7 @@ metadata:
   labels:
     app: reviews-api
 spec:
-  replicas: 3
+  replicas: 1
   strategy:
     type: "RollingUpdate"
     rollingUpdate:
@@ -651,7 +651,7 @@ metadata:
   labels:
     app: reviews-server
 spec:
-  replicas: 2
+  replicas: 1
   strategy:
     type: "RollingUpdate"
     rollingUpdate:
