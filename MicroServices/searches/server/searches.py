@@ -181,7 +181,7 @@ def serve():
     searches_pb2_grpc.add_SearchesServicer_to_server(
         SearchesService(), server
     )
-    server.add_insecure_port("[::]:50060")
+    server.add_insecure_port("[::]:50079")
     server.start()
     server.wait_for_termination()
 

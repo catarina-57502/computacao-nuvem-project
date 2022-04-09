@@ -13,7 +13,7 @@ RUN pip install --upgrade pip
 RUN pip install --upgrade protobuf
 RUN python -m grpc_tools.protoc -I ../protobufs --python_out=. --grpc_python_out=. ../protobufs/searches.proto
 
-EXPOSE 5010
+EXPOSE 5078
 ENV FLASK_APP=searches-api.py
-ENV FLASK_RUN_PORT=5010
+ENV FLASK_RUN_PORT=5078
 ENTRYPOINT [ "flask", "run", "--host=0.0.0.0"]
