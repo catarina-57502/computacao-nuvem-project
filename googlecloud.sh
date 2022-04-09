@@ -101,10 +101,6 @@ gcloud auth configure-docker
 
 kubectl get nodes
 
-# Kubernetes dashboard UI
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.5.0/aio/deploy/recommended.yaml
-kubectl -n cluster-steam describe secret admin-user-token-mbtk2
-kubectl proxy
 
 # Kubernetes Apply YAML files
 kubectl apply -f mongo-secrets.yaml
