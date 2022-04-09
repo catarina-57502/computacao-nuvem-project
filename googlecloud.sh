@@ -94,6 +94,8 @@ docker push gcr.io/${PROJECT_ID}/reviews-server
 docker build . -f api/Dockerfile -t gcr.io/${PROJECT_ID}reviews-api
 docker push gcr.io/${PROJECT_ID}/reviews-api
 
+cd ..
+
 # Deploy
 gcloud auth configure-docker
 
