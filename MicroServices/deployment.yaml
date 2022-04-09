@@ -243,7 +243,13 @@ metadata:
   labels:
     app: "libraryapi"
 spec:
-  replicas: 1
+  replicas: 3
+  strategy:
+    type: "RollingUpdate"
+    rollingUpdate:
+      maxSurge: 30%
+      maxUnavailable: 30%
+  revisionHistoryLimit: 5
   selector:
     matchLabels:
       app: "libraryapi"
