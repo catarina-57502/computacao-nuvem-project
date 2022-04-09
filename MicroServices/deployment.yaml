@@ -71,7 +71,13 @@ metadata:
   labels:
     app: "adminoperationsserver"
 spec:
-  replicas: 1
+  replicas: 2
+  strategy:
+    type: "RollingUpdate"
+    rollingUpdate:
+      maxSurge: 30%
+      maxUnavailable: 30%
+  revisionHistoryLimit: 5
   selector:
     matchLabels:
       app: "adminoperationsserver"
@@ -105,7 +111,21 @@ metadata:
   labels:
     app: "adminoperationsapi"
 spec:
-  replicas: 1
+  replicas: 3
+  strategy:
+    type: "RollingUpdate"
+    rollingUpdate:
+      maxSurge: 30%
+      maxUnavailable: 30%
+    readinessProbe:
+      periodSeconds: 15
+      timeoutSeconds: 2
+      sucessThreshold: 2
+      failureThreshold: 2
+      httpGet:
+        path: /health
+        port: 5003
+  revisionHistoryLimit: 5
   selector:
     matchLabels:
       app: "adminoperationsapi"
@@ -140,7 +160,13 @@ metadata:
   labels:
     app: "usermanagementserver"
 spec:
-  replicas: 1
+  replicas: 2
+  strategy:
+    type: "RollingUpdate"
+    rollingUpdate:
+      maxSurge: 30%
+      maxUnavailable: 30%
+  revisionHistoryLimit: 5
   selector:
     matchLabels:
       app: "usermanagementserver"
@@ -174,7 +200,20 @@ metadata:
   labels:
     app: "usermanagementapi"
 spec:
-  replicas: 1
+  replicas: 3
+  strategy:
+    type: "RollingUpdate"
+    rollingUpdate:
+      maxSurge: 30%
+      maxUnavailable: 30%
+    readinessProbe:
+      periodSeconds: 15
+      timeoutSeconds: 2
+      sucessThreshold: 2
+      failureThreshold: 2
+      httpGet:
+        path: /health
+        port: 5004
   selector:
     matchLabels:
       app: "usermanagementapi"
@@ -209,7 +248,13 @@ metadata:
   labels:
     app: "libraryserver"
 spec:
-  replicas: 1
+  replicas: 2
+  strategy:
+    type: "RollingUpdate"
+    rollingUpdate:
+      maxSurge: 30%
+      maxUnavailable: 30%
+  revisionHistoryLimit: 5
   selector:
     matchLabels:
       app: "libraryserver"
@@ -249,6 +294,14 @@ spec:
     rollingUpdate:
       maxSurge: 30%
       maxUnavailable: 30%
+    readinessProbe:
+      periodSeconds: 15
+      timeoutSeconds: 2
+      sucessThreshold: 2
+      failureThreshold: 2
+      httpGet:
+        path: /health
+        port: 5001
   revisionHistoryLimit: 5
   selector:
     matchLabels:
@@ -284,7 +337,13 @@ metadata:
   labels:
     app: "wishlistserver"
 spec:
-  replicas: 1
+  replicas: 2
+  strategy:
+    type: "RollingUpdate"
+    rollingUpdate:
+      maxSurge: 30%
+      maxUnavailable: 30%
+  revisionHistoryLimit: 5
   selector:
     matchLabels:
       app: "wishlistserver"
@@ -318,7 +377,20 @@ metadata:
   labels:
     app: "wishlistapi"
 spec:
-  replicas: 1
+  replicas: 3
+  strategy:
+    type: "RollingUpdate"
+    rollingUpdate:
+      maxSurge: 30%
+      maxUnavailable: 30%
+    readinessProbe:
+      periodSeconds: 15
+      timeoutSeconds: 2
+      sucessThreshold: 2
+      failureThreshold: 2
+      httpGet:
+        path: /health
+        port: 5002
   selector:
     matchLabels:
       app: "wishlistapi"
@@ -353,7 +425,13 @@ metadata:
   labels:
     app: "suggestionsserver"
 spec:
-  replicas: 1
+  replicas: 2
+  strategy:
+    type: "RollingUpdate"
+    rollingUpdate:
+      maxSurge: 30%
+      maxUnavailable: 30%
+  revisionHistoryLimit: 5
   selector:
     matchLabels:
       app: "suggestionsserver"
@@ -387,7 +465,20 @@ metadata:
   labels:
     app: "suggestionsapi"
 spec:
-  replicas: 1
+  replicas: 3
+  strategy:
+    type: "RollingUpdate"
+    rollingUpdate:
+      maxSurge: 30%
+      maxUnavailable: 30%
+    readinessProbe:
+      periodSeconds: 15
+      timeoutSeconds: 2
+      sucessThreshold: 2
+      failureThreshold: 2
+      httpGet:
+        path: /health
+        port: 5008
   selector:
     matchLabels:
       app: "suggestionsapi"
@@ -422,7 +513,13 @@ metadata:
   labels:
     app: "searchesserver"
 spec:
-  replicas: 1
+  replicas: 2
+  strategy:
+    type: "RollingUpdate"
+    rollingUpdate:
+      maxSurge: 30%
+      maxUnavailable: 30%
+  revisionHistoryLimit: 5
   selector:
     matchLabels:
       app: "searchesserver"
@@ -456,7 +553,20 @@ metadata:
   labels:
     app: "searchesapi"
 spec:
-  replicas: 1
+  replicas: 3
+  strategy:
+    type: "RollingUpdate"
+    rollingUpdate:
+      maxSurge: 30%
+      maxUnavailable: 30%
+    readinessProbe:
+      periodSeconds: 15
+      timeoutSeconds: 2
+      sucessThreshold: 2
+      failureThreshold: 2
+      httpGet:
+        path: /health
+        port: 5078
   selector:
     matchLabels:
       app: "searchesapi"
@@ -491,7 +601,20 @@ metadata:
   labels:
     app: reviews-api
 spec:
-  replicas: 1
+  replicas: 3
+  strategy:
+    type: "RollingUpdate"
+    rollingUpdate:
+      maxSurge: 30%
+      maxUnavailable: 30%
+    readinessProbe:
+      periodSeconds: 15
+      timeoutSeconds: 2
+      sucessThreshold: 2
+      failureThreshold: 2
+      httpGet:
+        path: /health
+        port: 5012
   selector:
     matchLabels:
       app: reviews-api
@@ -528,7 +651,13 @@ metadata:
   labels:
     app: reviews-server
 spec:
-  replicas: 1
+  replicas: 2
+  strategy:
+    type: "RollingUpdate"
+    rollingUpdate:
+      maxSurge: 30%
+      maxUnavailable: 30%
+  revisionHistoryLimit: 5
   selector:
     matchLabels:
       app: reviews-server
