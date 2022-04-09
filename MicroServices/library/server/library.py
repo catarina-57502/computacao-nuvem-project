@@ -77,7 +77,7 @@ class LibraryService(library_pb2_grpc.LibraryServicer):
             library = doc["library"]
 
 
-        searches_channel = grpc.insecure_channel("searchesserver:50059")
+        searches_channel = grpc.insecure_channel("searchesserver:50079")
         searches_client = SearchesStub(searches_channel)
 
         gamesInfo = []

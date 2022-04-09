@@ -81,7 +81,7 @@ class WishlistService(wishlist_pb2_grpc.WishlistServicer):
         for doc in docUser:
             library = doc["wishlist"]
 
-        searches_channel = grpc.insecure_channel("searchesserver:50059")
+        searches_channel = grpc.insecure_channel("searchesserver:50079")
         searches_client = SearchesStub(searches_channel)
 
         gamesInfo = []
