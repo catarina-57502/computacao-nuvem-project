@@ -131,14 +131,6 @@ spec:
           image: "gcr.io/${PROJECT_ID}/adminoperationsapi"
           ports:
             - containerPort: 5003
-          readinessProbe:
-            periodSeconds: 15
-            timeoutSeconds: 2
-            sucessThreshold: 2
-            failureThreshold: 2
-            httpGet:
-              path: /health
-              port: 5003
 ---
 apiVersion: "v1"
 kind: "Service"
@@ -219,14 +211,6 @@ spec:
           image: "gcr.io/${PROJECT_ID}/usermanagementapi"
           ports:
             - containerPort: 5004
-          readinessProbe:
-            periodSeconds: 15
-            timeoutSeconds: 2
-            sucessThreshold: 2
-            failureThreshold: 2
-            httpGet:
-              path: /health
-              port: 5004
 ---
 apiVersion: "v1"
 kind: "Service"
@@ -308,14 +292,6 @@ spec:
           image: "gcr.io/${PROJECT_ID}/libraryapi"
           ports:
             - containerPort: 5001
-          readinessProbe:
-            periodSeconds: 15
-            timeoutSeconds: 2
-            sucessThreshold: 2
-            failureThreshold: 2
-            httpGet:
-              path: /health
-              port: 5001
 ---
 apiVersion: "v1"
 kind: "Service"
@@ -396,14 +372,6 @@ spec:
           image: "gcr.io/${PROJECT_ID}/wishlistapi"
           ports:
             - containerPort: 5002
-          readinessProbe:
-            periodSeconds: 15
-            timeoutSeconds: 2
-            sucessThreshold: 2
-            failureThreshold: 2
-            httpGet:
-              path: /health
-              port: 5002
 ---
 apiVersion: "v1"
 kind: "Service"
@@ -484,14 +452,6 @@ spec:
           image: "gcr.io/${PROJECT_ID}/suggestionsapi"
           ports:
             - containerPort: 5008
-          readinessProbe:
-            periodSeconds: 15
-            timeoutSeconds: 2
-            sucessThreshold: 2
-            failureThreshold: 2
-            httpGet:
-              path: /health
-              port: 5008
 ---
 apiVersion: "v1"
 kind: "Service"
@@ -572,14 +532,6 @@ spec:
           image: "gcr.io/${PROJECT_ID}/searchesapi"
           ports:
             - containerPort: 5078
-          readinessProbe:
-            periodSeconds: 15
-            timeoutSeconds: 2
-            sucessThreshold: 2
-            failureThreshold: 2
-            httpGet:
-              path: /health
-              port: 5078
 ---
 apiVersion: "v1"
 kind: "Service"
@@ -620,14 +572,6 @@ spec:
         image: "gcr.io/${PROJECT_ID}/reviews-api"
         ports:
         - containerPort: 5012
-        readinessProbe:
-          periodSeconds: 15
-          timeoutSeconds: 2
-          sucessThreshold: 2
-          failureThreshold: 2
-          httpGet:
-            path: /health
-            port: 5012
 ---
 apiVersion: v1
 kind: Service
