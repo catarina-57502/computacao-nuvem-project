@@ -117,14 +117,6 @@ spec:
     rollingUpdate:
       maxSurge: 30%
       maxUnavailable: 30%
-    readinessProbe:
-      periodSeconds: 15
-      timeoutSeconds: 2
-      sucessThreshold: 2
-      failureThreshold: 2
-      httpGet:
-        path: /health
-        port: 5003
   revisionHistoryLimit: 5
   selector:
     matchLabels:
@@ -206,14 +198,6 @@ spec:
     rollingUpdate:
       maxSurge: 30%
       maxUnavailable: 30%
-    readinessProbe:
-      periodSeconds: 15
-      timeoutSeconds: 2
-      sucessThreshold: 2
-      failureThreshold: 2
-      httpGet:
-        path: /health
-        port: 5004
   selector:
     matchLabels:
       app: "usermanagementapi"
@@ -294,14 +278,6 @@ spec:
     rollingUpdate:
       maxSurge: 30%
       maxUnavailable: 30%
-    readinessProbe:
-      periodSeconds: 15
-      timeoutSeconds: 2
-      sucessThreshold: 2
-      failureThreshold: 2
-      httpGet:
-        path: /health
-        port: 5001
   revisionHistoryLimit: 5
   selector:
     matchLabels:
@@ -383,14 +359,6 @@ spec:
     rollingUpdate:
       maxSurge: 30%
       maxUnavailable: 30%
-    readinessProbe:
-      periodSeconds: 15
-      timeoutSeconds: 2
-      sucessThreshold: 2
-      failureThreshold: 2
-      httpGet:
-        path: /health
-        port: 5002
   selector:
     matchLabels:
       app: "wishlistapi"
@@ -471,14 +439,6 @@ spec:
     rollingUpdate:
       maxSurge: 30%
       maxUnavailable: 30%
-    readinessProbe:
-      periodSeconds: 15
-      timeoutSeconds: 2
-      sucessThreshold: 2
-      failureThreshold: 2
-      httpGet:
-        path: /health
-        port: 5008
   selector:
     matchLabels:
       app: "suggestionsapi"
@@ -559,14 +519,6 @@ spec:
     rollingUpdate:
       maxSurge: 30%
       maxUnavailable: 30%
-    readinessProbe:
-      periodSeconds: 15
-      timeoutSeconds: 2
-      sucessThreshold: 2
-      failureThreshold: 2
-      httpGet:
-        path: /health
-        port: 5078
   selector:
     matchLabels:
       app: "searchesapi"
@@ -607,14 +559,6 @@ spec:
     rollingUpdate:
       maxSurge: 30%
       maxUnavailable: 30%
-    readinessProbe:
-      periodSeconds: 15
-      timeoutSeconds: 2
-      sucessThreshold: 2
-      failureThreshold: 2
-      httpGet:
-        path: /health
-        port: 5012
   selector:
     matchLabels:
       app: reviews-api
