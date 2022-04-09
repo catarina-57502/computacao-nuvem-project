@@ -496,7 +496,7 @@ spec:
     spec:
       containers:
       - name: reviews-api
-        image: gcr.io/${PROJECT_ID}/reviews-api
+        image: "gcr.io/${PROJECT_ID}/reviews-api"
         ports:
         - containerPort: 5012
 ---
@@ -511,7 +511,6 @@ spec:
     app: reviews-api
   ports:
     - name: http
-      protocol: TCP
       port: 5012
       targetPort: 5012
   type: LoadBalancer
@@ -534,7 +533,7 @@ spec:
     spec:
       containers:
       - name: reviews-server
-        image: gcr.io/${PROJECT_ID}/reviews-server
+        image: "gcr.io/${PROJECT_ID}/reviews-server"
         ports:
         - containerPort: 50060
 ---
@@ -545,11 +544,9 @@ metadata:
   labels:
     app: reviews-server
 spec:
-  type: ClusterIP
   selector:
     app: reviews-server
   ports:
     - name: http
-      protocol: TCP
       port: 50060
       targetPort: 50060
