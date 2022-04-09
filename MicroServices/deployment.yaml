@@ -507,7 +507,6 @@ metadata:
   labels:
     app: reviews-api
 spec:
-  type: ClusterIP
   selector:
     app: reviews-api
   ports:
@@ -515,6 +514,7 @@ spec:
       protocol: TCP
       port: 5012
       targetPort: 5012
+  type: LoadBalancer
 ---
 apiVersion: apps/v1
 kind: Deployment
