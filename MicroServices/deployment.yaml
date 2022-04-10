@@ -145,12 +145,12 @@ spec:
       targetPort: 5003
   type: LoadBalancer
 ---
-apiVersion: "apps/v1"
-kind: "Deployment"
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: "usermanagementserver"
+  name: usermanagementserver-d
   labels:
-    app: "usermanagementserver"
+    app: usermanagementserver
 spec:
   replicas: 1
   strategy:
@@ -161,31 +161,29 @@ spec:
   revisionHistoryLimit: 5
   selector:
     matchLabels:
-      app: "usermanagementserver"
+      app: usermanagementserver
   template:
     metadata:
       labels:
-        app: "usermanagementserver"
+        app: usermanagementserver
     spec:
       containers:
-        - name: "usermanagementserver"
+        - name: usermanagementserver
           image: "gcr.io/${PROJECT_ID}/usermanagementserver"
           ports:
             - containerPort: 50052
 ---
-apiVersion: "v1"
-kind: "Service"
+apiVersion: v1
+kind: Service
 metadata:
-  name: "usermanagementserver"
+  name: usermanagementserver-s
   labels:
-    app: "usermanagementserver"
+    app: usermanagementserver
 spec:
+  type: ClusterIP
   selector:
-    app: "usermanagementserver"
+    app: usermanagementserver
   ports:
-    type: ClusterIP
-    selector:
-      app: "usermanagementserver"
     - name: "server"
       port: 50052
       targetPort: 50052
