@@ -180,10 +180,12 @@ apiVersion: v1
 metadata:
   name: usermanagementserversvc
 spec:
+  type: ClusterIP
   selector:
     app: usermanagementserver
   ports:
-    - name: server
+    - name: http
+      protocol: TCP
       port: 50052
       targetPort: 50052
 ---
