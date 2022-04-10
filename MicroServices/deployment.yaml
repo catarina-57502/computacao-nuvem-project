@@ -179,13 +179,17 @@ kind: Service
 apiVersion: v1
 metadata:
   name: usermanagementserver-svc
+  annotations:
+    "prometheus.io/scrape": "true",
+    "prometheus.io/path": "/mypath/metrics",
+    "prometheus.io/port": "50052",
+    "prometheus.io/scheme": "http"
 spec:
   type: NodePort
   selector:
     app: usermanagementserver
   ports:
     - name: server
-      protocol: TCP
       port: 50052
       targetPort: 50052
 ---
