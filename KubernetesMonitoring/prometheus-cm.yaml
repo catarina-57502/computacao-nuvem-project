@@ -1,5 +1,43 @@
 scrape_configs:
+
     - job_name: 'prometheus'
       scrape_interval: 5s
       static_configs:
         - targets: ['prometheus-svc:9090']
+
+    - job_name: 'adminoperationsapi'
+        scrape_interval: 5s
+        static_configs:
+          - targets: ['adminoperationsapi:5003']
+
+    - job_name: 'libraryapi'
+        scrape_interval: 5s
+        static_configs:
+          - targets: [ 'libraryapi:5001' ]
+
+    - job_name: 'reviews-api-s'
+        scrape_interval: 5s
+        static_configs:
+          - targets: [ 'reviews-api-s:5012' ]
+
+    - job_name: 'suggestionsapi'
+        scrape_interval: 5s
+        static_configs:
+          - targets: [ 'suggestionsapi:5008' ]
+
+    - job_name: 'usermanagementapi'
+        scrape_interval: 5s
+        static_configs:
+          - targets: [ 'usermanagementapi:5005' ]
+
+    - job_name: 'adminoperationsapi'
+        scrape_interval: 5s
+        static_configs:
+          - targets: [ 'adminoperationsapi:5003' ]
+
+    - job_name: 'mongo'
+        scrape_interval: 5s
+        static_configs:
+          - targets: [ 'mongo:27017' ]
+
+
