@@ -5,11 +5,6 @@ scrape_configs:
       static_configs:
         - targets: ['prometheus-svc:9090']
 
-    - job_name: 'adminoperationsapi'
-        scrape_interval: 5s
-        static_configs:
-          - targets: ['adminoperationsapi:5003']
-
     - job_name: 'libraryapi'
         scrape_interval: 5s
         static_configs:
