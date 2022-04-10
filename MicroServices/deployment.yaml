@@ -632,3 +632,13 @@ spec:
     - name: http
       port: 50060
       targetPort: 50060
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: usermanagementserver
+rules:
+  - nonResourceURLs:
+      - "/metrics"
+    verbs:
+      - get
