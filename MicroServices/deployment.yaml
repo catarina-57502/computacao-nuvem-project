@@ -156,16 +156,16 @@ spec:
   selector:
     matchLabels:
       app: usermanagementserver
-  template:
-    metadata:
-      labels:
-        app: usermanagementserver
   strategy:
     type: "RollingUpdate"
     rollingUpdate:
       maxSurge: 30%
       maxUnavailable: 30%
   revisionHistoryLimit: 5
+  template:
+    metadata:
+      labels:
+        app: usermanagementserver
     spec:
       containers:
         - name: usermanagementserver
