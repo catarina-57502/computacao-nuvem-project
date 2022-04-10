@@ -17,6 +17,11 @@ from searches_pb2_grpc import SearchesStub
 from userManagement_pb2 import *
 from userManagement_pb2_grpc import UserManagementStub
 
+from prometheus_client import start_http_server, Summary
+
+# Track time spent and requests made.
+REQUEST_TIME = Summary('request_processing_seconds', 'Time spent processing request')
+
 def get_table(db,table):
     return db[table]
 
@@ -30,6 +35,8 @@ def connectToClient():
     return userManagement_client
 
 class LibraryService(library_pb2_grpc.LibraryServicer):
+
+    @REQUEST_TIME.time()
     def AddGame(self, request, context):
         getToken_request = TokenRequest(
             token = request.token
@@ -47,6 +54,7 @@ class LibraryService(library_pb2_grpc.LibraryServicer):
             usersDB.insert_one(doc)
         return AddGameLibResponse(message="Game added in library")
 
+    @REQUEST_TIME.time()
     def DeleteGame(self, request, context):
         getToken_request = TokenRequest(
             token = request.token
@@ -64,6 +72,7 @@ class LibraryService(library_pb2_grpc.LibraryServicer):
             usersDB.insert_one(doc)
         return DeleteGameLibResponse(message="Game deleted from library")
 
+    @REQUEST_TIME.time()
     def ListGames(self, request, context):
         str = ""
         getToken_request = TokenRequest(
@@ -130,4 +139,5 @@ def serve():
 
 
 if __name__ == "__main__":
+    start_http_server(51053)
     serve()

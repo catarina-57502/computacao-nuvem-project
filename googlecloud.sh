@@ -1,7 +1,7 @@
 # Config
 export PROJECT_ID=$(gcloud info --format='value(config.project)')
 gcloud services enable cloudapis.googleapis.com  container.googleapis.com containerregistry.googleapis.com
-gcloud container clusters create cluster-steam --num-nodes 2 --zone europe-west4-a
+gcloud container clusters create cluster-steam --zone europe-west4-a --num-nodes 2 --enable-autoscaling --min-nodes 1 --max-nodes 4 --enable-autorepair
 
 gcloud auth configure-docker
 
@@ -99,12 +99,18 @@ cd ..
 # Deploy
 gcloud auth configure-docker
 
-kubectl get nodes
-
-
 # Kubernetes Apply YAML files
 kubectl apply -f mongo-secrets.yaml
 kubectl apply -f pv.yaml
 envsubst < "deployment.yaml" > "deploymentENV.yaml"
 kubectl apply -f deploymentENV.yaml
+
+cd ..
+cd Prometheus
+
+kubectl apply -f components.yaml
+kubectl create configmap prometheus-cm --from-file prometheus-cm.yaml
+kubectl apply -f prometheus.yaml
+kubectl apply -f grafana.yaml
+
 kubectl get pods

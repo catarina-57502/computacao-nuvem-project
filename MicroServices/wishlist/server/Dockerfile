@@ -15,4 +15,5 @@ RUN python -m grpc_tools.protoc -I ../protobufs --python_out=. --grpc_python_out
 RUN python -m grpc_tools.protoc -I ../protobufs --python_out=. --grpc_python_out=. ../protobufs/userManagement.proto
 
 EXPOSE 50058
+EXPOSE 51058
 ENTRYPOINT [ "python", "wishlist.py" ]

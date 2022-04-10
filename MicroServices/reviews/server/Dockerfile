@@ -15,4 +15,5 @@ RUN python -m grpc_tools.protoc -I ../protobufs --python_out=. \
            --grpc_python_out=. ../protobufs/reviews.proto
 
 EXPOSE 50060
+EXPOSE 51060
 ENTRYPOINT [ "python", "reviews-server.py" ]

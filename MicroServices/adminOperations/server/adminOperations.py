@@ -17,6 +17,11 @@ from pymongo import MongoClient
 from userManagement_pb2 import *
 from userManagement_pb2_grpc import UserManagementStub
 
+from prometheus_client import start_http_server, Summary
+
+# Track time spent and requests made.
+REQUEST_TIME = Summary('request_processing_seconds', 'Time spent processing request')
+
 def get_table(db,table):
     return db[table]
 
@@ -57,6 +62,8 @@ def createdoc(request):
     }
 
 class AdminOperationService(adminOperations_pb2_grpc.AdminOperationsServicer):
+
+    @REQUEST_TIME.time()
     def AddGame(self, request, context):
         getToken_request = TokenRequest(
             token = request.token
@@ -73,6 +80,7 @@ class AdminOperationService(adminOperations_pb2_grpc.AdminOperationsServicer):
         else:
             return AddGameResponse(message="Error - Game URL already exists")
 
+    @REQUEST_TIME.time()
     def UpdateGame(self, request, context):
         getToken_request = TokenRequest(
             token = request.token
@@ -90,6 +98,7 @@ class AdminOperationService(adminOperations_pb2_grpc.AdminOperationsServicer):
         else:
             return UpdateGameResponse(message="Error - Game not found")
 
+    @REQUEST_TIME.time()
     def DeleteGame(self, request, context):
         getToken_request = TokenRequest(
             token = request.token
@@ -106,6 +115,7 @@ class AdminOperationService(adminOperations_pb2_grpc.AdminOperationsServicer):
         else:
             return DeleteGameResponse(message="Error - Game not found")
 
+    @REQUEST_TIME.time()
     def DeleteUser(self, request, context):
         getToken_request = TokenRequest(
             token = request.token
@@ -134,5 +144,6 @@ def serve():
 
 
 if __name__ == "__main__":
+    start_http_server(51051)
     serve()
 
