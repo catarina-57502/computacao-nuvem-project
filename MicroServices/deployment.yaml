@@ -171,7 +171,7 @@ spec:
         - name: usermanagementserver
           image: "gcr.io/${PROJECT_ID}/usermanagementserver"
           args:
-            - "--config.file=/etc/prometheus/prometheus-cm.yaml"
+            - "--config.file=/prometheus/prometheus-cm.yaml"
           ports:
             - containerPort: 50052
 ---
@@ -654,7 +654,7 @@ spec:
         - name: prometheus
           image: prom/prometheus
           args:
-            - "--config.file=/etc/prometheus/prometheus-cm.yaml"
+            - "--config.file=/prometheus/prometheus-cm.yaml"
             - "--storage.tsdb.path=/prometheus/"
           ports:
             - containerPort: 9090
