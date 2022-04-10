@@ -1,12 +1,9 @@
 scrape_configs:
-
     - job_name: 'prometheus'
       scrape_interval: 5s
       static_configs:
         - targets: ['prometheus-svc:9090']
-
-    - job_name: usermanagementserver-s
+    - job_name: 'usermanagementserver-svc'
         scrape_interval: 5s
         static_configs:
-          - targets: ['usermanagementserver-s:50052']
-
+          - targets: ['usermanagementserver-svc:50052']

@@ -148,17 +148,11 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: usermanagementserver-d
+  name: usermanagementserver-deployment
   labels:
     app: usermanagementserver
 spec:
   replicas: 1
-  strategy:
-    type: "RollingUpdate"
-    rollingUpdate:
-      maxSurge: 30%
-      maxUnavailable: 30%
-  revisionHistoryLimit: 5
   selector:
     matchLabels:
       app: usermanagementserver
@@ -166,21 +160,26 @@ spec:
     metadata:
       labels:
         app: usermanagementserver
+  strategy:
+    type: "RollingUpdate"
+    rollingUpdate:
+      maxSurge: 30%
+      maxUnavailable: 30%
+  revisionHistoryLimit: 5
     spec:
       containers:
         - name: usermanagementserver
           image: "gcr.io/${PROJECT_ID}/usermanagementserver"
+          args:
+            - "--config.file=../KubernetesMonitoring/prometheus-cm.yaml"
           ports:
             - containerPort: 50052
 ---
-apiVersion: v1
 kind: Service
+apiVersion: v1
 metadata:
-  name: usermanagementserver-s
-  labels:
-    app: usermanagementserver
+  name: usermanagementserver-svc
 spec:
-  type: ClusterIP
   selector:
     app: usermanagementserver
   ports:
