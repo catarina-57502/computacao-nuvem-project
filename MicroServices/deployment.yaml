@@ -184,8 +184,7 @@ spec:
   selector:
     app: usermanagementserver
   ports:
-    - name: http
-      protocol: TCP
+    - name: server
       port: 50052
       targetPort: 50052
 ---
