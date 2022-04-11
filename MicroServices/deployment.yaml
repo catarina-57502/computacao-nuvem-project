@@ -68,6 +68,9 @@ apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
   name: "adminoperationsserver"
+  annotations:
+      prometheus.io/scrape: 'true'
+      prometheus.io/port: '50051'
   labels:
     app: "adminoperationsserver"
 spec:
@@ -149,6 +152,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: usermanagementserver-deployment
+  annotations:
+      prometheus.io/scrape: 'true'
+      prometheus.io/port: '50052'
   labels:
     app: usermanagementserver
 spec:
@@ -231,6 +237,9 @@ apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
   name: "libraryserver"
+  annotations:
+      prometheus.io/scrape: 'true'
+      prometheus.io/port: '50053'
   labels:
     app: "libraryserver"
 spec:
@@ -312,6 +321,9 @@ apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
   name: "wishlistserver"
+  annotations:
+      prometheus.io/scrape: 'true'
+      prometheus.io/port: '50058'
   labels:
     app: "wishlistserver"
 spec:
@@ -392,6 +404,9 @@ apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
   name: "suggestionsserver"
+  annotations:
+      prometheus.io/scrape: 'true'
+      prometheus.io/port: '50059'
   labels:
     app: "suggestionsserver"
 spec:
@@ -472,6 +487,9 @@ apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
   name: "searchesserver"
+  annotations:
+      prometheus.io/scrape: 'true'
+      prometheus.io/port: '50079'
   labels:
     app: "searchesserver"
 spec:
@@ -594,6 +612,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: reviews-server-d
+  annotations:
+      prometheus.io/scrape: 'true'
+      prometheus.io/port: '50060'
   labels:
     app: reviews-server
 spec:
