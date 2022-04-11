@@ -96,9 +96,6 @@ apiVersion: "v1"
 kind: "Service"
 metadata:
   name: "adminoperationsserver"
-  annotations:
-      prometheus.io/scrape: 'true'
-      prometheus.io/port: '50051'
 spec:
   selector:
     app: "adminoperationsserver"
@@ -182,9 +179,6 @@ kind: Service
 apiVersion: v1
 metadata:
   name: usermanagementserversvc
-  annotations:
-      prometheus.io/scrape: 'true'
-      prometheus.io/port: '50052'
 spec:
   selector:
     app: usermanagementserver
@@ -265,9 +259,6 @@ apiVersion: "v1"
 kind: "Service"
 metadata:
   name: "libraryserver"
-  annotations:
-      prometheus.io/scrape: 'true'
-      prometheus.io/port: '50053'
 spec:
   selector:
     app: "libraryserver"
@@ -349,9 +340,6 @@ apiVersion: "v1"
 kind: "Service"
 metadata:
   name: "wishlistserver"
-  annotations:
-      prometheus.io/scrape: 'true'
-      prometheus.io/port: '50058'
 spec:
   selector:
     app: "wishlistserver"
@@ -432,9 +420,6 @@ apiVersion: "v1"
 kind: "Service"
 metadata:
   name: "suggestionsserver"
-  annotations:
-      prometheus.io/scrape: 'true'
-      prometheus.io/port: '50059'
 spec:
   selector:
     app: "suggestionsserver"
@@ -515,12 +500,14 @@ apiVersion: "v1"
 kind: "Service"
 metadata:
   name: "searchesserver"
+  namespace: monitoring
   annotations:
-      prometheus.io/scrape: 'true'
-      prometheus.io/port: '50079'
+    prometheus.io/scrape: 'true'
+    prometheus.io/port: '50079'
 spec:
   selector:
     app: "searchesserver"
+  type: NodePort
   ports:
     - name: "server"
       port: 50079
@@ -640,9 +627,6 @@ apiVersion: v1
 kind: Service
 metadata:
   name: reviews-server-s
-  annotations:
-      prometheus.io/scrape: 'true'
-      prometheus.io/port: '50060'
   labels:
     app: reviews-server
 spec:
