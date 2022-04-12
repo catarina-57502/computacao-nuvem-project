@@ -524,9 +524,9 @@ metadata:
     prometheus.io/scrape: 'true'
     prometheus.io/port: '50079'
 spec:
+  type: ClusterIP
   selector:
     app: "searchesserver"
-  type: NodePort
   ports:
     - name: "server"
       port: 50079
