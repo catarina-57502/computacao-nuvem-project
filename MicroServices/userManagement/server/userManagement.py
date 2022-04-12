@@ -20,6 +20,7 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import exceptions
 from firebase_admin import auth
+from prometheus_client import start_http_server, Summary
 
 cred = credentials.Certificate('./authInfo.json')
 default_app = firebase_admin.initialize_app(cred)
@@ -209,5 +210,6 @@ def serve():
 
 
 if __name__ == "__main__":
+    start_http_server(50052)
     serve()
 

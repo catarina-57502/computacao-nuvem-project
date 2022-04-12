@@ -110,8 +110,6 @@ cd ..
 cd Prometheus
 
 kubectl apply -f components.yaml
-kubectl apply -f py-prom-d.yaml
-kubectl apply -f py-prom-s.yaml
 kubectl create configmap prometheus-cm --from-file prometheus-cm.yaml
 kubectl apply -f prometheus.yaml
 
