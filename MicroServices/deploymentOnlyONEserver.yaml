@@ -38,9 +38,12 @@ spec:
     app: usermanagementserver
   ports:
     - name: server
-      protocol: TCP
       port: 50052
       targetPort: 50052
+    - name: prometheus
+      protocol: TCP
+      port: 51052
+      targetPort: 51052
 ---
 apiVersion: "apps/v1"
 kind: "Deployment"
