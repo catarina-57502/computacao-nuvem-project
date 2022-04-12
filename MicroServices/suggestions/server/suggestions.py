@@ -3,6 +3,8 @@ import random
 import pymongo
 from pymongo import MongoClient
 
+from prometheus_client import start_http_server, Summary
+
 import grpc
 from grpc_interceptor import ExceptionToStatusInterceptor
 from grpc_interceptor.exceptions import NotFound
