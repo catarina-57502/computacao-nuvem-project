@@ -12,4 +12,5 @@ RUN pip install --upgrade protobuf
 RUN python -m grpc_tools.protoc -I ../protobufs --python_out=. \--grpc_python_out=. ../protobufs/suggestions.proto
 
 EXPOSE 50059
+EXPOSE 51059
 ENTRYPOINT [ "python", "suggestions.py" ]

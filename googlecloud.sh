@@ -102,8 +102,7 @@ gcloud auth configure-docker
 # Kubernetes Apply YAML files
 kubectl apply -f mongo-secrets.yaml
 kubectl apply -f pv.yaml
-#envsubst < "deployment.yaml" > "deploymentENV.yaml"
-envsubst < "deploymentOnlyONEserver.yaml" > "deploymentENV.yaml"
+envsubst < "deployment.yaml" > "deploymentENV.yaml"
 kubectl apply -f deploymentENV.yaml
 
 cd ..

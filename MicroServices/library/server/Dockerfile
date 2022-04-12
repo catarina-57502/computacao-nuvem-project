@@ -15,4 +15,5 @@ RUN python -m grpc_tools.protoc -I ../protobufs --python_out=. --grpc_python_out
 RUN python -m grpc_tools.protoc -I ../protobufs --python_out=. --grpc_python_out=. ../protobufs/searches.proto
 
 EXPOSE 50053
+EXPOSE 51053
 ENTRYPOINT [ "python", "library.py" ]

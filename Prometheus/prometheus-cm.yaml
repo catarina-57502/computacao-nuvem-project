@@ -9,3 +9,33 @@ scrape_configs:
       static_configs:
         - targets: ['usermanagementserversvc:51052']
 
+    - job_name: adminoperationsserver
+      scrape_interval: 5s
+      static_configs:
+        - targets: [ 'adminoperationsserver:51051' ]
+
+    - job_name: libraryserver
+      scrape_interval: 5s
+      static_configs:
+        - targets: [ 'libraryserver:51053' ]
+
+    - job_name: wishlistserver
+      scrape_interval: 5s
+      static_configs:
+        - targets: [ 'wishlistserver:51058' ]
+
+    - job_name: suggestionsserver
+      scrape_interval: 5s
+      static_configs:
+        - targets: [ 'suggestionsserver:51059' ]
+
+    - job_name: searchesserver
+      scrape_interval: 5s
+      static_configs:
+        - targets: [ 'searchesserver:51079' ]
+
+    - job_name: reviews-server-s
+      scrape_interval: 5s
+      static_configs:
+        - targets: [ 'reviews-server-s:51060' ]
+

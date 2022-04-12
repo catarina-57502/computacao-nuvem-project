@@ -97,12 +97,17 @@ kind: "Service"
 metadata:
   name: "adminoperationsserver"
 spec:
+  type: ClusterIP
   selector:
     app: "adminoperationsserver"
   ports:
     - name: "server"
       port: 50051
       targetPort: 50051
+    - name: prometheus
+      protocol: TCP
+      port: 51051
+      targetPort: 51051
 ---
 apiVersion: "apps/v1"
 kind: "Deployment"
@@ -170,8 +175,6 @@ spec:
       containers:
         - name: usermanagementserver
           image: "gcr.io/${PROJECT_ID}/usermanagementserver"
-          args:
-            - "--config.file=/prometheus/prometheus-cm.yaml"
           ports:
             - containerPort: 50052
 ---
@@ -180,12 +183,17 @@ apiVersion: v1
 metadata:
   name: usermanagementserversvc
 spec:
+  type: ClusterIP
   selector:
     app: usermanagementserver
   ports:
     - name: server
       port: 50052
       targetPort: 50052
+    - name: prometheus
+      protocol: TCP
+      port: 51052
+      targetPort: 51052
 ---
 apiVersion: "apps/v1"
 kind: "Deployment"
@@ -266,6 +274,10 @@ spec:
     - name: "server"
       port: 50053
       targetPort: 50053
+    - name: prometheus
+      protocol: TCP
+      port: 51053
+      targetPort: 51053
 ---
 apiVersion: "apps/v1"
 kind: "Deployment"
@@ -347,6 +359,10 @@ spec:
     - name: "server"
       port: 50058
       targetPort: 50058
+    - name: prometheus
+      protocol: TCP
+      port: 51058
+      targetPort: 51058
 ---
 apiVersion: "apps/v1"
 kind: "Deployment"
@@ -427,6 +443,10 @@ spec:
     - name: "server"
       port: 50059
       targetPort: 50059
+    - name: prometheus
+      protocol: TCP
+      port: 51059
+      targetPort: 51059
 ---
 apiVersion: "apps/v1"
 kind: "Deployment"
@@ -511,6 +531,10 @@ spec:
     - name: "server"
       port: 50079
       targetPort: 50079
+    - name: prometheus
+      protocol: TCP
+      port: 51079
+      targetPort: 51079
 ---
 apiVersion: "apps/v1"
 kind: "Deployment"
@@ -635,3 +659,7 @@ spec:
     - name: http
       port: 50060
       targetPort: 50060
+    - name: prometheus
+      protocol: TCP
+      port: 51060
+      targetPort: 51060

@@ -5,6 +5,8 @@ from grpc_interceptor import ExceptionToStatusInterceptor
 from pymongo import MongoClient
 import os
 
+from prometheus_client import start_http_server, Summary
+
 from reviews_pb2 import (
     ReviewObject,
     ListReviewsResponse,
@@ -158,4 +160,5 @@ def serve():
     server.wait_for_termination()
 
 if __name__ == "__main__":
+    start_http_server(51060)
     serve()

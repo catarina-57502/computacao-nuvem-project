@@ -11,6 +11,8 @@ import searches_pb2_grpc
 import pymongo
 from pymongo import MongoClient
 
+from prometheus_client import start_http_server, Summary
+
 def get_table(db,table):
     return db[table]
 
@@ -187,4 +189,5 @@ def serve():
 
 
 if __name__ == "__main__":
+    start_http_server(51079)
     serve()

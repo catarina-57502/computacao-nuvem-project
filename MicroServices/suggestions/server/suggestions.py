@@ -146,4 +146,5 @@ def serve():
     server.wait_for_termination()
 
 if __name__ == "__main__":
+    start_http_server(51059)
     serve()

@@ -15,6 +15,8 @@ from userManagement_pb2_grpc import UserManagementStub
 from searches_pb2 import *
 from searches_pb2_grpc import SearchesStub
 
+from prometheus_client import start_http_server, Summary
+
 
 import pymongo
 from pymongo import MongoClient
@@ -133,4 +135,5 @@ def serve():
 
 
 if __name__ == "__main__":
+    start_http_server(51058)
     serve()
