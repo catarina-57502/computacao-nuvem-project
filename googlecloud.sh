@@ -99,12 +99,20 @@ cd ..
 # Deploy
 gcloud auth configure-docker
 
-kubectl get nodes
-
-
 # Kubernetes Apply YAML files
 kubectl apply -f mongo-secrets.yaml
 kubectl apply -f pv.yaml
-envsubst < "deployment.yaml" > "deploymentENV.yaml"
+#envsubst < "deployment.yaml" > "deploymentENV.yaml"
+envsubst < "deploymentOnlyONEserver.yaml" > "deploymentENV.yaml"
 kubectl apply -f deploymentENV.yaml
+
+cd ..
+cd Prometheus
+
+kubectl apply -f components.yaml
+kubectl apply -f py-prom-d.yaml
+kubectl apply -f py-prom-s.yaml
+kubectl create configmap prometheus-cm --from-file prometheus-cm.yaml
+kubectl apply -f prometheus.yaml
+
 kubectl get pods
