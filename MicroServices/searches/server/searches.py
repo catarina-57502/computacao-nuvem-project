@@ -13,6 +13,9 @@ from pymongo import MongoClient
 
 from prometheus_client import start_http_server, Summary
 
+# Track time spent and requests made.
+REQUEST_TIME = Summary('request_processing_seconds', 'Time spent processing request')
+
 def get_table(db,table):
     return db[table]
 
@@ -73,6 +76,8 @@ def DocToReview(doc):
     )
 
 class SearchesService(searches_pb2_grpc.SearchesServicer):
+
+    @REQUEST_TIME.time()
     def SearchGames(self, request, context):
         games = []
         dict_game = {}
@@ -123,11 +128,12 @@ class SearchesService(searches_pb2_grpc.SearchesServicer):
 
         return SearchGamesResponse(games=dict_game)
 
+    @REQUEST_TIME.time()
     def SearchGameById(self, request, context):
         docGame = myGames.find_one({"_id": ObjectId(request.id)})
         return SearchGameResponse(game=DocToGame(docGame))
 
-
+    @REQUEST_TIME.time()
     def SearchReviews(self, request, context):
         if(request.app_name == ""):
             request.app_name = "NULL"
@@ -168,7 +174,7 @@ class SearchesService(searches_pb2_grpc.SearchesServicer):
 
         return SearchReviewsResponse(reviews=dict_review)
 
-
+    @REQUEST_TIME.time()
     def SearchReviewById(self, request, context):
 
         docReview = myReviews.find_one({"review_id": request.id})

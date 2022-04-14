@@ -22,6 +22,9 @@ from firebase_admin import exceptions
 from firebase_admin import auth
 from prometheus_client import start_http_server, Summary
 
+# Track time spent and requests made.
+REQUEST_TIME = Summary('request_processing_seconds', 'Time spent processing request')
+
 cred = credentials.Certificate('./authInfo.json')
 default_app = firebase_admin.initialize_app(cred)
 
@@ -54,6 +57,7 @@ def loginCheckGetEmail (token):
 
 class UserManagementService(userManagement_pb2_grpc.UserManagementServicer):
 
+    @REQUEST_TIME.time()
     def AddUser(self, request, context):
         library = []
         wishlist = []
@@ -74,6 +78,7 @@ class UserManagementService(userManagement_pb2_grpc.UserManagementServicer):
         else:
             return DefaultResponse(code=409,message="Error - User already exists")
 
+    @REQUEST_TIME.time()
     def EditUser(self, request, context):
         # New Info
         new_password = request.new_password
@@ -117,6 +122,7 @@ class UserManagementService(userManagement_pb2_grpc.UserManagementServicer):
             return DefaultResponse(code=200,message="User Updated")
         return DefaultResponse(code=400,message="Not found - User")
 
+    @REQUEST_TIME.time()
     def LoginUser(self, request, context):
         password = request.password
         email = request.email
@@ -144,6 +150,7 @@ class UserManagementService(userManagement_pb2_grpc.UserManagementServicer):
         return LoginResponse(token=token)
 
     #TODO not logout!!!!!! just test - (maybe delete uid...)
+    @REQUEST_TIME.time()
     def Logout(self, request, context):
         WEB_API_KEY = 'AIzaSyAI2IzUwQ0-Cnu66Vn_EXnYrCN31oD-my8'
         rest_api_url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword"

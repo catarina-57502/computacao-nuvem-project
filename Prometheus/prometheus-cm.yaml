@@ -38,4 +38,3 @@ scrape_configs:
       scrape_interval: 5s
       static_configs:
         - targets: [ 'reviews-server-s:51060' ]
-

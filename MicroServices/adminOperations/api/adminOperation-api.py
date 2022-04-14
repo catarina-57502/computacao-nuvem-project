@@ -6,6 +6,7 @@ import grpc
 from adminOperations_pb2 import *
 from adminOperations_pb2_grpc import AdminOperationsStub
 
+
 api = Flask(__name__)
 
 adminoperations_channel = grpc.insecure_channel("adminoperationsserver:50051")
@@ -96,3 +97,4 @@ def deleteUser():
         deleteUser_request
     )
     return json.dumps(deleteUser_response.message)
+

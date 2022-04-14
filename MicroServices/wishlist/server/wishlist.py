@@ -16,7 +16,8 @@ from searches_pb2 import *
 from searches_pb2_grpc import SearchesStub
 
 from prometheus_client import start_http_server, Summary
-
+# Track time spent and requests made.
+REQUEST_TIME = Summary('request_processing_seconds', 'Time spent processing request')
 
 import pymongo
 from pymongo import MongoClient
@@ -35,6 +36,8 @@ def connectToClient():
 
 
 class WishlistService(wishlist_pb2_grpc.WishlistServicer):
+
+    @REQUEST_TIME.time()
     def AddGame(self, request, context):
 
         getToken_request = TokenRequest(
@@ -53,6 +56,7 @@ class WishlistService(wishlist_pb2_grpc.WishlistServicer):
             usersDB.insert_one(doc)
         return AddGameWishResponse(message="Game added in wishlist")
 
+    @REQUEST_TIME.time()
     def DeleteGame(self, request, context):
 
         getToken_request = TokenRequest(
@@ -71,6 +75,7 @@ class WishlistService(wishlist_pb2_grpc.WishlistServicer):
             usersDB.insert_one(doc)
         return DeleteGameWishResponse(message="Game deleted from wishlist")
 
+    @REQUEST_TIME.time()
     def ListGames(self, request, context):
         str = ""
         getToken_request = TokenRequest(
