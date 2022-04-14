@@ -1,7 +1,33 @@
-# Projeto Cloud
+# Project Cloud
 
 The goal of the project is to develop a cloud native application that offers a set of services that provide
 relevant information extracted from a dataset. The services will be provided through a REST API.
+
+## To deploy on the CLOUD!
+
+Create a Project on google cloud  
+Open gcloud shell:   
+```
+git clone https://github.com/mdmourao/CloudProjectGroup7  
+cd CloudProjectGroup7  
+sh googlecloud.sh  
+```
+
+Note: If you already have the docker images pushed to the container registry just run:  
+```
+sh googlecloud_noDocker.sh
+```
+
+## To populate the db
+
+```
+cd DB
+sh db.sh
+```
+Note: If you already have the docker images of the db just run:  
+```
+sh db_noDocker.sh
+```
 
 ## Links Dataset
 
