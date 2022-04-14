@@ -7,8 +7,14 @@ import csv
 from csv import reader
 from pymongo import MongoClient
 
-STEAM_REVIEWS = './csvFiles/steam_reviews_eng_new.csv'
-STEAM_GAMES = './csvFiles/steam_games.csv'
+import gdown
+
+url = "https://drive.google.com/uc?id=1_r2rvMzaa7Ugf2c-_gAP6BRV9JctMSdV"
+output = "steam_reviews_eng_new.csv"
+gdown.download(url, output, quiet=False)
+
+STEAM_REVIEWS = './steam_reviews_eng_new.csv'
+STEAM_GAMES = './steam_games.csv'
 
 
 def writeCSVtoDB(CSVFile,tableDB):
@@ -156,14 +162,14 @@ def writeUser(dbUsers):
     
 if __name__ == "__main__":
     print("WELCOME")
-    db = get_database()
-    dbReviews = get_table(db,'Reviews')
-    dbGames = get_table(db,'Games')
-    dbUsers = get_table(get_databaseUsers(),'users')
+    #db = get_database()
+    #dbReviews = get_table(db,'Reviews')
+    #dbGames = get_table(db,'Games')
+    #dbUsers = get_table(get_databaseUsers(),'users')
     # Reviews and games
-    writeCSVtoDB(STEAM_REVIEWS,dbReviews)
-    writeCSVtoDBGames(STEAM_GAMES,dbGames)
+    #writeCSVtoDB(STEAM_REVIEWS,dbReviews)
+    #writeCSVtoDBGames(STEAM_GAMES,dbGames)
     # User default
-    writeUser(dbUsers)
+    #writeUser(dbUsers)
 
 
