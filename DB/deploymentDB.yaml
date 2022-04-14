@@ -1,14 +1,8 @@
-apiVersion: "apps/v1"
-kind: "Deployment"
+apiVersion: "v1"
+kind: Job
 metadata:
   name: "writedb"
-  labels:
-    app: "writedb"
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: "writedb"
   template:
     metadata:
       labels:
@@ -19,3 +13,5 @@ spec:
           image: "gcr.io/${PROJECT_ID}/writedb"
           ports:
             - containerPort: 50111
+      restartPolicy: Never
+  backoffLimit: 0
