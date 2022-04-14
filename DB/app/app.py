@@ -10,7 +10,6 @@ from pymongo import MongoClient
 STEAM_REVIEWS = './csvFiles/steam_reviews_eng_new.csv'
 STEAM_GAMES = './csvFiles/steam_games.csv'
 
-CONNECTION_STRING = "mongodb://admin:admin@34.90.228.181:27017/admin"
 
 def writeCSVtoDB(CSVFile,tableDB):
     import csv
@@ -124,8 +123,7 @@ def writeCSVtoDBGames(CSVFile,tableDB):
     file.close()
     print("DONE", CSVFile)
 def get_database():
-
-    client = MongoClient(CONNECTION_STRING)
+    client = MongoClient('mongo', 27017 ,username='admin', password='admin' )
     print("DataBase Created")
     return client['steam']
 
@@ -134,7 +132,7 @@ def get_databaseUsers():
     import pymongo
 
     from pymongo import MongoClient
-    client = MongoClient(CONNECTION_STRING)
+    client = MongoClient('mongo', 27017 ,username='admin', password='admin' )
     print("DataBase Created")
     return client['users']
 
@@ -144,14 +142,9 @@ def get_table(db,table):
     return db[table]
 
 def writeUser(dbUsers):
-    library = [
-        "6240977ffee051363df02ff9",
-        "6240977ffee051363df03003",
-    ]
-    wishlist = [
-        "6240977ffee051363df0300c",
-    ]
-    myquery = { "userid": "00000000000000000",
+    library = []
+    wishlist = []
+    myquery = { "userid": "01",
             "nickname": "userTest",
             "email": "martimmourao@gmail.com",
             "password": "qwerty",
@@ -161,8 +154,7 @@ def writeUser(dbUsers):
             }
     dbUsers.insert_one(myquery)
     
-if __name__ == "__main__":    
-
+if __name__ == "__main__":
     print("WELCOME")
     db = get_database()
     dbReviews = get_table(db,'Reviews')
