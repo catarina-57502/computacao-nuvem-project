@@ -7,14 +7,9 @@ import csv
 from csv import reader
 from pymongo import MongoClient
 
-import gdown
 
-url = "https://drive.google.com/uc?id=1_r2rvMzaa7Ugf2c-_gAP6BRV9JctMSdV"
-output = "steam_reviews_eng_new.csv"
-gdown.download(url, output, quiet=False)
-
-STEAM_REVIEWS = './steam_reviews_eng_new.csv'
-STEAM_GAMES = './steam_games.csv'
+STEAM_REVIEWS = 'steam_reviews_eng_new.csv'
+STEAM_GAMES = 'steam_games.csv'
 
 
 def writeCSVtoDB(CSVFile,tableDB):
