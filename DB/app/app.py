@@ -157,14 +157,14 @@ def writeUser(dbUsers):
     
 if __name__ == "__main__":
     print("WELCOME")
-    #db = get_database()
-    #dbReviews = get_table(db,'Reviews')
-    #dbGames = get_table(db,'Games')
-    #dbUsers = get_table(get_databaseUsers(),'users')
-    # Reviews and games
-    #writeCSVtoDB(STEAM_REVIEWS,dbReviews)
-    #writeCSVtoDBGames(STEAM_GAMES,dbGames)
+    db = get_database()
+    dbReviews = get_table(db,'Reviews')
+    dbGames = get_table(db,'Games')
+    dbUsers = get_table(get_databaseUsers(),'users')
+    #Reviews and games
+    writeCSVtoDB(STEAM_REVIEWS,dbReviews)
+    writeCSVtoDBGames(STEAM_GAMES,dbGames)
     # User default
-    #writeUser(dbUsers)
+    writeUser(dbUsers)
 
 
