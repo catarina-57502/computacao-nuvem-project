@@ -1,13 +1,13 @@
 export PROJECT_ID=$(gcloud info --format='value(config.project)')
-pip install gdown
-pip install --upgrade gdown
-
+pip install requests
 cd app
 cd csvFiles
 
-gdown https://drive.google.com/file/d/1bfl997anVVA77yXs0cM3tC44vAn9mrUt/view?usp=sharing
+python google_drive.py 1bfl997anVVA77yXs0cM3tC44vAn9mrUt ./csvFiles
 
-apt install unzip
+cd csvFiles
+
+sudo apt install unzip
 unzip csvFiles.zip
 
 cd ..
