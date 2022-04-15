@@ -1,31 +1,57 @@
 openapi: "3.0.2"
 info:
   title: "Steam Games and Reviews"
-  version: "1.0"
+  version: "2.0"
 
 servers:
-- url: "http://0.0.0.0:5000"
+  - url: "http://0.0.0.0:5000"
 
 paths:
   ######SEARCHS######
   /searchGames:
     get:
       tags:
-      - Searchs
+        - Searchs
       summary: "Search multiple games"
       description: "Search games with specific filters"
       operationId: GameSearch
       parameters:
-        - $ref: '#/components/parameters/types'
-        - $ref: '#/components/parameters/name'
-        - $ref: '#/components/parameters/release_date'
-        - $ref: '#/components/parameters/developer'
-        - $ref: '#/components/parameters/publisher'
-        - $ref: '#/components/parameters/popular_tags'
-        - $ref: '#/components/parameters/languages'
-        - $ref: '#/components/parameters/genre'
-        - $ref: '#/components/parameters/original_price'
-        - $ref: '#/components/parameters/discount_price'
+        - in: query
+          name: types
+          schema:
+            type: string
+        - in: query
+          name: name
+          schema:
+            type: string
+        - in: query
+          name: release_date
+          schema:
+            type: string
+        - in: query
+          name: developer
+          schema:
+            type: string
+        - in: query
+          name: publisher
+          schema:
+            type: string
+        - in: query
+          name: popular_tags
+          schema:
+            type: string
+        - in: query
+          name: languages
+          schema:
+            type: string
+        - in: query
+          name: genre
+          schema:
+            type: string
+        - in: query
+          name: original_price
+          schema:
+            type: string
       responses:
         "200":
           description: Successful response
@@ -45,7 +71,7 @@ paths:
                 example: Not found
         '500':
           description: Server Error
-  /getGame/{url}:
+  /getGame:
     get:
       tags:
         - Searchs
@@ -53,10 +79,8 @@ paths:
       description: "Get specific game data with the game URL"
       operationId: GameSearchFromID
       parameters:
-        - name: url
-          in: path
-          description: URL of the game
-          required: true
+        - in: query
+          name: id
           schema:
             type: string
       responses:
@@ -85,16 +109,30 @@ paths:
       description: "Search all reviews using filters"
       operationId: ReviewSearch
       parameters:
-        - $ref: '#/components/parameters/app_id'
-        - $ref: '#/components/parameters/app_name'
-        - $ref: '#/components/parameters/language'
-        - $ref: '#/components/parameters/timestamp_created'
-        - $ref: '#/components/parameters/timestamp_updated'
-        - $ref: '#/components/parameters/votes_helpful'
-        - $ref: '#/components/parameters/votes_funny'
-        - $ref: '#/components/parameters/weighted_vote_score'
-        - $ref: '#/components/parameters/comment_count'
-        - $ref: '#/components/parameters/author_steamid'
+        - in: query
+          name: app_name
+          schema:
+            type: string
+        - in: query
+          name: timestamp_created
+          schema:
+            type: string
+        - in: query
+          name: recommended
+          schema:
+            type: string
+        - in: query
+          name: votes_helpful
+          schema:
+            type: string
+        - in: query
+          name: votes_funny
+          schema:
+            type: string
+        - in: query
+          name: comment_count
+          schema:
+            type: string
       responses:
         "200":
           description: Successful response
@@ -114,7 +152,7 @@ paths:
                 example: Not found
         '500':
           description: Server Error
-  /getReview/{id}:
+  /getReview:
     get:
       tags:
         - Searchs
@@ -122,12 +160,10 @@ paths:
       description: "Get specific review with the review id"
       operationId: ReviewSearchFromID
       parameters:
-        - name: id
-          in: path
-          description: ID of the game
-          required: true
+        - in: query
+          name: id
           schema:
-            type: number
+            type: string
       responses:
         "200":
           description: Successful response
@@ -189,9 +225,7 @@ paths:
       operationId: BestGameReviewsByFilters
       parameters:
         - $ref: '#/components/parameters/app_name'
-        - $ref: '#/components/parameters/timestamp_updated'
-        - $ref: '#/components/parameters/recommended'
-        - $ref: '#/components/parameters/author_playtime_at_review'
+        - $ref: '#/components/parameters/maxResults'
       responses:
         "200":
           description: Successful response
@@ -220,31 +254,12 @@ paths:
       summary: 'User register'
       description: 'Allows the user to register'
       operationId: AddUser
-      parameters:
-        - name: id
-          in: query
-          description: Unique ID for each user
-          required: true
-          schema:
-            type: string
-        - name: nickname
-          in: query
-          description: Nickname for each user
-          required: true
-          schema:
-            type: string
-        - name: email
-          in: query
-          description: Unique email for each user
-          required: true
-          schema:
-            type: string
-        - name: password
-          in: query
-          description: Unique password for each user
-          required: true
-          schema:
-            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserAdd'
       responses:
         '204':
           description: User created
@@ -256,34 +271,18 @@ paths:
       summary: 'User edit account'
       description: 'Enables the users to edit their accounts'
       operationId: EditUser
-      security:
-        - AuthUser:
-            - operations_user
       parameters:
-        - name: password
-          in: query
-          description: Unique password for each user
+        - in: header
+          name: token
           required: true
           schema:
             type: string
-        - name: new_password
-          in: query
-          description: New Password
-          required: false
-          schema:
-            type: string
-        - name: nickname
-          in: query
-          description: New nickname for each user
-          required: false
-          schema:
-            type: string
-        - name: email
-          in: query
-          description: New email
-          required: false
-          schema:
-            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserEdit'
       responses:
         '204':
           description: User info updated
@@ -297,25 +296,15 @@ paths:
       summary: 'Users login'
       description: 'Enables already registered users to login'
       operationId: UserLogin
-      security:
-        - AuthUser:
-            - operations_user
-      parameters:
-        - name: email
-          in: query
-          description: Unique email for each user
-          required: true
-          schema:
-            type: string
-        - name: password
-          in: query
-          description: Unique password for each user
-          required: true
-          schema:
-            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLogin'
       responses:
         '204':
-          description: Successful response - Login OK
+          description: Token
         '404':
           description: Not found
         '500':
@@ -328,9 +317,6 @@ paths:
       summary: Users logout
       description: 'Enables users to logout'
       operationId: UserLogout
-      security:
-        - AuthUser:
-            - operations_user
       responses:
         '204':
           description: Successful logout
@@ -348,10 +334,12 @@ paths:
         - Library
       summary: "List all games in your library"
       operationId: getGame
-      ## Auth User to get library info
-      security:
-        - AuthUser:
-            - operations_library
+      parameters:
+        - in: header
+          name: token
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: Successful response
@@ -384,19 +372,19 @@ paths:
         - Library
       summary: "Add a game to your library"
       operationId: AddGame
-      security:
-        - AuthUser:
-            - operations_library
       parameters:
-        - $ref: '#/components/parameters/app_name'
-        - $ref: '#/components/parameters/app_id'
+        - in: query
+          name: id
+          schema:
+            type: string
+        - in: header
+          name: token
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: Successful response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Game'
         "404":
           description: Game not found
           content:
@@ -420,12 +408,16 @@ paths:
         - Library
       summary: "Remove a game in your library"
       operationId: DelGame
-      security:
-        - AuthUser:
-            - operations_library
       parameters:
-        - $ref: '#/components/parameters/app_name'
-        - $ref: '#/components/parameters/app_id'
+        - in: header
+          name: token
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: id
+          schema:
+            type: string
       responses:
         "204":
           description: Successful response
@@ -453,9 +445,6 @@ paths:
         - Reviews
       summary: "Create review"
       operationId: add_review
-      security:
-        - AuthUser:
-            - operations_reviews
       requestBody:
         required: true
         content:
@@ -486,7 +475,7 @@ paths:
                     type: integer
                     format: int32
                   description:
-                    type: string        
+                    type: string
         "500":
           description: Internal server error
           content:
@@ -510,10 +499,7 @@ paths:
           required: false
           schema:
             type: integer
-            format: int64      
-      security:
-        - AuthUser:
-            - operations_reviews
+            format: int64
       responses:
         "200":
           description: Reviews list returned successfully
@@ -559,10 +545,7 @@ paths:
           required: true
           schema:
             type: integer
-            format: int64      
-      security:
-        - AuthUser:
-            - operations_reviews
+            format: int64
       responses:
         "200":
           description: Review returned successfully
@@ -595,7 +578,7 @@ paths:
                     type: integer
                     format: int32
                   description:
-                    type: string       
+                    type: string
     put:
       tags:
         - Reviews
@@ -607,16 +590,13 @@ paths:
           required: true
           schema:
             type: integer
-            format: int64 
+            format: int64
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Review'      
-      security:
-        - AuthUser:
-            - operations_reviews
+              $ref: '#/components/schemas/Review'
       responses:
         "200":
           description: Review updated successfully
@@ -661,10 +641,7 @@ paths:
           required: true
           schema:
             type: integer
-            format: int64      
-      security:
-        - AuthUser:
-            - operations_reviews
+            format: int64
       responses:
         "204":
           description: Review deleted successfully
@@ -701,7 +678,7 @@ paths:
                     type: integer
                     format: int32
                   description:
-                    type: string                   
+                    type: string
 
   ######WISHLIST######
 
@@ -711,9 +688,12 @@ paths:
         - WishList
       summary: "List all games in your wishlist"
       operationId: GetGameWish
-      security:
-        - AuthUser:
-            - operations_wishlist
+      parameters:
+        - in: header
+          name: token
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: Successful response
@@ -746,12 +726,16 @@ paths:
         - WishList
       summary: "Add a game to your wish list"
       operationId: AddGame_wish
-      security:
-        - AuthUser:
-            - operations_wishlist
       parameters:
-        - $ref: '#/components/parameters/app_id'
-        - $ref: '#/components/parameters/app_name'
+        - in: header
+          name: token
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: id
+          schema:
+            type: string
       responses:
         "200":
           description: Successful response
@@ -782,12 +766,16 @@ paths:
         - WishList
       summary: "Delete a game from your wishlist"
       operationId: DelGame_wish
-      security:
-        - AuthUser:
-            - operations_wishlist
       parameters:
-        - $ref: '#/components/parameters/app_id'
-        - $ref: '#/components/parameters/app_name'
+        - in: header
+          name: token
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: id
+          schema:
+            type: string
       responses:
         "204":
           description: Game removed from wishlist
@@ -817,9 +805,12 @@ paths:
       summary: Add game
       description: Add a new game
       operationId: addGame
-      security:
-        - AuthAdmin:
-            - operations_admin
+      parameters:
+        - in: header
+          name: token
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -847,9 +838,12 @@ paths:
       summary: Update game
       description: Updated a new game
       operationId: UpdateGame
-      security:
-        - AuthAdmin:
-            - operations_admin
+      parameters:
+        - in: header
+          name: token
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -871,17 +865,19 @@ paths:
               schema:
                 $ref: '#/components/schemas/Response'
 
-  /admin/games/{url}:
+  /admin/gamess:
     delete:
       tags:
         - Admin
       summary: Delete game from URL
       description: Deletes a single game based on the URL supplied
       operationId: deleteGame
-      security:
-        - AuthAdmin:
-            - operations_admin
       parameters:
+        - in: header
+          name: token
+          required: true
+          schema:
+            type: string
         - name: url
           in: query
           description: URL of the game to delete
@@ -906,24 +902,25 @@ paths:
               schema:
                 $ref: '#/components/schemas/Response'
 
-  /admin/users/{id}:
+  /admin/users:
     delete:
       tags:
         - Admin
       summary: Delete user
       description: Deletes a single user based on the id supplied
       operationId: deleteUser
-      security:
-        - AuthAdmin:
-            - operations_admin
       parameters:
+        - in: header
+          name: token
+          required: true
+          schema:
+            type: string
         - name: id
-          in: path
+          in: query
           description: id of the user to delete
           required: true
           schema:
-            type: integer
-            format: int64
+            type: string
       responses:
         '204':
           description: User deleted
@@ -942,8 +939,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Response'
 
-security:
-  - app_id: []
 
 tags:
   - name: User Management
@@ -958,6 +953,8 @@ tags:
     description: "Edit your reviews"
   - name: WishList
     description: "Edit your wish list"
+  - name: Suggestions
+    description: "Get Suggestions"
 
 externalDocs:
   description: GitHub
@@ -977,34 +974,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Response'
-
-  securitySchemes:
-    AuthUser:
-      type: oauth2
-      description: This API uses OAuth 2 for users
-      flows:
-        implicit:
-          authorizationUrl: https://localhost/
-          scopes:
-            operations_library: Library (add/delete)
-            operations_wishlist: Wishlist (add/delelte)
-            operations_reviews: Wishlist (create/edit/delelte)
-            operations_user: Edit user info / Logout
-    AuthAdmin:
-      type: oauth2
-      description: This API uses OAuth 2 for admins
-      flows:
-        implicit:
-          authorizationUrl: https://localhost/
-          scopes:
-            operations_admin: Admin Operations
-    app_id:
-      type: apiKey
-      description: "API key to authorize requests."
-      name: appid
-      in: query
-
   parameters:
+    maxResults:
+      name: maxResults
+      in: query
+      description: Max Results of the query
+      example: 10
+      schema:
+        type: number
     token:
       name: token
       in: query
@@ -1497,6 +1474,62 @@ components:
         email:
           type: string
         password:
+          type: string
+    UserAdd:
+      type: object
+      required:
+        - id
+        - nickname
+        - email
+        - password
+        - type
+      properties:
+        id:
+          type: string
+        nickname:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        type:
+          type: string
+    UserEdit:
+      type: object
+      required:
+        - new_password
+        - nickname
+        - new_email
+        - password
+        - type
+      properties:
+        new_password:
+          type: string
+        nickname:
+          type: string
+        new_email:
+          type: string
+        password:
+          type: string
+        type:
+          type: string
+    UserLogin:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+    IdObject:
+      type: object
+      required:
+        - id
+        - password
+      properties:
+        id:
           type: string
     Response:
       type: object

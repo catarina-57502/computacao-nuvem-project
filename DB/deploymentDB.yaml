@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: "writedb"
+spec:
+  template:
+    metadata:
+      labels:
+        app: "writedb"
+    spec:
+      containers:
+        - name: "writedb"
+          image: "gcr.io/${PROJECT_ID}/writedb"
+          ports:
+            - containerPort: 50111
+      restartPolicy: Never
+  backoffLimit: 0

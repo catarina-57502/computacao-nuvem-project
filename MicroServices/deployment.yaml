@@ -705,3 +705,4 @@ spec:
             name: reviews-api-s
             port:
               number: 5012
+     
