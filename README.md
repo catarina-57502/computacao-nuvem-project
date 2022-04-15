@@ -93,8 +93,4 @@ André Grilo - Searchs
 
 (9) setup your own probes for liveness, readiness and start-up (Grilo)  
 
-<<<<<<< HEAD
 (10) implement rolling updates and rollback (Catarina)  
-=======
-(10) implement rolling updates and rollback (Catarina)  
->>>>>>> 20bffeab9f5124d851bb1c2f6f29cb2b3859f3a6
