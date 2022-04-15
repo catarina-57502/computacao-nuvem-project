@@ -64,7 +64,7 @@ def DocToReview(review):
      "_id" : review._id
     }
 
-@app.route("/suggestionGames", methods=['GET'])
+@app.route("/suggestions/games", methods=['GET'])
 def suggestionsGames():
     suggGame = gameRequest(
         release_date = request.args.get('release_date'),
@@ -81,7 +81,7 @@ def suggestionsGames():
         i+=1
     return json.dumps(map)
 
-@app.route("/suggestionReviews", methods=['GET'])
+@app.route("/suggestions/reviews", methods=['GET'])
 def suggestionReviews():
     suggReview = reviewRequest(
         app_name = str(request.args.get('app_name')),

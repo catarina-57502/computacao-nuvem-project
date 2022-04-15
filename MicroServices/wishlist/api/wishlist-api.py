@@ -40,7 +40,7 @@ def DocToGame(game):
         "_id" : "NA"
     }
 
-@api.route('/addGame_wish', methods=['POST'])
+@api.route('/wishes', methods=['POST'])
 def addGame():
     data = json.loads(request.data)
     addGameWish_request = AddGameWishRequest(
@@ -53,7 +53,7 @@ def addGame():
     return json.dumps(addGameWish_response.message)
 
 
-@api.route('/delGame_wish', methods=['DELETE'])
+@api.route('/wishes', methods=['DELETE'])
 def deleteGame():
 
     data = json.loads(request.data)
@@ -66,7 +66,7 @@ def deleteGame():
     )
     return json.dumps(deleteGameWish_response.message)
 
-@api.route('/getGame_wish', methods=['GET'])
+@api.route('/wishes', methods=['GET'])
 def listGames():
     listGamesWish_request = ListGamesWishRequest(
         token = request.headers.get('token')

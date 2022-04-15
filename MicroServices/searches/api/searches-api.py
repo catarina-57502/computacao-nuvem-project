@@ -64,7 +64,7 @@ def DocToReview(review):
         "author_last_played" : review.author_last_played,
     }
 
-@api.route('/searchGames', methods=['GET'])
+@api.route('/searches/games', methods=['GET'])
 def searchGames():
 
     searchGames_request = SearchGamesRequest(
@@ -89,7 +89,7 @@ def searchGames():
 
     return json.dumps(map)
 
-@api.route('/getGame', methods=['GET'])
+@api.route('/searches/game', methods=['GET'])
 def getGame():
     id = request.args.get('id')
     searchGame_request = SearchGameRequest(
@@ -100,7 +100,7 @@ def getGame():
     )
     return MessageToJson(searchGame_response)
 
-@api.route('/searchReviews', methods=['GET'])
+@api.route('/searches/reviews', methods=['GET'])
 def searchReviews():
 
     app_name = request.args.get('app_name')
@@ -130,7 +130,7 @@ def searchReviews():
 
     return json.dumps(map)
 
-@api.route('/getReview', methods=['GET'])
+@api.route('/searches/review', methods=['GET'])
 def getReview():
     id = request.args.get('id')
     searchReview_request = SearchReviewRequest(

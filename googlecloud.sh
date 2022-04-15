@@ -1,3 +1,4 @@
+
 # Config
 export PROJECT_ID=$(gcloud info --format='value(config.project)')
 gcloud services enable cloudapis.googleapis.com  container.googleapis.com containerregistry.googleapis.com
@@ -98,6 +99,13 @@ cd ..
 
 # Deploy
 gcloud auth configure-docker
+
+# Add the nginx-stable Helm repository
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm repo update
+
+# Deploy an NGINX controller Deployment and Service
+helm install nginx-ingress ingress-nginx/ingress-nginx 
 
 # Kubernetes Apply YAML files
 kubectl apply -f mongo-secrets.yaml

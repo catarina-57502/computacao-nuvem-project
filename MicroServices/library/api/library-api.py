@@ -39,7 +39,7 @@ def DocToGame(game):
 
 
 
-@api.route('/addGame', methods=['POST'])
+@api.route('/library', methods=['POST'])
 def addGame():
 
     data = json.loads(request.data)
@@ -53,7 +53,7 @@ def addGame():
     return json.dumps(addGameLib_response.message)
 
 
-@api.route('/delGame', methods=['DELETE'])
+@api.route('/library', methods=['DELETE'])
 def deleteGame():
 
     data = json.loads(request.data)
@@ -66,7 +66,7 @@ def deleteGame():
     )
     return json.dumps(deleteGameLib_response.message)
 
-@api.route('/getGames', methods=['GET'])
+@api.route('/library', methods=['GET'])
 def listGames():
     listGamesLib_request = ListGamesLibRequest(
         token = request.headers.get('token')

@@ -13,7 +13,7 @@ userManagement_channel = grpc.insecure_channel("usermanagementserver:50052")
 usermanagement_client = UserManagementStub(userManagement_channel)
 
 
-@api.route('/addUser', methods=['POST'])
+@api.route('/user', methods=['POST'])
 def addUser():
     data = json.loads(request.data)
     addUser_request = AddUserRequest(
@@ -28,7 +28,7 @@ def addUser():
     )
     return json.dumps(addUser_response.message)
 
-@api.route('/editUser', methods=['PUT'])
+@api.route('/user', methods=['PUT'])
 def editUser():
     data = json.loads(request.data)
     updateUser_request = EditUserRequest(
@@ -43,7 +43,7 @@ def editUser():
     )
     return json.dumps(updateUser_response.message)
 
-@api.route('/login', methods=['POST'])
+@api.route('/user/login', methods=['POST'])
 def login():
     data = json.loads(request.data)
     login_request = LoginRequest(
@@ -55,7 +55,7 @@ def login():
     )
     return json.dumps(login_response.token)
 
-@api.route('/logout', methods=['GET'])
+@api.route('/user/logout', methods=['GET'])
 def logout():
     data = json.loads(request.data)
     logout_request = LogoutRequest(

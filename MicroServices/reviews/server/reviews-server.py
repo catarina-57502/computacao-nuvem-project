@@ -18,6 +18,7 @@ import reviews_pb2_grpc
 REQUEST_TIME = Summary('request_processing_seconds', 'Time spent processing request')
 
 #connString = os.environ["MONGODB_CONNSTRING"]
+
 connection = MongoClient('mongo', 27017, username='admin', password='admin')
 revs = connection["steam"]
 db = revs["Reviews"]
