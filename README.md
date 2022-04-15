@@ -29,6 +29,20 @@ Note: If you already have the docker images of the db just run:
 sh db_noDocker.sh
 ```
 
+## To use the services api
+
+Export the EXTERNAL-IP of the NGINX ingress controller in a variable:
+
+```
+export NGINX_INGRESS_IP=$(kubectl get service nginx-ingress-ingress-nginx-controller -ojson | jq -r '.status.loadBalancer.ingress[].ip')
+
+echo $NGINX_INGRESS_IP
+```
+Access the web application by going to the:
+```
+http://$NGINX_INGRESS_IP.nip.io/[SERVICE_NAME]
+```
+
 ## Links Dataset
 
 https://www.kaggle.com/najzeko/steam-reviews-2021   
@@ -79,4 +93,8 @@ André Grilo - Searchs
 
 (9) setup your own probes for liveness, readiness and start-up (Grilo)  
 
+<<<<<<< HEAD
 (10) implement rolling updates and rollback (Catarina)  
+=======
+(10) implement rolling updates and rollback (Catarina)  
+>>>>>>> 20bffeab9f5124d851bb1c2f6f29cb2b3859f3a6
