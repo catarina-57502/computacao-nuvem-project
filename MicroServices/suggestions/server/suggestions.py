@@ -3,6 +3,8 @@ import random
 import pymongo
 from pymongo import MongoClient
 
+from prometheus_client import start_http_server, Summary
+
 import grpc
 from grpc_interceptor import ExceptionToStatusInterceptor
 from grpc_interceptor.exceptions import NotFound
@@ -16,7 +18,10 @@ from suggestions_pb2 import (
 
 import suggestions_pb2_grpc
 
-myClient = MongoClient('microservices-mongoDB-1', 27017 ,username='admin', password='admin' )
+# Track time spent and requests made.
+REQUEST_TIME = Summary('request_processing_seconds', 'Time spent processing request')
+
+myClient = MongoClient('mongo', 27017 ,username='admin', password='admin' )
 myDB = myClient["steam"]
 myGames = myDB["Games"]
 myReviews = myDB["Reviews"]
@@ -75,6 +80,8 @@ def DocToReview(doc):
 
 
 class SuggestionsService(suggestions_pb2_grpc.SuggestionsServicer):
+
+    @REQUEST_TIME.time()
     def GetGames(self, request, context):
         games = []
         reviews = []
@@ -111,6 +118,8 @@ class SuggestionsService(suggestions_pb2_grpc.SuggestionsServicer):
             dict_game[str1] = DocToGame(game)
             i+=1
         return GameResponse(games=dict_game)
+
+    @REQUEST_TIME.time()
     def GetReviews(self, request, context):
         games = []
         reviews = []
@@ -146,4 +155,5 @@ def serve():
     server.wait_for_termination()
 
 if __name__ == "__main__":
+    start_http_server(51059)
     serve()

@@ -44,7 +44,7 @@ def DocToGame(game):
 def addGame():
     data = json.loads(request.data)
     addGameWish_request = AddGameWishRequest(
-        id=data['id'],
+        id = request.args.get('id'),
         token = request.headers.get('token')
     )
     addGameWish_response = wishlist_client.AddGame(
@@ -58,7 +58,7 @@ def deleteGame():
 
     data = json.loads(request.data)
     deleteGameWish_request = DeleteGameWishRequest(
-        id=data['id'],
+        id = request.args.get('id'),
         token = request.headers.get('token')
     )
     deleteGameWish_response = wishlist_client.DeleteGame(

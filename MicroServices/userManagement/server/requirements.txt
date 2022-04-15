@@ -6,3 +6,4 @@ pyjwt
 firebase-admin
 pyjwt[crypto]
 requests
+prometheus_client

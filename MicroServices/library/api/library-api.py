@@ -44,7 +44,7 @@ def addGame():
 
     data = json.loads(request.data)
     addGameLib_request = AddGameLibRequest(
-        id=data['id'],
+        id = request.args.get('id'),
         token = request.headers.get('token')
     )
     addGameLib_response = library_client.AddGame(
@@ -58,7 +58,7 @@ def deleteGame():
 
     data = json.loads(request.data)
     deleteGameLib_request = DeleteGameLibRequest(
-        id=data['id'],
+        id = request.args.get('id'),
         token = request.headers.get('token')
     )
     deleteGameLib_response = library_client.DeleteGame(

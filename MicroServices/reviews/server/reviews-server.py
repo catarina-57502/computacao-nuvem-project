@@ -5,6 +5,8 @@ from grpc_interceptor import ExceptionToStatusInterceptor
 from pymongo import MongoClient
 import os
 
+from prometheus_client import start_http_server, Summary
+
 from reviews_pb2 import (
     ReviewObject,
     ListReviewsResponse,
@@ -12,13 +14,18 @@ from reviews_pb2 import (
 )
 import reviews_pb2_grpc
 
-# connString = os.environ["MONGODB_CONNSTRING"]
-# connection = MongoClient('microservices-mongoDB-1', 27017, username='admin', password='admin')
+# Track time spent and requests made.
+REQUEST_TIME = Summary('request_processing_seconds', 'Time spent processing request')
+
+#connString = os.environ["MONGODB_CONNSTRING"]
+
 connection = MongoClient('mongo', 27017, username='admin', password='admin')
 revs = connection["steam"]
 db = revs["Reviews"]
 
 class ReviewService(reviews_pb2_grpc.ReviewsServicer):
+
+    @REQUEST_TIME.time()
     def GetReview(self, request, context):
         doc = db.find_one({"review_id": request.review_id})
         if doc is None:
@@ -71,6 +78,7 @@ class ReviewService(reviews_pb2_grpc.ReviewsServicer):
             author_last_played = doc["author_last_played"]
         )
 
+    @REQUEST_TIME.time()
     def AddReview(self, request, context):
         doc = db.find_one({"review_id": request.review_id})
         if doc is None:
@@ -101,6 +109,7 @@ class ReviewService(reviews_pb2_grpc.ReviewsServicer):
             return SimpleResponse(code="200", description="Review added")
         return SimpleResponse(code="400", description="Review already exists")
 
+    @REQUEST_TIME.time()
     def UpdateReview(self, request, context):
         doc = db.find_one({"review_id": request.review_id})
         if doc is None:
@@ -132,6 +141,7 @@ class ReviewService(reviews_pb2_grpc.ReviewsServicer):
         })
         return SimpleResponse(code="200", description="Review updated")
 
+    @REQUEST_TIME.time()
     def DeleteReview(self, request, context):
         doc = db.find_one({"review_id": request.review_id})
         if doc is None:
@@ -139,6 +149,7 @@ class ReviewService(reviews_pb2_grpc.ReviewsServicer):
         db.delete_one(doc)
         return SimpleResponse(code="204", description="Review deleted")
 
+    @REQUEST_TIME.time()
     def ListReviews(self, request, context):
         docs = db.aggregate([{"$sample": {"size": int(request.max_results)}},{"$project": {"_id": 0}}]);
         if docs is None:
@@ -159,4 +170,5 @@ def serve():
     server.wait_for_termination()
 
 if __name__ == "__main__":
+    start_http_server(51060)
     serve()
