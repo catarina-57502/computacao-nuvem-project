@@ -1,7 +1,8 @@
+
 # Config
 export PROJECT_ID=$(gcloud info --format='value(config.project)')
 gcloud services enable cloudapis.googleapis.com  container.googleapis.com containerregistry.googleapis.com
-gcloud container clusters create cluster-steam --num-nodes 2 --zone europe-west4-a
+gcloud container clusters create cluster-steam --zone europe-west4-a --num-nodes 2 --enable-autoscaling --min-nodes 1 --max-nodes 4 --enable-autorepair
 
 gcloud auth configure-docker
 
@@ -62,12 +63,12 @@ cd ..
 # MicroService Suggestions Server
 cd suggestions
 docker build . -f server/Dockerfile -t suggestionsserver
-docker tag wishlistserver gcr.io/${PROJECT_ID}/suggestionsserver
+docker tag suggestionsserver gcr.io/${PROJECT_ID}/suggestionsserver
 docker push gcr.io/${PROJECT_ID}/suggestionsserver
 
 # Microservice Suggestions API
 docker build . -f api/Dockerfile -t suggestionsapi
-docker tag wishlistapi gcr.io/${PROJECT_ID}/suggestionsapi
+docker tag suggestionsapi gcr.io/${PROJECT_ID}/suggestionsapi
 docker push gcr.io/${PROJECT_ID}/suggestionsapi
 
 cd ..
@@ -91,15 +92,33 @@ docker build . -f server/Dockerfile -t gcr.io/${PROJECT_ID}/reviews-server
 docker push gcr.io/${PROJECT_ID}/reviews-server
 
 # MicroService Reviews API
-docker build . -f api/Dockerfile -t gcr.io/${PROJECT_ID}reviews-api
+docker build . -f api/Dockerfile -t gcr.io/${PROJECT_ID}/reviews-api
 docker push gcr.io/${PROJECT_ID}/reviews-api
+
+cd ..
 
 # Deploy
 gcloud auth configure-docker
 
-kubectl get nodes
+# Add the nginx-stable Helm repository
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm repo update
+
+# Deploy an NGINX controller Deployment and Service
+helm install nginx-ingress ingress-nginx/ingress-nginx 
+
+# Kubernetes Apply YAML files
 kubectl apply -f mongo-secrets.yaml
 kubectl apply -f pv.yaml
 envsubst < "deployment.yaml" > "deploymentENV.yaml"
 kubectl apply -f deploymentENV.yaml
+
+cd ..
+cd Prometheus
+
+kubectl apply -f components.yaml
+kubectl create configmap prometheus-cm --from-file prometheus-cm.yaml
+kubectl apply -f prometheus.yaml
+kubectl apply -f grafana.yaml
+
 kubectl get pods

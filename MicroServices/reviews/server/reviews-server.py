@@ -12,8 +12,9 @@ from reviews_pb2 import (
 )
 import reviews_pb2_grpc
 
-#connString = os.environ["MONGODB_CONNSTRING"]
-connection = MongoClient('microservices-mongoDB-1', 27017, username='admin', password='admin')
+# connString = os.environ["MONGODB_CONNSTRING"]
+# connection = MongoClient('microservices-mongoDB-1', 27017, username='admin', password='admin')
+connection = MongoClient('mongo', 27017, username='admin', password='admin')
 revs = connection["steam"]
 db = revs["Reviews"]
 

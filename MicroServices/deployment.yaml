@@ -1,19 +1,3 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: steam-ingress
-spec:
-  rules:
-  - http:
-      paths:
-      - path: /reviews
-        pathType: Prefix
-        backend:
-          service:
-            name: reviews-api
-            port:
-              number: 5012
----
 apiVersion: v1
 kind: Service
 metadata:
@@ -72,6 +56,12 @@ metadata:
     app: "adminoperationsserver"
 spec:
   replicas: 1
+  strategy:
+    type: "RollingUpdate"
+    rollingUpdate:
+      maxSurge: 30%
+      maxUnavailable: 30%
+  revisionHistoryLimit: 5
   selector:
     matchLabels:
       app: "adminoperationsserver"
@@ -91,12 +81,17 @@ kind: "Service"
 metadata:
   name: "adminoperationsserver"
 spec:
+  type: ClusterIP
   selector:
     app: "adminoperationsserver"
   ports:
     - name: "server"
       port: 50051
       targetPort: 50051
+    - name: prometheus
+      protocol: TCP
+      port: 51051
+      targetPort: 51051
 ---
 apiVersion: "apps/v1"
 kind: "Deployment"
@@ -106,6 +101,12 @@ metadata:
     app: "adminoperationsapi"
 spec:
   replicas: 1
+  strategy:
+    type: "RollingUpdate"
+    rollingUpdate:
+      maxSurge: 30%
+      maxUnavailable: 30%
+  revisionHistoryLimit: 5
   selector:
     matchLabels:
       app: "adminoperationsapi"
@@ -131,41 +132,52 @@ spec:
     - name: "api"
       port: 5003
       targetPort: 5003
-  type: LoadBalancer
+  type: NodePort
 ---
-apiVersion: "apps/v1"
-kind: "Deployment"
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: "usermanagementserver"
+  name: usermanagementserver-deployment
   labels:
-    app: "usermanagementserver"
+    app: usermanagementserver
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: "usermanagementserver"
+      app: usermanagementserver
+  strategy:
+    type: "RollingUpdate"
+    rollingUpdate:
+      maxSurge: 30%
+      maxUnavailable: 30%
+  revisionHistoryLimit: 5
   template:
     metadata:
       labels:
-        app: "usermanagementserver"
+        app: usermanagementserver
     spec:
       containers:
-        - name: "usermanagementserver"
+        - name: usermanagementserver
           image: "gcr.io/${PROJECT_ID}/usermanagementserver"
           ports:
             - containerPort: 50052
 ---
-apiVersion: "v1"
-kind: "Service"
+kind: Service
+apiVersion: v1
 metadata:
-  name: "usermanagementserver"
+  name: usermanagementserversvc
 spec:
+  type: ClusterIP
   selector:
-    app: "usermanagementserver"
+    app: usermanagementserver
   ports:
-    - name: "server"
+    - name: server
       port: 50052
       targetPort: 50052
+    - name: prometheus
+      protocol: TCP
+      port: 51052
+      targetPort: 51052
 ---
 apiVersion: "apps/v1"
 kind: "Deployment"
@@ -175,6 +187,11 @@ metadata:
     app: "usermanagementapi"
 spec:
   replicas: 1
+  strategy:
+    type: "RollingUpdate"
+    rollingUpdate:
+      maxSurge: 30%
+      maxUnavailable: 30%
   selector:
     matchLabels:
       app: "usermanagementapi"
@@ -200,7 +217,7 @@ spec:
     - name: "api"
       port: 5004
       targetPort: 5004
-  type: LoadBalancer
+  type: NodePort
 ---
 apiVersion: "apps/v1"
 kind: "Deployment"
@@ -210,6 +227,12 @@ metadata:
     app: "libraryserver"
 spec:
   replicas: 1
+  strategy:
+    type: "RollingUpdate"
+    rollingUpdate:
+      maxSurge: 30%
+      maxUnavailable: 30%
+  revisionHistoryLimit: 5
   selector:
     matchLabels:
       app: "libraryserver"
@@ -235,6 +258,10 @@ spec:
     - name: "server"
       port: 50053
       targetPort: 50053
+    - name: prometheus
+      protocol: TCP
+      port: 51053
+      targetPort: 51053
 ---
 apiVersion: "apps/v1"
 kind: "Deployment"
@@ -244,6 +271,12 @@ metadata:
     app: "libraryapi"
 spec:
   replicas: 1
+  strategy:
+    type: "RollingUpdate"
+    rollingUpdate:
+      maxSurge: 30%
+      maxUnavailable: 30%
+  revisionHistoryLimit: 5
   selector:
     matchLabels:
       app: "libraryapi"
@@ -269,7 +302,7 @@ spec:
     - name: "api"
       port: 5001
       targetPort: 5001
-  type: LoadBalancer
+  type: NodePort
 ---
 apiVersion: "apps/v1"
 kind: "Deployment"
@@ -279,6 +312,12 @@ metadata:
     app: "wishlistserver"
 spec:
   replicas: 1
+  strategy:
+    type: "RollingUpdate"
+    rollingUpdate:
+      maxSurge: 30%
+      maxUnavailable: 30%
+  revisionHistoryLimit: 5
   selector:
     matchLabels:
       app: "wishlistserver"
@@ -304,6 +343,10 @@ spec:
     - name: "server"
       port: 50058
       targetPort: 50058
+    - name: prometheus
+      protocol: TCP
+      port: 51058
+      targetPort: 51058
 ---
 apiVersion: "apps/v1"
 kind: "Deployment"
@@ -313,6 +356,11 @@ metadata:
     app: "wishlistapi"
 spec:
   replicas: 1
+  strategy:
+    type: "RollingUpdate"
+    rollingUpdate:
+      maxSurge: 30%
+      maxUnavailable: 30%
   selector:
     matchLabels:
       app: "wishlistapi"
@@ -338,7 +386,7 @@ spec:
     - name: "api"
       port: 5002
       targetPort: 5002
-  type: LoadBalancer
+  type: NodePort
 ---
 apiVersion: "apps/v1"
 kind: "Deployment"
@@ -348,6 +396,12 @@ metadata:
     app: "suggestionsserver"
 spec:
   replicas: 1
+  strategy:
+    type: "RollingUpdate"
+    rollingUpdate:
+      maxSurge: 30%
+      maxUnavailable: 30%
+  revisionHistoryLimit: 5
   selector:
     matchLabels:
       app: "suggestionsserver"
@@ -373,6 +427,10 @@ spec:
     - name: "server"
       port: 50059
       targetPort: 50059
+    - name: prometheus
+      protocol: TCP
+      port: 51059
+      targetPort: 51059
 ---
 apiVersion: "apps/v1"
 kind: "Deployment"
@@ -382,6 +440,11 @@ metadata:
     app: "suggestionsapi"
 spec:
   replicas: 1
+  strategy:
+    type: "RollingUpdate"
+    rollingUpdate:
+      maxSurge: 30%
+      maxUnavailable: 30%
   selector:
     matchLabels:
       app: "suggestionsapi"
@@ -407,7 +470,7 @@ spec:
     - name: "api"
       port: 5008
       targetPort: 5008
-  type: LoadBalancer
+  type: NodePort
 ---
 apiVersion: "apps/v1"
 kind: "Deployment"
@@ -417,6 +480,12 @@ metadata:
     app: "searchesserver"
 spec:
   replicas: 1
+  strategy:
+    type: "RollingUpdate"
+    rollingUpdate:
+      maxSurge: 30%
+      maxUnavailable: 30%
+  revisionHistoryLimit: 5
   selector:
     matchLabels:
       app: "searchesserver"
@@ -436,12 +505,17 @@ kind: "Service"
 metadata:
   name: "searchesserver"
 spec:
+  type: ClusterIP
   selector:
     app: "searchesserver"
   ports:
     - name: "server"
       port: 50079
       targetPort: 50079
+    - name: prometheus
+      protocol: TCP
+      port: 51079
+      targetPort: 51079
 ---
 apiVersion: "apps/v1"
 kind: "Deployment"
@@ -451,6 +525,11 @@ metadata:
     app: "searchesapi"
 spec:
   replicas: 1
+  strategy:
+    type: "RollingUpdate"
+    rollingUpdate:
+      maxSurge: 30%
+      maxUnavailable: 30%
   selector:
     matchLabels:
       app: "searchesapi"
@@ -476,7 +555,7 @@ spec:
     - name: "api"
       port: 5078
       targetPort: 5078
-  type: LoadBalancer
+  type: NodePort
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -486,6 +565,11 @@ metadata:
     app: reviews-api
 spec:
   replicas: 1
+  strategy:
+    type: "RollingUpdate"
+    rollingUpdate:
+      maxSurge: 30%
+      maxUnavailable: 30%
   selector:
     matchLabels:
       app: reviews-api
@@ -496,7 +580,7 @@ spec:
     spec:
       containers:
       - name: reviews-api
-        image: gcr.io/${PROJECT_ID}/reviews-api
+        image: "gcr.io/${PROJECT_ID}/reviews-api"
         ports:
         - containerPort: 5012
 ---
@@ -507,14 +591,13 @@ metadata:
   labels:
     app: reviews-api
 spec:
-  type: ClusterIP
   selector:
     app: reviews-api
   ports:
     - name: http
-      protocol: TCP
       port: 5012
       targetPort: 5012
+  type: NodePort
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -524,6 +607,12 @@ metadata:
     app: reviews-server
 spec:
   replicas: 1
+  strategy:
+    type: "RollingUpdate"
+    rollingUpdate:
+      maxSurge: 30%
+      maxUnavailable: 30%
+  revisionHistoryLimit: 5
   selector:
     matchLabels:
       app: reviews-server
@@ -534,7 +623,7 @@ spec:
     spec:
       containers:
       - name: reviews-server
-        image: gcr.io/${PROJECT_ID}/reviews-server
+        image: "gcr.io/${PROJECT_ID}/reviews-server"
         ports:
         - containerPort: 50060
 ---
@@ -545,11 +634,74 @@ metadata:
   labels:
     app: reviews-server
 spec:
-  type: ClusterIP
   selector:
     app: reviews-server
   ports:
     - name: http
-      protocol: TCP
       port: 50060
       targetPort: 50060
+    - name: prometheus
+      protocol: TCP
+      port: 51060
+      targetPort: 51060
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: steam-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: "/admin"
+        pathType: Prefix
+        backend:
+          service:
+            name: adminoperationsapi
+            port:
+              number: 5003
+      - path: "/user"
+        pathType: Prefix
+        backend:
+          service:
+            name: usermanagementapi
+            port:
+              number: 5004
+      - path: "/library"
+        pathType: Prefix
+        backend:
+          service:
+            name: libraryapi
+            port:
+              number: 5001
+      - path: "/wishes"
+        pathType: Prefix
+        backend:
+          service:
+            name: wishlistapi
+            port:
+              number: 5002
+      - path: "/suggestions"
+        pathType: Prefix
+        backend:
+          service:
+            name: suggestionsapi
+            port:
+              number: 5008
+      - path: "/searches"
+        pathType: Prefix
+        backend:
+          service:
+            name: searchesapi
+            port:
+              number: 5078
+      - path: "/reviews"
+        pathType: Prefix
+        backend:
+          service:
+            name: reviews-api-s
+            port:
+              number: 5012
