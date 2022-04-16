@@ -30,7 +30,7 @@ db = client['users']
 usersDB = get_table(db,"users")
 
 def connectToClient():
-    userManagement_channel = grpc.insecure_channel("usermanagementserver:50052")
+    userManagement_channel = grpc.insecure_channel("usermanagementserversvc:50052")
     userManagement_client = UserManagementStub(userManagement_channel)
     return userManagement_client
 
