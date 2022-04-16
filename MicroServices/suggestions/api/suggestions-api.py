@@ -64,6 +64,10 @@ def DocToReview(review):
      "_id" : review._id
     }
 
+@api.route('/healthz', methods=['GET'])
+def healthz():
+    return json.dumps("Ok")
+
 @app.route("/suggestions/games", methods=['GET'])
 def suggestionsGames():
     suggGame = gameRequest(

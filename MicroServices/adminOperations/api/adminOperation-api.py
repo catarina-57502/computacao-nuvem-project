@@ -12,6 +12,10 @@ api = Flask(__name__)
 adminoperations_channel = grpc.insecure_channel("adminoperationsserver:50051")
 adminoperations_client = AdminOperationsStub(adminoperations_channel)
 
+@api.route('/healthz', methods=['GET'])
+def healthz():
+    return json.dumps("Ok")
+
 @api.route('/admin/games', methods=['POST'])
 def addGame():
     data = json.loads(request.data)

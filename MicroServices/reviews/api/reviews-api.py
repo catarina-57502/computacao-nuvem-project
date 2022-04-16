@@ -16,6 +16,10 @@ api = Flask(__name__)
 reviews_channel = grpc.insecure_channel("reviews-server-s:50060")
 reviews_client = ReviewsStub(reviews_channel)
 
+@api.route('/healthz', methods=['GET'])
+def healthz():
+    return json.dumps("Ok")
+
 @api.route('/reviews', methods=['GET'])
 def list_reviews():
     max_results = request.args.get('max_results')

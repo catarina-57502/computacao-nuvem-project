@@ -64,6 +64,10 @@ def DocToReview(review):
         "author_last_played" : review.author_last_played,
     }
 
+@api.route('/healthz', methods=['GET'])
+def healthz():
+    return json.dumps("Ok")
+
 @api.route('/searches/games', methods=['GET'])
 def searchGames():
 

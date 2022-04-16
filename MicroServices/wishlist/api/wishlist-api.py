@@ -40,6 +40,10 @@ def DocToGame(game):
         "_id" : "NA"
     }
 
+@api.route('/healthz', methods=['GET'])
+def healthz():
+    return json.dumps("Ok")
+
 @api.route('/wishes', methods=['POST'])
 def addGame():
     data = json.loads(request.data)
