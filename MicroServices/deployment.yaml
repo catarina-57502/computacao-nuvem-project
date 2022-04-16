@@ -76,16 +76,28 @@ spec:
           ports:
             - containerPort: 50051
           livenessProbe:
-            grpc:
-              port: 50051
+            httpGet:
+              path: /metrics
+              port: 51051
+              httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
             initialDelaySeconds: 20
-          readnessProbe:
-            grpc:
-              port: 50051
+          readinessProbe:
+            httpGet:
+              path: /metrics
+              port: 51051
+              httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
             initialDelaySeconds: 20
           startupProbe:
-            grpc:
-              port: 50051
+            httpGet:
+              path: /metrics
+              port: 51051
+              httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
             failureThreshold: 30
 ---
 apiVersion: "v1"
@@ -132,33 +144,33 @@ spec:
           image: "gcr.io/${PROJECT_ID}/adminoperationsapi"
           ports:
             - containerPort: 5003
-        livenessProbe:
-          httpGet:
-            path: /healthz
-            port: 5003
-            httpHeaders:
-              - name: Custom-Header
-                value: Awesome
-          initialDelaySeconds: 10
-          periodSeconds: 10
-        readnessProbe:
-          httpGet:
-            path: /healthz
-            port: 5003
-            httpHeaders:
-              - name: Custom-Header
-                value: Awesome
-          initialDelaySeconds: 10
-          periodSeconds: 10
-        startupProbe:
-          httpGet:
-            path: /healthz
-            port: 5003
-            httpHeaders:
-              - name: Custom-Header
-                value: Awesome
-          failureThreshold: 30
-          periodSeconds: 20
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 5003
+              httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 5003
+              httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          startupProbe:
+            httpGet:
+              path: /healthz
+              port: 5003
+              httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
+            failureThreshold: 30
+            periodSeconds: 20
 ---
 apiVersion: "v1"
 kind: "Service"
@@ -201,16 +213,28 @@ spec:
           ports:
             - containerPort: 50052
           livenessProbe:
-            grpc:
-              port: 50052
+            httpGet:
+              path: /metrics
+              port: 51052
+              httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
             initialDelaySeconds: 20
-          readnessProbe:
-            grpc:
-              port: 50052
+          readinessProbe:
+            httpGet:
+              path: /metrics
+              port: 51052
+              httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
             initialDelaySeconds: 20
           startupProbe:
-            grpc:
-              port: 50052
+            httpGet:
+              path: /metrics
+              port: 51052
+              httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
             failureThreshold: 30
 ---
 kind: Service
@@ -256,33 +280,33 @@ spec:
           image: "gcr.io/${PROJECT_ID}/usermanagementapi"
           ports:
             - containerPort: 5004
-        livenessProbe:
-          httpGet:
-            path: /healthz
-            port: 5004
-            httpHeaders:
-              - name: Custom-Header
-                value: Awesome
-          initialDelaySeconds: 10
-          periodSeconds: 10
-        readnessProbe:
-          httpGet:
-            path: /healthz
-            port: 5004
-            httpHeaders:
-              - name: Custom-Header
-                value: Awesome
-          initialDelaySeconds: 10
-          periodSeconds: 10
-        startupProbe:
-          httpGet:
-            path: /healthz
-            port: 5004
-            httpHeaders:
-              - name: Custom-Header
-                value: Awesome
-          failureThreshold: 30
-          periodSeconds: 20
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 5004
+              httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 5004
+              httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          startupProbe:
+            httpGet:
+              path: /healthz
+              port: 5004
+              httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
+            failureThreshold: 30
+            periodSeconds: 20
 ---
 apiVersion: "v1"
 kind: "Service"
@@ -325,16 +349,28 @@ spec:
           ports:
             - containerPort: 50053
           livenessProbe:
-            grpc:
-              port: 50053
+            httpGet:
+              path: /metrics
+              port: 51053
+              httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
             initialDelaySeconds: 20
-          readnessProbe:
-            grpc:
-              port: 50053
+          readinessProbe:
+            httpGet:
+              path: /metrics
+              port: 51053
+              httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
             initialDelaySeconds: 20
           startupProbe:
-            grpc:
-              port: 50053
+            httpGet:
+              path: /metrics
+              port: 51053
+              httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
             failureThreshold: 30
 ---
 apiVersion: "v1"
@@ -380,33 +416,33 @@ spec:
           image: "gcr.io/${PROJECT_ID}/libraryapi"
           ports:
             - containerPort: 5001
-        livenessProbe:
-          httpGet:
-            path: /healthz
-            port: 5001
-            httpHeaders:
-              - name: Custom-Header
-                value: Awesome
-          initialDelaySeconds: 10
-          periodSeconds: 10
-        readnessProbe:
-          httpGet:
-            path: /healthz
-            port: 5001
-            httpHeaders:
-              - name: Custom-Header
-                value: Awesome
-          initialDelaySeconds: 10
-          periodSeconds: 10
-        startupProbe:
-          httpGet:
-            path: /healthz
-            port: 5001
-            httpHeaders:
-              - name: Custom-Header
-                value: Awesome
-          failureThreshold: 30
-          periodSeconds: 20
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 5001
+              httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 5001
+              httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          startupProbe:
+            httpGet:
+              path: /healthz
+              port: 5001
+              httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
+            failureThreshold: 30
+            periodSeconds: 20
 ---
 apiVersion: "v1"
 kind: "Service"
@@ -449,16 +485,28 @@ spec:
           ports:
             - containerPort: 50058
           livenessProbe:
-            grpc:
-              port: 50058
+            httpGet:
+              path: /metrics
+              port: 51058
+              httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
             initialDelaySeconds: 20
-          readnessProbe:
-            grpc:
-              port: 50058
+          readinessProbe:
+            httpGet:
+              path: /metrics
+              port: 51058
+              httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
             initialDelaySeconds: 20
           startupProbe:
-            grpc:
-              port: 50058
+            httpGet:
+              path: /metrics
+              port: 51058
+              httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
             failureThreshold: 30
 ---
 apiVersion: "v1"
@@ -503,33 +551,33 @@ spec:
           image: "gcr.io/${PROJECT_ID}/wishlistapi"
           ports:
             - containerPort: 5002
-        livenessProbe:
-          httpGet:
-            path: /healthz
-            port: 5002
-            httpHeaders:
-              - name: Custom-Header
-                value: Awesome
-          initialDelaySeconds: 10
-          periodSeconds: 10
-        readnessProbe:
-          httpGet:
-            path: /healthz
-            port: 5002
-            httpHeaders:
-              - name: Custom-Header
-                value: Awesome
-          initialDelaySeconds: 10
-          periodSeconds: 10
-        startupProbe:
-          httpGet:
-            path: /healthz
-            port: 5002
-            httpHeaders:
-              - name: Custom-Header
-                value: Awesome
-          failureThreshold: 30
-          periodSeconds: 20
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 5002
+              httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 5002
+              httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          startupProbe:
+            httpGet:
+              path: /healthz
+              port: 5002
+              httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
+            failureThreshold: 30
+            periodSeconds: 20
 ---
 apiVersion: "v1"
 kind: "Service"
@@ -572,16 +620,28 @@ spec:
           ports:
             - containerPort: 50059
           livenessProbe:
-            grpc:
-              port: 50059
+            httpGet:
+              path: /metrics
+              port: 51059
+              httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
             initialDelaySeconds: 20
-          readnessProbe:
-            grpc:
-              port: 50059
+          readinessProbe:
+            httpGet:
+              path: /metrics
+              port: 51059
+              httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
             initialDelaySeconds: 20
           startupProbe:
-            grpc:
-              port: 50059
+            httpGet:
+              path: /metrics
+              port: 51059
+              httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
             failureThreshold: 30
 ---
 apiVersion: "v1"
@@ -626,33 +686,33 @@ spec:
           image: "gcr.io/${PROJECT_ID}/suggestionsapi"
           ports:
             - containerPort: 5008
-        livenessProbe:
-          httpGet:
-            path: /healthz
-            port: 5008
-            httpHeaders:
-              - name: Custom-Header
-                value: Awesome
-          initialDelaySeconds: 10
-          periodSeconds: 10
-        readnessProbe:
-          httpGet:
-            path: /healthz
-            port: 5008
-            httpHeaders:
-              - name: Custom-Header
-                value: Awesome
-          initialDelaySeconds: 10
-          periodSeconds: 10
-        startupProbe:
-          httpGet:
-            path: /healthz
-            port: 5008
-            httpHeaders:
-              - name: Custom-Header
-                value: Awesome
-          failureThreshold: 30
-          periodSeconds: 20
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 5008
+              httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 5008
+              httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          startupProbe:
+            httpGet:
+              path: /healthz
+              port: 5008
+              httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
+            failureThreshold: 30
+            periodSeconds: 20
 ---
 apiVersion: "v1"
 kind: "Service"
@@ -695,16 +755,28 @@ spec:
           ports:
             - containerPort: 50079
           livenessProbe:
-            grpc:
-              port: 50079
+            httpGet:
+              path: /metrics
+              port: 51079
+              httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
             initialDelaySeconds: 20
-          readnessProbe:
-            grpc:
-              port: 50079
+          readinessProbe:
+            httpGet:
+              path: /metrics
+              port: 51079
+              httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
             initialDelaySeconds: 20
           startupProbe:
-            grpc:
-              port: 50079
+            httpGet:
+              path: /metrics
+              port: 51079
+              httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
             failureThreshold: 30
 ---
 apiVersion: "v1"
@@ -750,33 +822,33 @@ spec:
           image: "gcr.io/${PROJECT_ID}/searchesapi"
           ports:
             - containerPort: 5078
-        livenessProbe:
-          httpGet:
-            path: /healthz
-            port: 5078
-            httpHeaders:
-              - name: Custom-Header
-                value: Awesome
-          initialDelaySeconds: 10
-          periodSeconds: 10
-        readnessProbe:
-          httpGet:
-            path: /healthz
-            port: 5078
-            httpHeaders:
-              - name: Custom-Header
-                value: Awesome
-          initialDelaySeconds: 10
-          periodSeconds: 10
-        startupProbe:
-          httpGet:
-            path: /healthz
-            port: 5078
-            httpHeaders:
-              - name: Custom-Header
-                value: Awesome
-          failureThreshold: 30
-          periodSeconds: 20
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 5078
+              httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 5078
+              httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          startupProbe:
+            httpGet:
+              path: /healthz
+              port: 5078
+              httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
+            failureThreshold: 30
+            periodSeconds: 20
 ---
 apiVersion: "v1"
 kind: "Service"
@@ -826,7 +898,7 @@ spec:
                   value: Awesome
             initialDelaySeconds: 10
             periodSeconds: 10
-          readnessProbe:
+          readinessProbe:
             httpGet:
               path: /healthz
               port: 5012
@@ -887,18 +959,30 @@ spec:
           image: "gcr.io/${PROJECT_ID}/reviews-server"
           ports:
             - containerPort: 50060
-      livenessProbe:
-        grpc:
-          port: 50060
-        initialDelaySeconds: 20
-      readnessProbe:
-        grpc:
-          port: 50060
-        initialDelaySeconds: 20
-      startupProbe:
-        grpc:
-          port: 50060
-        failureThreshold: 30
+          livenessProbe:
+            httpGet:
+              path: /metrics
+              port: 51060
+              httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
+            initialDelaySeconds: 20
+          readinessProbe:
+            httpGet:
+              path: /metrics
+              port: 51060
+              httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
+            initialDelaySeconds: 20
+          startupProbe:
+            httpGet:
+              path: /metrics
+              port: 51060
+              httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
+            failureThreshold: 30
 ---
 apiVersion: v1
 kind: Service

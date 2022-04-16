@@ -161,7 +161,6 @@ class UserManagementService(userManagement_pb2_grpc.UserManagementServicer):
         if "error" in r.json():
             raise NotFound("Error Login")
 
-
         # ask auth to create JWT
         email = request.email
         #TODO get type from db

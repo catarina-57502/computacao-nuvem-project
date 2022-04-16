@@ -64,7 +64,7 @@ def DocToReview(review):
      "_id" : review._id
     }
 
-@api.route('/healthz', methods=['GET'])
+@app.route('/healthz', methods=['GET'])
 def healthz():
     return json.dumps("Ok")
 
