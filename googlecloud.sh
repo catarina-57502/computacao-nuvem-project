@@ -100,6 +100,12 @@ cd ..
 # Deploy
 gcloud auth configure-docker
 
+# Kubernetes Apply YAML files
+kubectl apply -f mongo-secrets.yaml
+kubectl apply -f pv.yaml
+envsubst < "deployment.yaml" > "deploymentENV.yaml"
+kubectl apply -f deploymentENV.yaml
+
 # Add the nginx-stable Helm repository
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm repo update
@@ -107,11 +113,8 @@ helm repo update
 # Deploy an NGINX controller Deployment and Service
 helm install nginx-ingress ingress-nginx/ingress-nginx 
 
-# Kubernetes Apply YAML files
-kubectl apply -f mongo-secrets.yaml
-kubectl apply -f pv.yaml
-envsubst < "deployment.yaml" > "deploymentENV.yaml"
-kubectl apply -f deploymentENV.yaml
+# Apply the ingress resource to the cluster
+kubectl apply -f ingress.yaml
 
 cd ..
 cd Prometheus
