@@ -28,6 +28,10 @@ def addUser():
     )
     return json.dumps(addUser_response.message)
 
+@api.route('/healthz', methods=['GET'])
+def healthz():
+    return json.dumps("Ok")
+
 @api.route('/user', methods=['PUT'])
 def editUser():
     data = json.loads(request.data)
