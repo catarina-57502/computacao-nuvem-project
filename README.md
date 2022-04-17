@@ -29,18 +29,28 @@ Note: If you already have the docker images of the db just run:
 sh db_noDocker.sh
 ```
 
-## To use the services api
+## To use the services API
 
 Export the EXTERNAL-IP of the NGINX ingress controller in a variable:
 
 ```
 export NGINX_INGRESS_IP=$(kubectl get service nginx-ingress-ingress-nginx-controller -ojson | jq -r '.status.loadBalancer.ingress[].ip')
+```
 
+Ensure that you have the correct IP address value stored in the $NGINX_INGRESS_IP variable
+```
 echo $NGINX_INGRESS_IP
 ```
+
 Access the web application by going to the:
 ```
 http://$NGINX_INGRESS_IP.nip.io/[SERVICE_NAME]
+```
+
+## Clean up
+
+```
+sh teardown.sh
 ```
 
 ## Links Dataset
