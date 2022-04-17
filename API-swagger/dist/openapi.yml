@@ -7,11 +7,11 @@ servers:
   - url: "http://0.0.0.0:5000"
 
 paths:
-  ######SEARCHS######
-  /searchGames:
+  ######SEARCHES######
+  /searches/games:
     get:
       tags:
-        - Searchs
+        - searches
       summary: "Search multiple games"
       description: "Search games with specific filters"
       operationId: GameSearch
@@ -71,10 +71,10 @@ paths:
                 example: Not found
         '500':
           description: Server Error
-  /getGame:
+  /searches/game:
     get:
       tags:
-        - Searchs
+        - searches
       summary: "Get game information from URL"
       description: "Get specific game data with the game URL"
       operationId: GameSearchFromID
@@ -100,11 +100,10 @@ paths:
                 example: Not found
         '500':
           description: Server Error
-
-  /searchReviews:
+  /searches/reviews:
     get:
       tags:
-        - Searchs
+        - searches
       summary: "Search multiple reviews"
       description: "Search all reviews using filters"
       operationId: ReviewSearch
@@ -152,10 +151,10 @@ paths:
                 example: Not found
         '500':
           description: Server Error
-  /getReview:
+  /searches/review:
     get:
       tags:
-        - Searchs
+        - searches
       summary: "Get review from id"
       description: "Get specific review with the review id"
       operationId: ReviewSearchFromID
@@ -181,12 +180,11 @@ paths:
                 example: Not found
         '500':
           description: Server Error
-
   ######SUGESTIONS######
-  /suggestionsGames:
+  /suggestions/games:
     get:
       tags:
-        - Suggestions
+        - suggestions
       summary: "Call personalized top 10 games"
       description: "Return personalized top 10 games on Steam"
       operationId: BestGamesByFilters
@@ -215,11 +213,10 @@ paths:
                 example: Not found
         '500':
           description: Server Error
-
-  /suggestionsReviews:
+  /suggestions/reviews:
     get:
       tags:
-        - Suggestions
+        - suggestions
       summary: "Call personalized top 10 reviews of a given game"
       description: "Return personalized top 10 reviews of a given game on Steam"
       operationId: BestGameReviewsByFilters
@@ -245,12 +242,11 @@ paths:
                 example: Not found
         '500':
           description: Server Error
-
   ######USERS######
-  /addUser:
+  /user:
     post:
       tags:
-        - User Management
+        - user
       summary: 'User register'
       description: 'Allows the user to register'
       operationId: AddUser
@@ -265,8 +261,6 @@ paths:
           description: User created
         '404':
           description: Not found
-
-  /editUser:
     put:
       summary: 'User edit account'
       description: 'Enables the users to edit their accounts'
@@ -289,9 +283,8 @@ paths:
         '404':
           description: Not found
       tags:
-        - User Management
-
-  /login:
+        - user
+  /user/login:
     post:
       summary: 'Users login'
       description: 'Enables already registered users to login'
@@ -310,9 +303,8 @@ paths:
         '500':
           description: Server Error
       tags:
-        - User Management
-
-  /logout:
+        - user
+  /user/logout:
     get:
       summary: Users logout
       description: 'Enables users to logout'
@@ -325,13 +317,12 @@ paths:
         '500':
           description: Server Error
       tags:
-        - User Management
+        - user
   ######LIBRARY######
-
-  /getGames:
+  /library:
     get:
       tags:
-        - Library
+        - library
       summary: "List all games in your library"
       operationId: getGame
       parameters:
@@ -365,11 +356,9 @@ paths:
                 title: Error
                 type: string
                 example: Internal Server Error
-
-  /addGame:
     post:
       tags:
-        - Library
+        - library
       summary: "Add a game to your library"
       operationId: AddGame
       parameters:
@@ -401,11 +390,9 @@ paths:
                 title: Error
                 type: string
                 example: Internal Server Error
-
-  /delGame:
     delete:
       tags:
-        - Library
+        - library
       summary: "Remove a game in your library"
       operationId: DelGame
       parameters:
@@ -437,12 +424,11 @@ paths:
                 title: Error
                 type: string
                 example: Internal Server Error
-
   ######REVIEWS######
   /reviews:
     post:
       tags:
-        - Reviews
+        - reviews
       summary: "Create review"
       operationId: add_review
       requestBody:
@@ -490,7 +476,7 @@ paths:
                     type: string
     get:
       tags:
-        - Reviews
+        - reviews
       summary: "Get reviews list"
       operationId: list_reviews
       parameters:
@@ -536,7 +522,7 @@ paths:
   /reviews/{review_id}:
     get:
       tags:
-        - Reviews
+        - reviews
       summary: "Get review"
       operationId: get_review
       parameters:
@@ -581,7 +567,7 @@ paths:
                     type: string
     put:
       tags:
-        - Reviews
+        - reviews
       summary: "Update review"
       operationId: update_review
       parameters:
@@ -632,7 +618,7 @@ paths:
                     type: string
     delete:
       tags:
-        - Reviews
+        - reviews
       summary: "Delete review"
       operationId: delete_review
       parameters:
@@ -679,13 +665,11 @@ paths:
                     format: int32
                   description:
                     type: string
-
   ######WISHLIST######
-
-  /getGame_wish:
+  /wishes:
     get:
       tags:
-        - WishList
+        - wishes
       summary: "List all games in your wishlist"
       operationId: GetGameWish
       parameters:
@@ -719,11 +703,9 @@ paths:
                 title: Error
                 type: string
                 example: Internal Server Error
-
-  /addGame_wish:
     post:
       tags:
-        - WishList
+        - wishes
       summary: "Add a game to your wish list"
       operationId: AddGame_wish
       parameters:
@@ -759,11 +741,9 @@ paths:
                 title: Error
                 type: string
                 example: Internal Server Error
-
-  /delGame_wish:
     delete:
       tags:
-        - WishList
+        - wishes
       summary: "Delete a game from your wishlist"
       operationId: DelGame_wish
       parameters:
@@ -795,13 +775,11 @@ paths:
                 title: Error
                 type: string
                 example: Internal Server Error
-
   #########ADMIN#########
-
   /admin/games:
     post:
       tags:
-        - Admin
+        - admin
       summary: Add game
       description: Add a new game
       operationId: addGame
@@ -831,10 +809,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Response'
-
     put:
       tags:
-        - Admin
+        - admin
       summary: Update game
       description: Updated a new game
       operationId: UpdateGame
@@ -864,11 +841,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Response'
-
-  /admin/gamess:
     delete:
       tags:
-        - Admin
+        - admin
       summary: Delete game from URL
       description: Deletes a single game based on the URL supplied
       operationId: deleteGame
@@ -901,11 +876,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Response'
-
   /admin/users:
     delete:
       tags:
-        - Admin
+        - admin
       summary: Delete user
       description: Deletes a single user based on the id supplied
       operationId: deleteUser
@@ -938,22 +912,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Response'
-
-
 tags:
-  - name: User Management
+  - name: user
     description: "User operations"
-  - name: Searchs
+  - name: searches
     description: "Search Game or Reviews"
-  - name: Admin
+  - name: admin
     description: Administrative Operations
-  - name: Library
+  - name: library
     description: "Edit your library"
-  - name: Reviews
+  - name: reviews
     description: "Edit your reviews"
-  - name: WishList
+  - name: wishes
     description: "Edit your wish list"
-  - name: Suggestions
+  - name: suggestions
     description: "Get Suggestions"
 
 externalDocs:
