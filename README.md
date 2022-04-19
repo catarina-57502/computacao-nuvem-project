@@ -44,7 +44,7 @@ echo $NGINX_INGRESS_IP
 
 Access the web application by going to the:
 ```
-http://$NGINX_INGRESS_IP.nip.io/[SERVICE_NAME]
+http://$NGINX_INGRESS_IP.nip.io/[SERVICE_ENDPOINT]
 ```
 
 ## Clean up
