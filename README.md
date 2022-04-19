@@ -65,7 +65,7 @@ You can check:
 2. Time of the request for each microservices
 3. CPU usage per pod
 4. Memory usage per pod
-5. 
+
 ### Clean up
 
 ```
