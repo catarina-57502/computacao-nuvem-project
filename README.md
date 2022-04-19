@@ -18,7 +18,7 @@ Note: If you already have the docker images pushed to the container registry jus
 sh googlecloud_noDocker.sh
 ```
 
-## To populate the db
+### To populate the db
 
 ```
 cd DB
@@ -29,7 +29,7 @@ Note: If you already have the docker images of the db just run:
 sh db_noDocker.sh
 ```
 
-## To use the services API
+### To use the services API
 
 Export the EXTERNAL-IP of the NGINX ingress controller in a variable:
 
@@ -47,13 +47,32 @@ Access the web application by going to the:
 http://$NGINX_INGRESS_IP.nip.io/[SERVICE_ENDPOINT]
 ```
 
-## Clean up
+### To setup Grafana Dashboard
+
+```
+http://$GRAFANA_IP:3000/
+```
+1. Open Configurations - Data Sources - Add Data Source - Prometheus
+2. URL: http://$PROMETHEUS_IP:9090/
+3. Save & Test
+4. Dashboard - Import - Import file from **Prometheus directory** - *grafanaDashboard.json*
+
+Note: Sometimes the graphs are empty you need to open the graph on the dashboard and set the Data Source again
+1. Edit - Data Source - Prometheus(deafult)
+
+You can check:
+1. Number of requests for each microservices
+2. Time of the request for each microservices
+3. CPU usage per pod
+4. Memory usage per pod
+5. 
+### Clean up
 
 ```
 sh teardown.sh
 ```
 
-## Links Dataset
+### Links Dataset
 
 https://www.kaggle.com/najzeko/steam-reviews-2021   
 https://www.kaggle.com/trolukovich/steam-games-complete-dataset  
@@ -66,7 +85,7 @@ Martim Mourão
 Thomas Marques  
 Tomás Dias  
 
-## Organização
+### Organização
 
 1. System and API Architect (CEO) - Martim
 2. Networking  - Catarina
@@ -74,7 +93,7 @@ Tomás Dias
 4. DevOps Officer - Tomas
 5. Data Scientist - Andre
 
-## Microservices 
+### Microservices 
 
 Martim Mourão - Admin Operations & User Management  
 CatarinaMoita - WishList & Library  
@@ -83,7 +102,7 @@ Thomas Marques  - Suggestions
 André Grilo - Searchs  
 
 
-## Google Cloud
+### Google Cloud
 
 (1) deploy the containers to a kubernetes cluster on the cloud (ALL)  
 
