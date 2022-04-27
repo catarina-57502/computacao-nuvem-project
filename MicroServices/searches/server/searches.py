@@ -116,7 +116,6 @@ class SearchesService(searches_pb2_grpc.SearchesServicer):
             return SearchGamesResponse(games=dict_game)
 
         for x in docGame:
-            x["_id"] = ""
             games.append(x)
 
         dict_game = {}
@@ -157,13 +156,12 @@ class SearchesService(searches_pb2_grpc.SearchesServicer):
                          {"comment_count": request.comment_count}]
                     }
 
-        docReview = myReviews.find(myQuery).limit(10)
+        docReview = myReviews.find(myQuery).limit(5)
 
         reviews = []
         dict_review = {}
 
         for x in docReview:
-            x["_id"] = ""
             reviews.append(x)
 
         i = 0

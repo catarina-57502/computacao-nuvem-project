@@ -43,8 +43,6 @@ def healthz():
 
 @api.route('/library', methods=['POST'])
 def addGame():
-
-    data = json.loads(request.data)
     addGameLib_request = AddGameLibRequest(
         id = request.args.get('id'),
         token = request.headers.get('token')
@@ -58,7 +56,6 @@ def addGame():
 @api.route('/library', methods=['DELETE'])
 def deleteGame():
 
-    data = json.loads(request.data)
     deleteGameLib_request = DeleteGameLibRequest(
         id = request.args.get('id'),
         token = request.headers.get('token')

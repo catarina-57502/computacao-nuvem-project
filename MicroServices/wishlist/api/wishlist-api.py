@@ -46,7 +46,6 @@ def healthz():
 
 @api.route('/wishes', methods=['POST'])
 def addGame():
-    data = json.loads(request.data)
     addGameWish_request = AddGameWishRequest(
         id = request.args.get('id'),
         token = request.headers.get('token')
@@ -60,7 +59,6 @@ def addGame():
 @api.route('/wishes', methods=['DELETE'])
 def deleteGame():
 
-    data = json.loads(request.data)
     deleteGameWish_request = DeleteGameWishRequest(
         id = request.args.get('id'),
         token = request.headers.get('token')

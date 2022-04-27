@@ -151,7 +151,7 @@ class ReviewService(reviews_pb2_grpc.ReviewsServicer):
 
     @REQUEST_TIME.time()
     def ListReviews(self, request, context):
-        docs = db.aggregate([{"$sample": {"size": int(request.max_results)}},{"$project": {"_id": 0}}]);
+        docs = db.aggregate([{"$sample": {"size": int(request.max_results)}},{"$project": {"_id": 0}}])
         if docs is None:
             return ListReviewsResponse(reviews="")
         return ListReviewsResponse(reviews=docs)
