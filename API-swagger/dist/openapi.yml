@@ -17,14 +17,6 @@ paths:
       operationId: GameSearch
       parameters:
         - in: query
-          name: types
-          schema:
-            type: string
-        - in: query
-          name: name
-          schema:
-            type: string
-        - in: query
           name: release_date
           schema:
             type: string
@@ -33,15 +25,7 @@ paths:
           schema:
             type: string
         - in: query
-          name: publisher
-          schema:
-            type: string
-        - in: query
           name: popular_tags
-          schema:
-            type: string
-        - in: query
-          name: languages
           schema:
             type: string
         - in: query
@@ -110,10 +94,6 @@ paths:
       parameters:
         - in: query
           name: app_name
-          schema:
-            type: string
-        - in: query
-          name: timestamp_created
           schema:
             type: string
         - in: query
@@ -965,14 +945,14 @@ components:
       name: review_id
       in: query
       description: The unique id of the review
-      example: 85184605
+      example: "85184605"
       schema:
         type: number
     app_id:
       name: app_id
       in: query
       description: The unique id of the app (game)
-      example: 292030
+      example: "292030"
       schema:
         type: number
     app_name:
@@ -1000,119 +980,119 @@ components:
       name: timestamp_created
       in: query
       description: Date the review was created (unix timestamp)
-      example: 1611379970
+      example: "1611379970"
       schema:
         type: number
     timestamp_updated:
       name: timestamp_updated
       in: query
       description: Date the review was last updated (unix timestamp)
-      example: 1611379970
+      example: "1611379970"
       schema:
         type: number
     recommended:
       name: recommended
       in: query
       description: TRUE if the user recommends the game
-      example: true
+      example: "True"
       schema:
         type: boolean
     votes_helpful:
       name: votes_helpful
       in: query
       description: The number of users that found this review helpful
-      example: 0
+      example: "0"
       schema:
         type: number
     votes_funny:
       name: votes_funny
       in: query
       description: The number of users that found this review funny
-      example: 0
+      example: "0"
       schema:
         type: number
     weighted_vote_score:
       name: weighted_vote_score
       in: query
       description: Helpfulness score
-      example: 0.0
+      example: "0.0"
       schema:
         type: number
     comment_count:
       name: comment_count
       in: query
       description: Number of comments posted on this review
-      example: 0
+      example: "0"
       schema:
         type: number
     steam_purchase:
       name: steam_purchase
       in: query
       description: TRUE if the user purchased the game on Steam
-      example: true
+      example: "True"
       schema:
         type: boolean
     received_for_free:
       name: received_for_free
       in: query
       description: TRUE if the user checked a box saying they got the app for free
-      example: false
+      example: "False"
       schema:
         type: boolean
     written_during_early_access:
       name: written_during_early_access
       in: query
       description: TRUE if the user posted this review while the game was in Early Access
-      example: false
+      example: "False"
       schema:
         type: boolean
     author_steamid:
       name: author_steamid
       in: query
       description: The user’s SteamID
-      example: 76561199054755373
+      example: "76561199054755373"
       schema:
         type: number
     author_num_games_owned:
       name: author_num_games_owned
       in: query
       description: Number of games owned by the user
-      example: 5
+      example: "5"
       schema:
         type: number
     author_num_reviews:
       name: author_num_reviews
       in: query
       description: Number of reviews written by the user
-      example: 3
+      example: "3"
       schema:
         type: number
     author_playtime_forever:
       name: author_playtime_forever
       in: query
       description: Lifetime playtime tracked
-      example: 5587.0
+      example: "5587.0"
       schema:
         type: number
     author_playtime_last_two_weeks:
       name: author_playtime_last_two_weeks
       in: query
       description: Playtime tracked in the past two weeks
-      example: 3200.0
+      example: "3200.0"
       schema:
         type: number
     author_playtime_at_review:
       name: author_playtime_at_review
       in: query
       description: Playtime when the review was written
-      example: 5524.0
+      example: "5524.0"
       schema:
         type: number
     author_last_played:
       name: author_last_played
       in: query
       description: Time for when the user last played
-      example: 1611383744.0
+      example: "1611383744.0"
       schema:
         type: number
     url:
@@ -1261,13 +1241,13 @@ components:
       type: object
       properties:
         review_id:
-          type: number
+          type: string
           description: The unique id of the recommendation
-          example: 85184605
+          example: "85184605"
         app_id:
-          type: number
+          type: string
           description: The unique id of the app (game)
-          example: 292030
+          example: "292030"
         app_name:
           type: string
           description: The name of the app (game)
@@ -1281,73 +1261,73 @@ components:
           description: Text of written review
           example: 'One of the best RPGs of all time, worthy of any collection'
         timestamp_created:
-          type: number
+          type: string
           description: Date the review was created (unix timestamp)
-          example: 1611379970
+          example: "1611379970"
         timestamp_updated:
-          type: number
+          type: string
           description: Date the review was last updated (unix timestamp)
-          example: 1611379970
+          example: "1611379970"
         recommended:
-          type: boolean
+          type: string
           description: TRUE if the user recommends the game
-          example: true
+          example: "True"
         votes_helpful:
-          type: number
+          type: string
           description: The number of users that found this review helpful
-          example: 0
+          example: "0"
         votes_funny:
-          type: number
+          type: string
           description: The number of users that found this review funny
-          example: 0
+          example: "0"
         weighted_vote_score:
-          type: number
+          type: string
           description: Helpfulness score
-          example: 0.0
+          example: "0.0"
         comment_count:
-          type: number
+          type: string
           description: Number of comments posted on this review
-          example: 0
+          example: "0"
         steam_purchase:
-          type: boolean
+          type: string
           description: TRUE if the user purchased the game on Steam
-          example: true
+          example: "True"
         received_for_free:
-          type: boolean
+          type: string
           description: TRUE if the user checked a box saying they got the app for free
-          example: false
+          example: "False"
         written_during_early_access:
-          type: boolean
+          type: string
           description: TRUE if the user posted this review while the game was in Early Access
-          example: false
+          example: "False"
         author_steamid:
-          type: number
+          type: string
           description: The user’s SteamID
-          example: 76561199054755373
+          example: "76561199054755373"
         author_num_games_owned:
-          type: number
+          type: string
           description: Number of games owned by the user
-          example: 5
+          example: "5"
         author_num_reviews:
-          type: number
+          type: string
           description: Number of reviews written by the user
-          example: 3
+          example: "3"
         author_playtime_forever:
-          type: number
+          type: string
           description: Lifetime playtime tracked
-          example: 5587.0
+          example: "5587.0"
         author_playtime_last_two_weeks:
-          type: number
+          type: string
           description: Playtime tracked in the past two weeks
-          example: 3200.0
+          example: "3200.0"
         author_playtime_at_review:
-          type: number
+          type: string
           description: Playtime when the review was written
-          example: 5524.0
+          example: "5524.0"
         author_last_played:
-          type: number
+          type: string
           description: Time for when the user last played
-          example: 1611383744.0
+          example: "1611383744.0"
     Game:
       title: Game
       type: object
