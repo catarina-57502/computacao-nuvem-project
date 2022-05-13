@@ -11,7 +11,7 @@ api = Flask(__name__)
 
 
 
-wishlist_channel = grpc.insecure_channel("wishlistserver:50058")
+wishlist_channel = grpc.insecure_channel(os.environ['wishlistserver'])
 
 wishlist_client = WishlistStub(wishlist_channel)
 

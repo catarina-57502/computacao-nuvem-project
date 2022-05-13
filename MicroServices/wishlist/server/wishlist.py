@@ -1,5 +1,6 @@
 from concurrent import futures
 import random
+import os
 
 import grpc
 import grpc_interceptor
@@ -25,12 +26,12 @@ from pymongo import MongoClient
 def get_table(db,table):
     return db[table]
 
-client = MongoClient('mongo', 27017 ,username='admin', password='admin' )
+client = MongoClient(os.environ['mongo'], os.environ['mongoPORT'] ,username='admin', password='admin')
 db = client['users']
 usersDB = get_table(db,"users")
 
 def connectToClient():
-    userManagement_channel = grpc.insecure_channel("usermanagementserversvc:50052")
+    userManagement_channel = grpc.insecure_channel(os.environ['usermanagementserversvc'])
     userManagement_client = UserManagementStub(userManagement_channel)
     return userManagement_client
 
@@ -87,8 +88,7 @@ class WishlistService(wishlist_pb2_grpc.WishlistServicer):
         docUser = usersDB.find({"email": getToken_response.email})
         for doc in docUser:
             library = doc["wishlist"]
-
-        searches_channel = grpc.insecure_channel("searchesserver:50079")
+        searches_channel = grpc.insecure_channel(os.environ['searchesserver'])
         searches_client = SearchesStub(searches_channel)
 
         gamesInfo = []

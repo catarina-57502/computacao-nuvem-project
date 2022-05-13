@@ -8,7 +8,8 @@ from suggestions_pb2_grpc import SuggestionsStub
 
 app = Flask(__name__)
 
-suggestions_channel = grpc.insecure_channel("suggestionsserver:50059")
+
+suggestions_channel = grpc.insecure_channel(os.environ['suggestionsserver'])
 suggestions_client = SuggestionsStub(suggestions_channel)
 
 

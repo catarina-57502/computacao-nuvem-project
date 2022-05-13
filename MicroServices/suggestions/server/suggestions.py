@@ -2,6 +2,7 @@ from concurrent import futures
 import random
 import pymongo
 from pymongo import MongoClient
+import os
 
 from prometheus_client import start_http_server, Summary
 
@@ -21,8 +22,8 @@ import suggestions_pb2_grpc
 # Track time spent and requests made.
 REQUEST_TIME = Summary('request_processing_seconds', 'Time spent processing request')
 
-myClient = MongoClient('mongo', 27017 ,username='admin', password='admin' )
-myDB = myClient["steam"]
+client = MongoClient(os.environ['mongo'], os.environ['mongoPORT'] ,username='admin', password='admin')
+myDB = client["steam"]
 myGames = myDB["Games"]
 myReviews = myDB["Reviews"]
 

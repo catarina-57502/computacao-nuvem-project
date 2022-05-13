@@ -1,5 +1,6 @@
 from concurrent import futures
 import random
+import os
 
 import grpc
 from grpc_interceptor import ExceptionToStatusInterceptor
@@ -25,7 +26,7 @@ REQUEST_TIME = Summary('request_processing_seconds', 'Time spent processing requ
 def get_table(db,table):
     return db[table]
 
-client = MongoClient('mongo', 27017 ,username='admin', password='admin')
+client = MongoClient(os.environ['mongo'], os.environ['mongoPORT'] ,username='admin', password='admin')
 db = client['steam']
 gamesDB = get_table(db,"Games")
 reviewsDB = get_table(db,"Reviews")
@@ -33,7 +34,7 @@ dbUsers = client['users']
 userDB = get_table(dbUsers,"users")
 
 def connectToClient():
-    userManagement_channel = grpc.insecure_channel("usermanagementserversvc:50052")
+    userManagement_channel = grpc.insecure_channel(os.environ['usermanagementserversvc'])
     userManagement_client = UserManagementStub(userManagement_channel)
     return userManagement_client
 

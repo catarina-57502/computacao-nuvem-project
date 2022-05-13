@@ -100,6 +100,11 @@ cd ..
 # Deploy
 gcloud auth configure-docker
 
+cd ..
+cd ConfigMaps
+
+kubectl create dns --from-file configMapMicroServices.yaml
+
 # Kubernetes Apply YAML files
 kubectl apply -f mongo-secrets.yaml
 kubectl apply -f pv.yaml
