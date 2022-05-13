@@ -153,7 +153,7 @@ spec:
           ports:
             - containerPort: 5003
           volumeMounts:
-            - name: config
+            - name: configmap
               mountPath: "../ConfigMaps/configMapMicroServices.yaml"
               subPath: "configMapMicroServices.yaml"
           livenessProbe:

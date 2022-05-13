@@ -8,8 +8,9 @@ from adminOperations_pb2_grpc import AdminOperationsStub
 
 
 api = Flask(__name__)
-config = open("/config-directory/my-config.file", "r")
-print(config)
+print(os.listdir() )
+
+
 adminoperations_channel = grpc.insecure_channel("")
 adminoperations_client = AdminOperationsStub(adminoperations_channel)
 
