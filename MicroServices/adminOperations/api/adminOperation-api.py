@@ -8,7 +8,9 @@ from adminOperations_pb2_grpc import AdminOperationsStub
 
 
 api = Flask(__name__)
-
+print(os.listdir())
+print(os.getcwd())
+print(os.environ['adminoperationsserver'])
 adminoperations_channel = grpc.insecure_channel(os.environ['adminoperationsserver'])
 adminoperations_client = AdminOperationsStub(adminoperations_channel)
 
