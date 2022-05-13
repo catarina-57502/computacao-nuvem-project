@@ -9,6 +9,7 @@ cd ConfigMaps
 
 kubectl create DNS --from-file configMapMicroServices.yaml
 
+cd ..
 cd MicroServices
 
 # Kubernetes Apply YAML files

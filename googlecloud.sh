@@ -105,6 +105,9 @@ cd ConfigMaps
 
 kubectl create dns --from-file configMapMicroServices.yaml
 
+cd ..
+cd MicroServices
+
 # Kubernetes Apply YAML files
 kubectl apply -f mongo-secrets.yaml
 kubectl apply -f pv.yaml
