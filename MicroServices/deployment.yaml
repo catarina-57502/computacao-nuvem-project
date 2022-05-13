@@ -71,9 +71,9 @@ spec:
         app: "adminoperationsserver"
     spec:
       volumes:
-        - name: DNS
+        - name: configmap
           configMap:
-            name: DNS
+            name: configmap
       containers:
         - name: "adminoperationsserver"
           image: "gcr.io/${PROJECT_ID}/adminoperationsserver"
@@ -144,9 +144,9 @@ spec:
         app: "adminoperationsapi"
     spec:
       volumes:
-        - name: DNS
+        - name: configmap
           configMap:
-            name: DNS
+            name: configmap
       containers:
         - name: "adminoperationsapi"
           image: "gcr.io/${PROJECT_ID}/adminoperationsapi"
@@ -216,9 +216,9 @@ spec:
         app: usermanagementserver
     spec:
       volumes:
-        - name: DNS
+        - name: configmap
           configMap:
-            name: DNS
+            name: configmap
       containers:
         - name: usermanagementserver
           image: "gcr.io/${PROJECT_ID}/usermanagementserver"
@@ -288,9 +288,9 @@ spec:
         app: "usermanagementapi"
     spec:
       volumes:
-        - name: DNS
+        - name: configmap
           configMap:
-            name: DNS
+            name: configmap
       containers:
         - name: "usermanagementapi"
           image: "gcr.io/${PROJECT_ID}/usermanagementapi"
@@ -360,9 +360,9 @@ spec:
         app: "libraryserver"
     spec:
       volumes:
-        - name: DNS
+        - name: configmap
           configMap:
-            name: DNS
+            name: configmap
       containers:
         - name: "libraryserver"
           image: "gcr.io/${PROJECT_ID}/libraryserver"
@@ -432,9 +432,9 @@ spec:
         app: "libraryapi"
     spec:
       volumes:
-        - name: DNS
+        - name: configmap
           configMap:
-            name: DNS
+            name: configmap
       containers:
         - name: "libraryapi"
           image: "gcr.io/${PROJECT_ID}/libraryapi"
@@ -504,9 +504,9 @@ spec:
         app: "wishlistserver"
     spec:
       volumes:
-        - name: DNS
+        - name: configmap
           configMap:
-            name: DNS
+            name: configmap
       containers:
         - name: "wishlistserver"
           image: "gcr.io/${PROJECT_ID}/wishlistserver"
@@ -575,9 +575,9 @@ spec:
         app: "wishlistapi"
     spec:
       volumes:
-        - name: DNS
+        - name: configmap
           configMap:
-            name: DNS
+            name: configmap
       containers:
         - name: "wishlistapi"
           image: "gcr.io/${PROJECT_ID}/wishlistapi"
@@ -647,9 +647,9 @@ spec:
         app: "suggestionsserver"
     spec:
       volumes:
-        - name: DNS
+        - name: configmap
           configMap:
-            name: DNS
+            name: configmap
       containers:
         - name: "suggestionsserver"
           image: "gcr.io/${PROJECT_ID}/suggestionsserver"
@@ -718,9 +718,9 @@ spec:
         app: "suggestionsapi"
     spec:
       volumes:
-        - name: DNS
+        - name: configmap
           configMap:
-            name: DNS
+            name: configmap
       containers:
         - name: "suggestionsapi"
           image: "gcr.io/${PROJECT_ID}/suggestionsapi"
@@ -790,9 +790,9 @@ spec:
         app: "searchesserver"
     spec:
       volumes:
-        - name: DNS
+        - name: configmap
           configMap:
-            name: DNS
+            name: configmap
       containers:
         - name: "searchesserver"
           image: "gcr.io/${PROJECT_ID}/searchesserver"
@@ -862,9 +862,9 @@ spec:
         app: "searchesapi"
     spec:
       volumes:
-        - name: DNS
+        - name: configmap
           configMap:
-            name: DNS
+            name: configmap
       containers:
         - name: "searchesapi"
           image: "gcr.io/${PROJECT_ID}/searchesapi"
@@ -933,9 +933,9 @@ spec:
         app: reviews-api
     spec:
       volumes:
-        - name: DNS
+        - name: configmap
           configMap:
-            name: DNS
+            name: configmap
       containers:
         - name: reviews-api
           image: "gcr.io/${PROJECT_ID}/reviews-api"
@@ -1007,9 +1007,9 @@ spec:
         app: reviews-server
     spec:
       volumes:
-        - name: DNS
+        - name: configmap
           configMap:
-            name: DNS
+            name: configmap
       containers:
         - name: reviews-server
           image: "gcr.io/${PROJECT_ID}/reviews-server"

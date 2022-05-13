@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: DNS
+  name: configmap
 data:
   mongo: "mongo"
   mongoPORT: 27017

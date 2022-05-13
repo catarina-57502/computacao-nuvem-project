@@ -103,7 +103,7 @@ gcloud auth configure-docker
 cd ..
 cd ConfigMaps
 
-kubectl create dns --from-file configMapMicroServices.yaml
+kubectl create configmap --from-file configMapMicroServices.yaml
 
 cd ..
 cd MicroServices
