@@ -20,9 +20,9 @@ jobs:
           service_account_key: ${{ secrets.GCR_KEY }}
     - run: |
         gcloud auth configure-docker
-        git clone https://github.com/mdmourao/CloudProjectGroup7.git
     - name: Build and Push Docker Images Microservices
       run: |
+        git clone https://github.com/mdmourao/CloudProjectGroup7.git
         cd CloudProjectGroup7
         export PROJECT_ID=$(gcloud info --format='value(config.project)')
 
