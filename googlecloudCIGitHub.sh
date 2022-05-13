@@ -7,7 +7,7 @@ gcloud auth configure-docker
 
 cd ConfigMaps
 
-kubectl create configmap special-config --from-file configMapMicroServices.yaml
+kubectl create -f configMapMicroServices.yaml
 
 cd ..
 cd MicroServices

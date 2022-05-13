@@ -146,14 +146,19 @@ spec:
       containers:
         - name: "adminoperationsapi"
           image: "gcr.io/${PROJECT_ID}/adminoperationsapi"
-          ports:
-            - containerPort: 5003
           env:
-            - name: usermanagementserversvc_KEY
+            - name: adminoperationsserver_KEY
               valueFrom:
                 configMapKeyRef:
-                  name: special-config
-                  key: usermanagementserversvc
+                  name: config
+                  key: adminoperationsserver
+            - name: usermanagementserversvc_KEY
+                valueFrom:
+                  configMapKeyRef:
+                    name: config
+                    key: usermanagementserversvc
+          ports:
+            - containerPort: 5003
           livenessProbe:
             httpGet:
               path: /healthz

@@ -27,13 +27,12 @@ jobs:
         cd CloudProjectGroup7
         
         cd MicroServices
-        # MicroService Admin Operations Server
-        cd adminOperations
-        #docker build . -f server/Dockerfile -t adminoperationsserver
-        #docker tag adminoperationsserver gcr.io/${{ secrets.PROJECT_ID }}/adminoperationsserver        
-        #docker push gcr.io/${{ secrets.PROJECT_ID }}/adminoperationsserver
 
-        # MicroService Admin Operations API
+        cd adminOperations
+        docker build . -f server/Dockerfile -t adminoperationsserver
+        docker tag adminoperationsserver gcr.io/${{ secrets.PROJECT_ID }}/adminoperationsserver        
+        docker push gcr.io/${{ secrets.PROJECT_ID }}/adminoperationsserver
+
         docker build . -f api/Dockerfile -t adminoperationsapi
         docker tag adminoperationsapi gcr.io/${{ secrets.PROJECT_ID }}/adminoperationsapi
         docker push gcr.io/${{ secrets.PROJECT_ID }}/adminoperationsapi
