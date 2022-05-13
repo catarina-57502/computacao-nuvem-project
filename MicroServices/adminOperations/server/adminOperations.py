@@ -26,7 +26,7 @@ REQUEST_TIME = Summary('request_processing_seconds', 'Time spent processing requ
 def get_table(db,table):
     return db[table]
 
-client = MongoClient('mongo', '27017' ,username='admin', password='admin')
+client = MongoClient('mongo', 27017 ,username='admin', password='admin')
 db = client['steam']
 gamesDB = get_table(db,"Games")
 reviewsDB = get_table(db,"Reviews")
