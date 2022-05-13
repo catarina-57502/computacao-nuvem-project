@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: DNS
+data:
+  mongo: "mongo"
+  mongoPORT: 27017
+
+  adminoperationsserver: "adminoperationsserver:50051"
+
+  libraryserver: "libraryserver:50053"
+
+  reviews-server-s: "reviews-server-s:50060"
+
+  searchesserver: "searchesserver:50079"
+
+  suggestionsserver: "suggestionsserver:50059"
+
+  usermanagementserversvc: "usermanagementserversvc:50052"
+
+  wishlistserver: "wishlistserver:50058"
+
+
+---
