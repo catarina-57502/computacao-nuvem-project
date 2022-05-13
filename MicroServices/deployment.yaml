@@ -150,12 +150,12 @@ spec:
             - name: adminoperationsserver_KEY
               valueFrom:
                 configMapKeyRef:
-                  name: config
+                  name: special-config
                   key: adminoperationsserver
             - name: usermanagementserversvc_KEY
                 valueFrom:
                   configMapKeyRef:
-                    name: config
+                    name: special-config
                     key: usermanagementserversvc
           ports:
             - containerPort: 5003
