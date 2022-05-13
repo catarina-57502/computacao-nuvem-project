@@ -149,9 +149,8 @@ spec:
           ports:
             - containerPort: 5003
           volumeMounts:
-            - name: configmapm
-              mountPath: "../ConfigMaps/configMapMicroServices.yaml"
-              subPath: "configMapMicroServices.yaml"
+            - name: configma-volume
+              mountPath: etc/configs
           livenessProbe:
             httpGet:
               path: /healthz
@@ -180,7 +179,7 @@ spec:
             failureThreshold: 30
             periodSeconds: 20
       volumes:
-        - name: configmapm
+        - name: configma-volume
           configMap:
             name: configmapm
 ---
