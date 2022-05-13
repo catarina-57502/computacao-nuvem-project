@@ -8,24 +8,19 @@ env:
   GITHUB_REF: ${{ github.ref }} 
   REGISTRY_HOSTNAME: gcr.io
 
-
 jobs:
   setup-build-publish-deploy:
     name: Setup, Build, and Publish
     runs-on: ubuntu-latest
     steps:
-
-     - name: Login
-       uses: google-github-actions/setup-gcloud@v0
-       with:
-         service_account_email: ${{ secrets.GKE_EMAIL }}
-         service_account_key: ${{ secrets.GCR_KEY }}
-
-
+    - name: Login
+      uses: google-github-actions/setup-gcloud@v0
+      with:
+          service_account_email: ${{ secrets.GKE_EMAIL }}
+          service_account_key: ${{ secrets.GCR_KEY }}
     - run: |
         gcloud auth configure-docker
         git clone https://github.com/mdmourao/CloudProjectGroup7.git
-
     - name: Build and Push Docker Images Microservices
       run: |
         cd CloudProjectGroup7
