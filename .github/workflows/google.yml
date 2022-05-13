@@ -28,7 +28,7 @@ jobs:
         
         cd MicroServices
         # MicroService Admin Operations Server
-        #cd adminOperations
+        cd adminOperations
         #docker build . -f server/Dockerfile -t adminoperationsserver
         #docker tag adminoperationsserver gcr.io/${{ secrets.PROJECT_ID }}/adminoperationsserver        
         #docker push gcr.io/${{ secrets.PROJECT_ID }}/adminoperationsserver
