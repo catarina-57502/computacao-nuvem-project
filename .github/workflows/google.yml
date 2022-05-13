@@ -22,6 +22,7 @@ jobs:
         gcloud auth configure-docker
     - name: Build and Push Docker Images Microservices
       run: |
+        export PROJECT_ID=$(gcloud info --format='value(config.project)')
         git clone https://github.com/mdmourao/CloudProjectGroup7.git
         cd CloudProjectGroup7
         export PROJECT_ID=$(gcloud info --format='value(config.project)')
