@@ -14,11 +14,12 @@ jobs:
     name: Setup, Build, and Publish
     runs-on: ubuntu-latest
     steps:
-      - name: 'Set up Cloud SDK'
-        uses: 'google-github-actions/setup-gcloud@v0'
-        with:
-          version: '270.0.0'
-          service_account_key: ${{ secrets.GCR_KEY }}
+
+     - name: Login
+       uses: google-github-actions/setup-gcloud@v0
+       with:
+         service_account_email: ${{ secrets.GKE_EMAIL }}
+         service_account_key: ${{ secrets.GCR_KEY }}
 
 
     - run: |
