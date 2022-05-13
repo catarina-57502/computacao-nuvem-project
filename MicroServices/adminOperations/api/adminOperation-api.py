@@ -9,8 +9,7 @@ from adminOperations_pb2_grpc import AdminOperationsStub
 
 api = Flask(__name__)
 
-config = open("etc/configs", "r")
-print(config)
+print(os.environ['usermanagementserversvc_KEY'])
 
 adminoperations_channel = grpc.insecure_channel("usermanagement:1220")
 adminoperations_client = AdminOperationsStub(adminoperations_channel)

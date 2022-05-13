@@ -148,9 +148,12 @@ spec:
           image: "gcr.io/${PROJECT_ID}/adminoperationsapi"
           ports:
             - containerPort: 5003
-          volumeMounts:
-            - name: configma-volume
-              mountPath: etc/configs
+          env:
+            - name: usermanagementserversvc_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: special-config
+                  key: usermanagementserversvc
           livenessProbe:
             httpGet:
               path: /healthz
@@ -178,10 +181,6 @@ spec:
                   value: Awesome
             failureThreshold: 30
             periodSeconds: 20
-      volumes:
-        - name: configma-volume
-          configMap:
-            name: configmapm
 ---
 apiVersion: "v1"
 kind: "Service"
