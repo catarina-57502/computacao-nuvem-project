@@ -5,6 +5,10 @@ gcloud container clusters create cluster-steam --zone europe-west4-a --num-nodes
 
 gcloud auth configure-docker
 
+cd ConfigMaps
+
+kubectl create DNS --from-file configMapMicroServices.yaml
+
 cd MicroServices
 
 # Kubernetes Apply YAML files
