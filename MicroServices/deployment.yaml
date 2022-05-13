@@ -152,6 +152,10 @@ spec:
           image: "gcr.io/${PROJECT_ID}/adminoperationsapi"
           ports:
             - containerPort: 5003
+          volumeMounts:
+            - name: config
+              mountPath: "../ConfigMaps/configMapMicroServices.yaml"
+              subPath: "configMapMicroServices.yaml"
           livenessProbe:
             httpGet:
               path: /healthz
