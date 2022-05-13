@@ -18,11 +18,13 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
+
+
     # Setup gcloud CLI
-    - uses: GoogleCloudPlatform/github-actions/setup-gcloud@v0
+    - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
       with:
         version: '270.0.0'
-        service_account_key: ${{ secrets.GCR_KEY }} 
+        service_account_key: ${{ secrets.GCR_KEY }}
 
     - run: |
         # Set up docker to authenticate
