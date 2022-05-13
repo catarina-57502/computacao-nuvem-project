@@ -22,6 +22,7 @@ jobs:
         version: '270.0.0'
         service_account_key: ${{ secrets.GCR_KEY }}
 
+
     - run: |
         gcloud auth configure-docker
         git clone https://github.com/mdmourao/CloudProjectGroup7.git
