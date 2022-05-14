@@ -66,7 +66,6 @@ class AdminOperationService(adminOperations_pb2_grpc.AdminOperationsServicer):
 
     @REQUEST_TIME.time()
     def AddGame(self, request, context):
-        raise Exception("ola")
         getToken_request = TokenRequest(
             token = request.token
         )

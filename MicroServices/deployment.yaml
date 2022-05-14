@@ -70,13 +70,15 @@ spec:
       labels:
         app: "adminoperationsserver"
     spec:
-      volumes:
-        - name: configmap
-          configMap:
-            name: configmap
       containers:
         - name: "adminoperationsserver"
           image: "gcr.io/${PROJECT_ID}/adminoperationsserver"
+          env:
+            - name: usermanagementserversvc_KEY
+                valueFrom:
+                  configMapKeyRef:
+                    name: special-config
+                    key: usermanagementserversvc
           ports:
             - containerPort: 50051
           livenessProbe:
@@ -222,10 +224,6 @@ spec:
       labels:
         app: usermanagementserver
     spec:
-      volumes:
-        - name: configmap
-          configMap:
-            name: configmap
       containers:
         - name: usermanagementserver
           image: "gcr.io/${PROJECT_ID}/usermanagementserver"
@@ -294,13 +292,15 @@ spec:
       labels:
         app: "usermanagementapi"
     spec:
-      volumes:
-        - name: configmap
-          configMap:
-            name: configmap
       containers:
         - name: "usermanagementapi"
           image: "gcr.io/${PROJECT_ID}/usermanagementapi"
+          env:
+            - name: usermanagementserversvc_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: special-config
+                  key: usermanagementserversvc
           ports:
             - containerPort: 5004
           livenessProbe:
@@ -366,13 +366,15 @@ spec:
       labels:
         app: "libraryserver"
     spec:
-      volumes:
-        - name: configmap
-          configMap:
-            name: configmap
       containers:
         - name: "libraryserver"
           image: "gcr.io/${PROJECT_ID}/libraryserver"
+          env:
+            - name: usermanagementserversvc_KEY
+                valueFrom:
+                  configMapKeyRef:
+                    name: special-config
+                    key: usermanagementserversvc
           ports:
             - containerPort: 50053
           livenessProbe:
@@ -438,13 +440,15 @@ spec:
       labels:
         app: "libraryapi"
     spec:
-      volumes:
-        - name: configmap
-          configMap:
-            name: configmap
       containers:
         - name: "libraryapi"
           image: "gcr.io/${PROJECT_ID}/libraryapi"
+          env:
+            - name: libraryserver_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: special-config
+                  key: libraryserver
           ports:
             - containerPort: 5001
           livenessProbe:
@@ -510,13 +514,15 @@ spec:
       labels:
         app: "wishlistserver"
     spec:
-      volumes:
-        - name: configmap
-          configMap:
-            name: configmap
       containers:
         - name: "wishlistserver"
           image: "gcr.io/${PROJECT_ID}/wishlistserver"
+          env:
+            - name: usermanagementserversvc_KEY
+                valueFrom:
+                  configMapKeyRef:
+                    name: special-config
+                    key: usermanagementserversvc
           ports:
             - containerPort: 50058
           livenessProbe:
@@ -581,13 +587,20 @@ spec:
       labels:
         app: "wishlistapi"
     spec:
-      volumes:
-        - name: configmap
-          configMap:
-            name: configmap
       containers:
         - name: "wishlistapi"
           image: "gcr.io/${PROJECT_ID}/wishlistapi"
+          env:
+            - name: wishlistserver_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: special-config
+                  key: wishlistserver
+            - name: usermanagementserversvc_KEY
+                valueFrom:
+                  configMapKeyRef:
+                    name: special-config
+                    key: usermanagementserversvc
           ports:
             - containerPort: 5002
           livenessProbe:
@@ -653,10 +666,6 @@ spec:
       labels:
         app: "suggestionsserver"
     spec:
-      volumes:
-        - name: configmap
-          configMap:
-            name: configmap
       containers:
         - name: "suggestionsserver"
           image: "gcr.io/${PROJECT_ID}/suggestionsserver"
@@ -724,13 +733,15 @@ spec:
       labels:
         app: "suggestionsapi"
     spec:
-      volumes:
-        - name: configmap
-          configMap:
-            name: configmap
       containers:
         - name: "suggestionsapi"
           image: "gcr.io/${PROJECT_ID}/suggestionsapi"
+          env:
+            - name: suggestionsserver_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: special-config
+                  key: suggestionsserver
           ports:
             - containerPort: 5008
           livenessProbe:
@@ -796,10 +807,6 @@ spec:
       labels:
         app: "searchesserver"
     spec:
-      volumes:
-        - name: configmap
-          configMap:
-            name: configmap
       containers:
         - name: "searchesserver"
           image: "gcr.io/${PROJECT_ID}/searchesserver"
@@ -868,13 +875,15 @@ spec:
       labels:
         app: "searchesapi"
     spec:
-      volumes:
-        - name: configmap
-          configMap:
-            name: configmap
       containers:
         - name: "searchesapi"
           image: "gcr.io/${PROJECT_ID}/searchesapi"
+          env:
+            - name: searchesserver_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: special-config
+                  key: searchesserver
           ports:
             - containerPort: 5078
           livenessProbe:
@@ -939,13 +948,20 @@ spec:
       labels:
         app: reviews-api
     spec:
-      volumes:
-        - name: configmap
-          configMap:
-            name: configmap
       containers:
         - name: reviews-api
           image: "gcr.io/${PROJECT_ID}/reviews-api"
+          env:
+            - name: reviews-server-s_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: special-config
+                  key: reviews-server-s
+            - name: usermanagementserversvc_KEY
+                valueFrom:
+                  configMapKeyRef:
+                    name: special-config
+                    key: usermanagementserversvc
           ports:
             - containerPort: 5012
           livenessProbe:
@@ -1013,10 +1029,6 @@ spec:
       labels:
         app: reviews-server
     spec:
-      volumes:
-        - name: configmap
-          configMap:
-            name: configmap
       containers:
         - name: reviews-server
           image: "gcr.io/${PROJECT_ID}/reviews-server"

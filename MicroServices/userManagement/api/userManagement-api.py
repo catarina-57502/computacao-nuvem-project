@@ -8,7 +8,7 @@ from userManagement_pb2_grpc import UserManagementStub
 
 api = Flask(__name__)
 
-userManagement_channel = grpc.insecure_channel(os.environ['usermanagementserversvc'])
+userManagement_channel = grpc.insecure_channel(os.environ['usermanagementserversvc_KEY'])
 usermanagement_client = UserManagementStub(userManagement_channel)
 
 
