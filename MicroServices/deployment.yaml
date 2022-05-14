@@ -75,10 +75,10 @@ spec:
           image: "gcr.io/${PROJECT_ID}/adminoperationsserver"
           env:
             - name: usermanagementserversvc_KEY
-                valueFrom:
-                  configMapKeyRef:
-                    name: special-config
-                    key: usermanagementserversvc
+              valueFrom:
+                configMapKeyRef:
+                  name: special-config
+                  key: usermanagementserversvc
           ports:
             - containerPort: 50051
           livenessProbe:
@@ -155,10 +155,10 @@ spec:
                   name: special-config
                   key: adminoperationsserver
             - name: usermanagementserversvc_KEY
-                valueFrom:
-                  configMapKeyRef:
-                    name: special-config
-                    key: usermanagementserversvc
+              valueFrom:
+                configMapKeyRef:
+                  name: special-config
+                  key: usermanagementserversvc
           ports:
             - containerPort: 5003
           livenessProbe:
@@ -371,10 +371,10 @@ spec:
           image: "gcr.io/${PROJECT_ID}/libraryserver"
           env:
             - name: usermanagementserversvc_KEY
-                valueFrom:
-                  configMapKeyRef:
-                    name: special-config
-                    key: usermanagementserversvc
+              valueFrom:
+                configMapKeyRef:
+                  name: special-config
+                  key: usermanagementserversvc
           ports:
             - containerPort: 50053
           livenessProbe:
@@ -519,10 +519,10 @@ spec:
           image: "gcr.io/${PROJECT_ID}/wishlistserver"
           env:
             - name: usermanagementserversvc_KEY
-                valueFrom:
-                  configMapKeyRef:
-                    name: special-config
-                    key: usermanagementserversvc
+              valueFrom:
+                configMapKeyRef:
+                  name: special-config
+                  key: usermanagementserversvc
           ports:
             - containerPort: 50058
           livenessProbe:
@@ -597,10 +597,10 @@ spec:
                   name: special-config
                   key: wishlistserver
             - name: usermanagementserversvc_KEY
-                valueFrom:
-                  configMapKeyRef:
-                    name: special-config
-                    key: usermanagementserversvc
+              valueFrom:
+                configMapKeyRef:
+                  name: special-config
+                  key: usermanagementserversvc
           ports:
             - containerPort: 5002
           livenessProbe:
@@ -958,10 +958,10 @@ spec:
                   name: special-config
                   key: reviews-server-s
             - name: usermanagementserversvc_KEY
-                valueFrom:
-                  configMapKeyRef:
-                    name: special-config
-                    key: usermanagementserversvc
+              valueFrom:
+                configMapKeyRef:
+                  name: special-config
+                  key: usermanagementserversvc
           ports:
             - containerPort: 5012
           livenessProbe:
