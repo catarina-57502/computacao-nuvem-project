@@ -105,13 +105,14 @@ cd ConfigMaps
 
 kubectl create -f configMapMicroServices.yaml
 
-cd ..
-cd MicroServices
+cd ../..
+
+# Create database secret
+kubectl create secret generic mongo-secret --from-file=./username.txt --from-file=./password.txt
+
+cd CloudProjectGroup7/MicroServices
 
 # Kubernetes Apply YAML files
-echo "admin" | base64 > username.txt
-echo "admin" | base64 > password.txt
-kubectl create secret generic mongo-secret --from-file=./username.txt --from-file=./password.txt
 kubectl apply -f pv.yaml
 envsubst < "deployment.yaml" > "deploymentENV.yaml"
 kubectl apply -f deploymentENV.yaml
