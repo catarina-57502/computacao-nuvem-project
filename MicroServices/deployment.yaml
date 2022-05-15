@@ -40,6 +40,9 @@ spec:
           volumeMounts:
             - name: mongo-persistent-storage
               mountPath: /data/db
+            - name: secrets
+              mountPath: "/etc/secrets"
+              readOnly: true
       volumes:
         - name: mongo-persistent-storage
           persistentVolumeClaim:
