@@ -45,8 +45,8 @@ spec:
           persistentVolumeClaim:
             claimName: mongo-pv-claim
         - name: secrets
-        secret:
-          secretName: mongo-secret
+          secret:
+            secretName: mongo-secret
 ---
 apiVersion: "apps/v1"
 kind: "Deployment"
