@@ -108,9 +108,9 @@ kubectl create -f configMapMicroServices.yaml
 cd ..
 cd MicroServices
 
-#echo -n "admin" | base64 > username.txt
-#echo -n "admin" | base64 > password.txt
-kubectl create secret generic mongo-secret --from-file=.../../username.txt --from-file=../../password.txt
+echo -n "admin" | base64 > username.txt
+echo -n "admin" | base64 > password.txt
+kubectl create secret generic mongo-secret --from-file=./username.txt --from-file=./password.txt
 
 # Kubernetes Apply YAML files
 kubectl apply -f pv.yaml
