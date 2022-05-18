@@ -235,6 +235,17 @@ spec:
       containers:
         - name: usermanagementserver
           image: "gcr.io/${PROJECT_ID}/usermanagementserver"
+          env:
+            - name: MONGO_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secrets
+                  key: username.txt
+            - name: MONGO_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secrets
+                  key: password.txt
           ports:
             - containerPort: 50052
           livenessProbe:
