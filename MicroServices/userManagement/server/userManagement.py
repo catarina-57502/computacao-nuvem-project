@@ -29,15 +29,10 @@ REQUEST_TIME = Summary('request_processing_seconds', 'Time spent processing requ
 cred = credentials.Certificate('./authInfo.json')
 default_app = firebase_admin.initialize_app(cred)
 
-username = os.environ['MONGO_USERNAME']
-password = os.environ['MONGO_PASSWORD']
-
-print(username)
-
 def get_table(db,table):
     return db[table]
 
-client = MongoClient('mongo', 27017, username, password)
+client = MongoClient('mongo', 27017, username = os.environ['MONGO_USERNAME'], password = os.environ['MONGO_PASSWORD'])
 db = client['users']
 usersDB = get_table(db,"users")
 
