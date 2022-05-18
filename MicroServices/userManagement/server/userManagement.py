@@ -43,7 +43,7 @@ with open("./keys/keyToken.txt", "r") as text_file:
 text_file.close()
 
 def loginCheckGetEmail (token):
-    WEB_API_KEY = 'AIzaSyAI2IzUwQ0-Cnu66Vn_EXnYrCN31oD-my8'
+    WEB_API_KEY = 'AIzaSyBNIX-re6r5hbjLOdV2c_m2tMdj2fsI9tI'
     #Confirm Token signature
     payload = json.dumps({"token": token})
     rest_api_url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken"
@@ -127,7 +127,7 @@ class UserManagementService(userManagement_pb2_grpc.UserManagementServicer):
     def LoginUser(self, request, context):
         password = request.password
         email = request.email
-        WEB_API_KEY = 'AIzaSyAI2IzUwQ0-Cnu66Vn_EXnYrCN31oD-my8'
+        WEB_API_KEY = 'AIzaSyBNIX-re6r5hbjLOdV2c_m2tMdj2fsI9tI'
         rest_api_url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword"
 
         #check login
@@ -153,7 +153,7 @@ class UserManagementService(userManagement_pb2_grpc.UserManagementServicer):
     #TODO not logout!!!!!! just test - (maybe delete uid...)
     @REQUEST_TIME.time()
     def Logout(self, request, context):
-        WEB_API_KEY = 'AIzaSyAI2IzUwQ0-Cnu66Vn_EXnYrCN31oD-my8'
+        WEB_API_KEY = 'AIzaSyBNIX-re6r5hbjLOdV2c_m2tMdj2fsI9tI'
         rest_api_url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword"
 
         #check login
@@ -188,7 +188,7 @@ class UserManagementService(userManagement_pb2_grpc.UserManagementServicer):
     #TODO test claims option with other microservices
     def GetInfoFromToken(self, request, context):
         token = request.token
-        WEB_API_KEY = 'AIzaSyAI2IzUwQ0-Cnu66Vn_EXnYrCN31oD-my8'
+        WEB_API_KEY = 'AIzaSyBNIX-re6r5hbjLOdV2c_m2tMdj2fsI9tI'
         #Confirm Token signature
         payload = json.dumps({"token": token})
         rest_api_url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken"
