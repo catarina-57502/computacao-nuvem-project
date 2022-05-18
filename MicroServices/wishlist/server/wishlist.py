@@ -88,7 +88,7 @@ class WishlistService(wishlist_pb2_grpc.WishlistServicer):
         docUser = usersDB.find({"email": getToken_response.email})
         for doc in docUser:
             library = doc["wishlist"]
-        searches_channel = grpc.insecure_channel(os.environ['searchesserver'])
+        searches_channel = grpc.insecure_channel(os.environ['searchesserver_KEY'])
         searches_client = SearchesStub(searches_channel)
 
         gamesInfo = []
