@@ -39,12 +39,12 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: mongo-secrets
-                  key: username
+                  key: username.txt
             - name: MONGO_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: mongo-secrets
-                  key: password
+                  key: password.txt
           ports:
             - containerPort: 27017
               name: mongo
