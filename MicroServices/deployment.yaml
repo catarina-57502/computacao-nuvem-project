@@ -376,10 +376,10 @@ spec:
                   name: special-config
                   key: usermanagementserversvc
             - name: searchesserver_KEY
-                valueFrom:
-                  configMapKeyRef:
-                    name: special-config
-                    key: searchesserver
+              valueFrom:
+                configMapKeyRef:
+                  name: special-config
+                  key: searchesserver
           ports:
             - containerPort: 50053
           livenessProbe:
@@ -529,10 +529,10 @@ spec:
                   name: special-config
                   key: usermanagementserversvc
             - name: searchesserver_KEY
-                valueFrom:
-                  configMapKeyRef:
-                    name: special-config
-                    key: searchesserver
+              valueFrom:
+                configMapKeyRef:
+                  name: special-config
+                  key: searchesserver
           ports:
             - containerPort: 50058
           livenessProbe:
