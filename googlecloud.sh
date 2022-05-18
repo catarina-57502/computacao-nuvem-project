@@ -103,10 +103,22 @@ gcloud auth configure-docker
 cd ..
 cd ConfigMaps
 
-kubectl create dns --from-file configMapMicroServices.yaml
+kubectl create -f configMapMicroServices.yaml
+
+cd ..
+cd Networking
+
+# Kubernetes Apply network YAML files
+kubectl apply -f networkpolicy.yaml
+
+cd ..
+cd MicroServices
+
+echo -n "admin" | base64 > ./username.txt
+echo -n "admin" | base64 > ./password.txt
+kubectl create secret generic mongo-secret --from-file=./username.txt --from-file=./password.txt
 
 # Kubernetes Apply YAML files
-kubectl apply -f mongo-secrets.yaml
 kubectl apply -f pv.yaml
 envsubst < "deployment.yaml" > "deploymentENV.yaml"
 kubectl apply -f deploymentENV.yaml

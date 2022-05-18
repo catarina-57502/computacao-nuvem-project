@@ -9,7 +9,8 @@ from adminOperations_pb2_grpc import AdminOperationsStub
 
 api = Flask(__name__)
 
-adminoperations_channel = grpc.insecure_channel(os.environ['adminoperationsserver'])
+
+adminoperations_channel = grpc.insecure_channel(os.environ['adminoperationsserver_KEY'])
 adminoperations_client = AdminOperationsStub(adminoperations_channel)
 
 @api.route('/healthz', methods=['GET'])

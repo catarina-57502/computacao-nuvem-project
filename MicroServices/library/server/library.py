@@ -26,12 +26,12 @@ REQUEST_TIME = Summary('request_processing_seconds', 'Time spent processing requ
 def get_table(db,table):
     return db[table]
 
-client = MongoClient(os.environ['mongo'], os.environ['mongoPORT'] ,username='admin', password='admin')
+client = MongoClient('mongo', 27017 ,username='admin', password='admin')
 db = client['users']
 usersDB = get_table(db,"users")
 
 def connectToClient():
-    userManagement_channel = grpc.insecure_channel(os.environ['usermanagementserversvc'])
+    userManagement_channel = grpc.insecure_channel(os.environ['usermanagementserversvc_KEY'])
     userManagement_client = UserManagementStub(userManagement_channel)
     return userManagement_client
 

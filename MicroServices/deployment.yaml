@@ -34,19 +34,22 @@ spec:
               memory: "500Mi"
             limits:
               memory: "1000Mi"
-          envFrom:
-            - secretRef:
-                name: mongo-secret
           ports:
             - containerPort: 27017
               name: mongo
           volumeMounts:
             - name: mongo-persistent-storage
               mountPath: /data/db
+            - name: secrets
+              mountPath: "/etc/secrets"
+              readOnly: true
       volumes:
         - name: mongo-persistent-storage
           persistentVolumeClaim:
             claimName: mongo-pv-claim
+        - name: secrets
+          secret:
+            secretName: mongo-secret
 ---
 apiVersion: "apps/v1"
 kind: "Deployment"
@@ -73,6 +76,12 @@ spec:
       containers:
         - name: "adminoperationsserver"
           image: "gcr.io/${PROJECT_ID}/adminoperationsserver"
+          env:
+            - name: usermanagementserversvc_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: special-config
+                  key: usermanagementserversvc
           ports:
             - containerPort: 50051
           livenessProbe:
@@ -142,6 +151,17 @@ spec:
       containers:
         - name: "adminoperationsapi"
           image: "gcr.io/${PROJECT_ID}/adminoperationsapi"
+          env:
+            - name: adminoperationsserver_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: special-config
+                  key: adminoperationsserver
+            - name: usermanagementserversvc_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: special-config
+                  key: usermanagementserversvc
           ports:
             - containerPort: 5003
           livenessProbe:
@@ -278,6 +298,12 @@ spec:
       containers:
         - name: "usermanagementapi"
           image: "gcr.io/${PROJECT_ID}/usermanagementapi"
+          env:
+            - name: usermanagementserversvc_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: special-config
+                  key: usermanagementserversvc
           ports:
             - containerPort: 5004
           livenessProbe:
@@ -346,6 +372,12 @@ spec:
       containers:
         - name: "libraryserver"
           image: "gcr.io/${PROJECT_ID}/libraryserver"
+          env:
+            - name: usermanagementserversvc_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: special-config
+                  key: usermanagementserversvc
           ports:
             - containerPort: 50053
           livenessProbe:
@@ -414,6 +446,12 @@ spec:
       containers:
         - name: "libraryapi"
           image: "gcr.io/${PROJECT_ID}/libraryapi"
+          env:
+            - name: libraryserver_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: special-config
+                  key: libraryserver
           ports:
             - containerPort: 5001
           livenessProbe:
@@ -482,6 +520,12 @@ spec:
       containers:
         - name: "wishlistserver"
           image: "gcr.io/${PROJECT_ID}/wishlistserver"
+          env:
+            - name: usermanagementserversvc_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: special-config
+                  key: usermanagementserversvc
           ports:
             - containerPort: 50058
           livenessProbe:
@@ -549,6 +593,17 @@ spec:
       containers:
         - name: "wishlistapi"
           image: "gcr.io/${PROJECT_ID}/wishlistapi"
+          env:
+            - name: wishlistserver_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: special-config
+                  key: wishlistserver
+            - name: usermanagementserversvc_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: special-config
+                  key: usermanagementserversvc
           ports:
             - containerPort: 5002
           livenessProbe:
@@ -684,6 +739,12 @@ spec:
       containers:
         - name: "suggestionsapi"
           image: "gcr.io/${PROJECT_ID}/suggestionsapi"
+          env:
+            - name: suggestionsserver_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: special-config
+                  key: suggestionsserver
           ports:
             - containerPort: 5008
           livenessProbe:
@@ -820,6 +881,12 @@ spec:
       containers:
         - name: "searchesapi"
           image: "gcr.io/${PROJECT_ID}/searchesapi"
+          env:
+            - name: searchesserver_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: special-config
+                  key: searchesserver
           ports:
             - containerPort: 5078
           livenessProbe:
@@ -887,6 +954,17 @@ spec:
       containers:
         - name: reviews-api
           image: "gcr.io/${PROJECT_ID}/reviews-api"
+          env:
+            - name: reviews-server-s_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: special-config
+                  key: reviews-server-s
+            - name: usermanagementserversvc_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: special-config
+                  key: usermanagementserversvc
           ports:
             - containerPort: 5012
           livenessProbe:

@@ -13,7 +13,7 @@ from flask import Flask, json, request
 
 api = Flask(__name__)
 
-reviews_channel = grpc.insecure_channel(os.environ['reviews-server-s'])
+reviews_channel = grpc.insecure_channel(os.environ['reviews-server-s_KEY'])
 reviews_client = ReviewsStub(reviews_channel)
 
 @api.route('/healthz', methods=['GET'])

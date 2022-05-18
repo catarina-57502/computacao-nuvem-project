@@ -17,9 +17,8 @@ import reviews_pb2_grpc
 # Track time spent and requests made.
 REQUEST_TIME = Summary('request_processing_seconds', 'Time spent processing request')
 
-#connString = os.environ["MONGODB_CONNSTRING"]
 
-client = MongoClient(os.environ['mongo'], os.environ['mongoPORT'] ,username='admin', password='admin')
+client = MongoClient('mongo', 27017 ,username='admin', password='admin')
 revs = client["steam"]
 db = revs["Reviews"]
 
