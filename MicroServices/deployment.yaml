@@ -34,22 +34,19 @@ spec:
               memory: "500Mi"
             limits:
               memory: "1000Mi"
+          envFrom:
+            - secretRef:
+                name: mongo-secret
           ports:
             - containerPort: 27017
               name: mongo
           volumeMounts:
             - name: mongo-persistent-storage
               mountPath: /data/db
-            - name: secrets
-              mountPath: "/etc/secrets"
-              readOnly: true
       volumes:
         - name: mongo-persistent-storage
           persistentVolumeClaim:
             claimName: mongo-pv-claim
-        - name: secrets
-          secret:
-            secretName: mongo-secret
 ---
 apiVersion: "apps/v1"
 kind: "Deployment"

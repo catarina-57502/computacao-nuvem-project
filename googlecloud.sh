@@ -114,11 +114,8 @@ kubectl apply -f networkpolicy.yaml
 cd ..
 cd MicroServices
 
-echo -n "admin"  > ./username.txt
-echo -n "admin"  > ./password.txt
-kubectl create secret generic mongo-secret --from-file=./username.txt --from-file=./password.txt
-
 # Kubernetes Apply YAML files
+kubectl apply -f mongo-secrets.yaml
 kubectl apply -f pv.yaml
 envsubst < "deployment.yaml" > "deploymentENV.yaml"
 kubectl apply -f deploymentENV.yaml
