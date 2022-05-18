@@ -1,5 +1,3 @@
-kube-apiserver --authorization-mode=Security,RBAC
-
 #Generate ket for Team X
 openssl genrsa -out adminOperationsTeam.key 2048
 
