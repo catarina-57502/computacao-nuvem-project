@@ -106,6 +106,12 @@ cd ConfigMaps
 kubectl create -f configMapMicroServices.yaml
 
 cd ..
+cd Networking
+
+# Kubernetes Apply network YAML files
+kubectl apply -f networkpolicy.yaml
+
+cd ..
 cd MicroServices
 
 echo -n "admin" | base64 > ./username.txt
