@@ -3,9 +3,10 @@ kind: CertificateSigningRequest
 metadata:
   name: adminOperationsTeam
 spec:
-  request: $(cat adminOperationsTeam.csr | tr -d '\n')
-  signerName: adminOperations
+  request:
+  signerName: kubernetes.io/kube-apiserver-client
   usages:
     - digital signature
     - key encipherment
     - server auth
+    - client auth

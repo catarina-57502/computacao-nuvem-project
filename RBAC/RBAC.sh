@@ -14,7 +14,9 @@ kubectl describe csr adminOperationsTeam
 kubectl certificate approve adminOperationsTeam
 
 #Register the new credentials and config context
-kubectl config set-credentials adminOperationsTeam --client-certificate=adminOperationsTeam.crt --client- key=adminOperationsTeam.key
+kubectl config set-credentials adminOperationsTeam --client-certificate=adminOperationsTeam.crt --client-key=adminOperationsTeam.key
 
+kubectl config set-context adminOperationsTeam@gke_phase4-cn_europe-west4-a_cluster-steam --cluster=gke_phase4-cn_europe-west4-a_cluster-steam --user=adminOperationsTeam
 
-kubectl config set-context adminOperationsTeam@kubernetes --cluster=kubernetes --user=adminOperationsTeam
+kubectl config get-contexts
+kubectl config current-context
