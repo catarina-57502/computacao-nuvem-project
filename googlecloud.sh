@@ -23,7 +23,10 @@ cd ..
 cd MicroServices
 echo "admin" | base64 > username.txt
 echo "admin" | base64 > password.txt
-kubectl create secret generic mongo-secrets --from-file=./username.txt --from-file=./password.txt
+kubectl create secret generic mongo-secrets --namespace="default" --from-file=./username.txt --from-file=./password.txt
+kubectl create secret generic mongo-secrets --namespace="adminoperations" --from-file=./username.txt --from-file=./password.txt
+kubectl create secret generic mongo-secrets --namespace="usermanagement" --from-file=./username.txt --from-file=./password.txt
+
 
 kubectl apply -f pv.yaml
 envsubst < "deployment.yaml" > "deploymentENV.yaml"
