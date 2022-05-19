@@ -10,10 +10,17 @@ chmod u+x dockerBuildPush.sh
 ./dockerBuildPush.sh
 
 cd ..
+cd NameSpaces
+chmod u+x namespaces.sh
+./namespaces.sh
+
+cd ..
 cd ConfigMaps
 chmod u+x configmaps.sh
 ./configmaps.sh
 
+cd..
+cd MicroServices
 echo "admin" | base64 > username.txt
 echo "admin" | base64 > password.txt
 kubectl create secret generic mongo-secrets --from-file=./username.txt --from-file=./password.txt
