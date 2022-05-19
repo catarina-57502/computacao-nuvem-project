@@ -29,11 +29,10 @@ REQUEST_TIME = Summary('request_processing_seconds', 'Time spent processing requ
 cred = credentials.Certificate('./authInfo.json')
 default_app = firebase_admin.initialize_app(cred)
 
-
 def get_table(db,table):
     return db[table]
 
-client = MongoClient('mongo', 27017 ,username='admin', password='admin')
+client = MongoClient('mongo', 27017, username = os.environ['MONGO_USERNAME'], password = os.environ['MONGO_PASSWORD'])
 db = client['users']
 usersDB = get_table(db,"users")
 
@@ -43,7 +42,7 @@ with open("./keys/keyToken.txt", "r") as text_file:
 text_file.close()
 
 def loginCheckGetEmail (token):
-    WEB_API_KEY = 'AIzaSyAI2IzUwQ0-Cnu66Vn_EXnYrCN31oD-my8'
+    WEB_API_KEY = 'AIzaSyBNIX-re6r5hbjLOdV2c_m2tMdj2fsI9tI'
     #Confirm Token signature
     payload = json.dumps({"token": token})
     rest_api_url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken"
@@ -127,7 +126,7 @@ class UserManagementService(userManagement_pb2_grpc.UserManagementServicer):
     def LoginUser(self, request, context):
         password = request.password
         email = request.email
-        WEB_API_KEY = 'AIzaSyAI2IzUwQ0-Cnu66Vn_EXnYrCN31oD-my8'
+        WEB_API_KEY = 'AIzaSyBNIX-re6r5hbjLOdV2c_m2tMdj2fsI9tI'
         rest_api_url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword"
 
         #check login
@@ -153,7 +152,7 @@ class UserManagementService(userManagement_pb2_grpc.UserManagementServicer):
     #TODO not logout!!!!!! just test - (maybe delete uid...)
     @REQUEST_TIME.time()
     def Logout(self, request, context):
-        WEB_API_KEY = 'AIzaSyAI2IzUwQ0-Cnu66Vn_EXnYrCN31oD-my8'
+        WEB_API_KEY = 'AIzaSyBNIX-re6r5hbjLOdV2c_m2tMdj2fsI9tI'
         rest_api_url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword"
 
         #check login
@@ -188,7 +187,7 @@ class UserManagementService(userManagement_pb2_grpc.UserManagementServicer):
     #TODO test claims option with other microservices
     def GetInfoFromToken(self, request, context):
         token = request.token
-        WEB_API_KEY = 'AIzaSyAI2IzUwQ0-Cnu66Vn_EXnYrCN31oD-my8'
+        WEB_API_KEY = 'AIzaSyBNIX-re6r5hbjLOdV2c_m2tMdj2fsI9tI'
         #Confirm Token signature
         payload = json.dumps({"token": token})
         rest_api_url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken"

@@ -86,7 +86,7 @@ class LibraryService(library_pb2_grpc.LibraryServicer):
         for doc in docUser:
             library = doc["library"]
 
-        searches_channel = grpc.insecure_channel(os.environ['searchesserver'])
+        searches_channel = grpc.insecure_channel(os.environ['searchesserver_KEY'])
         searches_client = SearchesStub(searches_channel)
 
         gamesInfo = []

@@ -34,22 +34,27 @@ spec:
               memory: "500Mi"
             limits:
               memory: "1000Mi"
+          env:
+          - name: MONGO_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: mongo-secrets
+                key: username.txt
+          - name: MONGO_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mongo-secrets
+                key: password.txt
           ports:
             - containerPort: 27017
               name: mongo
           volumeMounts:
             - name: mongo-persistent-storage
               mountPath: /data/db
-            - name: secrets
-              mountPath: "/etc/secrets"
-              readOnly: true
       volumes:
         - name: mongo-persistent-storage
           persistentVolumeClaim:
             claimName: mongo-pv-claim
-        - name: secrets
-          secret:
-            secretName: mongo-secret
 ---
 apiVersion: "apps/v1"
 kind: "Deployment"
@@ -230,6 +235,17 @@ spec:
       containers:
         - name: usermanagementserver
           image: "gcr.io/${PROJECT_ID}/usermanagementserver"
+          env:
+          - name: MONGO_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: mongo-secrets
+                key: username.txt
+          - name: MONGO_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mongo-secrets
+                key: password.txt
           ports:
             - containerPort: 50052
           livenessProbe:
@@ -378,6 +394,11 @@ spec:
                 configMapKeyRef:
                   name: special-config
                   key: usermanagementserversvc
+            - name: searchesserver_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: special-config
+                  key: searchesserver
           ports:
             - containerPort: 50053
           livenessProbe:
@@ -526,6 +547,11 @@ spec:
                 configMapKeyRef:
                   name: special-config
                   key: usermanagementserversvc
+            - name: searchesserver_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: special-config
+                  key: searchesserver
           ports:
             - containerPort: 50058
           livenessProbe:
