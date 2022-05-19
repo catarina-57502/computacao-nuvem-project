@@ -17,7 +17,7 @@ cd ConfigMaps
 chmod u+x configmaps.sh
 ./configmaps.sh
 
-cd..
+cd ..
 cd MicroServices
 echo "admin" | base64 > username.txt
 echo "admin" | base64 > password.txt
