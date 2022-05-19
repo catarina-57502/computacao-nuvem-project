@@ -1,0 +1,11 @@
+apiVersion: certificates.k8s.io/v1
+kind: CertificateSigningRequest
+metadata:
+  name: adminOperationsTeam
+spec:
+  request: $(cat adminOperationsTeam.csr | tr -d '\n')
+  signerName: adminOperations
+  usages:
+    - digital signature
+    - key encipherment
+    - server auth

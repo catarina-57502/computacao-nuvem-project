@@ -5,11 +5,16 @@ openssl genrsa -out adminOperationsTeam.key 2048
 openssl req -new -key adminOperationsTeam.key -out adminOperationsTeam.csr -subj "/CN=steam/O=adminOperationsTeam"
 
 #Sign this CSR using the root Kubernetes CA
-openssl x509 -req -in adminOperationsTeam.csr -CA /etc/kubernetes/pki/ca.crt -CAkey /etc/kubernetes/pki/ca.key -CAcreateserial -out adminOperationsTeam.crt
+kubectl apply -f CertificateSigningRequest.yaml
 
 #Inspect the new certificate
-openssl x509 -in adminOperationsTeam.crt -text
+kubectl describe csr adminOperationsTeam
+
+#Approve
+kubectl certificate approve adminOperationsTeam
 
 #Register the new credentials and config context
-kubectl config set-credentials adminOperationsTeam --client-certificate=/home/teams/adminOperationsTeam.crt --client- key=/home/teams/adminOperationsTeam.key
+kubectl config set-credentials adminOperationsTeam --client-certificate=adminOperationsTeam.crt --client- key=adminOperationsTeam.key
+
+
 kubectl config set-context adminOperationsTeam@kubernetes --cluster=kubernetes --user=adminOperationsTeam
