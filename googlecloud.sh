@@ -40,11 +40,6 @@ chmod u+x hpa.sh
 ./hpa.sh
 
 cd ..
-cd Networking
-chmod u+x network.sh
-./network.sh
-
-cd ..
 cd Prometheus
 chmod u+x prometheus.sh
 ./prometheus.sh
