@@ -1,0 +1,19 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: default
+  name: adminoperations
+rules:
+  - apiGroups: ["configmaps","endpoints","nodes","pods","secrets","replicasets","jobs"]
+    resources: ["pods"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: default
+  name: userManagement
+rules:
+  - apiGroups: ["configmaps","endpoints","nodes","pods","secrets","replicasets","jobs"]
+    resources: ["pods"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]

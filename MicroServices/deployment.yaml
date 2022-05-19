@@ -60,6 +60,7 @@ apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
   name: "adminoperationsserver"
+  namespace: adminoperations
   labels:
     app: "adminoperationsserver"
 spec:
@@ -118,6 +119,7 @@ apiVersion: "v1"
 kind: "Service"
 metadata:
   name: "adminoperationsserver"
+  namespace: adminoperations
 spec:
   type: ClusterIP
   selector:

@@ -3,7 +3,20 @@ kind: CertificateSigningRequest
 metadata:
   name: adminOperationsTeam
 spec:
-  request:
+  request: ${adminOperationsTeamCSR}
+  signerName: kubernetes.io/kube-apiserver-client
+  usages:
+    - digital signature
+    - key encipherment
+    - server auth
+    - client auth
+---
+apiVersion: certificates.k8s.io/v1
+kind: CertificateSigningRequest
+metadata:
+  name: adminOperationsTeam
+spec:
+  request: ${userManagementTeam}
   signerName: kubernetes.io/kube-apiserver-client
   usages:
     - digital signature
