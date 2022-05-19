@@ -137,6 +137,7 @@ apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
   name: "adminoperationsapi"
+  namespace: adminoperations
   labels:
     app: "adminoperationsapi"
 spec:
@@ -203,6 +204,7 @@ apiVersion: "v1"
 kind: "Service"
 metadata:
   name: "adminoperationsapi"
+  namespace: adminoperations
 spec:
   selector:
     app: "adminoperationsapi"
@@ -216,6 +218,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: usermanagementserver-deployment
+  namespace: usermanagement
   labels:
     app: usermanagementserver
 spec:
@@ -279,6 +282,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: usermanagementserversvc
+  namespace: usermanagement
 spec:
   type: ClusterIP
   selector:
@@ -296,6 +300,7 @@ apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
   name: "usermanagementapi"
+  namespace: usermanagement
   labels:
     app: "usermanagementapi"
 spec:
@@ -356,6 +361,7 @@ apiVersion: "v1"
 kind: "Service"
 metadata:
   name: "usermanagementapi"
+  namespace: usermanagement
 spec:
   selector:
     app: "usermanagementapi"
