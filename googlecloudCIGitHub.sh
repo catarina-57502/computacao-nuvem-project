@@ -5,65 +5,38 @@ gcloud container clusters create cluster-steam --zone europe-west4-a --num-nodes
 
 gcloud auth configure-docker
 
+cd ..
 cd ConfigMaps
+chmod u+x configmaps.sh
+./configmaps.sh
 
-kubectl create -f configMapMicroServices.yaml
+cd ..
+cd Networking
+chmod u+x network.sh
+./network.sh
 
 cd ..
 cd MicroServices
 
-# Kubernetes Apply YAML files
-kubectl apply -f mongo-secrets.yaml
+echo "admin" | base64 > username.txt
+echo "admin" | base64 > password.txt
+kubectl create secret generic mongo-secrets --from-file=./username.txt --from-file=./password.txt
+
 kubectl apply -f pv.yaml
 envsubst < "deployment.yaml" > "deploymentENV.yaml"
 kubectl apply -f deploymentENV.yaml
 
-# HPA
-kubectl autoscale deployment adminoperationsserver --cpu-percent=70 --min=1 --max=3
-kubectl autoscale deployment adminoperationsapi --cpu-percent=70 --min=1 --max=3
-kubectl autoscale deployment usermanagementserver-deployment --cpu-percent=70 --min=1 --max=3
-kubectl autoscale deployment libraryserver --cpu-percent=70 --min=1 --max=3
-kubectl autoscale deployment libraryapi --cpu-percent=70 --min=1 --max=3
-kubectl autoscale deployment wishlistserver --cpu-percent=70 --min=1 --max=3
-kubectl autoscale deployment wishlistapi --cpu-percent=70 --min=1 --max=3
-kubectl autoscale deployment suggestionsserver --cpu-percent=70 --min=1 --max=3
-kubectl autoscale deployment suggestionsapi --cpu-percent=70 --min=1 --max=3
-kubectl autoscale deployment searchesserver --cpu-percent=70 --min=1 --max=3
-kubectl autoscale deployment searchesapi --cpu-percent=70 --min=1 --max=3
-kubectl autoscale deployment reviews-api-d --cpu-percent=70 --min=1 --max=3
-kubectl autoscale deployment reviews-server-d --cpu-percent=70 --min=1 --max=3
+cd..
+cd HPA
+chmod u+x hpa.sh
+./hpa.sh
 
-kubectl get hpa
-
-# Add the nginx-stable Helm repository
-helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-helm repo update
-
-# Deploy an NGINX controller Deployment and Service
-helm install nginx-ingress ingress-nginx/ingress-nginx 
-
-echo "10s"
-sleep 10s
-echo "10s"
-sleep 10s
-echo "10s"
-sleep 10s
-echo "10s"
-sleep 10s
-echo "10s"
-sleep 10s
-echo "10s"
-sleep 10s
-
-# Apply the ingress resource to the cluster
-kubectl apply -f ingress.yaml
+cd..
+cd Networking
+chmod u+x network.sh
+./network.sh
 
 cd ..
 cd Prometheus
-
-kubectl apply -f components.yaml
-kubectl create configmap prometheus-cm --from-file prometheus-cm.yaml
-kubectl apply -f prometheus.yaml
-kubectl apply -f grafana.yaml
-
-kubectl get pods
+chmod u+x prometheus.sh
+./prometheus.sh

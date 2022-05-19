@@ -17,15 +17,15 @@ services:
   reviews-server:
     container_name: reviews-server
     build: 
-      dockerfile: ./server/Dockerfile
-      context: ./reviews
+      dockerfile: ../reviews/server/Dockerfile
+      context: ../reviews
 
 
   reviews-api:
     container_name: reviews-api
     build: 
-      dockerfile: ./api/Dockerfile
-      context: ./reviews
+      dockerfile: ../reviews/api/Dockerfile
+      context: ../reviews
     environment:
       REVIEWS_SERVER_HOST: reviews-server
     ports:
@@ -35,16 +35,16 @@ services:
 
   adminOperations:
     build:
-      dockerfile: ./server/Dockerfile
-      context: ./adminOperations
+      dockerfile: ../adminOperations/server/Dockerfile
+      context: ../adminOperations
     image: adminoperations
     ports:
       - "50052:50052"
 
   adminOperations-api:
     build:
-      dockerfile: ./api/Dockerfile
-      context: ./adminOperations
+      dockerfile: ../adminOperations/api/Dockerfile
+      context: ../adminOperations
     environment:
       ADMINOPERATIONS_HOST: adminOperations
     image: apiadminoperations
@@ -55,16 +55,16 @@ services:
 
   usermanagementserver:
     build:
-      dockerfile: ./server/Dockerfile
-      context: ./userManagement
+      dockerfile: ../userManagement/server/Dockerfile
+      context: ../userManagement
     image: usermanagementserver
     ports:
       - "50054:50054"
 
   userManagement-api:
     build:
-      dockerfile: ./api/Dockerfile
-      context: ./userManagement
+      dockerfile: ../userManagement/api/Dockerfile
+      context: ../userManagement
     environment:
       USERMANAGEMENT_HOST: usermanagementserver
     image: apiusermanagement
@@ -75,16 +75,16 @@ services:
 
   libraryserver:
     build:
-      dockerfile: ./server/Dockerfile
-      context: ./library
+      dockerfile: ../library/server/Dockerfile
+      context: ../library
     image: libraryserver
     ports:
       - "50055:50055"
 
   library-api:
     build:
-      dockerfile: ./api/Dockerfile
-      context: ./library
+      dockerfile: ../library/api/Dockerfile
+      context: ../library
     environment:
         LIBRARY_HOST: libraryserver
     image: apilibrary
@@ -95,16 +95,16 @@ services:
 
   wishlist:
     build:
-      dockerfile: ./server/Dockerfile
-      context: ./wishlist
+      dockerfile: ../wishlist/server/Dockerfile
+      context: ../wishlist
     image: wishlist
     ports:
       - "50058:50058"
 
   wishlist-api:
     build:
-      dockerfile: ./api/Dockerfile
-      context: ./wishlist
+      dockerfile: ../wishlist/api/Dockerfile
+      context: ../wishlist
     environment:
       WISHLIST_HOST: wishlist
     image: apiwishlist
@@ -115,16 +115,16 @@ services:
 
   suggestions:
     build:
-      dockerfile: ./server/Dockerfile
-      context: ./suggestions
+      dockerfile: ../suggestions/server/Dockerfile
+      context: ../suggestions
     image: suggestions
     ports:
       - "50059:50059"
 
   suggestions-api:
     build:
-      dockerfile: ./api/Dockerfile
-      context: ./suggestions
+      dockerfile: ../suggestions/api/Dockerfile
+      context: ../suggestions
     environment:
       SUGGESTIONS_HOST: suggestions
     image: apisuggestions
@@ -135,16 +135,16 @@ services:
 
   searchesserver:
     build:
-      dockerfile: ./server/Dockerfile
-      context: ./searches
+      dockerfile: ../searches/server/Dockerfile
+      context: ../searches
     image: searchesserver
     ports:
       - "50060:50060"
 
   searches-api:
     build:
-      dockerfile: ./api/Dockerfile
-      context: ./searches
+      dockerfile: ../searches/api/Dockerfile
+      context: ../searches
     environment:
       SEARCHES_HOST: searchesserver
     image: searches
