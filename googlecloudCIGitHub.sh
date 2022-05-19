@@ -5,18 +5,12 @@ gcloud container clusters create cluster-steam --zone europe-west4-a --num-nodes
 
 gcloud auth configure-docker
 
+cd MicroServices
+
 cd ..
 cd ConfigMaps
 chmod u+x configmaps.sh
 ./configmaps.sh
-
-cd ..
-cd Networking
-chmod u+x network.sh
-./network.sh
-
-cd ..
-cd MicroServices
 
 echo "admin" | base64 > username.txt
 echo "admin" | base64 > password.txt
@@ -25,6 +19,11 @@ kubectl create secret generic mongo-secrets --from-file=./username.txt --from-fi
 kubectl apply -f pv.yaml
 envsubst < "deployment.yaml" > "deploymentENV.yaml"
 kubectl apply -f deploymentENV.yaml
+
+cd ..
+cd Networking
+chmod u+x network.sh
+./network.sh
 
 cd..
 cd HPA
