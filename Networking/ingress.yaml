@@ -9,6 +9,20 @@ spec:
   rules:
   - http:
       paths:
+      - path: "/admin"
+        pathType: Prefix
+        backend:
+          service:
+            name: adminoperationsapi
+            port:
+              number: 5003
+      - path: "/user"
+        pathType: Prefix
+        backend:
+          service:
+            name: usermanagementapi
+            port:
+              number: 5004
       - path: "/library"
         pathType: Prefix
         backend:
