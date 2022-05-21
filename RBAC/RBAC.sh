@@ -17,13 +17,18 @@ kubectl apply -f CertificateSigningRequestSigned.yaml
 
 kubectl describe csr userManagementTeam
 kubectl certificate approve userManagementTeam
-kubectl config set-credentials userManagementTeam --client-certificate=userManagementTeam.csr --client-key=userManagementTeam.key
-kubectl config set-context userManagementTeam@$CLUSTER --cluster=$CLUSTER --user=userManagementTeam
-kubectl create rolebinding usermanagement --user=userManagementTeam
 
 kubectl describe csr adminOperationsTeam
 kubectl certificate approve adminOperationsTeam
-kubectl config set-credentials adminOperationsTeam --client-certificate=adminOperationsTeam.csr --client-key=adminOperationsTeam.key
+
+kubectl get csr userManagementTeam -o jsonpath='{.status.certificate}'| base64 -d > userManagementTeam.crt
+kubectl get csr adminOperationsTeam -o jsonpath='{.status.certificate}'| base64 -d > adminOperationsTeam.crt
+
+kubectl config set-credentials userManagementTeam --client-certificate=userManagementTeam.crt --client-key=userManagementTeam.key
+kubectl config set-context userManagementTeam@$CLUSTER --cluster=$CLUSTER --user=userManagementTeam
+kubectl create rolebinding usermanagement --user=userManagementTeam
+
+kubectl config set-credentials adminOperationsTeam --client-certificate=adminOperationsTeam.crt --client-key=adminOperationsTeam.key
 kubectl config set-context adminOperationsTeam@$CLUSTER --cluster=$CLUSTER --user=adminOperationsTeam
 kubectl create rolebinding adminoperations --user=adminOperationsTeam
 

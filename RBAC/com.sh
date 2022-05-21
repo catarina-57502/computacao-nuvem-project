@@ -9,6 +9,8 @@ kubectl auth can-i '*' '*'
 # Check to see if I can create pods in any namespace
 kubectl auth can-i create pods --all-namespaces
 
+kubectl config get-contexts
+kubectl config current-context
 
 kubectl config use-context adminOperationsTeam@gke_phase4-cn_europe-west4-a_cluster-steam
 
