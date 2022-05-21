@@ -46,5 +46,15 @@ chmod u+x prometheus.sh
 
 cd ..
 cd RBAC
-chmod u+x RBAC.sh
-./RBAC.sh
+
+cd Team-AdminOperations
+chmod u+x RBAC_AdminOperations.sh
+./RBAC_AdminOperations.sh
+cd ..
+
+cd Team-UserManagement
+chmod u+x RBAC_UserManagement.sh
+./RBAC_UserManagement.sh
+cd ..
+
+cd ..

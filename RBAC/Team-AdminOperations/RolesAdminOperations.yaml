@@ -1,0 +1,119 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: adminoperations
+  name: adminOperationsTeamRole1
+rules:
+  - apiGroups: ["*"]
+    resources: ["bindings" ]
+    verbs: ["create"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: adminoperations
+  name: adminOperationsTeamRole2
+rules:
+  - apiGroups: ["*"]
+    resources: ["componentstatuses","nodes","pods" ]
+    verbs: ["get","list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: adminoperations
+  name: adminOperationsTeamRole3
+rules:
+  - apiGroups: ["*"]
+    resources: ["configmaps", "endpoints" , "events", "limitranges", "namespaces", "nodes", "persistentvolumeclaims", "persistentvolumes"]
+    verbs: ["get","list","create","patch", "update", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: adminoperations
+  name: adminOperationsTeamRole4
+rules:
+  - apiGroups: ["*"]
+    resources: ["pods", "podtemplates" , "replicationcontrollers", "resourcequotas", "secrets", "serviceaccounts", "services", "mutatingwebhookconfigurations" ]
+    verbs: ["get","list","create","patch", "update", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: adminoperations
+  name: adminOperationsTeamRole5
+rules:
+  - apiGroups: ["*"]
+    resources: ["validatingwebhookconfigurations", "customresourcedefinitions" , "apiservices", "controllerrevisions", "daemonsets"]
+    verbs: ["get","list","create","patch", "update", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: adminoperations
+  name: adminOperationsTeamRole6
+rules:
+  - apiGroups: ["*"]
+    resources: ["deployments", "replicasets" , "statefulsets"]
+    verbs: ["get","list","create","patch", "update", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: adminoperations
+  name: adminOperationsTeamRole7
+rules:
+  - apiGroups: ["*"]
+    resources: ["tokenreviews", "localsubjectaccessreviews" , "selfsubjectaccessreviews", "subjectaccessreviews", "secrets", "serviceaccounts", "services", "mutatingwebhookconfigurations"  ]
+    verbs: ["create"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: adminoperations
+  name: adminOperationsTeamRole8
+rules:
+  - apiGroups: ["*"]
+    resources: ["horizontalpodautoscalers", "cronjobs" , "jobs", "certificatesigningrequests", "backendconfigs", "serviceaccounts", "leases", "endpointslices" ]
+    verbs: ["get","list","create","patch", "update", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: adminoperations
+  name: adminOperationsTeamRole9
+rules:
+  - apiGroups: ["*"]
+    resources: ["events", "ingresses" , "flowschemas", "prioritylevelconfigurations", "capacityrequests", "storagestates", "storageversionmigrations", "frontendconfigs"]
+    verbs: ["get","list","create","patch", "update", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: adminoperations
+  name: adminOperationsTeamRole10
+rules:
+  - apiGroups: ["*"]
+    resources: ["managedcertificates", "serviceattachments" , "servicenetworkendpointgroups", "ingressclasses", "networkpolicies", "runtimeclasses", "updateinfos", "poddisruptionbudgets"]
+    verbs: ["get","list","create","patch", "update", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: adminoperations
+  name: adminOperationsTeamRole11
+rules:
+  - apiGroups: ["*"]
+    resources: [ "podsecuritypolicies", "clusterrolebindings" , "clusterroles", "rolebindings", "roles", "volumesnapshotclasses", "volumesnapshotcontents", "volumesnapshots" ]
+    verbs: ["get","list","create", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: adminoperations
+  name: adminOperationsTeamRole12
+rules:
+  - apiGroups: ["*"]
+    resources: [ "csidrivers", "csinodes" , "csistoragecapacities", "storageclasses", "volumeattachments" ]
+    verbs: ["get","list","create", "watch"]
