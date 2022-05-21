@@ -39,8 +39,12 @@ cd HPA
 chmod u+x hpa.sh
 ./hpa.sh
 
-
 cd ..
 cd Prometheus
 chmod u+x prometheus.sh
 ./prometheus.sh
+
+cd ..
+cd RBAC
+chmod u+x RBAC.sh
+./RBAC.sh
