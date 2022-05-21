@@ -217,25 +217,6 @@ spec:
       targetPort: 5003
   type: NodePort
 ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: steam-ingress
-  namespace: adminoperations
-  annotations:
-    kubernetes.io/ingress.class: "nginx"
-spec:
-  rules:
-    - http:
-        paths:
-          - path: "/admin"
-            pathType: Prefix
-            backend:
-              service:
-                name: adminoperationsapi
-                port:
-                  number: 5003
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -381,25 +362,6 @@ spec:
       port: 5004
       targetPort: 5004
   type: NodePort
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: steam-ingress
-  namespace: usermanagement
-  annotations:
-    kubernetes.io/ingress.class: "nginx"
-spec:
-  rules:
-    - http:
-        paths:
-          - path: "/user"
-            pathType: Prefix
-            backend:
-              service:
-                name: usermanagementapi
-                port:
-                  number: 5004
 ---
 apiVersion: "apps/v1"
 kind: "Deployment"
@@ -553,25 +515,6 @@ spec:
       port: 5001
       targetPort: 5001
   type: NodePort
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: steam-ingress
-  namespace: default
-  annotations:
-    kubernetes.io/ingress.class: "nginx"
-spec:
-  rules:
-    - http:
-        paths:
-          - path: "/library"
-            pathType: Prefix
-            backend:
-              service:
-                name: libraryapi
-                port:
-                  number: 5001
 ---
 apiVersion: "apps/v1"
 kind: "Deployment"
@@ -730,25 +673,6 @@ spec:
       targetPort: 5002
   type: NodePort
 ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: steam-ingress
-  namespace: default
-  annotations:
-    kubernetes.io/ingress.class: "nginx"
-spec:
-  rules:
-    - http:
-        paths:
-          - path: "/wishes"
-            pathType: Prefix
-            backend:
-              service:
-                name: wishlistapi
-                port:
-                  number: 5002
----
 apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
@@ -889,25 +813,6 @@ spec:
       port: 5008
       targetPort: 5008
   type: NodePort
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: steam-ingress
-  namespace: default
-  annotations:
-    kubernetes.io/ingress.class: "nginx"
-spec:
-  rules:
-    - http:
-        paths:
-          - path: "/suggestions"
-            pathType: Prefix
-            backend:
-              service:
-                name: suggestionsapi
-                port:
-                  number: 5008
 ---
 apiVersion: "apps/v1"
 kind: "Deployment"
@@ -1051,25 +956,6 @@ spec:
       targetPort: 5078
   type: NodePort
 ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: steam-ingress
-  namespace: default
-  annotations:
-    kubernetes.io/ingress.class: "nginx"
-spec:
-  rules:
-    - http:
-        paths:
-          - path: "/searches"
-            pathType: Prefix
-            backend:
-              service:
-                name: searchesapi
-                port:
-                  number: 5078
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -1149,25 +1035,6 @@ spec:
       port: 5012
       targetPort: 5012
   type: NodePort
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: steam-ingress
-  namespace: default
-  annotations:
-    kubernetes.io/ingress.class: "nginx"
-spec:
-  rules:
-    - http:
-        paths:
-        - path: "/reviews"
-          pathType: Prefix
-          backend:
-            service:
-              name: reviews-api-s
-              port:
-                number: 5012
 ---
 apiVersion: apps/v1
 kind: Deployment
