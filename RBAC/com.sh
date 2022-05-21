@@ -10,7 +10,7 @@ kubectl auth can-i '*' '*'
 kubectl auth can-i create pods --all-namespaces
 
 
-kubectl config use-context adminOperationsTeam@kubernetes
+kubectl config use-context adminOperationsTeam@gke_phase4-cn_europe-west4-a_cluster-steam
 
 
 gcloud secrets versions access 1 --secret="adminTeam-key" --format='get(payload.data)' | tr '_-' '/+' | base64 -d
