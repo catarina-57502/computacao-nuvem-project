@@ -214,6 +214,23 @@ spec:
       targetPort: 5003
   type: NodePort
 ---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    "alb.ingress.kubernetes.io/group.name": "group"
+    "alb.ingress.kubernetes.io/group.order": "1"
+  namespace: adminoperations
+spec:
+  rules:
+    - host: latest.example.com
+      http:
+        paths:
+          - backend:
+              serviceName: adminoperationsapi
+              servicePort: 5003
+            path: /admin
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -370,6 +387,23 @@ spec:
       port: 5004
       targetPort: 5004
   type: NodePort
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    "alb.ingress.kubernetes.io/group.name": "group"
+    "alb.ingress.kubernetes.io/group.order": "2"
+  namespace: adminoperations
+spec:
+  rules:
+    - host: other.example.com
+      http:
+        paths:
+          - backend:
+              serviceName: usermanagementapi
+              servicePort: 5004
+            path: /user
 ---
 apiVersion: "apps/v1"
 kind: "Deployment"
