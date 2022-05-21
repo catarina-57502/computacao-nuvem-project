@@ -14,7 +14,7 @@ spec:
 apiVersion: certificates.k8s.io/v1
 kind: CertificateSigningRequest
 metadata:
-  name: adminOperationsTeam
+  name: userManagementTeam
 spec:
   request: ${userManagementTeamCSR}
   signerName: kubernetes.io/kube-apiserver-client
