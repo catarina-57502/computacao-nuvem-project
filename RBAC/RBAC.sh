@@ -25,12 +25,12 @@ kubectl get csr userManagementTeam -o jsonpath='{.status.certificate}'| base64 -
 kubectl get csr adminOperationsTeam -o jsonpath='{.status.certificate}'| base64 -d > adminOperationsTeam.crt
 
 kubectl config set-credentials userManagementTeam --client-certificate=userManagementTeam.crt --client-key=userManagementTeam.key
-kubectl config set-context userManagementTeam@$CLUSTER --cluster=$CLUSTER --user=userManagementTeam
-kubectl create rolebinding usermanagement --user=userManagementTeam
+kubectl config set-context userManagementTeam@$CLUSTER --cluster=$CLUSTER --namespace=usermanagement --user=userManagementTeam
+kubectl create rolebinding userManagementTeam --user=userManagementTeam
 
 kubectl config set-credentials adminOperationsTeam --client-certificate=adminOperationsTeam.crt --client-key=adminOperationsTeam.key
-kubectl config set-context adminOperationsTeam@$CLUSTER --cluster=$CLUSTER --user=adminOperationsTeam
-kubectl create rolebinding adminoperations --user=adminOperationsTeam
+kubectl config set-context adminOperationsTeam@$CLUSTER --cluster=$CLUSTER --namespace=adminoperations --user=adminOperationsTeam
+kubectl create rolebinding adminOperationsTeam --user=adminOperationsTeam
 
 kubectl apply -f Roles.yaml
 echo 'RBAC end'
