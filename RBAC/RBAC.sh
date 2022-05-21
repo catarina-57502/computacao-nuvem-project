@@ -30,7 +30,7 @@ kubectl config set-credentials adminOperationsTeam --client-certificate=adminOpe
 kubectl apply -f Roles.yaml
 kubectl apply -f RoleBinding.yaml
 
-kubectl config set-context userManagementTeam@$CLUSTER --cluster=$CLUSTER --namespace=usermanagement --user=userManagementTeam
-kubectl config set-context adminOperationsTeam@$CLUSTER --cluster=$CLUSTER --namespace=adminoperations --user=adminOperationsTeam
+kubectl config set-context userManagementTeam --cluster=$CLUSTER --namespace=usermanagement --user=userManagementTeam
+kubectl config set-context adminOperationsTeam --cluster=$CLUSTER --namespace=adminoperations --user=adminOperationsTeam
 
 echo 'RBAC end'
