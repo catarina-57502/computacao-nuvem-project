@@ -19,7 +19,7 @@ kubectl describe csr userManagementTeam
 kubectl certificate approve userManagementTeam
 kubectl config set-credentials userManagementTeam --client-certificate=userManagementTeam.csr --client-key=userManagementTeam.key
 kubectl config set-context userManagementTeam@$CLUSTER --cluster=$CLUSTER --user=userManagementTeam
-kubectl create rolebinding userManagement --user=userManagementTeam
+kubectl create rolebinding usermanagement --user=userManagementTeam
 
 kubectl describe csr adminOperationsTeam
 kubectl certificate approve adminOperationsTeam
