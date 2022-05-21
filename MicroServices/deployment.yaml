@@ -11,17 +11,6 @@ spec:
       targetPort: 27017
   type: LoadBalancer
 ---
-kind: Service
-apiVersion: v1
-metadata:
-  name: mongo
-  namespace: usermanagement
-spec:
-  type: ExternalName
-  externalName: mongo.default.svc.cluster.local
-  ports:
-    - port: 27017
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:

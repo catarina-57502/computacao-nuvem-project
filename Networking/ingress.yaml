@@ -14,7 +14,6 @@ spec:
         backend:
           service:
             name: adminoperationsapi
-            namespace: adminoperations
             port:
               number: 5003
       - path: "/user"
@@ -22,7 +21,6 @@ spec:
         backend:
           service:
             name: usermanagementapi
-            namespace: usermanagement
             port:
               number: 5004
       - path: "/library"
@@ -30,7 +28,6 @@ spec:
         backend:
           service:
             name: libraryapi
-            namespace: default
             port:
               number: 5001
       - path: "/wishes"
@@ -38,7 +35,6 @@ spec:
         backend:
           service:
             name: wishlistapi
-            namespace: default
             port:
               number: 5002
       - path: "/suggestions"
@@ -46,7 +42,6 @@ spec:
         backend:
           service:
             name: suggestionsapi
-            namespace: default
             port:
               number: 5008
       - path: "/searches"
@@ -54,7 +49,6 @@ spec:
         backend:
           service:
             name: searchesapi
-            namespace: default
             port:
               number: 5078
       - path: "/reviews"
@@ -62,6 +56,5 @@ spec:
         backend:
           service:
             name: reviews-api-s
-            namespace: default
             port:
               number: 5012
