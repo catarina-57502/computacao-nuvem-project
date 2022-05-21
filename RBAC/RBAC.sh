@@ -1,8 +1,8 @@
 # AdminOperationsTeam
-
-gcloud secrets versions access 1 --secret="adminTeam-key" --format='get(payload.data)' | tr '_-' '/+' | base64 -d > adminOperationsTeam.key
-gcloud secrets versions access 1 --secret="adminTeam-cert" --format='get(payload.data)' | tr '_-' '/+' | base64 -d > adminOperationsTeam.crt
-
+echo 'Starting RBAC'
+gcloud secrets versions access 1 --secret="adminoperations-key" --format='get(payload.data)' | tr '_-' '/+' | base64 -d > adminOperationsTeam.key
+gcloud secrets versions access 1 --secret="adminoperations-cert" --format='get(payload.data)' | tr '_-' '/+' | base64 -d > adminOperationsTeam.crt
+echo 'Keys loaded'
 export adminOperationsTeamCSR=$(cat adminOperationsTeam.csr | base64 | tr -d '\n')
 envsubst < "CertificateSigningRequest.yaml" > "CertificateSigningRequestSigned.yaml"
 #Sign this CSR using the root Kubernetes CA
@@ -42,3 +42,5 @@ kubectl config get-contexts
 kubectl config current-context
 kubectl apply -f Roles.yaml
 kubectl create rolebinding userManagement --user=userManagementTeam
+
+echo 'RBAC end'
