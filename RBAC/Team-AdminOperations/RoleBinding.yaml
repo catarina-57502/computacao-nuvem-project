@@ -1,0 +1,167 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: adminOperationsTeamRoleB1
+  namespace: adminoperations
+subjects:
+  - kind: User
+    name: adminOperationsTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: adminOperationsTeamRole1
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: adminOperationsTeamRoleB2
+  namespace: adminoperations
+subjects:
+  - kind: User
+    name: adminOperationsTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: adminOperationsTeamRole2
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: adminOperationsTeamRoleB3
+  namespace: adminoperations
+subjects:
+  - kind: User
+    name: adminOperationsTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: adminOperationsTeamRole3
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: adminOperationsTeamRoleB4
+  namespace: adminoperations
+subjects:
+  - kind: User
+    name: adminOperationsTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: adminOperationsTeamRole4
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: adminOperationsTeamRoleB5
+  namespace: adminoperations
+subjects:
+  - kind: User
+    name: adminOperationsTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: adminOperationsTeamRole5
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: adminOperationsTeamRoleB6
+  namespace: adminoperations
+subjects:
+  - kind: User
+    name: adminOperationsTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: adminOperationsTeamRole6
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: adminOperationsTeamRoleB7
+  namespace: adminoperations
+subjects:
+  - kind: User
+    name: adminOperationsTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: adminOperationsTeamRole7
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: adminOperationsTeamRoleB8
+  namespace: adminoperations
+subjects:
+  - kind: User
+    name: adminOperationsTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: adminOperationsTeamRole8
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: adminOperationsTeamRoleB9
+  namespace: adminoperations
+subjects:
+  - kind: User
+    name: adminOperationsTeam9
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: adminOperationsTeamRole9
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: adminOperationsTeamRoleB10
+  namespace: adminoperations
+subjects:
+  - kind: User
+    name: adminOperationsTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: adminOperationsTeamRole10
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: adminOperationsTeamRoleB11
+  namespace: adminoperations
+subjects:
+  - kind: User
+    name: adminOperationsTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: adminOperationsTeamRole11
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: adminOperationsTeamRoleB12
+  namespace: adminoperations
+subjects:
+  - kind: User
+    name: adminOperationsTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: adminOperationsTeamRole12
+  apiGroup: rbac.authorization.k8s.io
