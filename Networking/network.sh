@@ -21,6 +21,4 @@ echo "10s"
 sleep 10s
 
 # Apply the ingress resource to the cluster
-kubectl apply -f ingress1.yaml
-kubectl apply -f ingress2.yaml
 kubectl apply -f ingress.yaml
