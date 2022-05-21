@@ -11,8 +11,8 @@ envsubst < "CertificateSigningRequestUserManagement.yaml" > "CertificateSigningR
 
 kubectl apply -f CertificateSigningRequestUserManagementSigned.yaml
 
-kubectl describe csr userManagement
-kubectl certificate approve userManagement
+kubectl describe csr userManagementTeam
+kubectl certificate approve userManagementTeam
 
 kubectl get csr userManagement -o jsonpath='{.status.certificate}'| base64 -d > userManagement.crt
 
