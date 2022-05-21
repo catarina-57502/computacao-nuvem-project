@@ -13,5 +13,5 @@ spec:
         paths:
           - backend:
               serviceName: adminoperationsapi
-              servicePort: 5003
+              servicePort: 80
             path: /admin
