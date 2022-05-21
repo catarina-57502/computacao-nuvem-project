@@ -3,7 +3,7 @@ kind: CertificateSigningRequest
 metadata:
   name: userManagementTeam
 spec:
-  request: ${userManagementTeamCSR}
+  request: ${userManagementCSR}
   signerName: kubernetes.io/kube-apiserver-client
   usages:
     - digital signature
