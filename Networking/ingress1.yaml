@@ -13,5 +13,5 @@ spec:
         paths:
           - backend:
               serviceName: usermanagementapi
-              servicePort: 5004
+              servicePort: 80
             path: /user
