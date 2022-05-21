@@ -1,9 +1,8 @@
-## AdminOperationsTeam
+# AdminOperationsTeam
 
-#Generate ket for Team X
-openssl genrsa -out adminOperationsTeam.key 2048
-#Create a certificate signing request containing the public key
-openssl req -new -key adminOperationsTeam.key -out adminOperationsTeam.csr -subj "/CN=steam/O=adminOperationsTeam"
+gcloud secrets versions access 1 --secret="adminTeam-key" --format='get(payload.data)' | tr '_-' '/+' | base64 -d > adminOperationsTeam.key
+gcloud secrets versions access 1 --secret="adminTeam-cert" --format='get(payload.data)' | tr '_-' '/+' | base64 -d > adminOperationsTeam.crt
+
 export adminOperationsTeamCSR=$(cat adminOperationsTeam.csr | base64 | tr -d '\n')
 envsubst < "CertificateSigningRequest.yaml" > "CertificateSigningRequestSigned.yaml"
 #Sign this CSR using the root Kubernetes CA
@@ -22,11 +21,10 @@ kubectl config current-context
 kubectl apply -f Roles.yaml
 kubectl create rolebinding adminoperations --user=adminOperationsTeam
 
-## userManagementTeam
+# UserManagementTeam
+gcloud secrets versions access 1 --secret="usermanagement-key" --format='get(payload.data)' | tr '_-' '/+' | base64 -d > userManagementTeam.key
+gcloud secrets versions access 1 --secret="usermanagement-cert" --format='get(payload.data)' | tr '_-' '/+' | base64 -d > userManagementTeam.crt
 
-openssl genrsa -out userManagementTeam.key 2048
-#Create a certificate signing request containing the public key
-openssl req -new -key userManagementTeam.key -out userManagementTeam.csr -subj "/CN=steam/O=userManagementTeam"
 export userManagementTeam=$(cat userManagementTeam.csr | base64 | tr -d '\n')
 envsubst < "CertificateSigningRequest.yaml" > "CertificateSigningRequestSigned.yaml"
 #Sign this CSR using the root Kubernetes CA
