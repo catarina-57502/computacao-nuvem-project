@@ -14,14 +14,14 @@ kubectl apply -f CertificateSigningRequestUserManagementSigned.yaml
 kubectl describe csr userManagementTeam
 kubectl certificate approve userManagementTeam
 
-kubectl get csr userManagement -o jsonpath='{.status.certificate}'| base64 -d > userManagement.crt
+kubectl get csr userManagementTeam -o jsonpath='{.status.certificate}'| base64 -d > userManagement.crt
 
-kubectl config set-credentials userManagement --client-certificate=userManagement.crt --client-key=userManagement.key
+kubectl config set-credentials userManagementTeam --client-certificate=userManagement.crt --client-key=userManagement.key
 
 kubectl apply -f RolesUserManagement.yaml
 kubectl apply -f RoleBindingUserManagement.yaml
 
-kubectl config set-context userManagement --cluster=$CLUSTER --namespace=usermanagement --user=userManagement
+kubectl config set-context userManagementTeam --cluster=$CLUSTER --namespace=usermanagement --user=userManagementTeam
 
 
 echo 'End RBAC - userManagementTeam'
