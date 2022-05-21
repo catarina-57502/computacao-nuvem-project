@@ -1,17 +1,17 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  namespace: adminoperations
+  namespace: adminOperationsTeam
   name: adminoperations
 rules:
   - apiGroups: ["*"]
-    resources: ["pods"]
+    resources: ["pods", "namespaces", "endpoints", "services", "nodes" , "nodes/proxy" ]
     verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  namespace: usermanagement
+  namespace: userManagementTeam
   name: usermanagement
 rules:
   - apiGroups: ["*"]
