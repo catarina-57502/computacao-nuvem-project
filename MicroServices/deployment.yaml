@@ -225,7 +225,9 @@ spec:
   rules:
     - http:
         paths:
-          - backend:
+          - path: "/admin"
+            pathType: Prefix
+            backend:
               service:
                 name: adminoperationsapi
                 port:
@@ -399,9 +401,11 @@ spec:
   rules:
     - http:
         paths:
-          - backend:
+          - path: "/user"
+            pathType: Prefix
+            backend:
               service:
-                name: adminoperationsapi
+                name: usermanagementapi
                 port:
                   number: 5004
 ---
@@ -569,7 +573,9 @@ spec:
   rules:
     - http:
         paths:
-          - backend:
+          - path: "/library"
+            pathType: Prefix
+            backend:
               service:
                 name: libraryapi
                 port:
@@ -743,7 +749,9 @@ spec:
   rules:
     - http:
         paths:
-          - backend:
+          - path: "/wishes"
+            pathType: Prefix
+            backend:
               service:
                 name: wishlistapi
                 port:
@@ -901,7 +909,9 @@ spec:
   rules:
     - http:
         paths:
-          - backend:
+          - path: "/suggestions"
+            pathType: Prefix
+            backend:
               service:
                 name: suggestionsapi
                 port:
@@ -1060,7 +1070,9 @@ spec:
   rules:
     - http:
         paths:
-          - backend:
+          - path: "/searches"
+            pathType: Prefix
+            backend:
               service:
                 name: searchesapi
                 port:
@@ -1157,11 +1169,13 @@ spec:
   rules:
     - http:
         paths:
-          - backend:
-              service:
-                name: reviews-api
-                port:
-                  number: 5012
+        - path: "/reviews"
+          pathType: Prefix
+          backend:
+            service:
+              name: reviews-api-s
+              port:
+                number: 5012
 ---
 apiVersion: apps/v1
 kind: Deployment
