@@ -18,8 +18,8 @@ kubectl get csr adminOperationsTeam -o jsonpath='{.status.certificate}'| base64 
 
 kubectl config set-credentials adminOperationsTeam --client-certificate=adminOperationsTeam.crt --client-key=adminOperationsTeam.key
 
-kubectl apply -f Roles.yaml
-kubectl apply -f RoleBinding.yaml
+kubectl apply -f RolesAdminOperations.yaml
+kubectl apply -f RoleBindingAdminOperations.yaml
 
 kubectl config set-context adminOperationsTeam --cluster=$CLUSTER --namespace=adminoperations --user=adminOperationsTeam
 
