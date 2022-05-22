@@ -143,6 +143,7 @@ spec:
   selector:
     matchLabels:
       app: "adminoperationsapi"
+      access: "true"
   template:
     metadata:
       labels:
@@ -294,6 +295,7 @@ spec:
   selector:
     matchLabels:
       app: "usermanagementapi"
+      access: "true"
   template:
     metadata:
       labels:
@@ -451,6 +453,7 @@ spec:
   selector:
     matchLabels:
       app: "libraryapi"
+      access: "true"
   template:
     metadata:
       labels:
@@ -607,6 +610,7 @@ spec:
   selector:
     matchLabels:
       app: "wishlistapi"
+      access: "true"
   template:
     metadata:
       labels:
@@ -754,6 +758,7 @@ spec:
   selector:
     matchLabels:
       app: "suggestionsapi"
+      access: "true"
   template:
     metadata:
       labels:
@@ -896,6 +901,7 @@ spec:
   selector:
     matchLabels:
       app: "searchesapi"
+      access: "true"
   template:
     metadata:
       labels:
@@ -969,6 +975,7 @@ spec:
   selector:
     matchLabels:
       app: reviews-api
+      access: "true"
   template:
     metadata:
       labels:
