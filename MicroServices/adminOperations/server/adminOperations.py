@@ -143,13 +143,16 @@ def serve():
     keyfile = 'server-key.pem'
     certfile = 'server.pem'
 
-    with open(keyfile, "rb") as f:
-        private_key = x509.load_pem_x509_certificate(f.read(), default_backend())
+    file1 = open(keyfile, "rb")
+    data1 = file1.read()
+    file1.close()
 
-    with open(certfile, "rb") as f:
-        certificate_chain = x509.load_pem_x509_certificate(f.read(), default_backend())
+    file2 = open(certfile, "rb")
+    data2 = file2.read()
+    file2.close()
 
-    credentials = grpc.ssl_server_credentials([(private_key, certificate_chain)])
+
+    credentials = grpc.ssl_server_credentials([(data1, data2)])
 
     server.add_secure_port("[::]:50051")
     server.start()
