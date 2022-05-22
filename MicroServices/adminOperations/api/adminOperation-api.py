@@ -13,18 +13,11 @@ from cryptography.hazmat.backends import default_backend
 api = Flask(__name__)
 
 caCRT = 'ca.crt'
-serverCRT = 'client.crt'
-serverKey = 'client.key'
 
 with open(caCRT, 'rb') as f:
     credsCAclient = grpc.ssl_channel_credentials(f.read())
-with open(serverCRT, 'rb') as f:
-    credsSCRTclient = grpc.ssl_channel_credentials(f.read())
-with open(serverKey, 'rb') as f:
-    credsSKclient = grpc.ssl_channel_credentials(f.read())
 
-
-channel_creds = grpc.ssl_channel_credentials(root_certificates=credsCAclient, private_key=credsSCRTclient,certificate_chain=credsSKclient)
+channel_creds = grpc.ssl_channel_credentials(credsCAclient)
 
 adminoperations_channel = grpc.secure_channel(os.environ['adminoperationsserver_KEY'],channel_creds)
 
