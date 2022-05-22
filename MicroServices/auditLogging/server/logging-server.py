@@ -22,8 +22,8 @@ class LoggingService(logging_pb2_grpc.LoggingServicer):
             "endpoint": request.endpoint,
             "status": request.status,
             "service": request.service,
-            "remote_addr": request.addr,
-            "user": "default",
+            "remote_addr": request.remote_addr,
+            "user": request.user,
             "host": request.host,
             "date": request.date
         })
