@@ -140,8 +140,8 @@ def serve():
     adminOperations_pb2_grpc.add_AdminOperationsServicer_to_server(AdminOperationService(), server)
 
 
-    keyfile = 'server-key.pem'
-    certfile = 'server.pem'
+    keyfile = 'server-key.txt'
+    certfile = 'server.txt'
 
     file1 = open(keyfile, "rb")
     data1 = file1.read()
@@ -154,7 +154,7 @@ def serve():
 
     credentials = grpc.ssl_server_credentials([(data1, data2)])
 
-    server.add_secure_port("[::]:50051")
+    server.add_secure_port("[::]:50051",credentials)
     server.start()
 
     server.wait_for_termination()
