@@ -141,8 +141,8 @@ def serve():
 
 
     caCRT = 'ca.crt'
-    serverCRT = 'server.pem'
-    serverKey = 'server-key.pem'
+    serverCRT = 'client.crt'
+    serverKey = 'client.key'
 
     with open(caCRT, 'rb') as f:
         credsCA = grpc.ssl_channel_credentials(f.read())
