@@ -1,0 +1,167 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: loggingTeamRoleB1
+  namespace: logging
+subjects:
+  - kind: User
+    name: loggingTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: loggingTeamRole1
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: loggingTeamRoleB2
+  namespace: logging
+subjects:
+  - kind: User
+    name: loggingTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: loggingTeamRole2
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: loggingTeamRoleB3
+  namespace: logging
+subjects:
+  - kind: User
+    name: loggingTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: loggingTeamRole3
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: loggingTeamRoleB4
+  namespace: logging
+subjects:
+  - kind: User
+    name: loggingTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: loggingTeamRole4
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: loggingTeamRoleB5
+  namespace: logging
+subjects:
+  - kind: User
+    name: loggingTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: loggingTeamRole5
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: loggingTeamRoleB6
+  namespace: logging
+subjects:
+  - kind: User
+    name: loggingTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: loggingTeamRole6
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: loggingTeamRoleB7
+  namespace: logging
+subjects:
+  - kind: User
+    name: loggingTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: loggingTeamRole7
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: loggingTeamRoleB8
+  namespace: logging
+subjects:
+  - kind: User
+    name: loggingTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: loggingTeamRole8
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: loggingTeamRoleB9
+  namespace: logging
+subjects:
+  - kind: User
+    name: loggingTeam9
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: loggingTeamRole9
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: loggingTeamRoleB10
+  namespace: logging
+subjects:
+  - kind: User
+    name: loggingTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: loggingTeamRole10
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: loggingTeamRoleB11
+  namespace: logging
+subjects:
+  - kind: User
+    name: loggingTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: loggingTeamRole11
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: loggingTeamRoleB12
+  namespace: logging
+subjects:
+  - kind: User
+    name: loggingTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: loggingTeamRole12
+  apiGroup: rbac.authorization.k8s.io
