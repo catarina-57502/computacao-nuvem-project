@@ -143,7 +143,6 @@ spec:
   selector:
     matchLabels:
       app: "adminoperationsapi"
-      access: "true"
   template:
     metadata:
       labels:
@@ -295,7 +294,6 @@ spec:
   selector:
     matchLabels:
       app: "usermanagementapi"
-      access: "true"
   template:
     metadata:
       labels:
@@ -453,7 +451,6 @@ spec:
   selector:
     matchLabels:
       app: "libraryapi"
-      access: "true"
   template:
     metadata:
       labels:
@@ -610,7 +607,6 @@ spec:
   selector:
     matchLabels:
       app: "wishlistapi"
-      access: "true"
   template:
     metadata:
       labels:
@@ -758,7 +754,6 @@ spec:
   selector:
     matchLabels:
       app: "suggestionsapi"
-      access: "true"
   template:
     metadata:
       labels:
@@ -901,7 +896,6 @@ spec:
   selector:
     matchLabels:
       app: "searchesapi"
-      access: "true"
   template:
     metadata:
       labels:
@@ -963,6 +957,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: reviews-api-d
+  namespace: reviews
   labels:
     app: reviews-api
 spec:
@@ -975,7 +970,6 @@ spec:
   selector:
     matchLabels:
       app: reviews-api
-      access: "true"
   template:
     metadata:
       labels:
@@ -990,11 +984,11 @@ spec:
                 configMapKeyRef:
                   name: special-config
                   key: reviews-server-s
-            - name: usermanagementserversvc_KEY
+            - name: logging-server-s_KEY
               valueFrom:
                 configMapKeyRef:
                   name: special-config
-                  key: usermanagementserversvc
+                  key: logging-server-s
           ports:
             - containerPort: 5012
           livenessProbe:
@@ -1029,6 +1023,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: reviews-api-s
+  namespace: reviews
   labels:
     app: reviews-api
 spec:
@@ -1044,6 +1039,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: reviews-server-d
+  namespace: reviews
   labels:
     app: reviews-server
 spec:
@@ -1065,8 +1061,12 @@ spec:
       containers:
         - name: reviews-server
           image: "gcr.io/${PROJECT_ID}/reviews-server"
-          ports:
-            - containerPort: 50060
+          env:
+            - name: reviews-server-s_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: special-config
+                  key: reviews-server-s
           livenessProbe:
             httpGet:
               path: /metrics
@@ -1096,6 +1096,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: reviews-server-s
+  namespace: reviews
   labels:
     app: reviews-server
 spec:
@@ -1109,3 +1110,79 @@ spec:
       protocol: TCP
       port: 51060
       targetPort: 51060
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logging-server-d
+  namespace: logging
+  labels:
+    app: logging-server
+spec:
+  replicas: 1
+  strategy:
+    type: "RollingUpdate"
+    rollingUpdate:
+      maxSurge: 30%
+      maxUnavailable: 30%
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app: logging-server
+  template:
+    metadata:
+      labels:
+        app: logging-server
+    spec:
+      containers:
+        - name: logging-server
+          image: "gcr.io/${PROJECT_ID}/logging-server"
+          env:
+            - name: logging-server-s_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: special-config
+                  key: logging-server-s          
+          # livenessProbe:
+          #   httpGet:
+          #     path: /metrics
+          #     port: 51060
+          #     httpHeaders:
+          #       - name: Custom-Header
+          #         value: Awesome
+          #   initialDelaySeconds: 20
+          # readinessProbe:
+          #   httpGet:
+          #     path: /metrics
+          #     port: 51060
+          #     httpHeaders:
+          #       - name: Custom-Header
+          #         value: Awesome
+          #   initialDelaySeconds: 20
+          # startupProbe:
+          #   httpGet:
+          #     path: /metrics
+          #     port: 51060
+          #     httpHeaders:
+          #       - name: Custom-Header
+          #         value: Awesome
+          #   failureThreshold: 30
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: logging-server-s
+  namespace: logging
+  labels:
+    app: logging-server
+spec:
+  selector:
+    app: logging-server
+  ports:
+    - name: http
+      port: 50160
+      targetPort: 50160
+    # - name: prometheus
+    #   protocol: TCP
+    #   port: 51060
+    #   targetPort: 51060

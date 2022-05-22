@@ -1,29 +1,97 @@
 kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1
 metadata:
-  name: default-deny-all
-spec:
-  podSelector:
-    matchLabels: {}
-  policyTypes:
-    - Ingress
-    - Egress
----
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: access-nginx
+  name: allow-policy-admin
 spec:
   podSelector:
     matchLabels:
-      app: nginx
+      app.kubernetes.io/name: ingress-nginx
   ingress:
     - from:
         - podSelector:
             matchLabels:
-              access: "true"
-  egress:
-    - to:
+              app: adminoperationsapi
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: allow-policy-user
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: ingress-nginx
+  ingress:
+    - from:
         - podSelector:
             matchLabels:
-              access: "true"
+              app: usermanagementapi
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: allow-policy-library
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: ingress-nginx
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: libraryapi
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: allow-policy-wishlist
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: ingress-nginx
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: wishlistapi
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: allow-policy-suggestions
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: ingress-nginx
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: suggestionsapi
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: allow-policy-searches
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: ingress-nginx
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: searchesapi
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: allow-policy-reviews
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: ingress-nginx
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: reviews-api
