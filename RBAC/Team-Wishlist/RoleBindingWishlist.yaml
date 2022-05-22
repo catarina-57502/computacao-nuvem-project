@@ -1,0 +1,167 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: wishlistTeamRoleB1
+  namespace: wishlist
+subjects:
+  - kind: User
+    name: wishlistTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: wishlistTeamRole1
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: wishlistTeamRoleB2
+  namespace: wishlist
+subjects:
+  - kind: User
+    name: wishlistTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: wishlistTeamRole2
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: wishlistTeamRoleB3
+  namespace: wishlist
+subjects:
+  - kind: User
+    name: wishlistTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: wishlistTeamRole3
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: wishlistTeamRoleB4
+  namespace: wishlist
+subjects:
+  - kind: User
+    name: wishlistTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: wishlistTeamRole4
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: wishlistTeamRoleB5
+  namespace: wishlist
+subjects:
+  - kind: User
+    name: wishlistTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: wishlistTeamRole5
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: wishlistTeamRoleB6
+  namespace: wishlist
+subjects:
+  - kind: User
+    name: wishlistTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: wishlistTeamRole6
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: wishlistTeamRoleB7
+  namespace: wishlist
+subjects:
+  - kind: User
+    name: wishlistTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: wishlistTeamRole7
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: wishlistTeamRoleB8
+  namespace: wishlist
+subjects:
+  - kind: User
+    name: wishlistTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: wishlistTeamRole8
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: wishlistTeamRoleB9
+  namespace: wishlist
+subjects:
+  - kind: User
+    name: wishlistTeam9
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: wishlistTeamRole9
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: wishlistTeamRoleB10
+  namespace: wishlist
+subjects:
+  - kind: User
+    name: wishlistTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: wishlistTeamRole10
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: wishlistTeamRoleB11
+  namespace: wishlist
+subjects:
+  - kind: User
+    name: wishlistTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: wishlistTeamRole11
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: wishlistTeamRoleB12
+  namespace: wishlist
+subjects:
+  - kind: User
+    name: wishlistTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: wishlistTeamRole12
+  apiGroup: rbac.authorization.k8s.io
