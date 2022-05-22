@@ -1,0 +1,167 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: reviewsTeamRoleB1
+  namespace: reviews
+subjects:
+  - kind: User
+    name: reviewsTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: reviewsTeamRole1
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: reviewsTeamRoleB2
+  namespace: reviews
+subjects:
+  - kind: User
+    name: reviewsTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: reviewsTeamRole2
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: reviewsTeamRoleB3
+  namespace: reviews
+subjects:
+  - kind: User
+    name: reviewsTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: reviewsTeamRole3
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: reviewsTeamRoleB4
+  namespace: reviews
+subjects:
+  - kind: User
+    name: reviewsTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: reviewsTeamRole4
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: reviewsTeamRoleB5
+  namespace: reviews
+subjects:
+  - kind: User
+    name: reviewsTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: reviewsTeamRole5
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: reviewsTeamRoleB6
+  namespace: reviews
+subjects:
+  - kind: User
+    name: reviewsTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: reviewsTeamRole6
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: reviewsTeamRoleB7
+  namespace: reviews
+subjects:
+  - kind: User
+    name: reviewsTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: reviewsTeamRole7
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: reviewsTeamRoleB8
+  namespace: reviews
+subjects:
+  - kind: User
+    name: reviewsTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: reviewsTeamRole8
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: reviewsTeamRoleB9
+  namespace: reviews
+subjects:
+  - kind: User
+    name: reviewsTeam9
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: reviewsTeamRole9
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: reviewsTeamRoleB10
+  namespace: reviews
+subjects:
+  - kind: User
+    name: reviewsTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: reviewsTeamRole10
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: reviewsTeamRoleB11
+  namespace: reviews
+subjects:
+  - kind: User
+    name: reviewsTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: reviewsTeamRole11
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: reviewsTeamRoleB12
+  namespace: reviews
+subjects:
+  - kind: User
+    name: reviewsTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: reviewsTeamRole12
+  apiGroup: rbac.authorization.k8s.io

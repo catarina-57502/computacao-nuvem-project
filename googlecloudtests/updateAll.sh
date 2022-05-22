@@ -25,3 +25,5 @@ kubectl set image deployment/searchesapi searchesapi=searchesapi:latest
 kubectl set image deployment/reviews-api reviews-api=reviews-api:latest
 
 kubectl set image deployment/reviews-server reviews-server=reviews-server:latest
+
+kubectl set image deployment/logging-server logging-server=logging-server:latest
