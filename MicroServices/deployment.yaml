@@ -1094,3 +1094,73 @@ spec:
       protocol: TCP
       port: 51060
       targetPort: 51060
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logging-server-d
+  labels:
+    app: logging-server
+spec:
+  replicas: 1
+  strategy:
+    type: "RollingUpdate"
+    rollingUpdate:
+      maxSurge: 30%
+      maxUnavailable: 30%
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app: logging-server
+  template:
+    metadata:
+      labels:
+        app: logging-server
+    spec:
+      containers:
+        - name: logging-server
+          image: "gcr.io/${PROJECT_ID}/logging-server"
+          ports:
+            - containerPort: 50160
+          # livenessProbe:
+          #   httpGet:
+          #     path: /metrics
+          #     port: 51060
+          #     httpHeaders:
+          #       - name: Custom-Header
+          #         value: Awesome
+          #   initialDelaySeconds: 20
+          # readinessProbe:
+          #   httpGet:
+          #     path: /metrics
+          #     port: 51060
+          #     httpHeaders:
+          #       - name: Custom-Header
+          #         value: Awesome
+          #   initialDelaySeconds: 20
+          # startupProbe:
+          #   httpGet:
+          #     path: /metrics
+          #     port: 51060
+          #     httpHeaders:
+          #       - name: Custom-Header
+          #         value: Awesome
+          #   failureThreshold: 30
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: logging-server-s
+  labels:
+    app: logging-server
+spec:
+  selector:
+    app: logging-server
+  ports:
+    - name: http
+      port: 50160
+      targetPort: 50160
+    # - name: prometheus
+    #   protocol: TCP
+    #   port: 51060
+    #   targetPort: 51060

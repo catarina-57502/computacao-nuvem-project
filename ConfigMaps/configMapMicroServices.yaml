@@ -8,6 +8,7 @@ data:
   searchesserver: "searchesserver:50079"
   suggestionsserver: "suggestionsserver:50059"
   wishlistserver: "wishlistserver:50058"
+  logging-server-s: "logging-server-s:50160"
 metadata:
   name: "special-config"
   namespace: "usermanagement"
@@ -22,6 +23,7 @@ data:
   searchesserver: "searchesserver:50079"
   suggestionsserver: "suggestionsserver:50059"
   wishlistserver: "wishlistserver:50058"
+  logging-server-s: "logging-server-s:50160"
 metadata:
   name: "special-config"
   namespace: "adminoperations"
@@ -36,6 +38,7 @@ data:
   searchesserver: "searchesserver:50079"
   suggestionsserver: "suggestionsserver:50059"
   wishlistserver: "wishlistserver:50058"
+  logging-server-s: "logging-server-s:50160"
 metadata:
   name: "special-config"
   namespace: "default"

@@ -12,5 +12,6 @@ kubectl autoscale deployment searchesserver --cpu-percent=70 --min=1 --max=3
 kubectl autoscale deployment searchesapi --cpu-percent=70 --min=1 --max=3
 kubectl autoscale deployment reviews-api-d --cpu-percent=70 --min=1 --max=3
 kubectl autoscale deployment reviews-server-d --cpu-percent=70 --min=1 --max=3
+kubectl autoscale deployment logging-server-d --cpu-percent=70 --min=1 --max=3
 
 kubectl get hpa
