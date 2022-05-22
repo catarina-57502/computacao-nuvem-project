@@ -1,5 +1,3 @@
-kubectl apply -f networkpolicy.yaml
-
 # Add the nginx-stable Helm repository
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm repo update
