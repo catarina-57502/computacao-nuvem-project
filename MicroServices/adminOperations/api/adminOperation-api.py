@@ -6,11 +6,17 @@ import grpc
 from adminOperations_pb2 import *
 from adminOperations_pb2_grpc import AdminOperationsStub
 
+from cryptography import x509
+from cryptography.hazmat.backends import default_backend
+
 
 api = Flask(__name__)
 
 ca_cert = 'ca.pem'
-root_certs = open(ca_cert).read()
+
+with open(ca_cert, "rb") as f:
+    root_certs = x509.load_pem_x509_certificate(f.read(), default_backend())
+
 credentials = grpc.ssl_channel_credentials(root_certs)
 
 
