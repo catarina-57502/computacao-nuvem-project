@@ -12,16 +12,16 @@ from cryptography.hazmat.backends import default_backend
 
 api = Flask(__name__)
 
-ca_cert = 'ca.txt'
+caCRT = 'ca.crt'
 
-file1 = open(ca_cert, "rb")
-data = file1.read()
-file1.close()
+with open(caCRT, 'rb') as f:
+    credsCAclient = grpc.ssl_channel_credentials(f.read())
 
-credentials = grpc.ssl_channel_credentials(data)
+channel_creds = grpc.ssl_channel_credentials(credsCAclient)
+
+adminoperations_channel = grpc.secure_channel(os.environ['adminoperationsserver_KEY'],channel_creds)
 
 
-adminoperations_channel = grpc.secure_channel(os.environ['adminoperationsserver_KEY'],credentials)
 adminoperations_client = AdminOperationsStub(adminoperations_channel)
 
 @api.route('/healthz', methods=['GET'])

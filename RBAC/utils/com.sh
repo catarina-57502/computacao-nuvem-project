@@ -1,5 +1,5 @@
-openssl genrsa -out adminOperationsTeam.key 2048
-openssl req -new -key adminOperationsTeam.key -out adminOperationsTeam.csr -subj "/CN=adminOperationsTeam/O=adminOperationsTeam"
+openssl genrsa -out loggingTeam.key 2048
+openssl req -new -key loggingTeam.key -out logging.csr -subj "/CN=loggingTeam/O=loggingTeam"
 
 openssl genrsa -out userManagementTeam.key 2048
 openssl req -new -key userManagementTeam.key -out userManagementTeam.csr -subj "/CN=userManagementTeam/O=userManagementTeam"
