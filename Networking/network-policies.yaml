@@ -5,7 +5,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      app: nginx
+      app.kubernetes.io/name: ingress-nginx
   ingress:
     - from:
         - podSelector:
@@ -19,7 +19,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      app: nginx
+      app.kubernetes.io/name: ingress-nginx
   ingress:
     - from:
         - podSelector:
@@ -33,7 +33,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      app: nginx
+      app.kubernetes.io/name: ingress-nginx
   ingress:
     - from:
         - podSelector:
@@ -47,7 +47,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      app: nginx
+      app.kubernetes.io/name: ingress-nginx
   ingress:
     - from:
         - podSelector:
@@ -61,7 +61,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      app: nginx
+      app.kubernetes.io/name: ingress-nginx
   ingress:
     - from:
         - podSelector:
@@ -75,7 +75,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      app: nginx
+      app.kubernetes.io/name: ingress-nginx
   ingress:
     - from:
         - podSelector:
@@ -89,20 +89,9 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      app: nginx
+      app.kubernetes.io/name: ingress-nginx
   ingress:
     - from:
         - podSelector:
             matchLabels:
               app: reviews-api
----
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: allow-all-ingress
-spec:
-  podSelector: {}
-  ingress:
-    - {}
-  policyTypes:
-    - Ingress
