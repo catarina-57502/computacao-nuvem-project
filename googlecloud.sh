@@ -42,3 +42,28 @@ cd ..
 cd Prometheus
 chmod u+x prometheus.sh
 ./prometheus.sh
+
+cd ..
+cd RBAC
+
+cd Team-AdminOperations
+chmod u+x RBAC_AdminOperations.sh
+./RBAC_AdminOperations.sh
+cd ..
+
+cd Team-UserManagement
+chmod u+x RBAC_UserManagement.sh
+./RBAC_UserManagement.sh
+cd ..
+
+cd Team-Library
+chmod u+x RBAC_Library.sh
+./RBAC_Library.sh
+cd ..
+
+cd Team-Wishlist
+chmod u+x RBAC_Wishlist.sh
+./RBAC_Wishlist.sh
+cd ..
+
+cd ..

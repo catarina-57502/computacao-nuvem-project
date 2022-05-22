@@ -356,6 +356,7 @@ apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
   name: "libraryserver"
+  namespace: library
   labels:
     app: "libraryserver"
 spec:
@@ -419,6 +420,7 @@ apiVersion: "v1"
 kind: "Service"
 metadata:
   name: "libraryserver"
+  namespace: library
 spec:
   selector:
     app: "libraryserver"
@@ -435,6 +437,7 @@ apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
   name: "libraryapi"
+  namespace: library
   labels:
     app: "libraryapi"
 spec:
@@ -496,6 +499,7 @@ apiVersion: "v1"
 kind: "Service"
 metadata:
   name: "libraryapi"
+  namespace: library
 spec:
   selector:
     app: "libraryapi"
@@ -509,6 +513,7 @@ apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
   name: "wishlistserver"
+  namespace: wishlist
   labels:
     app: "wishlistserver"
 spec:
@@ -572,6 +577,7 @@ apiVersion: "v1"
 kind: "Service"
 metadata:
   name: "wishlistserver"
+  namespace: wishlist
 spec:
   selector:
     app: "wishlistserver"
@@ -588,6 +594,7 @@ apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
   name: "wishlistapi"
+  namespace: wishlist
   labels:
     app: "wishlistapi"
 spec:
@@ -653,6 +660,7 @@ apiVersion: "v1"
 kind: "Service"
 metadata:
   name: "wishlistapi"
+  namespace: wishlist
 spec:
   selector:
     app: "wishlistapi"

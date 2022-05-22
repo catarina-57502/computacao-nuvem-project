@@ -6,11 +6,22 @@ import grpc
 from adminOperations_pb2 import *
 from adminOperations_pb2_grpc import AdminOperationsStub
 
+from cryptography import x509
+from cryptography.hazmat.backends import default_backend
+
 
 api = Flask(__name__)
 
+ca_cert = 'ca.txt'
 
-adminoperations_channel = grpc.insecure_channel(os.environ['adminoperationsserver_KEY'])
+file1 = open(ca_cert, "rb")
+data = file1.read()
+file1.close()
+
+credentials = grpc.ssl_channel_credentials(data)
+
+
+adminoperations_channel = grpc.secure_channel(os.environ['adminoperationsserver_KEY'],credentials)
 adminoperations_client = AdminOperationsStub(adminoperations_channel)
 
 @api.route('/healthz', methods=['GET'])

@@ -5,6 +5,8 @@ import os
 import grpc
 from grpc_interceptor import ExceptionToStatusInterceptor
 from grpc_interceptor.exceptions import NotFound
+from cryptography import x509
+from cryptography.hazmat.backends import default_backend
 
 from adminOperations_pb2 import (
     GameObject,
@@ -133,14 +135,28 @@ class AdminOperationService(adminOperations_pb2_grpc.AdminOperationsServicer):
 
 def serve():
     interceptors = [ExceptionToStatusInterceptor()]
-    server = grpc.server(
-        futures.ThreadPoolExecutor(max_workers=10), interceptors=interceptors
-    )
-    adminOperations_pb2_grpc.add_AdminOperationsServicer_to_server(
-        AdminOperationService(), server
-    )
-    server.add_insecure_port("[::]:50051")
+    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+
+    adminOperations_pb2_grpc.add_AdminOperationsServicer_to_server(AdminOperationService(), server)
+
+
+    keyfile = 'server-key.txt'
+    certfile = 'server.txt'
+
+    file1 = open(keyfile, "rb")
+    data1 = file1.read()
+    file1.close()
+
+    file2 = open(certfile, "rb")
+    data2 = file2.read()
+    file2.close()
+
+
+    credentials = grpc.ssl_server_credentials([(data1, data2)])
+
+    server.add_secure_port("[::]:50051",credentials)
     server.start()
+
     server.wait_for_termination()
 
 

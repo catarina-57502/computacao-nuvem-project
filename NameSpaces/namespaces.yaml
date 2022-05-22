@@ -11,6 +11,16 @@ metadata:
 apiVersion: v1
 kind: Namespace
 metadata:
+  name: library
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: wishlist
+---
+apiVersion: v1
+kind: Namespace
+metadata:
   name: reviews
 ---
 apiVersion: v1
