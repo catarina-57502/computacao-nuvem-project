@@ -1,0 +1,16 @@
+{
+  "CN": "STEAM CA",
+  "key": {
+    "algo": "rsa",
+    "size": 2048
+  },
+  "names": [
+    {
+      "C": "Portugal",
+      "L": "Lisboa",
+      "O": "FCUL",
+      "OU": "CertificateAuthority",
+      "ST": "FCUl"
+    }
+  ]
+}
