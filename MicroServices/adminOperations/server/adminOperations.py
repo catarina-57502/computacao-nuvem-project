@@ -5,6 +5,8 @@ import os
 import grpc
 from grpc_interceptor import ExceptionToStatusInterceptor
 from grpc_interceptor.exceptions import NotFound
+from cryptography import x509
+from cryptography.hazmat.backends import default_backend
 
 from adminOperations_pb2 import (
     GameObject,
@@ -137,10 +139,15 @@ def serve():
 
     adminOperations_pb2_grpc.add_AdminOperationsServicer_to_server(AdminOperationService(), server)
 
+
     keyfile = 'server-key.pem'
     certfile = 'server.pem'
-    private_key = open(keyfile).read()
-    certificate_chain = open(certfile).read()
+
+    with open(keyfile, "rb") as f:
+        private_key = x509.load_pem_x509_certificate(f.read(), default_backend())
+
+    with open(certfile, "rb") as f:
+        certificate_chain = x509.load_pem_x509_certificate(f.read(), default_backend())
 
     credentials = grpc.ssl_server_credentials([(private_key, certificate_chain)])
 
