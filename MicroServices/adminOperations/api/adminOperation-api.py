@@ -12,12 +12,13 @@ from cryptography.hazmat.backends import default_backend
 
 api = Flask(__name__)
 
-ca_cert = 'ca.pem'
+ca_cert = 'ca.txt'
 
-with open(ca_cert, "rb") as f:
-    root_certs = x509.load_pem_x509_certificate(f.read(), default_backend())
+file1 = open(ca_cert, "rb")
+data = file1.read()
+file1.close()
 
-credentials = grpc.ssl_channel_credentials(root_certs)
+credentials = grpc.ssl_channel_credentials(data)
 
 
 adminoperations_channel = grpc.secure_channel(os.environ['adminoperationsserver_KEY'],credentials)
