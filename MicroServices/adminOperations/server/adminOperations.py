@@ -133,14 +133,20 @@ class AdminOperationService(adminOperations_pb2_grpc.AdminOperationsServicer):
 
 def serve():
     interceptors = [ExceptionToStatusInterceptor()]
-    server = grpc.server(
-        futures.ThreadPoolExecutor(max_workers=10), interceptors=interceptors
-    )
-    adminOperations_pb2_grpc.add_AdminOperationsServicer_to_server(
-        AdminOperationService(), server
-    )
-    server.add_insecure_port("[::]:50051")
+    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+
+    adminOperations_pb2_grpc.add_AdminOperationsServicer_to_server(AdminOperationService(), server)
+
+    keyfile = 'server-key.pem'
+    certfile = 'server.pem'
+    private_key = open(keyfile).read()
+    certificate_chain = open(certfile).read()
+
+    credentials = grpc.ssl_server_credentials([(private_key, certificate_chain)])
+
+    server.add_secure_port("[::]:50051")
     server.start()
+
     server.wait_for_termination()
 
 
