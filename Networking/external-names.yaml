@@ -8,3 +8,36 @@ spec:
   externalName: mongo.default.svc.cluster.local
   ports:
     - port: 27017
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: mongo
+  namespace: adminoperations
+spec:
+  type: ExternalName
+  externalName: mongo.default.svc.cluster.local
+  ports:
+    - port: 27017
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: mongo
+  namespace: wishlist
+spec:
+  type: ExternalName
+  externalName: mongo.default.svc.cluster.local
+  ports:
+    - port: 27017
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: mongo
+  namespace: library
+spec:
+  type: ExternalName
+  externalName: mongo.default.svc.cluster.local
+  ports:
+    - port: 27017
