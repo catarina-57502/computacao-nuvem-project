@@ -139,7 +139,7 @@ def serve():
     adminOperations_pb2_grpc.add_AdminOperationsServicer_to_server(AdminOperationService(), server)
 
 
-    caCRT = 'rootCA.crt'
+    caCRT = 'ca.crt'
     serverCRT = 'server.crt'
     serverKey = 'server.key'
 
