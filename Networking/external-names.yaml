@@ -118,3 +118,14 @@ spec:
   externalName: searchesserver.searches.svc.cluster.local
   ports:
     - port: 50079
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: logging-server-s
+  namespace: reviews
+spec:
+  type: ExternalName
+  externalName: logging-server-s.logging.svc.cluster.local
+  ports:
+    - port: 50160
