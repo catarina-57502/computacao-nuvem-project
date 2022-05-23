@@ -1,0 +1,167 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: searchesTeamRoleB1
+  namespace: searches
+subjects:
+  - kind: User
+    name: searchesTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: searchesTeamRole1
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: searchesTeamRoleB2
+  namespace: searches
+subjects:
+  - kind: User
+    name: admisearches
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: searchesTeamRole2
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: searchesTeamRoleB3
+  namespace: searches
+subjects:
+  - kind: User
+    name: searchesTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: searchesTeamRole3
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: searchesTeamRoleB4
+  namespace: searches
+subjects:
+  - kind: User
+    name: searchesTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: searchesTeamRole4
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: searchesTeamRoleB5
+  namespace: searches
+subjects:
+  - kind: User
+    name: searchesTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: searchesTeamRole5
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: searchesTeamRoleB6
+  namespace: searches
+subjects:
+  - kind: User
+    name: searchesTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: searchesTeamRole6
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: searchesTeamRoleB7
+  namespace: searches
+subjects:
+  - kind: User
+    name: searchesTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: searchesTeamRole7
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: searchesTeamRoleB8
+  namespace: searches
+subjects:
+  - kind: User
+    name: searchesTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: searchesTeamRole8
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: searchesTeamRoleB9
+  namespace: searches
+subjects:
+  - kind: User
+    name: searchesTeam9
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: searchesTeamRole9
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: searchesTeamRoleB10
+  namespace: searches
+subjects:
+  - kind: User
+    name: searchesTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: searchesTeamRole10
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: searchesTeamRoleB11
+  namespace: searches
+subjects:
+  - kind: User
+    name: searchesTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: searchesTeamRole11
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: searchesTeamRoleB12
+  namespace: searches
+subjects:
+  - kind: User
+    name: searchesTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: searchesTeamRole12
+  apiGroup: rbac.authorization.k8s.io

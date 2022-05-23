@@ -815,6 +815,7 @@ apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
   name: "searchesserver"
+  namespace: "searches"
   labels:
     app: "searchesserver"
 spec:
@@ -867,6 +868,7 @@ apiVersion: "v1"
 kind: "Service"
 metadata:
   name: "searchesserver"
+  namespace: "searches"
 spec:
   type: ClusterIP
   selector:
@@ -884,6 +886,7 @@ apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
   name: "searchesapi"
+  namespace: "searches"
   labels:
     app: "searchesapi"
 spec:
@@ -944,6 +947,7 @@ apiVersion: "v1"
 kind: "Service"
 metadata:
   name: "searchesapi"
+  namespace: "searches"
 spec:
   selector:
     app: "searchesapi"
