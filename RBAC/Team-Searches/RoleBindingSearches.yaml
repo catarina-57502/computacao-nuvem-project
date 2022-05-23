@@ -19,7 +19,7 @@ metadata:
   namespace: searches
 subjects:
   - kind: User
-    name: admisearches
+    name: searchesTeam
     apiGroup: rbac.authorization.k8s.io
 roleRef:
   kind: Role

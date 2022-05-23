@@ -102,3 +102,19 @@ data:
 metadata:
   name: "special-config"
   namespace: "suggestions"
+---
+apiVersion: v1
+kind: ConfigMap
+data:
+  usermanagementserversvc: "usermanagementserversvc:50052"
+  adminoperationsserver: "adminoperationsserver:50051"
+  libraryserver: "libraryserver:50053"
+  reviews-server-s: "reviews-server-s:50060"
+  searchesserver: "searchesserver:50079"
+  suggestionsserver: "suggestionsserver:50059"
+  wishlistserver: "wishlistserver:50058"
+  logging-server-s: "logging-server-s:50160"
+metadata:
+  name: "special-config"
+  namespace: "searches"
+

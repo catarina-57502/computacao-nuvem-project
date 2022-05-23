@@ -76,4 +76,15 @@ chmod u+x RBAC_Logging.sh
 ./RBAC_Logging.sh
 cd ..
 
+cd Team-Searches
+chmod u+x RBAC_Searches.sh
+./RBAC_Searches.sh
+cd ..
+
+cd Team-Suggestions
+chmod u+x RBAC_Suggestions.sh
+./RBAC_Suggestions.sh
+
+cd ..
+
 cd ..

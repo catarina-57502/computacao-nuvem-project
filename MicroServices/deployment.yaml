@@ -674,6 +674,7 @@ apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
   name: "suggestionsserver"
+  namespace: suggestions
   labels:
     app: "suggestionsserver"
 spec:
@@ -726,6 +727,7 @@ apiVersion: "v1"
 kind: "Service"
 metadata:
   name: "suggestionsserver"
+  namespace: suggestions
 spec:
   selector:
     app: "suggestionsserver"
@@ -742,6 +744,7 @@ apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
   name: "suggestionsapi"
+  namespace: suggestions
   labels:
     app: "suggestionsapi"
 spec:
@@ -802,6 +805,7 @@ apiVersion: "v1"
 kind: "Service"
 metadata:
   name: "suggestionsapi"
+  namespace: suggestions
 spec:
   selector:
     app: "suggestionsapi"

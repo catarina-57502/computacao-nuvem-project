@@ -82,7 +82,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: steam-ingress
-  namespace: default
+  namespace: suggestions
   annotations:
     kubernetes.io/ingress.class: "nginx"
 spec:
@@ -102,7 +102,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: steam-ingress
-  namespace: default
+  namespace: searches
   annotations:
     kubernetes.io/ingress.class: "nginx"
 spec:
