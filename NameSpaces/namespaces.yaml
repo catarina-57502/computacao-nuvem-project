@@ -18,8 +18,17 @@ kind: Namespace
 metadata:
   name: wishlist
 ---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: suggestions
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: searches
+  name: reviews
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: logging

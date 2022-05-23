@@ -1,6 +1,7 @@
 import os
 import grpc
 from google.protobuf.json_format import MessageToJson, ParseDict
+from datetime import datetime
 
 from reviews_pb2 import (
     ReviewObject,
@@ -9,12 +10,22 @@ from reviews_pb2 import (
 )
 from reviews_pb2_grpc import ReviewsStub
 
-from flask import Flask, json, request
+from logging_pb2 import (
+    Log,
+    Empty
+)
+from logging_pb2_grpc import LoggingStub
+
+from flask import Flask, json, request, g
 
 api = Flask(__name__)
 
 reviews_channel = grpc.insecure_channel(os.environ['reviews-server-s_KEY'])
 reviews_client = ReviewsStub(reviews_channel)
+
+
+logging_channel = grpc.insecure_channel(os.environ['logging-server-s_KEY'])
+logging_client = LoggingStub(logging_channel)
 
 @api.route('/healthz', methods=['GET'])
 def healthz():
@@ -26,7 +37,9 @@ def list_reviews():
     req = ListReviewsRequest (
         max_results = max_results
     )
-    res = reviews_client.ListReviews(req)     
+    res = reviews_client.ListReviews(req)
+    g.req = request
+
     return MessageToJson(res)
 
 @api.route('/reviews', methods=['POST'])
@@ -58,6 +71,7 @@ def add_review():
     #     author_last_played = data["author_last_played"]        
     # )
     res = reviews_client.AddReview(req)
+    g.req = request
     # return json.dumps({
     #     "code": res.code,
     #     "description": res.description})
@@ -73,6 +87,8 @@ def get_review(review_id):
         return json.dumps({
             "code": "404", 
             "description": "Review not found"})
+    g.req = request
+
     return MessageToJson(res)
 
     # return json.dumps({
@@ -129,6 +145,7 @@ def update_review(review_id):
     #     author_last_played = data["author_last_played"]        
     # )
     res = reviews_client.UpdateReview(req)
+    g.req = request
     # return json.dumps({
     #     "code": res.code,
     #     "description": res.description})
@@ -140,7 +157,23 @@ def delete_review(review_id):
         review_id=review_id,
     )
     res = reviews_client.DeleteReview(req)
+    g.req = request
     # return json.dumps({
     #     "code": res.code,
     #     "description": res.description})
     return MessageToJson(res)
+
+@api.after_request()
+def reviews_ar(response):
+    req = g.get("req")
+    log = ParseDict({
+        "operation": str(req.method),
+        "endpoint": req.endpoint,
+        "status": response.status,
+        "service": "Reviews",
+        "remote_addr": str(req.remote_addr),
+        "user": "default",
+        "host": req.host,
+        "date": datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+    }, Log())
+    logging_client.StoreLog(log)

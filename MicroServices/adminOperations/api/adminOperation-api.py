@@ -6,21 +6,20 @@ import grpc
 from adminOperations_pb2 import *
 from adminOperations_pb2_grpc import AdminOperationsStub
 
-from cryptography import x509
-from cryptography.hazmat.backends import default_backend
 
 
 api = Flask(__name__)
 
-ca_cert = 'ca.pem'
+caCRT = 'ca.crt'
 
-with open(ca_cert, "rb") as f:
-    root_certs = x509.load_pem_x509_certificate(f.read(), default_backend())
+with open(caCRT, 'rb') as f:
+    credsCAclient = f.read()
 
-credentials = grpc.ssl_channel_credentials(root_certs)
+channel_creds = grpc.ssl_channel_credentials(credsCAclient)
+
+adminoperations_channel = grpc.secure_channel(os.environ['adminoperationsserver_KEY'],channel_creds)
 
 
-adminoperations_channel = grpc.secure_channel(os.environ['adminoperationsserver_KEY'],credentials)
 adminoperations_client = AdminOperationsStub(adminoperations_channel)
 
 @api.route('/healthz', methods=['GET'])

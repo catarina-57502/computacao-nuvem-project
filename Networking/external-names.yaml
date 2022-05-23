@@ -8,3 +8,113 @@ spec:
   externalName: mongo.default.svc.cluster.local
   ports:
     - port: 27017
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: mongo
+  namespace: adminoperations
+spec:
+  type: ExternalName
+  externalName: mongo.default.svc.cluster.local
+  ports:
+    - port: 27017
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: mongo
+  namespace: wishlist
+spec:
+  type: ExternalName
+  externalName: mongo.default.svc.cluster.local
+  ports:
+    - port: 27017
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: mongo
+  namespace: library
+spec:
+  type: ExternalName
+  externalName: mongo.default.svc.cluster.local
+  ports:
+    - port: 27017
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: mongo
+  namespace: wishlist
+spec:
+  type: ExternalName
+  externalName: mongo.default.svc.cluster.local
+  ports:
+    - port: 27017
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: mongo
+  namespace: library
+spec:
+  type: ExternalName
+  externalName: mongo.default.svc.cluster.local
+  ports:
+    - port: 27017
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: usermanagementserversvc
+  namespace: wishlist
+spec:
+  type: ExternalName
+  externalName: usermanagementserversvc.usermanagement.svc.cluster.local
+  ports:
+    - port: 50052
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: usermanagementserversvc
+  namespace: library
+spec:
+  type: ExternalName
+  externalName: usermanagementserversvc.usermanagement.svc.cluster.local
+  ports:
+    - port: 50052
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: usermanagementserversvc
+  namespace: adminoperations
+spec:
+  type: ExternalName
+  externalName: usermanagementserversvc.usermanagement.svc.cluster.local
+  ports:
+    - port: 50052
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: searchesserver
+  namespace: wishlist
+spec:
+  type: ExternalName
+  externalName: searchesserver.default.svc.cluster.local
+  ports:
+    - port: 50079
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: searchesserver
+  namespace: library
+spec:
+  type: ExternalName
+  externalName: searchesserver.default.svc.cluster.local
+  ports:
+    - port: 50079

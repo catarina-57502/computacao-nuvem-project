@@ -56,4 +56,24 @@ chmod u+x RBAC_UserManagement.sh
 ./RBAC_UserManagement.sh
 cd ..
 
+cd Team-Library
+chmod u+x RBAC_Library.sh
+./RBAC_Library.sh
+cd ..
+
+cd Team-Wishlist
+chmod u+x RBAC_Wishlist.sh
+./RBAC_Wishlist.sh
+cd ..
+
+cd Team-Reviews
+chmod u+x RBAC_Reviews.sh
+./RBAC_Reviews.sh
+cd ..
+
+cd Team-Logging
+chmod u+x RBAC_Logging.sh
+./RBAC_Logging.sh
+cd ..
+
 cd ..

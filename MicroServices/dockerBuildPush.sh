@@ -85,5 +85,12 @@ docker push gcr.io/${PROJECT_ID}/reviews-server
 docker build . -f api/Dockerfile -t gcr.io/${PROJECT_ID}/reviews-api
 docker push gcr.io/${PROJECT_ID}/reviews-api
 
+cd ..
+
+# MicroService Logging Server
+cd logging
+docker build . -f server/Dockerfile -t gcr.io/${PROJECT_ID}/logging-server
+docker push gcr.io/${PROJECT_ID}/logging-server
+
 # Deploy
 gcloud auth configure-docker
