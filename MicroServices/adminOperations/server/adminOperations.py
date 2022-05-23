@@ -5,8 +5,7 @@ import os
 import grpc
 from grpc_interceptor import ExceptionToStatusInterceptor
 from grpc_interceptor.exceptions import NotFound
-from cryptography import x509
-from cryptography.hazmat.backends import default_backend
+
 
 from adminOperations_pb2 import (
     GameObject,
@@ -145,11 +144,11 @@ def serve():
     serverKey = 'server.key'
 
     with open(caCRT, 'rb') as f:
-        credsCA = grpc.ssl_channel_credentials(f.read())
+        credsCA = f.read()
     with open(serverCRT, 'rb') as f:
-        credsSCRT = grpc.ssl_channel_credentials(f.read())
+        credsSCRT = f.read()
     with open(serverKey, 'rb') as f:
-        credsSK = grpc.ssl_channel_credentials(f.read())
+        credsSK = f.read()
 
 
     channel_creds = grpc.ssl_channel_credentials(root_certificates=credsCA, private_key=credsSK,certificate_chain=credsSCRT)

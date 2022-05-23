@@ -6,8 +6,6 @@ import grpc
 from adminOperations_pb2 import *
 from adminOperations_pb2_grpc import AdminOperationsStub
 
-from cryptography import x509
-from cryptography.hazmat.backends import default_backend
 
 
 api = Flask(__name__)
@@ -15,7 +13,7 @@ api = Flask(__name__)
 caCRT = 'rootCA.crt'
 
 with open(caCRT, 'rb') as f:
-    credsCAclient = grpc.ssl_channel_credentials(f.read())
+    credsCAclient = f.read()
 
 channel_creds = grpc.ssl_channel_credentials(credsCAclient)
 
