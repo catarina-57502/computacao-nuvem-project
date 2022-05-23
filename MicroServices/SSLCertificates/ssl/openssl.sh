@@ -37,6 +37,9 @@ openssl rsa -passin pass:4523 -in client.key -out client.key
 
 
 mv rootCA.crt /home/grupo7_cn_fcul/CloudProjectGroup7/MicroServices/adminOperations/api
+mv rootCA.crt /home/grupo7_cn_fcul/CloudProjectGroup7/MicroServices/adminOperations/server
+
+mv rootCA.key  /home/grupo7_cn_fcul/CloudProjectGroup7/MicroServices/adminOperations/api
 mv rootCA.key  /home/grupo7_cn_fcul/CloudProjectGroup7/MicroServices/adminOperations/server
 
 mv server.crt /home/grupo7_cn_fcul/CloudProjectGroup7/MicroServices/adminOperations/server
