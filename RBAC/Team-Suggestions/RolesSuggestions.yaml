@@ -1,0 +1,119 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: suggestions
+  name: suggestionsTeamRole1
+rules:
+  - apiGroups: ["*"]
+    resources: ["bindings" ]
+    verbs: ["create"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: suggestions
+  name: suggestionsTeamRole2
+rules:
+  - apiGroups: ["*"]
+    resources: ["componentstatuses","nodes","pods" ]
+    verbs: ["get","list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: suggestions
+  name: suggestionsTeamRole3
+rules:
+  - apiGroups: ["*"]
+    resources: ["configmaps", "endpoints" , "events", "limitranges", "namespaces", "nodes", "persistentvolumeclaims", "persistentvolumes"]
+    verbs: ["get","list","create","patch", "update", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: suggestions
+  name: suggestionsTeamRole4
+rules:
+  - apiGroups: ["*"]
+    resources: ["pods", "podtemplates" , "replicationcontrollers", "resourcequotas", "secrets", "serviceaccounts", "services", "mutatingwebhookconfigurations" ]
+    verbs: ["get","list","create","patch", "update", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: suggestions
+  name: suggestionsTeamRole5
+rules:
+  - apiGroups: ["*"]
+    resources: ["validatingwebhookconfigurations", "customresourcedefinitions" , "apiservices", "controllerrevisions", "daemonsets"]
+    verbs: ["get","list","create","patch", "update", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: suggestions
+  name: suggestionsTeamRole6
+rules:
+  - apiGroups: ["*"]
+    resources: ["deployments", "replicasets" , "statefulsets"]
+    verbs: ["get","list","create","patch", "update", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: suggestions
+  name: suggestionsTeamRole7
+rules:
+  - apiGroups: ["*"]
+    resources: ["tokenreviews", "localsubjectaccessreviews" , "selfsubjectaccessreviews", "subjectaccessreviews", "secrets", "serviceaccounts", "services", "mutatingwebhookconfigurations"  ]
+    verbs: ["create"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: suggestions
+  name: suggestionsTeamRole8
+rules:
+  - apiGroups: ["*"]
+    resources: ["horizontalpodautoscalers", "cronjobs" , "jobs", "certificatesigningrequests", "backendconfigs", "serviceaccounts", "leases", "endpointslices" ]
+    verbs: ["get","list","create","patch", "update", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: suggestions
+  name: suggestionsTeamRole9
+rules:
+  - apiGroups: ["*"]
+    resources: ["events", "ingresses" , "flowschemas", "prioritylevelconfigurations", "capacityrequests", "storagestates", "storageversionmigrations", "frontendconfigs"]
+    verbs: ["get","list","create","patch", "update", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: suggestions
+  name: suggestionsTeamRole10
+rules:
+  - apiGroups: ["*"]
+    resources: ["managedcertificates", "serviceattachments" , "servicenetworkendpointgroups", "ingressclasses", "networkpolicies", "runtimeclasses", "updateinfos", "poddisruptionbudgets"]
+    verbs: ["get","list","create","patch", "update", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: suggestions
+  name: suggestionsTeamRole11
+rules:
+  - apiGroups: ["*"]
+    resources: [ "podsecuritypolicies", "clusterrolebindings" , "clusterroles", "rolebindings", "roles", "volumesnapshotclasses", "volumesnapshotcontents", "volumesnapshots" ]
+    verbs: ["get","list","create", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: suggestions
+  name: suggestionsTeamRole12
+rules:
+  - apiGroups: ["*"]
+    resources: [ "csidrivers", "csinodes" , "csistoragecapacities", "storageclasses", "volumeattachments" ]
+    verbs: ["get","list","create", "watch"]
