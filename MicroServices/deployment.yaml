@@ -81,7 +81,7 @@ spec:
                   name: special-config
                   key: usermanagementserversvc
           ports:
-            - containerPort: 50051
+            - containerPort: 5051
           livenessProbe:
             httpGet:
               path: /metrics
