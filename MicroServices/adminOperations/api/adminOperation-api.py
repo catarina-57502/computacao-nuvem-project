@@ -12,7 +12,7 @@ from cryptography.hazmat.backends import default_backend
 
 api = Flask(__name__)
 
-caCRT = 'ca.crt'
+caCRT = 'rootCA.crt'
 
 with open(caCRT, 'rb') as f:
     credsCAclient = grpc.ssl_channel_credentials(f.read())
