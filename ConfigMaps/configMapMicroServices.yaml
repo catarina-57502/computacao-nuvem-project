@@ -17,7 +17,7 @@ apiVersion: v1
 kind: ConfigMap
 data:
   usermanagementserversvc: "usermanagementserversvc:50052"
-  adminoperationsserver: "adminoperationsserver:50051"
+  adminoperationsserver: "adminoperationsserver:5051"
   libraryserver: "libraryserver:50053"
   reviews-server-s: "reviews-server-s:50060"
   searchesserver: "searchesserver:50079"
