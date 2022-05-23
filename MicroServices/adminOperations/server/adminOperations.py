@@ -140,9 +140,9 @@ def serve():
     adminOperations_pb2_grpc.add_AdminOperationsServicer_to_server(AdminOperationService(), server)
 
 
-    caCRT = 'ca.crt'
-    serverCRT = 'server.pem'
-    serverKey = 'server-key.pem'
+    caCRT = 'rootCA.crt'
+    serverCRT = 'server.crt'
+    serverKey = 'server.key'
 
     with open(caCRT, 'rb') as f:
         credsCA = grpc.ssl_channel_credentials(f.read())

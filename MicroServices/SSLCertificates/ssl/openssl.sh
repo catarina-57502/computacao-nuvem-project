@@ -10,8 +10,13 @@ openssl genrsa -passout pass:4523 -des3 -out server.key 4096
 echo Generate server signing request:
 openssl req -passin pass:4523 -new -key server.key -out server.csr -subj  "/C=PT/ST=LIS/L=SI/O=FCUL/OU=STEAM/CN=CA"
 
+
+openssl genrsa -des3 -out rootCA.key 4096
+openssl req -x509 -new -nodes -key rootCA.key -sha256 -days 1024 -out rootCA.crt
+
+
 echo Self-sign server certificate:
-openssl x509 -req -passin pass:4523 -days 365 -in server.csr -CA ca.crt -CAkey ca.key -set_serial 01 -out server.crt
+openssl x509 -req -passin pass:4523 -days 365 -in server.csr -CA rootCA.crt -CAkey rootCA.key  -set_serial 01 -out server.crt
 
 echo Remove passphrase from server key:
 openssl rsa -passin pass:4523 -in server.key -out server.key
@@ -22,15 +27,17 @@ openssl genrsa -passout pass:4523 -des3 -out client.key 4096
 echo Generate client signing request:
 openssl req -passin pass:4523 -new -key client.key -out client.csr -subj  "/C=PT/ST=LIS/L=SI/O=FCUL/OU=STEAM/CN=CA"
 
+
+
 echo Self-sign client certificate:
-openssl x509 -passin pass:4523 -req -days 365 -in client.csr -CA ca.crt -CAkey ca.key -set_serial 01 -out client.crt
+openssl x509 -passin pass:4523 -req -days 365 -in client.csr -CA rootCA.crt -CAkey rootCA.key -set_serial 01 -out client.crt
 
 echo Remove passphrase from client key:
 openssl rsa -passin pass:4523 -in client.key -out client.key
 
 
-mv ca.crt /home/grupo7_cn_fcul/CloudProjectGroup7/MicroServices/adminOperations/api
-mv ca.crt /home/grupo7_cn_fcul/CloudProjectGroup7/MicroServices/adminOperations/server
+mv rootCA.crt /home/grupo7_cn_fcul/CloudProjectGroup7/MicroServices/adminOperations/api
+mv rootCA.key  /home/grupo7_cn_fcul/CloudProjectGroup7/MicroServices/adminOperations/server
 
 mv server.crt /home/grupo7_cn_fcul/CloudProjectGroup7/MicroServices/adminOperations/server
 mv server.key /home/grupo7_cn_fcul/CloudProjectGroup7/MicroServices/adminOperations/server
