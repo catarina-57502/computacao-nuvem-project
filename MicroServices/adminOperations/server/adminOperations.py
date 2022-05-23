@@ -139,7 +139,7 @@ def serve():
     adminOperations_pb2_grpc.add_AdminOperationsServicer_to_server(AdminOperationService(), server)
 
 
-    caCRT = 'rootCA.crt'
+    caCRT = 'ca.crt'
     serverCRT = 'server.crt'
     serverKey = 'server.key'
 
@@ -151,7 +151,7 @@ def serve():
         credsSK = f.read()
 
 
-    channel_creds = grpc.ssl_channel_credentials(root_certificates=credsCA, private_key=credsSK,certificate_chain=credsSCRT)
+    channel_creds = grpc.ssl_channel_credentials(credsCA)
 
 
     server.add_secure_port("[::]:50051",channel_creds)

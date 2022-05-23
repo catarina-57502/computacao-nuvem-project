@@ -10,7 +10,7 @@ from adminOperations_pb2_grpc import AdminOperationsStub
 
 api = Flask(__name__)
 
-caCRT = 'rootCA.crt'
+caCRT = 'ca.crt'
 
 with open(caCRT, 'rb') as f:
     credsCAclient = f.read()
