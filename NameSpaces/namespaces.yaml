@@ -21,6 +21,11 @@ metadata:
 apiVersion: v1
 kind: Namespace
 metadata:
+  name: suggestions
+---
+apiVersion: v1
+kind: Namespace
+metadata:
   name: reviews
 ---
 apiVersion: v1

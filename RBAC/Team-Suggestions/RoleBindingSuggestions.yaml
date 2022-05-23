@@ -1,0 +1,167 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: suggestionsTeamRoleB1
+  namespace: suggestions
+subjects:
+  - kind: User
+    name: suggestionsTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: suggestionsTeamRole1
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: suggestionsTeamRoleB2
+  namespace: suggestions
+subjects:
+  - kind: User
+    name: suggestionsTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: suggestionsTeamRole2
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: suggestionsTeamRoleB3
+  namespace: suggestions
+subjects:
+  - kind: User
+    name: suggestionsTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: suggestionsTeamRole3
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: suggestionsTeamRoleB4
+  namespace: suggestions
+subjects:
+  - kind: User
+    name: suggestionsTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: suggestionsTeamRole4
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: suggestionsTeamRoleB5
+  namespace: suggestions
+subjects:
+  - kind: User
+    name: suggestionsTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: suggestionsTeamRole5
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: suggestionsTeamRoleB6
+  namespace: suggestions
+subjects:
+  - kind: User
+    name: suggestionsTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: suggestionsTeamRole6
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: suggestionsTeamRoleB7
+  namespace: suggestions
+subjects:
+  - kind: User
+    name: suggestionsTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: suggestionsTeamRole7
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: suggestionsTeamRoleB8
+  namespace: suggestions
+subjects:
+  - kind: User
+    name: suggestionsTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: suggestionsTeamRole8
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: suggestionsTeamRoleB9
+  namespace: suggestions
+subjects:
+  - kind: User
+    name: suggestionsTeam9
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: suggestionsTeamRole9
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: suggestionsTeamRoleB10
+  namespace: suggestions
+subjects:
+  - kind: User
+    name: suggestionsTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: suggestionsTeamRole10
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: suggestionsTeamRoleB11
+  namespace: suggestions
+subjects:
+  - kind: User
+    name: suggestionsTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: suggestionsTeamRole11
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: suggestionsTeamRoleB12
+  namespace: suggestions
+subjects:
+  - kind: User
+    name: suggestionsTeam
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: suggestionsTeamRole12
+  apiGroup: rbac.authorization.k8s.io
