@@ -7,19 +7,10 @@ from adminOperations_pb2 import *
 from adminOperations_pb2_grpc import AdminOperationsStub
 
 
-
 api = Flask(__name__)
 
-caCRT = 'ca.crt'
 
-with open(caCRT, 'rb') as f:
-    credsCAclient = f.read()
-
-channel_creds = grpc.ssl_channel_credentials(credsCAclient)
-
-adminoperations_channel = grpc.secure_channel(os.environ['adminoperationsserver_KEY'],channel_creds)
-
-
+adminoperations_channel = grpc.insecure_channel(os.environ['adminoperationsserver_KEY'])
 adminoperations_client = AdminOperationsStub(adminoperations_channel)
 
 @api.route('/healthz', methods=['GET'])
@@ -111,4 +102,3 @@ def deleteUser():
         deleteUser_request
     )
     return json.dumps(deleteUser_response.message)
-
