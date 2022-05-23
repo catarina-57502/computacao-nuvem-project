@@ -46,7 +46,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: mongo
-  namespace: wishlist
+  namespace: suggestions
 spec:
   type: ExternalName
   externalName: mongo.default.svc.cluster.local
@@ -57,7 +57,29 @@ kind: Service
 apiVersion: v1
 metadata:
   name: mongo
-  namespace: library
+  namespace: searches
+spec:
+  type: ExternalName
+  externalName: mongo.default.svc.cluster.local
+  ports:
+    - port: 27017
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: mongo
+  namespace: reviews
+spec:
+  type: ExternalName
+  externalName: mongo.default.svc.cluster.local
+  ports:
+    - port: 27017
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: mongo
+  namespace: logging
 spec:
   type: ExternalName
   externalName: mongo.default.svc.cluster.local
