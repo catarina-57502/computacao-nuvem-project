@@ -104,7 +104,7 @@ metadata:
   namespace: wishlist
 spec:
   type: ExternalName
-  externalName: searchesserver.default.svc.cluster.local
+  externalName: searchesserver.searches.svc.cluster.local
   ports:
     - port: 50079
 ---
@@ -115,6 +115,6 @@ metadata:
   namespace: library
 spec:
   type: ExternalName
-  externalName: searchesserver.default.svc.cluster.local
+  externalName: searchesserver.searches.svc.cluster.local
   ports:
     - port: 50079
