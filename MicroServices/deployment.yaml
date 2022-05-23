@@ -118,8 +118,8 @@ spec:
     app: "adminoperationsserver"
   ports:
     - name: "server"
-      port: 50051
-      targetPort: 50051
+      port: 5051
+      targetPort: 5051
     - name: prometheus
       protocol: TCP
       port: 51051

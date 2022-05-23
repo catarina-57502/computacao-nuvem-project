@@ -153,7 +153,7 @@ def serve():
 
     channel_creds = grpc.ssl_server_credentials([(credsSK, credsSCRT)], credsCA, False)
 
-    server.add_secure_port("[::]:50051",channel_creds)
+    server.add_secure_port("[::]:5051",channel_creds)
     server.start()
 
     server.wait_for_termination()
