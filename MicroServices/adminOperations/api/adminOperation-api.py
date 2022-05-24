@@ -117,19 +117,3 @@ def deleteUser():
     )
     g.req = request
     return json.dumps(deleteUser_response.message)
-
-@api.after_request
-def admin_ar(response):
-    req = g.get("req")
-    log = ParseDict({
-        "operation": str(req.method),
-        "endpoint": req.full_path,
-        "status": response.status,
-        "service": "Admin Operations",
-        "remote_addr": str(req.remote_addr),
-        "user": "default",
-        "host": req.host,
-        "date": datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
-    }, Log())
-    logging_client.StoreLog(log)
-    return response
