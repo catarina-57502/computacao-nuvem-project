@@ -124,7 +124,7 @@ def writeCSVtoDBGames(CSVFile,tableDB):
     file.close()
     print("DONE", CSVFile)
 def get_database():
-    client = MongoClient('mongo', 27017 ,username='admin', password='admin' )
+    client = MongoClient('mongo', 27017 ,username='YWRtaW4=', password='YWRtaW4=' )
     print("DataBase Created")
     return client['steam']
 
