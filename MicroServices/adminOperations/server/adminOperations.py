@@ -141,8 +141,14 @@ def serve():
 
     keyfile = 'server-key.pem'
     certfile = 'server.pem'
-    private_key = open(keyfile).read()
-    certificate_chain = open(certfile).read()
+
+    with open(keyfile,'rb') as f:
+        private_key = f.read()
+
+    with open(certfile,'rb') as f:
+        certificate_chain = f.read()
+
+
     credentials = grpc.ssl_server_credentials(
         [(private_key, certificate_chain)]
     )
