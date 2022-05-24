@@ -6,15 +6,15 @@ message User {
   string password = 3;
   string email = 4;
   string type = 5;
-  repeated Wishlist wishlist = 6;
-  repeated Library library = 7;
+  repeated UserWishlist wishlist = 6;
+  repeated UserLibrary library = 7;
 }
 
-message Wishlist{
+message UserWishlist{
   string id = 1;
 }
 
-message Library{
+message UserLibrary{
   string id = 1;
 }
 

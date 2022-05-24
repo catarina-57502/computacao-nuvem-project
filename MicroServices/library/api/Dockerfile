@@ -14,6 +14,7 @@ RUN pip install --upgrade protobuf
 RUN python -m grpc_tools.protoc -I ../protobufs --python_out=. \
            --grpc_python_out=. ../protobufs/logging.proto
 RUN python -m grpc_tools.protoc -I ../protobufs --python_out=. --grpc_python_out=. ../protobufs/library.proto
+RUN python -m grpc_tools.protoc -I ../protobufs --python_out=. --grpc_python_out=. ../protobufs/userManagement.proto
 
 EXPOSE 5001
 ENV FLASK_APP=library-api.py
