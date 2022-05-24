@@ -28,9 +28,14 @@ with open(cert, 'rb') as f:
 with open(key, 'rb') as f:
     credsKey = f.read()
 
+options = {
+    'grpc.ssl_target_name_override' : 'adminoperationsserver',
+    'grpc.default_authority': 'adminoperationsserver'
+}
+
 creds = grpc.ssl_channel_credentials(root_certificates=credsCA,private_key=credsKey, certificate_chain=credsCERT)
 
-adminoperations_channel = grpc.secure_channel("adminoperationsserver:5051",creds)
+adminoperations_channel = grpc.secure_channel("adminoperationsserver:5051",creds,options)
 
 adminoperations_client = AdminOperationsStub(adminoperations_channel)
 
