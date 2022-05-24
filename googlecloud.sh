@@ -24,8 +24,8 @@ cd MicroServices
 
 #kubectl apply -f mongo-secrets.yaml
 
-echo "admin" | base64 > username.txt
-echo "admin" | base64 > password.txt
+echo "YWRtaW4=" > username.txt
+echo "YWRtaW4=" > password.txt
 kubectl create secret generic mongo-secrets --from-file=username=./username.txt --from-file=password=./password.txt
 
 kubectl apply -f pv.yaml
