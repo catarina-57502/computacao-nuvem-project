@@ -11,7 +11,7 @@ from adminOperations_pb2_grpc import AdminOperationsStub
 
 api = Flask(__name__)
 
-ca_cert = 'ca.pem'
+ca_cert = 'keys/caAdminOperations.pem'
 with open(ca_cert,'rb') as f:
     root_certs = f.read()
 
@@ -21,6 +21,16 @@ credentials = grpc.ssl_channel_credentials(root_certs)
 adminoperations_channel = grpc.secure_channel("adminoperationsserver:50051",credentials)
 
 adminoperations_client = AdminOperationsStub(adminoperations_channel)
+
+ca_cert = 'keys/caLogging.pem'
+with open(ca_cert,'rb') as f:
+    root_certs = f.read()
+
+
+credentials = grpc.ssl_channel_credentials(root_certs)
+
+logging_channel = grpc.secure_channel(os.environ['logging-server-s_KEY'],credentials)
+logging_client = LoggingStub(logging_channel)
 
 
 @api.route('/healthz', methods=['GET'])
@@ -117,3 +127,20 @@ def deleteUser():
     )
     g.req = request
     return json.dumps(deleteUser_response.message)
+
+
+@api.after_request
+def adminoperations_ar(response):
+    req = g.get("req")
+    log = ParseDict({
+        "operation": str(req.method),
+        "endpoint": req.full_path,
+        "status": response.status,
+        "service": "Library",
+        "remote_addr": str(req.remote_addr),
+        "user": "default",
+        "host": req.host,
+        "date": datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+    }, Log())
+    logging_client.StoreLog(log)
+    return response

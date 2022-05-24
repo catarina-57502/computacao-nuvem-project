@@ -8,6 +8,11 @@ COPY api/ /service/adminOperationAPI/
 WORKDIR /service/adminOperationAPI
 RUN pip install markupsafe==2.0.1
 RUN pip install -r requirements.txt
+RUN pip uninstall -y protobuf python3-protobuf
+RUN pip install --upgrade pip
+RUN pip install --upgrade protobuf
+RUN python -m grpc_tools.protoc -I ../protobufs --python_out=. \
+           --grpc_python_out=. ../protobufs/logging.proto
 RUN python -m grpc_tools.protoc -I ../protobufs --python_out=. --grpc_python_out=. ../protobufs/adminOperations.proto
 
 EXPOSE 5003

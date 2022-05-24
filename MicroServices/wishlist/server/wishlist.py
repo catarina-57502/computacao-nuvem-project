@@ -31,7 +31,13 @@ db = client['users']
 usersDB = get_table(db,"users")
 
 def connectToClient():
-    userManagement_channel = grpc.insecure_channel(os.environ['usermanagementserversvc_KEY'])
+    ca_cert = 'keys/caUserManagement.pem'
+    with open(ca_cert,'rb') as f:
+        root_certs = f.read()
+
+
+    credentials = grpc.ssl_channel_credentials(root_certs)
+    userManagement_channel = grpc.secure_channel(os.environ['usermanagementserversvc_KEY'],credentials)
     userManagement_client = UserManagementStub(userManagement_channel)
     return userManagement_client
 
@@ -88,7 +94,13 @@ class WishlistService(wishlist_pb2_grpc.WishlistServicer):
         docUser = usersDB.find({"email": getToken_response.email})
         for doc in docUser:
             library = doc["wishlist"]
-        searches_channel = grpc.insecure_channel(os.environ['searchesserver_KEY'])
+        ca_cert = 'keys/caSearches.pem'
+        with open(ca_cert,'rb') as f:
+            root_certs = f.read()
+
+
+        credentials = grpc.ssl_channel_credentials(root_certs)
+        searches_channel = grpc.secure_channel(os.environ['searchesserver_KEY'],credentials)
         searches_client = SearchesStub(searches_channel)
 
         gamesInfo = []
@@ -134,7 +146,17 @@ def serve():
     wishlist_pb2_grpc.add_WishlistServicer_to_server(
         WishlistService(), server
     )
-    server.add_insecure_port("[::]:50058")
+    keyfile = 'keys/serverWishlist-key.pem'
+    certfile = 'keys/serverWishlist.pem'
+
+    with open(keyfile,'rb') as f:
+        private_key = f.read()
+
+    with open(certfile,'rb') as f:
+        certificate_chain = f.read()
+
+    credentials = grpc.ssl_server_credentials([(private_key, certificate_chain)])
+    server.add_secure_port("[::]:50058",credentials)
     server.start()
     server.wait_for_termination()
 

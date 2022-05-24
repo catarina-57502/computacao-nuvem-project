@@ -151,9 +151,20 @@ def serve():
         SuggestionsService(), server
     )
 
-    server.add_insecure_port("[::]:50059")
+    keyfile = 'keys/serverSuggestions-key.pem'
+    certfile = 'keys/serverSuggestions.pem'
+
+    with open(keyfile,'rb') as f:
+        private_key = f.read()
+
+    with open(certfile,'rb') as f:
+        certificate_chain = f.read()
+
+    credentials = grpc.ssl_server_credentials([(private_key, certificate_chain)])
+    server.add_secure_port("[::]:50059",credentials)
     server.start()
     server.wait_for_termination()
+
 
 if __name__ == "__main__":
     start_http_server(51059)

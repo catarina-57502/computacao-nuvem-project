@@ -6,6 +6,13 @@ gcloud container clusters create cluster-steam --zone europe-west4-a --num-nodes
 gcloud auth configure-docker
 
 cd MicroServices
+
+cd SSLCertificates
+chmod u+x certificatesCloud.sh
+./certificatesCloud.sh
+
+cd..
+
 chmod u+x dockerBuildPush.sh
 ./dockerBuildPush.sh
 

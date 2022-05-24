@@ -164,7 +164,17 @@ def serve():
         ReviewService(), server
     )
 
-    server.add_insecure_port("[::]:50060")
+    keyfile = 'keys/serverReviews-key.pem'
+    certfile = 'keys/serverReviews.pem'
+
+    with open(keyfile,'rb') as f:
+        private_key = f.read()
+
+    with open(certfile,'rb') as f:
+        certificate_chain = f.read()
+
+    credentials = grpc.ssl_server_credentials([(private_key, certificate_chain)])
+    server.add_secure_port("[::]:50060",credentials)
     server.start()
     server.wait_for_termination()
 

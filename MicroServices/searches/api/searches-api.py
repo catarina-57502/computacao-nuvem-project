@@ -17,11 +17,24 @@ from logging_pb2_grpc import LoggingStub
 
 api = Flask(__name__)
 
+ca_cert = 'keys/caSearches.pem'
+with open(ca_cert,'rb') as f:
+    root_certs = f.read()
 
-searches_channel = grpc.insecure_channel(os.environ['searchesserver_KEY'])
+
+credentials = grpc.ssl_channel_credentials(root_certs)
+
+searches_channel = grpc.secure_channel(os.environ['searchesserver_KEY'],credentials)
 searches_client = SearchesStub(searches_channel)
 
-logging_channel = grpc.insecure_channel(os.environ['logging-server-s_KEY'])
+ca_cert = 'keys/caLogging.pem'
+with open(ca_cert,'rb') as f:
+    root_certs = f.read()
+
+
+credentials = grpc.ssl_channel_credentials(root_certs)
+
+logging_channel = grpc.secure_channel(os.environ['logging-server-s_KEY'],credentials)
 logging_client = LoggingStub(logging_channel)
 
 def DocToGame(game):

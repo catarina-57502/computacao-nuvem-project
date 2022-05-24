@@ -210,7 +210,17 @@ def serve():
     userManagement_pb2_grpc.add_UserManagementServicer_to_server(
         UserManagementService(), server
     )
-    server.add_insecure_port("[::]:50052")
+    keyfile = 'keys/serverUserManagement-key.pem'
+    certfile = 'keys/serverUserManagement.pem'
+
+    with open(keyfile,'rb') as f:
+        private_key = f.read()
+
+    with open(certfile,'rb') as f:
+        certificate_chain = f.read()
+
+    credentials = grpc.ssl_server_credentials([(private_key, certificate_chain)])
+    server.add_secure_port("[::]:50052",credentials)
     server.start()
     server.wait_for_termination()
 

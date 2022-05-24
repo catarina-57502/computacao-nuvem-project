@@ -20,10 +20,25 @@ from flask import Flask, json, request, g
 
 api = Flask(__name__)
 
-reviews_channel = grpc.insecure_channel(os.environ['reviews-server-s_KEY'])
+
+ca_cert = 'keys/caReviews.pem'
+with open(ca_cert,'rb') as f:
+    root_certs = f.read()
+
+
+credentials = grpc.ssl_channel_credentials(root_certs)
+
+reviews_channel = grpc.secure_channel(os.environ['reviews-server-s_KEY'],credentials)
 reviews_client = ReviewsStub(reviews_channel)
 
-logging_channel = grpc.insecure_channel(os.environ['logging-server-s_KEY'])
+ca_cert = 'keys/caLogging.pem'
+with open(ca_cert,'rb') as f:
+    root_certs = f.read()
+
+
+credentials = grpc.ssl_channel_credentials(root_certs)
+
+logging_channel = grpc.secure_channel(os.environ['logging-server-s_KEY'],credentials)
 logging_client = LoggingStub(logging_channel)
 
 @api.route('/healthz', methods=['GET'])

@@ -16,11 +16,25 @@ from logging_pb2_grpc import LoggingStub
 
 api = Flask(__name__)
 
-wishlist_channel = grpc.insecure_channel(os.environ['wishlistserver_KEY'])
+ca_cert = 'keys/caWishlist.pem'
+with open(ca_cert,'rb') as f:
+    root_certs = f.read()
+
+
+credentials = grpc.ssl_channel_credentials(root_certs)
+
+wishlist_channel = grpc.secure_channel(os.environ['wishlistserver_KEY'],credentials)
 
 wishlist_client = WishlistStub(wishlist_channel)
 
-logging_channel = grpc.insecure_channel(os.environ['logging-server-s_KEY'])
+ca_cert = 'keys/caLogging.pem'
+with open(ca_cert,'rb') as f:
+    root_certs = f.read()
+
+
+credentials = grpc.ssl_channel_credentials(root_certs)
+
+logging_channel = grpc.secure_channel(os.environ['logging-server-s_KEY'],credentials)
 logging_client = LoggingStub(logging_channel)
 
 def DocToGame(game):

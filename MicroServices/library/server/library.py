@@ -31,7 +31,13 @@ db = client['users']
 usersDB = get_table(db,"users")
 
 def connectToClient():
-    userManagement_channel = grpc.insecure_channel(os.environ['usermanagementserversvc_KEY'])
+    ca_cert = 'keys/caUserManagement.pem'
+    with open(ca_cert,'rb') as f:
+        root_certs = f.read()
+
+
+    credentials = grpc.ssl_channel_credentials(root_certs)
+    userManagement_channel = grpc.secure_channel(os.environ['usermanagementserversvc_KEY'],credentials)
     userManagement_client = UserManagementStub(userManagement_channel)
     return userManagement_client
 
@@ -86,7 +92,13 @@ class LibraryService(library_pb2_grpc.LibraryServicer):
         for doc in docUser:
             library = doc["library"]
 
-        searches_channel = grpc.insecure_channel(os.environ['searchesserver_KEY'])
+        ca_cert = 'keys/caSearches.pem'
+        with open(ca_cert,'rb') as f:
+            root_certs = f.read()
+
+
+        credentials = grpc.ssl_channel_credentials(root_certs)
+        searches_channel = grpc.secure_channel(os.environ['searchesserver_KEY'],credentials)
         searches_client = SearchesStub(searches_channel)
 
         gamesInfo = []
@@ -133,7 +145,19 @@ def serve():
     library_pb2_grpc.add_LibraryServicer_to_server(
         LibraryService(), server
     )
-    server.add_insecure_port("[::]:50053")
+
+
+    keyfile = 'keys/serverLibrary-key.pem'
+    certfile = 'keys/serverLibrary.pem'
+
+    with open(keyfile,'rb') as f:
+        private_key = f.read()
+
+    with open(certfile,'rb') as f:
+        certificate_chain = f.read()
+
+    credentials = grpc.ssl_server_credentials([(private_key, certificate_chain)])
+    server.add_secure_port("[::]:50053",credentials)
     server.start()
     server.wait_for_termination()
 

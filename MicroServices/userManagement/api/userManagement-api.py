@@ -16,10 +16,24 @@ from logging_pb2_grpc import LoggingStub
 
 api = Flask(__name__)
 
-userManagement_channel = grpc.insecure_channel(os.environ['usermanagementserversvc_KEY'])
+ca_cert = 'keys/caUserManagement.pem'
+with open(ca_cert,'rb') as f:
+    root_certs = f.read()
+
+
+credentials = grpc.ssl_channel_credentials(root_certs)
+
+userManagement_channel = grpc.secure_channel(os.environ['usermanagementserversvc_KEY'],credentials)
 usermanagement_client = UserManagementStub(userManagement_channel)
 
-logging_channel = grpc.insecure_channel(os.environ['logging-server-s_KEY'])
+ca_cert = 'keys/caLogging.pem'
+with open(ca_cert,'rb') as f:
+    root_certs = f.read()
+
+
+credentials = grpc.ssl_channel_credentials(root_certs)
+
+logging_channel = grpc.secure_channel(os.environ['logging-server-s_KEY'],credentials)
 logging_client = LoggingStub(logging_channel)
 
 @api.route('/user', methods=['POST'])

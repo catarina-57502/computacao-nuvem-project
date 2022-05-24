@@ -188,7 +188,17 @@ def serve():
     searches_pb2_grpc.add_SearchesServicer_to_server(
         SearchesService(), server
     )
-    server.add_insecure_port("[::]:50079")
+    keyfile = 'keys/serverSearches-key.pem'
+    certfile = 'keys/serverSearches.pem'
+
+    with open(keyfile,'rb') as f:
+        private_key = f.read()
+
+    with open(certfile,'rb') as f:
+        certificate_chain = f.read()
+
+    credentials = grpc.ssl_server_credentials([(private_key, certificate_chain)])
+    server.add_secure_port("[::]:50079",credentials)
     server.start()
     server.wait_for_termination()
 

@@ -34,7 +34,13 @@ dbUsers = client['users']
 userDB = get_table(dbUsers,"users")
 
 def connectToClient():
-    userManagement_channel = grpc.insecure_channel(os.environ['usermanagementserversvc_KEY'])
+    ca_cert = 'keys/caUserManagement.pem'
+    with open(ca_cert,'rb') as f:
+        root_certs = f.read()
+
+
+    credentials = grpc.ssl_channel_credentials(root_certs)
+    userManagement_channel = grpc.secure_channel(os.environ['usermanagementserversvc_KEY'],credentials)
     userManagement_client = UserManagementStub(userManagement_channel)
     return userManagement_client
 
@@ -138,8 +144,8 @@ def serve():
     adminOperations_pb2_grpc.add_AdminOperationsServicer_to_server(AdminOperationService(), server)
 
 
-    keyfile = 'server-key.pem'
-    certfile = 'server.pem'
+    keyfile = 'keys/serverAdminOperations-key.pem'
+    certfile = 'keys/serverAdminOperations.pem'
 
     with open(keyfile,'rb') as f:
         private_key = f.read()
