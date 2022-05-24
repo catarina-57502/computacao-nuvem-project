@@ -209,7 +209,7 @@ class UserManagementService(userManagement_pb2_grpc.UserManagementServicer):
         col = client["steam"]
         db = col["registry"]
 
-        if(db.count_documents({"_id": request.ip) < 1):
+        if(db.count_documents({"_id": request.ip}) < 1):
             db.insert_one({"_id": request.ip,"numberRequests": request.endpoint})
             return RegistryResponse(bol = True)
 

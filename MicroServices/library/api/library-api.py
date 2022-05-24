@@ -28,7 +28,7 @@ library_channel = grpc.secure_channel(os.environ['libraryserver_KEY'],credential
 library_client = LibraryStub(library_channel)
 
 from userManagement_pb2 import *
-import userManagement_pb2_grpc
+from userManagement_pb2_grpc import UserManagementStub
 
 ca_cert = 'caUserManagement.pem'
 with open(ca_cert,'rb') as f:
