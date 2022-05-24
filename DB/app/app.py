@@ -133,7 +133,7 @@ def get_databaseUsers():
     import pymongo
 
     from pymongo import MongoClient
-    client = MongoClient('mongo', 27017 ,username='admin', password='admin' )
+    client = MongoClient('mongo', 27017 ,username='YWRtaW4=', password='YWRtaW4=' )
     print("DataBase Created")
     return client['users']
 

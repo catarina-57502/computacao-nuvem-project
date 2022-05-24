@@ -148,7 +148,7 @@ def serve():
         certificate_chain = f.read()
 
     credentials = grpc.ssl_server_credentials([(private_key, certificate_chain)])
-    server.add_secure_port("[::]:5051",credentials)
+    server.add_secure_port("[::]:50051",credentials)
     server.start()
     server.wait_for_termination()
 

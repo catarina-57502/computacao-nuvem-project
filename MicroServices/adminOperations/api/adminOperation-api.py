@@ -18,7 +18,7 @@ with open(ca_cert,'rb') as f:
 
 credentials = grpc.ssl_channel_credentials(root_certs)
 
-adminoperations_channel = grpc.secure_channel("adminoperationsserver:5051",credentials)
+adminoperations_channel = grpc.secure_channel("adminoperationsserver:50051",credentials)
 
 adminoperations_client = AdminOperationsStub(adminoperations_channel)
 

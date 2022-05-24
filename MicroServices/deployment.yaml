@@ -92,7 +92,7 @@ spec:
                   name: special-config
                   key: usermanagementserversvc
           ports:
-            - containerPort: 5051
+            - containerPort: 50051
           livenessProbe:
             httpGet:
               path: /metrics
@@ -129,8 +129,8 @@ spec:
     app: "adminoperationsserver"
   ports:
     - name: "server"
-      port: 5051
-      targetPort: 5051
+      port: 50051
+      targetPort: 50051
     - name: prometheus
       protocol: TCP
       port: 51051
