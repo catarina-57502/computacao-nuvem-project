@@ -11,7 +11,7 @@ cd SSLCertificates
 chmod u+x certificatesCloud.sh
 ./certificatesCloud.sh
 
-cd..
+cd ..
 
 chmod u+x dockerBuildPush.sh
 ./dockerBuildPush.sh
