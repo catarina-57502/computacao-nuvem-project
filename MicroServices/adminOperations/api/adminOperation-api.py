@@ -17,7 +17,7 @@ from logging_pb2_grpc import LoggingStub
 
 api = Flask(__name__)
 
-caCRT = 'ca.crt'
+caCRT = 'ca-cert.pem'
 
 with open(caCRT, 'rb') as f:
     credsCAclient = f.read()
@@ -142,4 +142,3 @@ def admin_ar(response):
     }, Log())
     logging_client.StoreLog(log)
     return response
-    
