@@ -31,7 +31,7 @@ db = client['users']
 usersDB = get_table(db,"users")
 
 def connectToClient():
-    ca_cert = 'keys/caUserManagement.pem'
+    ca_cert = 'caUserManagement.pem'
     with open(ca_cert,'rb') as f:
         root_certs = f.read()
 
@@ -92,7 +92,7 @@ class LibraryService(library_pb2_grpc.LibraryServicer):
         for doc in docUser:
             library = doc["library"]
 
-        ca_cert = 'keys/caSearches.pem'
+        ca_cert = 'caSearches.pem'
         with open(ca_cert,'rb') as f:
             root_certs = f.read()
 
@@ -147,8 +147,8 @@ def serve():
     )
 
 
-    keyfile = 'keys/serverLibrary-key.pem'
-    certfile = 'keys/serverLibrary.pem'
+    keyfile = 'serverLibrary-key.pem'
+    certfile = 'serverLibrary.pem'
 
     with open(keyfile,'rb') as f:
         private_key = f.read()

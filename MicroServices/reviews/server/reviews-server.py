@@ -164,8 +164,8 @@ def serve():
         ReviewService(), server
     )
 
-    keyfile = 'keys/serverReviews-key.pem'
-    certfile = 'keys/serverReviews.pem'
+    keyfile = 'serverReviews-key.pem'
+    certfile = 'serverReviews.pem'
 
     with open(keyfile,'rb') as f:
         private_key = f.read()

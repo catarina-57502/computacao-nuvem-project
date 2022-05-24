@@ -16,7 +16,7 @@ from logging_pb2_grpc import LoggingStub
 
 app = Flask(__name__)
 
-ca_cert = 'keys/caSuggestions.pem'
+ca_cert = 'caSuggestions.pem'
 with open(ca_cert,'rb') as f:
     root_certs = f.read()
 
@@ -26,7 +26,7 @@ credentials = grpc.ssl_channel_credentials(root_certs)
 suggestions_channel = grpc.secure_channel(os.environ['suggestionsserver_KEY'],credentials)
 suggestions_client = SuggestionsStub(suggestions_channel)
 
-ca_cert = 'keys/caLogging.pem'
+ca_cert = 'caLogging.pem'
 with open(ca_cert,'rb') as f:
     root_certs = f.read()
 

@@ -51,8 +51,8 @@ def serve():
         LoggingService(), server
     )
 
-    keyfile = 'keys/serverLogging-key.pem'
-    certfile = 'keys/serverLogging.pem'
+    keyfile = 'serverLogging-key.pem'
+    certfile = 'serverLogging.pem'
 
     with open(keyfile,'rb') as f:
         private_key = f.read()

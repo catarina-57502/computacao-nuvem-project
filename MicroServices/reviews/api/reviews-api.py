@@ -21,7 +21,7 @@ from flask import Flask, json, request, g
 api = Flask(__name__)
 
 
-ca_cert = 'keys/caReviews.pem'
+ca_cert = 'caReviews.pem'
 with open(ca_cert,'rb') as f:
     root_certs = f.read()
 
@@ -31,7 +31,7 @@ credentials = grpc.ssl_channel_credentials(root_certs)
 reviews_channel = grpc.secure_channel(os.environ['reviews-server-s_KEY'],credentials)
 reviews_client = ReviewsStub(reviews_channel)
 
-ca_cert = 'keys/caLogging.pem'
+ca_cert = 'caLogging.pem'
 with open(ca_cert,'rb') as f:
     root_certs = f.read()
 

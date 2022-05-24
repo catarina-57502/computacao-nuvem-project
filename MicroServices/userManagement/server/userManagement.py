@@ -210,8 +210,8 @@ def serve():
     userManagement_pb2_grpc.add_UserManagementServicer_to_server(
         UserManagementService(), server
     )
-    keyfile = 'keys/serverUserManagement-key.pem'
-    certfile = 'keys/serverUserManagement.pem'
+    keyfile = 'serverUserManagement-key.pem'
+    certfile = 'serverUserManagement.pem'
 
     with open(keyfile,'rb') as f:
         private_key = f.read()

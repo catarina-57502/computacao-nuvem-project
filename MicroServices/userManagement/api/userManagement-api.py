@@ -16,7 +16,7 @@ from logging_pb2_grpc import LoggingStub
 
 api = Flask(__name__)
 
-ca_cert = 'keys/caUserManagement.pem'
+ca_cert = 'caUserManagement.pem'
 with open(ca_cert,'rb') as f:
     root_certs = f.read()
 
@@ -26,7 +26,7 @@ credentials = grpc.ssl_channel_credentials(root_certs)
 userManagement_channel = grpc.secure_channel(os.environ['usermanagementserversvc_KEY'],credentials)
 usermanagement_client = UserManagementStub(userManagement_channel)
 
-ca_cert = 'keys/caLogging.pem'
+ca_cert = 'caLogging.pem'
 with open(ca_cert,'rb') as f:
     root_certs = f.read()
 

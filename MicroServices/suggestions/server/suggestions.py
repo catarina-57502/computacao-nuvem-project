@@ -151,8 +151,8 @@ def serve():
         SuggestionsService(), server
     )
 
-    keyfile = 'keys/serverSuggestions-key.pem'
-    certfile = 'keys/serverSuggestions.pem'
+    keyfile = 'serverSuggestions-key.pem'
+    certfile = 'serverSuggestions.pem'
 
     with open(keyfile,'rb') as f:
         private_key = f.read()

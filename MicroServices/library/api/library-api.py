@@ -16,7 +16,7 @@ from logging_pb2_grpc import LoggingStub
 
 api = Flask(__name__)
 
-ca_cert = 'keys/caLibrary.pem'
+ca_cert = 'caLibrary.pem'
 with open(ca_cert,'rb') as f:
     root_certs = f.read()
 
@@ -27,7 +27,7 @@ library_channel = grpc.secure_channel(os.environ['libraryserver_KEY'],credential
 library_client = LibraryStub(library_channel)
 
 
-ca_cert = 'keys/caLogging.pem'
+ca_cert = 'caLogging.pem'
 with open(ca_cert,'rb') as f:
     root_certs = f.read()
 

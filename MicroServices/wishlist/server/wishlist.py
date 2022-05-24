@@ -31,7 +31,7 @@ db = client['users']
 usersDB = get_table(db,"users")
 
 def connectToClient():
-    ca_cert = 'keys/caUserManagement.pem'
+    ca_cert = 'caUserManagement.pem'
     with open(ca_cert,'rb') as f:
         root_certs = f.read()
 
@@ -94,7 +94,7 @@ class WishlistService(wishlist_pb2_grpc.WishlistServicer):
         docUser = usersDB.find({"email": getToken_response.email})
         for doc in docUser:
             library = doc["wishlist"]
-        ca_cert = 'keys/caSearches.pem'
+        ca_cert = 'caSearches.pem'
         with open(ca_cert,'rb') as f:
             root_certs = f.read()
 
@@ -146,8 +146,8 @@ def serve():
     wishlist_pb2_grpc.add_WishlistServicer_to_server(
         WishlistService(), server
     )
-    keyfile = 'keys/serverWishlist-key.pem'
-    certfile = 'keys/serverWishlist.pem'
+    keyfile = 'serverWishlist-key.pem'
+    certfile = 'serverWishlist.pem'
 
     with open(keyfile,'rb') as f:
         private_key = f.read()

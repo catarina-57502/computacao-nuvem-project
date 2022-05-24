@@ -188,8 +188,8 @@ def serve():
     searches_pb2_grpc.add_SearchesServicer_to_server(
         SearchesService(), server
     )
-    keyfile = 'keys/serverSearches-key.pem'
-    certfile = 'keys/serverSearches.pem'
+    keyfile = 'serverSearches-key.pem'
+    certfile = 'serverSearches.pem'
 
     with open(keyfile,'rb') as f:
         private_key = f.read()

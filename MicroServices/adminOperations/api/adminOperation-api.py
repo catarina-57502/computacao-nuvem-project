@@ -11,7 +11,7 @@ from adminOperations_pb2_grpc import AdminOperationsStub
 
 api = Flask(__name__)
 
-ca_cert = 'keys/caAdminOperations.pem'
+ca_cert = 'caAdminOperations.pem'
 with open(ca_cert,'rb') as f:
     root_certs = f.read()
 
@@ -22,7 +22,7 @@ adminoperations_channel = grpc.secure_channel("adminoperationsserver:50051",cred
 
 adminoperations_client = AdminOperationsStub(adminoperations_channel)
 
-ca_cert = 'keys/caLogging.pem'
+ca_cert = 'caLogging.pem'
 with open(ca_cert,'rb') as f:
     root_certs = f.read()
 

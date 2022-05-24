@@ -34,7 +34,7 @@ dbUsers = client['users']
 userDB = get_table(dbUsers,"users")
 
 def connectToClient():
-    ca_cert = 'keys/caUserManagement.pem'
+    ca_cert = 'caUserManagement.pem'
     with open(ca_cert,'rb') as f:
         root_certs = f.read()
 
@@ -144,8 +144,8 @@ def serve():
     adminOperations_pb2_grpc.add_AdminOperationsServicer_to_server(AdminOperationService(), server)
 
 
-    keyfile = 'keys/serverAdminOperations-key.pem'
-    certfile = 'keys/serverAdminOperations.pem'
+    keyfile = 'serverAdminOperations-key.pem'
+    certfile = 'serverAdminOperations.pem'
 
     with open(keyfile,'rb') as f:
         private_key = f.read()

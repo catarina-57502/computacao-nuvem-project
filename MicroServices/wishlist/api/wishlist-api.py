@@ -16,7 +16,7 @@ from logging_pb2_grpc import LoggingStub
 
 api = Flask(__name__)
 
-ca_cert = 'keys/caWishlist.pem'
+ca_cert = 'caWishlist.pem'
 with open(ca_cert,'rb') as f:
     root_certs = f.read()
 
@@ -27,7 +27,7 @@ wishlist_channel = grpc.secure_channel(os.environ['wishlistserver_KEY'],credenti
 
 wishlist_client = WishlistStub(wishlist_channel)
 
-ca_cert = 'keys/caLogging.pem'
+ca_cert = 'caLogging.pem'
 with open(ca_cert,'rb') as f:
     root_certs = f.read()
 
