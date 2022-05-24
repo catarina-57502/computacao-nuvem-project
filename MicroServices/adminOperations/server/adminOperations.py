@@ -6,7 +6,6 @@ import grpc
 from grpc_interceptor import ExceptionToStatusInterceptor
 from grpc_interceptor.exceptions import NotFound
 
-
 from adminOperations_pb2 import (
     GameObject,
     AddGameResponse,
@@ -148,17 +147,12 @@ def serve():
     with open(certfile,'rb') as f:
         certificate_chain = f.read()
 
-
-    credentials = grpc.ssl_server_credentials(
-        [(private_key, certificate_chain)]
-    )
-
+    credentials = grpc.ssl_server_credentials([(private_key, certificate_chain)])
     server.add_secure_port("[::]:5051",credentials)
     server.start()
-
     server.wait_for_termination()
 
 
 if __name__ == "__main__":
-    serve()
     start_http_server(51051)
+    serve()
