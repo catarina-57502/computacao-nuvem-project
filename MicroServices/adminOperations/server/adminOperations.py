@@ -139,20 +139,15 @@ def serve():
     adminOperations_pb2_grpc.add_AdminOperationsServicer_to_server(AdminOperationService(), server)
 
 
-    caCRT = 'ca-cert.pem'
-    serverCRT = 'server-cert.pem'
-    serverKey = 'server-key.pem'
+    keyfile = 'server-key.pem'
+    certfile = 'server.pem'
+    private_key = open(keyfile).read()
+    certificate_chain = open(certfile).read()
+    credentials = grpc.ssl_server_credentials(
+        [(private_key, certificate_chain)]
+    )
 
-    with open(caCRT, 'rb') as f:
-        credsCA = f.read()
-    with open(serverCRT, 'rb') as f:
-        credsSCRT = f.read()
-    with open(serverKey, 'rb') as f:
-        credsSK = f.read()
-
-    channel_creds = grpc.ssl_server_credentials([(credsSK, credsSCRT)], credsCA, False)
-
-    server.add_secure_port("[::]:5051",channel_creds)
+    server.add_secure_port("[::]:5051",credentials)
     server.start()
 
     server.wait_for_termination()
