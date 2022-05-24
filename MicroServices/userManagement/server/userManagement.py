@@ -214,7 +214,7 @@ class UserManagementService(userManagement_pb2_grpc.UserManagementServicer):
             return RegistryResponse(bol = True)
 
 
-        docUser = myReviews.find({"_id": request.ip).limit(1)
+        docUser = myReviews.find({"_id": request.ip}).limit(1)
 
         for x in docUser:
             x.numberRequests = x.numberRequests + 1
