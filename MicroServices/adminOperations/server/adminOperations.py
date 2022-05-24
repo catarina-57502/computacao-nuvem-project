@@ -140,8 +140,8 @@ def serve():
 
 
     caCRT = 'ca-cert.pem'
-    serverCRT = 'server-cert.pem'
-    serverKey = 'server-key.pem'
+    serverCRT = 'server-key.pem'
+    serverKey = 'server-cert.pem'
 
     with open(caCRT, 'rb') as f:
         credsCA = f.read()
@@ -151,7 +151,7 @@ def serve():
         credsSK = f.read()
 
 
-    channel_creds = grpc.ssl_server_credentials([(credsSK, credsSCRT)], credsCA,False)
+    channel_creds = grpc.ssl_server_credentials([(credsSK, credsSCRT)], credsCA, False)
 
     server.add_secure_port("[::]:5051",channel_creds)
     server.start()
