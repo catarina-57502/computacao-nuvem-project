@@ -18,14 +18,24 @@ from logging_pb2_grpc import LoggingStub
 api = Flask(__name__)
 
 caCRT = 'ca-cert.pem'
+key = 'client-key.pem'
+cert = 'client-cert.pem'
 
 with open(caCRT, 'rb') as f:
-    credsCAclient = f.read()
+    credsCA = f.read()
+with open(cert, 'rb') as f:
+    credsCERT = f.read()
+with open(key, 'rb') as f:
+    credsKey = f.read()
 
-channel_creds = grpc.ssl_channel_credentials(credsCAclient)
+options = {
+    'grpc.ssl_target_name_override' : 'adminoperationsserver',
+    'grpc.default_authority': 'adminoperationsserver'
+}
 
-adminoperations_channel = grpc.secure_channel(os.environ['adminoperationsserver_KEY'],channel_creds)
+creds = grpc.ssl_channel_credentials(root_certificates=credsCA,private_key=credsKey, certificate_chain=credsCERT)
 
+adminoperations_channel = grpc.secure_channel("adminoperationsserver:5051",creds,options)
 
 adminoperations_client = AdminOperationsStub(adminoperations_channel)
 
