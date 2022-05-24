@@ -22,11 +22,7 @@ chmod u+x configmaps.sh
 cd ..
 cd MicroServices
 
-#kubectl apply -f mongo-secrets.yaml
-
-echo "YWRtaW4=" > username.txt
-echo "YWRtaW4=" > password.txt
-kubectl create secret generic mongo-secrets --from-file=username=./username.txt --from-file=password=./password.txt
+kubectl apply -f mongo-secrets.yaml
 
 kubectl apply -f pv.yaml
 envsubst < "deployment.yaml" > "deploymentENV.yaml"
