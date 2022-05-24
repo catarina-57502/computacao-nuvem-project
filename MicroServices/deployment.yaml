@@ -39,12 +39,12 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: mongo-secrets
-                key: username.txt
+                key: username
           - name: MONGO_INITDB_ROOT_PASSWORD
             valueFrom:
               secretKeyRef:
                 name: mongo-secrets
-                key: password.txt
+                key: password
           #envFrom:
            # - secretRef:
             #    name: mongo-secret
