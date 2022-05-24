@@ -34,20 +34,9 @@ spec:
               memory: "500Mi"
             limits:
               memory: "1000Mi"
-          env:
-            - name: MONGO_INITDB_ROOT_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: mongo-secrets
-                  key: username
-            - name: MONGO_INITDB_ROOT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mongo-secrets
-                  key: password
-              #envFrom:
-              # - secretRef:
-              #    name: mongo-secret
+          envFrom:
+            - secretRef:
+              name: mongo-secret
           ports:
             - containerPort: 27017
               name: mongo
