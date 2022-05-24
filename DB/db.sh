@@ -1,12 +1,12 @@
 export PROJECT_ID=$(gcloud info --format='value(config.project)')
 
-# pip install gdown
+pip install gdown
 
-# cd app
+cd app
 
-# python3 download.py
+python3 download.py
 
-# cd ..
+cd ..
 
 docker build . -f app/Dockerfile -t writedb
 docker tag writedb gcr.io/${PROJECT_ID}/writedb
