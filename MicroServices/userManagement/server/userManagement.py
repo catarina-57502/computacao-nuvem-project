@@ -202,6 +202,29 @@ class UserManagementService(userManagement_pb2_grpc.UserManagementServicer):
         type = info["claims"]["type"]
         return TokenResponse(type = type,email = email)
 
+
+    def CheckForAttacks(self, request, context):
+        token = request.ip
+        client = MongoClient('mongo', 27017 ,username='admin', password='admin')
+        col = client["steam"]
+        db = col["registry"]
+
+        if(db.count_documents({"_id": request.ip) < 1):
+            db.insert_one({"_id": request.ip,"numberRequests": request.endpoint})
+            return RegistryResponse(bol = True)
+
+
+        docUser = myReviews.find({"_id": request.ip).limit(1)
+
+        for x in docUser:
+            x.numberRequests = x.numberRequests + 1
+            if(x.numberRequests > 5):
+                return RegistryResponse(bol = False)
+
+        db.update_one({"_id": request.ip,"numberRequests": request.endpoint})
+
+        return RegistryResponse(bol = True)
+
 def serve():
     interceptors = [ExceptionToStatusInterceptor()]
     server = grpc.server(

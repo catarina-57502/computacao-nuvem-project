@@ -23,12 +23,17 @@ message DefaultResponse {
   string message = 2;
 }
 
+
 message AddUserRequest {
   string id = 1;
   string nickname = 2;
   string email = 3;
   string password = 4;
   string type = 5;
+}
+
+message RegistryRequest {
+  string ip = 1;
 }
 
 message EditUserRequest {
@@ -62,12 +67,17 @@ message TokenResponse {
   string email = 2;
 }
 
+message RegistryResponse {
+  bool bol = 1;
+}
+
 service UserManagement {
   rpc AddUser (AddUserRequest) returns (DefaultResponse);
   rpc EditUser (EditUserRequest) returns (DefaultResponse);
   rpc LoginUser (LoginRequest) returns (LoginResponse);
   rpc Logout (LogoutRequest) returns (DefaultResponse);
   rpc GetInfoFromToken (TokenRequest) returns (TokenResponse);
+  rpc CheckForAttacks (RegistryRequest) returns (RegistryResponse);
 }
 
 

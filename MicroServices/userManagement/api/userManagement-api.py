@@ -36,6 +36,9 @@ credentials = grpc.ssl_channel_credentials(root_certs)
 logging_channel = grpc.secure_channel(os.environ['logging-server-s_KEY'],credentials)
 logging_client = LoggingStub(logging_channel)
 
+
+
+
 @api.route('/user', methods=['POST'])
 def addUser():
     data = json.loads(request.data)

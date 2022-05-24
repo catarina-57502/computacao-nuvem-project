@@ -14,17 +14,39 @@ from logging_pb2 import (
 )
 from logging_pb2_grpc import LoggingStub
 
+
+
 api = Flask(__name__)
 
 ca_cert = 'caLibrary.pem'
 with open(ca_cert,'rb') as f:
     root_certs = f.read()
 
-
 credentials = grpc.ssl_channel_credentials(root_certs)
 
 library_channel = grpc.secure_channel(os.environ['libraryserver_KEY'],credentials)
 library_client = LibraryStub(library_channel)
+
+from userManagement_pb2 import *
+import userManagement_pb2_grpc
+
+ca_cert = 'caUserManagement.pem'
+with open(ca_cert,'rb') as f:
+    root_certs = f.read()
+
+credentials = grpc.ssl_channel_credentials(root_certs)
+userManagement_channel = grpc.secure_channel(os.environ['usermanagementserversvc_KEY'],credentials)
+usermanagement_client = UserManagementStub(userManagement_channel)
+
+def checkIPRequestCounter(ipP):
+    registry_request = RegistryRequest(
+        ip=ipP,
+    )
+    registry_response = usermanagement_client.CheckForAttacks(
+        registry_request
+    )
+    resp = json.dumps(registry_response.message)
+    return resp["bol"]
 
 
 ca_cert = 'caLogging.pem'
@@ -70,15 +92,19 @@ def healthz():
 
 @api.route('/library', methods=['POST'])
 def addGame():
-    addGameLib_request = AddGameLibRequest(
-        id = request.args.get('id'),
-        token = request.headers.get('token')
-    )
-    addGameLib_response = library_client.AddGame(
-        addGameLib_request
-    )
-    g.req = request
-    return json.dumps(addGameLib_response.message)
+    auth = checkIPRequestCounter(request.remote_addr)
+    if(auth == True):
+        addGameLib_request = AddGameLibRequest(
+            id = request.args.get('id'),
+            token = request.headers.get('token')
+        )
+        addGameLib_response = library_client.AddGame(
+            addGameLib_request
+        )
+        g.req = request
+        return json.dumps(addGameLib_response.message)
+    else:
+        return json.dumps("Nice try! DoS")
 
 
 @api.route('/library', methods=['DELETE'])
