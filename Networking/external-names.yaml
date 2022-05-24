@@ -151,3 +151,69 @@ spec:
   externalName: logging-server-s.logging.svc.cluster.local
   ports:
     - port: 50160
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: logging-server-s
+  namespace: usermanagement
+spec:
+  type: ExternalName
+  externalName: logging-server-s.logging.svc.cluster.local
+  ports:
+    - port: 50160
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: logging-server-s
+  namespace: adminoperations
+spec:
+  type: ExternalName
+  externalName: logging-server-s.logging.svc.cluster.local
+  ports:
+    - port: 50160
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: logging-server-s
+  namespace: wishlist
+spec:
+  type: ExternalName
+  externalName: logging-server-s.logging.svc.cluster.local
+  ports:
+    - port: 50160
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: logging-server-s
+  namespace: library
+spec:
+  type: ExternalName
+  externalName: logging-server-s.logging.svc.cluster.local
+  ports:
+    - port: 50160
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: logging-server-s
+  namespace: suggestions
+spec:
+  type: ExternalName
+  externalName: logging-server-s.logging.svc.cluster.local
+  ports:
+    - port: 50160
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: logging-server-s
+  namespace: searches
+spec:
+  type: ExternalName
+  externalName: logging-server-s.logging.svc.cluster.local
+  ports:
+    - port: 50160

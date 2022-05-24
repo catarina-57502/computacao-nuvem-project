@@ -1,6 +1,7 @@
 import os
+import datetime
 
-from flask import Flask, json, request
+from flask import Flask, json, request, g
 import grpc
 
 from google.protobuf.json_format import MessageToJson, ParseDict
@@ -8,13 +9,23 @@ from google.protobuf.json_format import MessageToJson, ParseDict
 from searches_pb2 import *
 from searches_pb2_grpc import SearchesStub
 
+from logging_pb2 import (
+    Log,
+    Empty
+)
+from logging_pb2_grpc import LoggingStub
+
 api = Flask(__name__)
 
 
 searches_channel = grpc.insecure_channel(os.environ['searchesserver_KEY'])
 searches_client = SearchesStub(searches_channel)
 
+logging_channel = grpc.insecure_channel(os.environ['logging-server-s_KEY'])
+logging_client = LoggingStub(logging_channel)
+
 def DocToGame(game):
+    g.req = request
     return  {
         "url" : game.url,
         "types" : game.types,
@@ -40,6 +51,7 @@ def DocToGame(game):
     }
 
 def DocToReview(review):
+    g.req = request
     return  {
         "review_id" : review.review_id,
         "app_id" : review.app_id,
@@ -67,6 +79,7 @@ def DocToReview(review):
 
 @api.route('/healthz', methods=['GET'])
 def healthz():
+    g.req = request
     return json.dumps("Ok")
 
 @api.route('/searches/games', methods=['GET'])
@@ -91,7 +104,7 @@ def searchGames():
     for doc in searchGames_response.games:
         map[str(i)] = DocToGame(searchGames_response.games[str(i)])
         i+=1
-
+    g.req = request
     return json.dumps(map)
 
 @api.route('/searches/game', methods=['GET'])
@@ -103,6 +116,7 @@ def getGame():
     searchGame_response = searches_client.SearchGameById(
         searchGame_request
     )
+    g.req = request
     return MessageToJson(searchGame_response)
 
 @api.route('/searches/reviews', methods=['GET'])
@@ -132,7 +146,7 @@ def searchReviews():
     for doc in searchReviews_response.reviews:
         map[str(i)] = DocToReview(searchReviews_response.reviews[str(i)])
         i+=1
-
+    g.req = request
     return json.dumps(map)
 
 @api.route('/searches/review', methods=['GET'])
@@ -145,5 +159,21 @@ def getReview():
     searchReview_response = searches_client.SearchReviewById(
         searchReview_request
     )
-
+    g.req = request
     return MessageToJson(searchReview_response)
+
+@api.after_request
+def searches_ar(response):
+    req = g.get("req")
+    log = ParseDict({
+        "operation": str(req.method),
+        "endpoint": req.full_path,
+        "status": response.status,
+        "service": "Searches",
+        "remote_addr": str(req.remote_addr),
+        "user": "default",
+        "host": req.host,
+        "date": datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+    }, Log())
+    logging_client.StoreLog(log)
+    return response
