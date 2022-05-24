@@ -33,7 +33,7 @@ options = {
     'grpc.default_authority': 'adminoperationsserver'
 }
 
-creds = grpc.ssl_channel_credentials(root_certificates=credsCA,private_key=credsKey, certificate_chain=credsCERT)
+creds = grpc.ssl_channel_credentials(credsCA)
 
 adminoperations_channel = grpc.secure_channel("adminoperationsserver:5051",creds,options)
 
