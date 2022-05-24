@@ -91,11 +91,6 @@ spec:
                 configMapKeyRef:
                   name: special-config
                   key: usermanagementserversvc
-            - name: logging-server-s_KEY
-              valueFrom:
-                configMapKeyRef:
-                  name: special-config
-                  key: logging-server-s
           ports:
             - containerPort: 5051
           livenessProbe:
@@ -178,11 +173,6 @@ spec:
                 configMapKeyRef:
                   name: special-config
                   key: usermanagementserversvc
-            - name: logging-server-s_KEY
-              valueFrom:
-                configMapKeyRef:
-                  name: special-config
-                  key: logging-server-s
           ports:
             - containerPort: 5003
           livenessProbe:

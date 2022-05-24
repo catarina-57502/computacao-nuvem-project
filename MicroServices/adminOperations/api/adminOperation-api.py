@@ -28,8 +28,6 @@ adminoperations_channel = grpc.secure_channel("adminoperationsserver:5051",crede
 
 adminoperations_client = AdminOperationsStub(adminoperations_channel)
 
-logging_channel = grpc.insecure_channel(os.environ['logging-server-s_KEY'])
-logging_client = LoggingStub(logging_channel)
 
 @api.route('/healthz', methods=['GET'])
 def healthz():
