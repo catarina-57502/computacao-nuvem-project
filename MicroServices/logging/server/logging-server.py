@@ -51,7 +51,17 @@ def serve():
         LoggingService(), server
     )
 
-    server.add_insecure_port("[::]:50160")
+    keyfile = 'keys/serverLogging-key.pem'
+    certfile = 'keys/serverLogging.pem'
+
+    with open(keyfile,'rb') as f:
+        private_key = f.read()
+
+    with open(certfile,'rb') as f:
+        certificate_chain = f.read()
+
+    credentials = grpc.ssl_server_credentials([(private_key, certificate_chain)])
+    server.add_secure_port("[::]:50160",credentials)
     server.start()
     server.wait_for_termination()
 
