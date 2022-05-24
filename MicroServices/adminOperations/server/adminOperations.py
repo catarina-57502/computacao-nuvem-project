@@ -140,8 +140,8 @@ def serve():
 
 
     caCRT = 'ca-cert.pem'
-    serverCRT = 'server-key.pem'
-    serverKey = 'server-cert.pem'
+    serverCRT = 'server-cert.pem'
+    serverKey = 'server-key.pem'
 
     with open(caCRT, 'rb') as f:
         credsCA = f.read()
