@@ -9,12 +9,6 @@ from google.protobuf.json_format import ParseDict
 from adminOperations_pb2 import *
 from adminOperations_pb2_grpc import AdminOperationsStub
 
-from logging_pb2 import (
-    Log,
-    Empty
-)
-from logging_pb2_grpc import LoggingStub
-
 api = Flask(__name__)
 
 ca_cert = 'ca.pem'
