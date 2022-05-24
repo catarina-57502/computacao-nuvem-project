@@ -159,5 +159,5 @@ def serve():
 
 
 if __name__ == "__main__":
-    start_http_server(51051)
     serve()
+    start_http_server(51051)
