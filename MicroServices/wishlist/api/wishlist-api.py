@@ -1,21 +1,30 @@
 import os
+import datetime
 
-from flask import Flask, json, request,jsonify
+from flask import Flask, json, request, jsonify, g
 import grpc
 
 from wishlist_pb2 import *
 from wishlist_pb2_grpc import WishlistStub
-from google.protobuf.json_format import MessageToJson
+from google.protobuf.json_format import MessageToJson, ParseDict
+
+from logging_pb2 import (
+    Log,
+    Empty
+)
+from logging_pb2_grpc import LoggingStub
 
 api = Flask(__name__)
-
-
 
 wishlist_channel = grpc.insecure_channel(os.environ['wishlistserver_KEY'])
 
 wishlist_client = WishlistStub(wishlist_channel)
 
+logging_channel = grpc.insecure_channel(os.environ['logging-server-s_KEY'])
+logging_client = LoggingStub(logging_channel)
+
 def DocToGame(game):
+    g.req = request
     return  {
         "url" : game.url,
         "types" : game.types,
@@ -42,6 +51,7 @@ def DocToGame(game):
 
 @api.route('/healthz', methods=['GET'])
 def healthz():
+    g.req = request
     return json.dumps("Ok")
 
 @api.route('/wishes', methods=['POST'])
@@ -53,6 +63,7 @@ def addGame():
     addGameWish_response = wishlist_client.AddGame(
         addGameWish_request
     )
+    g.req = request
     return json.dumps(addGameWish_response.message)
 
 
@@ -66,6 +77,7 @@ def deleteGame():
     deleteGameWish_response = wishlist_client.DeleteGame(
         deleteGameWish_request
     )
+    g.req = request
     return json.dumps(deleteGameWish_response.message)
 
 @api.route('/wishes', methods=['GET'])
@@ -81,5 +93,21 @@ def listGames():
     for doc in listGamesWish_response.games:
         map[str(i)] = DocToGame(doc)
         i+=1
-
+    g.req = request
     return json.dumps(map)
+
+@api.after_request
+def wishlist_ar(response):
+    req = g.get("req")
+    log = ParseDict({
+        "operation": str(req.method),
+        "endpoint": req.full_path,
+        "status": response.status,
+        "service": "Wishlist",
+        "remote_addr": str(req.remote_addr),
+        "user": "default",
+        "host": req.host,
+        "date": datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+    }, Log())
+    logging_client.StoreLog(log)
+    return response
