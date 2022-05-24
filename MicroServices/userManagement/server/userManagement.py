@@ -210,18 +210,19 @@ class UserManagementService(userManagement_pb2_grpc.UserManagementServicer):
         db = col["registry"]
 
         if(db.count_documents({"_id": request.ip}) < 1):
-            db.insert_one({"_id": request.ip,"numberRequests": request.endpoint})
+            db.insert_one({"_id": request.ip,"numberRequests": 0})
             return RegistryResponse(bol = True)
 
 
         docUser = myReviews.find({"_id": request.ip}).limit(1)
-
+        count = 0
         for x in docUser:
+            count = x.numberRequests
             x.numberRequests = x.numberRequests + 1
             if(x.numberRequests > 5):
                 return RegistryResponse(bol = False)
 
-        db.update_one({"_id": request.ip,"numberRequests": request.endpoint})
+        db.update_one({"_id": request.ip,"numberRequests": count})
 
         return RegistryResponse(bol = True)
 
