@@ -91,6 +91,11 @@ spec:
                 configMapKeyRef:
                   name: special-config
                   key: usermanagementserversvc
+            - name: logging-server-s_KEY
+                valueFrom:
+                  configMapKeyRef:
+                    name: special-config
+                    key: logging-server-s
           ports:
             - containerPort: 5051
           livenessProbe:
@@ -173,6 +178,11 @@ spec:
                 configMapKeyRef:
                   name: special-config
                   key: usermanagementserversvc
+            - name: logging-server-s_KEY
+                valueFrom:
+                  configMapKeyRef:
+                    name: special-config
+                    key: logging-server-s
           ports:
             - containerPort: 5003
           livenessProbe:
@@ -319,6 +329,11 @@ spec:
                 configMapKeyRef:
                   name: special-config
                   key: usermanagementserversvc
+            - name: logging-server-s_KEY
+                valueFrom:
+                  configMapKeyRef:
+                    name: special-config
+                    key: logging-server-s
           ports:
             - containerPort: 5004
           livenessProbe:
@@ -400,6 +415,11 @@ spec:
                 configMapKeyRef:
                   name: special-config
                   key: searchesserver
+            - name: logging-server-s_KEY
+                valueFrom:
+                  configMapKeyRef:
+                    name: special-config
+                    key: logging-server-s
           ports:
             - containerPort: 50053
           livenessProbe:
@@ -476,6 +496,11 @@ spec:
                 configMapKeyRef:
                   name: special-config
                   key: libraryserver
+            - name: logging-server-s_KEY
+                valueFrom:
+                  configMapKeyRef:
+                    name: special-config
+                    key: logging-server-s
           ports:
             - containerPort: 5001
           livenessProbe:
@@ -557,6 +582,11 @@ spec:
                 configMapKeyRef:
                   name: special-config
                   key: searchesserver
+            - name: logging-server-s_KEY
+                valueFrom:
+                  configMapKeyRef:
+                    name: special-config
+                    key: logging-server-s
           ports:
             - containerPort: 50058
           livenessProbe:
@@ -637,6 +667,11 @@ spec:
                 configMapKeyRef:
                   name: special-config
                   key: usermanagementserversvc
+            - name: logging-server-s_KEY
+                valueFrom:
+                  configMapKeyRef:
+                    name: special-config
+                    key: logging-server-s
           ports:
             - containerPort: 5002
           livenessProbe:
@@ -782,6 +817,11 @@ spec:
                 configMapKeyRef:
                   name: special-config
                   key: suggestionsserver
+            - name: logging-server-s_KEY
+                valueFrom:
+                  configMapKeyRef:
+                    name: special-config
+                    key: logging-server-s
           ports:
             - containerPort: 5008
           livenessProbe:
@@ -928,6 +968,11 @@ spec:
                 configMapKeyRef:
                   name: special-config
                   key: searchesserver
+            - name: logging-server-s_KEY
+                valueFrom:
+                  configMapKeyRef:
+                    name: special-config
+                    key: logging-server-s
           ports:
             - containerPort: 5078
           livenessProbe:
@@ -1086,6 +1131,11 @@ spec:
                 configMapKeyRef:
                   name: special-config
                   key: reviews-server-s
+            - name: logging-server-s_KEY
+                valueFrom:
+                  configMapKeyRef:
+                    name: special-config
+                    key: logging-server-s
           livenessProbe:
             httpGet:
               path: /metrics
