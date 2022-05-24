@@ -11,7 +11,7 @@ from logging_pb2 import (
 )
 import logging_pb2_grpc
 
-client = MongoClient('mongo', 27017 ,username='admin', password='admin')
+client = MongoClient('mongo', 27017 ,username='YWRtaW4=', password='YWRtaW4=')
 logs = client["steam"]
 db = logs["logs"]
 db_healthz = logs["healthz"]
