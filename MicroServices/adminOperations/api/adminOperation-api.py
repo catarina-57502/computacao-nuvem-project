@@ -7,10 +7,19 @@ from adminOperations_pb2 import *
 from adminOperations_pb2_grpc import AdminOperationsStub
 
 
+
 api = Flask(__name__)
 
+caCRT = 'ca-cert.pem'
 
-adminoperations_channel = grpc.insecure_channel(os.environ['adminoperationsserver_KEY'])
+with open(caCRT, 'rb') as f:
+    credsCAclient = f.read()
+
+channel_creds = grpc.ssl_channel_credentials(credsCAclient)
+
+adminoperations_channel = grpc.secure_channel(os.environ['adminoperationsserver_KEY'],channel_creds)
+
+
 adminoperations_client = AdminOperationsStub(adminoperations_channel)
 
 @api.route('/healthz', methods=['GET'])

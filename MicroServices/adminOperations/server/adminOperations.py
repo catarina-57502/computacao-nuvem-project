@@ -6,6 +6,7 @@ import grpc
 from grpc_interceptor import ExceptionToStatusInterceptor
 from grpc_interceptor.exceptions import NotFound
 
+
 from adminOperations_pb2 import (
     GameObject,
     AddGameResponse,
@@ -133,14 +134,28 @@ class AdminOperationService(adminOperations_pb2_grpc.AdminOperationsServicer):
 
 def serve():
     interceptors = [ExceptionToStatusInterceptor()]
-    server = grpc.server(
-        futures.ThreadPoolExecutor(max_workers=10), interceptors=interceptors
-    )
-    adminOperations_pb2_grpc.add_AdminOperationsServicer_to_server(
-        AdminOperationService(), server
-    )
-    server.add_insecure_port("[::]:5051")
+    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+
+    adminOperations_pb2_grpc.add_AdminOperationsServicer_to_server(AdminOperationService(), server)
+
+
+    caCRT = 'ca-cert.pem'
+    serverCRT = 'server-cert.pem'
+    serverKey = 'server-key.pem'
+
+    with open(caCRT, 'rb') as f:
+        credsCA = f.read()
+    with open(serverCRT, 'rb') as f:
+        credsSCRT = f.read()
+    with open(serverKey, 'rb') as f:
+        credsSK = f.read()
+
+
+    channel_creds = grpc.ssl_server_credentials([(credsSK, credsSCRT)], credsCA,False)
+
+    server.add_secure_port("[::]:5051",channel_creds)
     server.start()
+
     server.wait_for_termination()
 
 
