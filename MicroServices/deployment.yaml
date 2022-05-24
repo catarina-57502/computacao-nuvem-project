@@ -35,19 +35,19 @@ spec:
             limits:
               memory: "1000Mi"
           env:
-          - name: MONGO_INITDB_ROOT_USERNAME
-            valueFrom:
-              secretKeyRef:
-                name: mongo-secrets
-                key: username
-          - name: MONGO_INITDB_ROOT_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: mongo-secrets
-                key: password
-          #envFrom:
-           # - secretRef:
-            #    name: mongo-secret
+            - name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secrets
+                  key: username
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secrets
+                  key: password
+              #envFrom:
+              # - secretRef:
+              #    name: mongo-secret
           ports:
             - containerPort: 27017
               name: mongo
@@ -319,11 +319,6 @@ spec:
                 configMapKeyRef:
                   name: special-config
                   key: usermanagementserversvc
-            - name: logging-server-s_KEY
-              valueFrom:
-                configMapKeyRef:
-                  name: special-config
-                  key: logging-server-s
           ports:
             - containerPort: 5004
           livenessProbe:
@@ -405,11 +400,6 @@ spec:
                 configMapKeyRef:
                   name: special-config
                   key: searchesserver
-            - name: logging-server-s_KEY
-              valueFrom:
-                configMapKeyRef:
-                  name: special-config
-                  key: logging-server-s
           ports:
             - containerPort: 50053
           livenessProbe:
@@ -486,11 +476,6 @@ spec:
                 configMapKeyRef:
                   name: special-config
                   key: libraryserver
-            - name: logging-server-s_KEY
-              valueFrom:
-                configMapKeyRef:
-                  name: special-config
-                  key: logging-server-s
           ports:
             - containerPort: 5001
           livenessProbe:
@@ -572,11 +557,6 @@ spec:
                 configMapKeyRef:
                   name: special-config
                   key: searchesserver
-            - name: logging-server-s_KEY
-              valueFrom:
-                configMapKeyRef:
-                  name: special-config
-                  key: logging-server-s
           ports:
             - containerPort: 50058
           livenessProbe:
@@ -657,11 +637,6 @@ spec:
                 configMapKeyRef:
                   name: special-config
                   key: usermanagementserversvc
-            - name: logging-server-s_KEY
-              valueFrom:
-                configMapKeyRef:
-                  name: special-config
-                  key: logging-server-s
           ports:
             - containerPort: 5002
           livenessProbe:
@@ -807,11 +782,6 @@ spec:
                 configMapKeyRef:
                   name: special-config
                   key: suggestionsserver
-            - name: logging-server-s_KEY
-              valueFrom:
-                configMapKeyRef:
-                  name: special-config
-                  key: logging-server-s
           ports:
             - containerPort: 5008
           livenessProbe:
@@ -958,11 +928,6 @@ spec:
                 configMapKeyRef:
                   name: special-config
                   key: searchesserver
-            - name: logging-server-s_KEY
-              valueFrom:
-                configMapKeyRef:
-                  name: special-config
-                  key: logging-server-s
           ports:
             - containerPort: 5078
           livenessProbe:
@@ -1196,7 +1161,7 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   name: special-config
-                  key: logging-server-s          
+                  key: logging-server-s
           # livenessProbe:
           #   httpGet:
           #     path: /metrics
