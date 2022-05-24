@@ -1,7 +1,7 @@
 import os
 import grpc
 from google.protobuf.json_format import MessageToJson, ParseDict
-from datetime import datetime
+import datetime
 
 from reviews_pb2 import (
     ReviewObject,
@@ -23,12 +23,12 @@ api = Flask(__name__)
 reviews_channel = grpc.insecure_channel(os.environ['reviews-server-s_KEY'])
 reviews_client = ReviewsStub(reviews_channel)
 
-
 logging_channel = grpc.insecure_channel(os.environ['logging-server-s_KEY'])
 logging_client = LoggingStub(logging_channel)
 
 @api.route('/healthz', methods=['GET'])
 def healthz():
+    g.req = request
     return json.dumps("Ok")
 
 @api.route('/reviews', methods=['GET'])
@@ -163,12 +163,12 @@ def delete_review(review_id):
     #     "description": res.description})
     return MessageToJson(res)
 
-@api.after_request()
+@api.after_request
 def reviews_ar(response):
     req = g.get("req")
     log = ParseDict({
         "operation": str(req.method),
-        "endpoint": req.endpoint,
+        "endpoint": req.full_path,
         "status": response.status,
         "service": "Reviews",
         "remote_addr": str(req.remote_addr),
@@ -177,3 +177,4 @@ def reviews_ar(response):
         "date": datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
     }, Log())
     logging_client.StoreLog(log)
+    return response

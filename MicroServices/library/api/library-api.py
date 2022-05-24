@@ -1,18 +1,29 @@
 import os
+import datetime
 
-from flask import Flask, json, request
+from flask import Flask, json, request, g
 import grpc
-from google.protobuf.json_format import MessageToJson
+from google.protobuf.json_format import MessageToJson, ParseDict
 
 from library_pb2 import *
 from library_pb2_grpc import LibraryStub
+
+from logging_pb2 import (
+    Log,
+    Empty
+)
+from logging_pb2_grpc import LoggingStub
 
 api = Flask(__name__)
 
 library_channel = grpc.insecure_channel(os.environ['libraryserver_KEY'])
 library_client = LibraryStub(library_channel)
 
+logging_channel = grpc.insecure_channel(os.environ['logging-server-s_KEY'])
+logging_client = LoggingStub(logging_channel)
+
 def DocToGame(game):
+    g.req = request
     return  {
         "url" : game.url,
         "types" : game.types,
@@ -39,6 +50,7 @@ def DocToGame(game):
 
 @api.route('/healthz', methods=['GET'])
 def healthz():
+    g.req = request
     return json.dumps("Ok")
 
 @api.route('/library', methods=['POST'])
@@ -50,6 +62,7 @@ def addGame():
     addGameLib_response = library_client.AddGame(
         addGameLib_request
     )
+    g.req = request
     return json.dumps(addGameLib_response.message)
 
 
@@ -63,6 +76,7 @@ def deleteGame():
     deleteGameLib_response = library_client.DeleteGame(
         deleteGameLib_request
     )
+    g.req = request
     return json.dumps(deleteGameLib_response.message)
 
 @api.route('/library', methods=['GET'])
@@ -79,6 +93,21 @@ def listGames():
     for doc in listGamesLib_response.games:
         map[str(i)] = DocToGame(doc)
         i+=1
-
+    g.req = request
     return json.dumps(map)
 
+@api.after_request
+def library_ar(response):
+    req = g.get("req")
+    log = ParseDict({
+        "operation": str(req.method),
+        "endpoint": req.full_path,
+        "status": response.status,
+        "service": "Library",
+        "remote_addr": str(req.remote_addr),
+        "user": "default",
+        "host": req.host,
+        "date": datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+    }, Log())
+    logging_client.StoreLog(log)
+    return response

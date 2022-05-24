@@ -1,10 +1,18 @@
 import os
+import datetime
 
-from flask import Flask, render_template, json, request
+from google.protobuf.json_format import MessageToJson, ParseDict
+from flask import Flask, render_template, json, request, g
 import grpc
 
 from suggestions_pb2 import gameRequest, reviewRequest, Game, Review
 from suggestions_pb2_grpc import SuggestionsStub
+
+from logging_pb2 import (
+    Log,
+    Empty
+)
+from logging_pb2_grpc import LoggingStub
 
 app = Flask(__name__)
 
@@ -12,8 +20,11 @@ app = Flask(__name__)
 suggestions_channel = grpc.insecure_channel(os.environ['suggestionsserver_KEY'])
 suggestions_client = SuggestionsStub(suggestions_channel)
 
+logging_channel = grpc.insecure_channel(os.environ['logging-server-s_KEY'])
+logging_client = LoggingStub(logging_channel)
 
 def DocToGame(game):
+    g.req = request
     return  {
         "url" : game.url,
         "types" : game.types,
@@ -39,6 +50,7 @@ def DocToGame(game):
     }
 
 def DocToReview(review):
+    g.req = request
     return  {
         "review_id" : review.review_id,
      "app_id" : review.app_id,
@@ -67,6 +79,7 @@ def DocToReview(review):
 
 @app.route('/healthz', methods=['GET'])
 def healthz():
+    g.req = request
     return json.dumps("Ok")
 
 @app.route("/suggestions/games", methods=['GET'])
@@ -84,6 +97,7 @@ def suggestionsGames():
     for doc in suggGame_response.games:
         map[str(i)] = DocToGame(suggGame_response.games[str(i)])
         i+=1
+    g.req = request
     return json.dumps(map)
 
 @app.route("/suggestions/reviews", methods=['GET'])
@@ -98,4 +112,21 @@ def suggestionReviews():
     for doc in suggReview_response.games:
         map[str(i)] = DocToReview(suggReview_response.games[str(i)])
         i+=1
+    g.req = request
     return json.dumps(map)
+
+@app.after_request
+def suggestions_ar(response):
+    req = g.get("req")
+    log = ParseDict({
+        "operation": str(req.method),
+        "endpoint": req.full_path,
+        "status": response.status,
+        "service": "Suggestions",
+        "remote_addr": str(req.remote_addr),
+        "user": "default",
+        "host": req.host,
+        "date": datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+    }, Log())
+    logging_client.StoreLog(log)
+    return response
