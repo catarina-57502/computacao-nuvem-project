@@ -18,18 +18,7 @@ db_healthz = logs["healthz"]
 
 class LoggingService(logging_pb2_grpc.LoggingServicer):
     def StoreLog(self, request, context):
-        if(request.endpoint == "/healthz?"):
-            db_healthz.insert_one({
-                "operation": request.operation,
-                "endpoint": request.endpoint,
-                "status": request.status,
-                "service": request.service,
-                "remote_addr": request.remote_addr,
-                "user": request.user,
-                "host": request.host,
-                "date": request.date
-            })
-        else:
+        if(request.endpoint != "/healthz?"):
             db.insert_one({
                 "operation": request.operation,
                 "endpoint": request.endpoint,
