@@ -38,15 +38,6 @@ credentials = grpc.ssl_channel_credentials(root_certs)
 userManagement_channel = grpc.secure_channel(os.environ['usermanagementserversvc_KEY'],credentials)
 usermanagement_client = UserManagementStub(userManagement_channel)
 
-def checkIPRequestCounter(ipP):
-    registry_request = RegistryRequest(
-        ip=ipP,
-    )
-    registry_response = usermanagement_client.CheckForAttacks(
-        registry_request
-    )
-    resp = (registry_response.bol)
-    return resp
 
 ca_cert = 'caLogging.pem'
 with open(ca_cert,'rb') as f:
@@ -91,19 +82,16 @@ def healthz():
 
 @api.route('/library', methods=['POST'])
 def addGame():
-    auth = checkIPRequestCounter(request.remote_addr)
-    if(auth == True):
-        addGameLib_request = AddGameLibRequest(
-            id = request.args.get('id'),
-            token = request.headers.get('token')
-        )
-        addGameLib_response = library_client.AddGame(
-            addGameLib_request
-        )
-        g.req = request
-        return json.dumps(addGameLib_response.message)
-    else:
-        return json.dumps("Nice try! DoS")
+    addGameLib_request = AddGameLibRequest(
+        id = request.args.get('id'),
+        token = request.headers.get('token')
+    )
+    addGameLib_response = library_client.AddGame(
+        addGameLib_request
+    )
+    g.req = request
+    return json.dumps(addGameLib_response.message)
+
 
 
 @api.route('/library', methods=['DELETE'])
@@ -121,24 +109,22 @@ def deleteGame():
 
 @api.route('/library', methods=['GET'])
 def listGames():
-    auth = checkIPRequestCounter(request.remote_addr)
-    if(auth == True):
-        listGamesLib_request = ListGamesLibRequest(
-            token = request.headers.get('token')
-        )
-        listGamesLib_response = library_client.ListGames(
-            listGamesLib_request
-        )
+    listGamesLib_request = ListGamesLibRequest(
+        token = request.headers.get('token')
+    )
+    listGamesLib_response = library_client.ListGames(
+        listGamesLib_request
+    )
 
-        map = {}
-        i = 0
-        for doc in listGamesLib_response.games:
-            map[str(i)] = DocToGame(doc)
-            i+=1
-        g.req = request
-        return json.dumps(map)
-    else:
-        return json.dumps("Nice try!")
+    map = {}
+    i = 0
+    for doc in listGamesLib_response.games:
+        map[str(i)] = DocToGame(doc)
+        i+=1
+    g.req = request
+    return json.dumps(map)
+
+
 
 @api.after_request
 def library_ar(response):
