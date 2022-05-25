@@ -46,7 +46,6 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "nginx"
 spec:
-  externalTrafficPolicy: Local
   rules:
     - http:
         paths:
