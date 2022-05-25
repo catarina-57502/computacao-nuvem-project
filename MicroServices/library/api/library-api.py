@@ -45,9 +45,8 @@ def checkIPRequestCounter(ipP):
     registry_response = usermanagement_client.CheckForAttacks(
         registry_request
     )
-    resp = json.dumps(registry_response.message)
-    return resp["bol"]
-
+    resp = (registry_response.bol)
+    return resp
 
 ca_cert = 'caLogging.pem'
 with open(ca_cert,'rb') as f:
@@ -122,20 +121,24 @@ def deleteGame():
 
 @api.route('/library', methods=['GET'])
 def listGames():
-    listGamesLib_request = ListGamesLibRequest(
-        token = request.headers.get('token')
-    )
-    listGamesLib_response = library_client.ListGames(
-        listGamesLib_request
-    )
+    auth = checkIPRequestCounter(request.remote_addr)
+    if(auth == True):
+        listGamesLib_request = ListGamesLibRequest(
+            token = request.headers.get('token')
+        )
+        listGamesLib_response = library_client.ListGames(
+            listGamesLib_request
+        )
 
-    map = {}
-    i = 0
-    for doc in listGamesLib_response.games:
-        map[str(i)] = DocToGame(doc)
-        i+=1
-    g.req = request
-    return json.dumps(map)
+        map = {}
+        i = 0
+        for doc in listGamesLib_response.games:
+            map[str(i)] = DocToGame(doc)
+            i+=1
+        g.req = request
+        return json.dumps(map)
+    else:
+        return json.dumps("Nice try!")
 
 @api.after_request
 def library_ar(response):
