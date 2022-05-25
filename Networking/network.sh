@@ -3,7 +3,7 @@ helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm repo update
 
 
-helm install nginx-ingress ingress-nginx/ingress-nginx --set controller.service.externalTrafficPolicy=Local --set service.spec.externalTrafficPolicy: Local
+helm install nginx-ingress ingress-nginx/ingress-nginx --set controller.service.externalTrafficPolicy=Local --set service.spec.externalTrafficPolicy=Local
 
 
 echo "10s"
