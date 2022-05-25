@@ -102,7 +102,7 @@ Thomas Marques  - Suggestions
 André Grilo - Searchs  
 
 
-### Google Cloud
+# Google Cloud
 
 (1) deploy the containers to a kubernetes cluster on the cloud (ALL)  
 
@@ -123,3 +123,26 @@ André Grilo - Searchs
 (9) setup your own probes for liveness, readiness and start-up (Grilo)  
 
 (10) implement rolling updates and rollback (Catarina)  
+
+# Security
+
+
+Check the need for config maps (Catarina/Martim)  
+Actions with Git CA (Martim)  
+
+
+
+1. Managing multiple namespaces. Create different RBAC policies for each namespace.  
+    (TODOS)  
+    a. Criar namespace para o seu microserviço  
+    b. Role para seu microserviço  
+    c. ClusterRole para seu microserviço  
+    d. RoleBinding para seu microserviço  
+    Referencia: https://kubernetes.io/docs/reference/access-authn-authz/rbac/
+2. Check if the current configuration of the network architecture isolates critical points from the public Internet. (Grilo)
+3. Secure channels in all communications. (Martim)
+4. Creation of logs (Audit Logging). (Tomas)
+5. Creation of NetworkPolicy. (Catarina)
+6. Protection for DoS, each request needs an access token, to monitor maximum requests per user. (Martim/Catarina)
+7. Check for attack Broken Object Level Authorization (when sensitive fields within an object are incorrectly exposed),
+   test for database inputs injection.
