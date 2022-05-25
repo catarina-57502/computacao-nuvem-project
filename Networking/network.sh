@@ -3,12 +3,10 @@ helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm repo update
 
 
-helm install stable/nginx-ingress --name nginx-ingress \
+helm install nginx-ingress ingress-nginx/ingress-nginx \
     --set controller.publishService.enabled=true \
     --set controller.service.externalTrafficPolicy=Local \
     --set controller.service.annotations."service\.beta\.kubernetes\.io/do-loadbalancer-enable-proxy-protocol=true" \
-    --set controller.replicaCount=2 \
-    --name nginx-ingress \
     --set-string controller.config.use-proxy-protocol=true,controller.config.use-forward-headers=true,controller.config.compute-full-forward-for=true
 
 echo "10s"
