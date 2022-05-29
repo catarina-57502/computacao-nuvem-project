@@ -33,7 +33,7 @@ default_app = firebase_admin.initialize_app(cred)
 def get_table(db,table):
     return db[table]
 
-client = MongoClient('mongo', 27017, username = os.environ['SECRET_USERNAME'], password = os.environ['SECRET_PASSWORD'])
+client = MongoClient('mongo', 27017, username = "admin", password = "admin")
 db = client['users']
 usersDB = get_table(db,"users")
 

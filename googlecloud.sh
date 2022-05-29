@@ -29,15 +29,11 @@ chmod u+x configmaps.sh
 cd ..
 cd MicroServices
 
-echo "admin" > username.txt
-echo "j3a225fkvesm2mzesq79xs3a56w35epta62" > password.txt
+export username=$(gcloud secrets versions access 1 --secret="username" --format='get(payload.data)' | tr '_-' '/+' | base64 -d)
+export password=$(gcloud secrets versions access 1 --secret="password" --format='get(payload.data)' | tr '_-' '/+' | base64 -d)
 
-kubectl create secret generic mongo-secretdb --type=string --from-file=MONGO_INITDB_ROOT_USERNAME=./username.txt --from-file=MONGO_INITDB_ROOT_PASSWORD=./password.txt
-
-kubectl create secret generic mongo-secret --type=string  --from-file=username=./username.txt --from-file=password=./password.txt
-kubectl create secret generic mongo-secret --type=string --namespace=usermanagement --from-file=username=./username.txt --from-file=password=./password.txt
-kubectl create secret generic mongo-secret --type=string --namespace=adminoperations --from-file=username=./username.txt --from-file=password=./password.txt
-
+envsubst < "mongo-secrets.yaml" > "mongo-secretsENV.yaml"
+kubectl apply -f mongo-secretsENV.yaml
 
 kubectl apply -f pv.yaml
 envsubst < "deployment.yaml" > "deploymentENV.yaml"
