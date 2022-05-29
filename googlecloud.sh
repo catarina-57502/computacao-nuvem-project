@@ -29,8 +29,8 @@ chmod u+x configmaps.sh
 cd ..
 cd MicroServices
 
-echo "admin" | base64 > username.txt
-echo "admin" | base64 > password.txt
+echo "admin" > username.txt
+echo "j3a225fkvesm2mzesq79xs3a56w35epta62" > password.txt
 
 kubectl create secret generic mongo-secretdb --from-file=MONGO_INITDB_ROOT_USERNAME=./username.txt --from-file=MONGO_INITDB_ROOT_PASSWORD=./password.txt
 
