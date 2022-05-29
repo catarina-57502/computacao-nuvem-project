@@ -32,11 +32,11 @@ cd MicroServices
 echo "admin" > username.txt
 echo "j3a225fkvesm2mzesq79xs3a56w35epta62" > password.txt
 
-kubectl create secret generic mongo-secretdb --from-file=MONGO_INITDB_ROOT_USERNAME=./username.txt --from-file=MONGO_INITDB_ROOT_PASSWORD=./password.txt
+kubectl create secret generic mongo-secretdb --type=string --from-file=MONGO_INITDB_ROOT_USERNAME=./username.txt --from-file=MONGO_INITDB_ROOT_PASSWORD=./password.txt
 
-kubectl create secret generic mongo-secret  --from-file=username=./username.txt --from-file=password=./password.txt
-kubectl create secret generic mongo-secret --namespace=usermanagement --from-file=username=./username.txt --from-file=password=./password.txt
-kubectl create secret generic mongo-secret --namespace=adminoperations --from-file=username=./username.txt --from-file=password=./password.txt
+kubectl create secret generic mongo-secret --type=string  --from-file=username=./username.txt --from-file=password=./password.txt
+kubectl create secret generic mongo-secret --type=string --namespace=usermanagement --from-file=username=./username.txt --from-file=password=./password.txt
+kubectl create secret generic mongo-secret --type=string --namespace=adminoperations --from-file=username=./username.txt --from-file=password=./password.txt
 
 
 kubectl apply -f pv.yaml
