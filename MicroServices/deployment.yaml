@@ -36,7 +36,7 @@ spec:
               memory: "1000Mi"
           envFrom:
             - secretRef:
-                name: mongo-secretdb
+                name: mongo-secret
           ports:
             - containerPort: 27017
               name: mongo
@@ -80,16 +80,6 @@ spec:
                 configMapKeyRef:
                   name: special-config
                   key: usermanagementserversvc
-            - name: SECRET_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: mongo-secret
-                  key: username
-            - name: SECRET_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mongo-secret
-                  key: password
           ports:
             - containerPort: 50051
           livenessProbe:
@@ -247,17 +237,6 @@ spec:
       containers:
         - name: usermanagementserver
           image: "gcr.io/${PROJECT_ID}/usermanagementserver"
-          env:
-            - name: SECRET_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: mongo-secret
-                  key: username
-            - name: SECRET_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mongo-secret
-                  key: password
           ports:
             - containerPort: 50052
           livenessProbe:
