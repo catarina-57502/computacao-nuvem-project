@@ -11,6 +11,17 @@ spec:
       containers:
         - name: "writedb"
           image: "gcr.io/${PROJECT_ID}/writedb"
+          env:
+            - name: SECRET_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: username
+            - name: SECRET_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: password
           ports:
             - containerPort: 50111
       restartPolicy: Never

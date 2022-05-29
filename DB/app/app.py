@@ -2,7 +2,7 @@
 ## Version: 1.0
 ## Cloud Computing - 2022
 ## Group 7 
-
+import os
 import csv
 from csv import reader
 from pymongo import MongoClient
@@ -124,7 +124,7 @@ def writeCSVtoDBGames(CSVFile,tableDB):
     file.close()
     print("DONE", CSVFile)
 def get_database():
-    client = MongoClient('mongo', 27017 ,username='admin', password='admin' )
+    client = MongoClient('mongo', 27017, username = os.environ['SECRET_USERNAME'], password = os.environ['SECRET_PASSWORD'])
     print("DataBase Created")
     return client['steam']
 
@@ -133,7 +133,7 @@ def get_databaseUsers():
     import pymongo
 
     from pymongo import MongoClient
-    client = MongoClient('mongo', 27017 ,username='admin', password='admin' )
+    client = MongoClient('mongo', 27017, username = os.environ['SECRET_USERNAME'], password = os.environ['SECRET_PASSWORD'])
     print("DataBase Created")
     return client['users']
 
@@ -161,10 +161,9 @@ if __name__ == "__main__":
     dbReviews = get_table(db,'Reviews')
     dbGames = get_table(db,'Games')
     dbUsers = get_table(get_databaseUsers(),'users')
+    writeUser(dbUsers)
     #Reviews and games
     writeCSVtoDB(STEAM_REVIEWS,dbReviews)
     writeCSVtoDBGames(STEAM_GAMES,dbGames)
-    # User default
-    writeUser(dbUsers)
 
 

@@ -34,6 +34,7 @@ echo "admin" | base64 > password.txt
 
 kubectl create secret generic mongo-secretdb --from-file=MONGO_INITDB_ROOT_USERNAME=./username.txt --from-file=MONGO_INITDB_ROOT_PASSWORD=./password.txt
 
+kubectl create secret generic mongo-secret  --from-file=username=./username.txt --from-file=password=./password.txt
 kubectl create secret generic mongo-secret --namespace=usermanagement --from-file=username=./username.txt --from-file=password=./password.txt
 kubectl create secret generic mongo-secret --namespace=adminoperations --from-file=username=./username.txt --from-file=password=./password.txt
 
