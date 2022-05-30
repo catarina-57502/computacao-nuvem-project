@@ -5,7 +5,7 @@ metadata:
   namespace: adminoperations
   annotations:
     kubernetes.io/ingress.class: "nginx"
-    nginx.ingress.kubernetes.io/limit-rpm: '30'
+    nginx.ingress.kubernetes.io/limit-rpm: '6000'
 spec:
   rules:
     - http:
@@ -26,7 +26,7 @@ metadata:
   namespace: usermanagement
   annotations:
     kubernetes.io/ingress.class: "nginx"
-    nginx.ingress.kubernetes.io/limit-rpm: '30'
+    nginx.ingress.kubernetes.io/limit-rpm: '6000'
 spec:
   rules:
     - http:
@@ -47,7 +47,7 @@ metadata:
   namespace: library
   annotations:
     kubernetes.io/ingress.class: "nginx"
-    nginx.ingress.kubernetes.io/limit-rpm: '30'
+    nginx.ingress.kubernetes.io/limit-rpm: '6000'
 spec:
   rules:
     - http:
@@ -68,7 +68,7 @@ metadata:
   namespace: wishlist
   annotations:
     kubernetes.io/ingress.class: "nginx"
-    nginx.ingress.kubernetes.io/limit-rpm: '30'
+    nginx.ingress.kubernetes.io/limit-rpm: '6000'
 spec:
   rules:
     - http:
@@ -89,7 +89,7 @@ metadata:
   namespace: suggestions
   annotations:
     kubernetes.io/ingress.class: "nginx"
-    nginx.ingress.kubernetes.io/limit-rpm: '30'
+    nginx.ingress.kubernetes.io/limit-rpm: '6000'
 spec:
   rules:
     - http:
@@ -110,7 +110,7 @@ metadata:
   namespace: searches
   annotations:
     kubernetes.io/ingress.class: "nginx"
-    nginx.ingress.kubernetes.io/limit-rpm: '30'
+    nginx.ingress.kubernetes.io/limit-rpm: '6000'
 spec:
   rules:
     - http:
@@ -130,7 +130,7 @@ metadata:
   namespace: reviews
   annotations:
     kubernetes.io/ingress.class: "nginx"
-    nginx.ingress.kubernetes.io/limit-rpm: '30'
+    nginx.ingress.kubernetes.io/limit-rpm: '6000'
 spec:
   rules:
     - http:

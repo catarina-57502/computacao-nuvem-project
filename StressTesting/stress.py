@@ -1,11 +1,9 @@
 import requests
-
+import time
 
 ip = input("Enter IP: ")
-print(ip)
-
 nRequest = input("Enter Number Request Send: ")
-print(nRequest)
+timeSleep = input("Enter Time: ")
 
 userManagementURL = "http://" + ip + "/user/login"
 adminURL = "http://" + ip + "/admin/games"
@@ -16,7 +14,8 @@ suggestionsURL = "http://" + ip + "/suggestions/games"
 wishesURL = "http://" + ip + "/wishes"
 
 # Token
-PARAMS = {"email":"martimmourao@gmail.com","password":"qwerty"}
-userToken = requests.get(url = userManagementURL, data = PARAMS)
-
-print(userToken)
+for i in range(int(nRequest)):
+    PARAMS = {"email":"martimmourao@gmail.com","password":"qwerty"}
+    userToken = requests.post(userManagementURL, json = PARAMS)
+    print(userToken.json())
+    time.sleep(float(timeSleep))
