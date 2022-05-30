@@ -29,7 +29,11 @@ chmod u+x configmaps.sh
 cd ..
 cd MicroServices
 
-kubectl apply -f mongo-secrets.yaml
+export username=$(gcloud secrets versions access 1 --secret="username" --format='get(payload.data)' | tr '_-' '/+' | base64 -d)
+export password=$(gcloud secrets versions access 1 --secret="password" --format='get(payload.data)' | tr '_-' '/+' | base64 -d)
+
+envsubst < "mongo-secrets.yaml" > "mongo-secretsENV.yaml"
+kubectl apply -f mongo-secretsENV.yaml
 
 kubectl apply -f pv.yaml
 envsubst < "deployment.yaml" > "deploymentENV.yaml"
