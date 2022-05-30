@@ -31,7 +31,7 @@ sh db_noDocker.sh
 
 ### To use the services API
 
-Export the EXTERNAL-ip of the NGINX ingress controller in a variable:
+Export the EXTERNAL-IP of the NGINX ingress controller in a variable:
 
 ```
 export NGINX_INGRESS_IP=$(kubectl get service nginx-ingress-ingress-nginx-controller -ojson | jq -r '.status.loadBalancer.ingress[].ip')
