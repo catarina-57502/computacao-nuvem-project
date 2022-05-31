@@ -10,5 +10,5 @@ for i in range(50):
     i += 1
     PARAMS = {"email":"martimmourao@gmail.com","password":"qwerty"}
     userToken = requests.post(userManagementURL, json = PARAMS)
-    userTokenFinal = userToken.json()
+    print(userToken)
     print("Request"  + str(i))
