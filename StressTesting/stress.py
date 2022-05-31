@@ -3,6 +3,8 @@ import time
 import threading
 
 
+
+
 ip = input("Enter IP: ")
 nRequest = input("Enter Number Request Send: ")
 timeSleep = input("Enter Time: ")
@@ -10,7 +12,7 @@ timeSleep = input("Enter Time: ")
 userManagementURL = "http://" + ip + "/user/login"
 adminURL = "http://" + ip + "/admin/games"
 libraryURL = "http://" + ip + "/library"
-reviewsURL = "http://" + ip + "/reviews?max_results=1"
+reviewsURL = "http://" + ip + "/reviews"
 searchesURL = "http://" + ip + "/searches/games?genre=Indie,Simulation,Strategy"
 suggestionsURL = "http://" + ip + "/suggestions/games?developer=id Software"
 wishesURL = "http://" + ip + "/wishes"
@@ -26,7 +28,7 @@ def stressUser():
     for i in range(int(nRequest)):
         PARAMS = {"email":"martimmourao@gmail.com","password":"qwerty"}
         userToken = requests.post(userManagementURL, json = PARAMS)
-        print(userToken)
+        print(str(userToken) + "USER")
         time.sleep(float(timeSleep))
 
 def stressAdmin():
@@ -56,7 +58,7 @@ def stressAdmin():
                  }
         headers = {"token": userTokenFinal}
         editGame = requests.put(adminURL, headers=headers ,json = PARAMS)
-        print(editGame)
+        print(str(editGame) + "Admin")
         time.sleep(float(timeSleep))
 
 def stressLib():
@@ -64,28 +66,54 @@ def stressLib():
     for i in range(int(nRequest)):
         headers = {"token": userTokenFinal}
         listLib = requests.get(libraryURL, headers=headers)
-        print(listLib)
+        print(str(listLib) + "Library")
         time.sleep(float(timeSleep))
 
 def stressRev():
     print("Start Reviews")
+    id = time.time()
     for i in range(int(nRequest)):
-        listReviews = requests.get(reviewsURL)
-        print(listReviews)
+        id = time.time()
+        PARAMS = {
+                   "review_id": str(int(id)),
+                   "app_id": "292030",
+                   "app_name": "The Witcher 3: Wild Hunt",
+                   "language": "english",
+                   "review": "LOVE IT",
+                   "timestamp_created": "1611379970",
+                   "timestamp_updated": "1611379970",
+                   "recommended": "True",
+                   "votes_helpful": "0",
+                   "votes_funny": "0",
+                   "weighted_vote_score": "0",
+                   "comment_count": "0",
+                   "steam_purchase": "True",
+                   "received_for_free": "False",
+                   "written_during_early_access": "False",
+                   "author_steamid": "765611990547553801",
+                   "author_num_games_owned": "5",
+                   "author_num_reviews": "3",
+                   "author_playtime_forever": "5587",
+                   "author_playtime_last_two_weeks": "3200",
+                   "author_playtime_at_review": "5524",
+                   "author_last_played": "1611383744"
+                 }
+        listReviews = requests.post(reviewsURL,json = PARAMS)
+        print(str(listReviews) + "Reviews")
         time.sleep(float(timeSleep))
 
 def stressSea():
     print("Start Searches")
     for i in range(int(nRequest)):
-        listGames = requests.post(searchesURL)
-        print(listGames)
+        listGames = requests.get(searchesURL)
+        print(str(listGames) + "Searches")
         time.sleep(float(timeSleep))
 
 def stressSugg():
     print("Start Suggestions")
     for i in range(int(nRequest)):
         listSug = requests.get(suggestionsURL)
-        print(listSug)
+        print(str(listSug) + "Suggestions")
         time.sleep(float(timeSleep))
 
 def stressWish():
@@ -93,7 +121,7 @@ def stressWish():
     for i in range(int(nRequest)):
         headers = {"token": userTokenFinal}
         listWish = requests.get(wishesURL, headers=headers)
-        print(listWish)
+        print(str(listWish)+ "Wishlist")
         time.sleep(float(timeSleep))
 
 
