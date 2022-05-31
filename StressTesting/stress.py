@@ -24,14 +24,6 @@ PARAMS = {"email":"martimmourao@gmail.com","password":"qwerty"}
 userToken = requests.post(userManagementURL, json = PARAMS)
 userTokenFinal = userToken.json()
 
-def stressUser():
-    print("Start UserManagement")
-    for i in range(int(nRequest)):
-        PARAMS = {"email":"martimmourao@gmail.com","password":"qwerty"}
-        userToken = requests.post(userManagementURL, json = PARAMS)
-        print(str(userToken) + "USER")
-        time.sleep(float(timeSleep))
-
 def stressAdmin():
     print("Start AdminOperations")
     for i in range(int(nRequest)):
@@ -102,14 +94,12 @@ def stressWish():
 
 if __name__ == "__main__":
     for i in range(int(nThread)):
-        userM = threading.Thread(target=stressUser, args=())
         admin = threading.Thread(target=stressAdmin, args=())
         lib = threading.Thread(target=stressLib, args=())
         rev = threading.Thread(target=stressRev, args=())
         sea = threading.Thread(target=stressSea, args=())
         sugg = threading.Thread(target=stressSugg, args=())
         wish = threading.Thread(target=stressWish, args=())
-        userM.start()
         admin.start()
         lib.start()
         rev.start()
