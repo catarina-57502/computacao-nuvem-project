@@ -2,9 +2,6 @@ import requests
 import time
 import threading
 
-
-
-
 ip = input("Enter IP: ")
 nThread = input("Enter Number Threads: ")
 nRequest = input("Enter Number Request Send: ")
@@ -17,8 +14,6 @@ reviewsURL = "http://" + ip + "/reviews/85184605"
 searchesURL = "http://" + ip + "/searches/games?genre=Indie,Simulation,Strategy"
 suggestionsURL = "http://" + ip + "/suggestions/games?developer=id Software"
 wishesURL = "http://" + ip + "/wishes"
-
-
 
 PARAMS = {"email":"martimmourao@gmail.com","password":"qwerty"}
 userToken = requests.post(userManagementURL, json = PARAMS)
