@@ -3,9 +3,10 @@ import time
 import threading
 
 ip = input("Enter IP: ")
-nThread = input("Enter Number Threads: ")
-nRequest = input("Enter Number Request Send: ")
-timeSleep = input("Enter Time: ")
+nThread = input("Enter Number Users: ")
+nRequest = 1
+timeSleep = input("Enter Time micro: ")
+timeUsers = input("Enter Time Users: ")
 
 userManagementURL = "http://" + ip + "/user/login"
 adminURL = "http://" + ip + "/admin/games"
@@ -47,7 +48,6 @@ def stressAdmin():
         headers = {"token": userTokenFinal}
         editGame = requests.put(adminURL, headers=headers ,json = PARAMS)
         print(str(editGame) + "Admin")
-        time.sleep(float(timeSleep))
 
 def stressLib():
     print("Start Library")
@@ -55,28 +55,24 @@ def stressLib():
         headers = {"token": userTokenFinal}
         listLib = requests.get(libraryURL, headers=headers)
         print(str(listLib) + "Library")
-        time.sleep(float(timeSleep))
 
 def stressRev():
     print("Start Reviews")
     for i in range(int(nRequest)):
         listReviews = requests.get(reviewsURL)
         print(str(listReviews) + "Reviews")
-        time.sleep(float(timeSleep))
 
 def stressSea():
     print("Start Searches")
     for i in range(int(nRequest)):
         listGames = requests.get(searchesURL)
         print(str(listGames) + "Searches")
-        time.sleep(float(timeSleep))
 
 def stressSugg():
     print("Start Suggestions")
     for i in range(int(nRequest)):
         listSug = requests.get(suggestionsURL)
         print(str(listSug) + "Suggestions")
-        time.sleep(float(timeSleep))
 
 def stressWish():
     print("Start Wishlist")
@@ -84,20 +80,28 @@ def stressWish():
         headers = {"token": userTokenFinal}
         listWish = requests.get(wishesURL, headers=headers)
         print(str(listWish)+ "Wishlist")
-        time.sleep(float(timeSleep))
 
+
+def user():
+    admin = threading.Thread(target=stressAdmin, args=())
+    lib = threading.Thread(target=stressLib, args=())
+    rev = threading.Thread(target=stressRev, args=())
+    sea = threading.Thread(target=stressSea, args=())
+    sugg = threading.Thread(target=stressSugg, args=())
+    wish = threading.Thread(target=stressWish, args=())
+    admin.start()
+    time.sleep(float(timeSleep))
+    lib.start()
+    time.sleep(float(timeSleep))
+    rev.start()
+    time.sleep(float(timeSleep))
+    sea.start()
+    time.sleep(float(timeSleep))
+    sugg.start()
+    time.sleep(float(timeSleep))
+    wish.start()
 
 if __name__ == "__main__":
     for i in range(int(nThread)):
-        admin = threading.Thread(target=stressAdmin, args=())
-        lib = threading.Thread(target=stressLib, args=())
-        rev = threading.Thread(target=stressRev, args=())
-        sea = threading.Thread(target=stressSea, args=())
-        sugg = threading.Thread(target=stressSugg, args=())
-        wish = threading.Thread(target=stressWish, args=())
-        admin.start()
-        lib.start()
-        rev.start()
-        sea.start()
-        sugg.start()
-        wish.start()
+        time.sleep(float(timeUsers))
+        user()
