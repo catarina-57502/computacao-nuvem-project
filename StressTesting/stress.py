@@ -6,13 +6,14 @@ import threading
 
 
 ip = input("Enter IP: ")
+nThread = input("Enter Number Threads: ")
 nRequest = input("Enter Number Request Send: ")
 timeSleep = input("Enter Time: ")
 
 userManagementURL = "http://" + ip + "/user/login"
 adminURL = "http://" + ip + "/admin/games"
 libraryURL = "http://" + ip + "/library"
-reviewsURL = "http://" + ip + "/reviews"
+reviewsURL = "http://" + ip + "/reviews/85184605"
 searchesURL = "http://" + ip + "/searches/games?genre=Indie,Simulation,Strategy"
 suggestionsURL = "http://" + ip + "/suggestions/games?developer=id Software"
 wishesURL = "http://" + ip + "/wishes"
@@ -71,34 +72,8 @@ def stressLib():
 
 def stressRev():
     print("Start Reviews")
-    id = time.time()
     for i in range(int(nRequest)):
-        id = time.time()
-        PARAMS = {
-                   "review_id": str(int(id)),
-                   "app_id": "292030",
-                   "app_name": "The Witcher 3: Wild Hunt",
-                   "language": "english",
-                   "review": "LOVE IT",
-                   "timestamp_created": "1611379970",
-                   "timestamp_updated": "1611379970",
-                   "recommended": "True",
-                   "votes_helpful": "0",
-                   "votes_funny": "0",
-                   "weighted_vote_score": "0",
-                   "comment_count": "0",
-                   "steam_purchase": "True",
-                   "received_for_free": "False",
-                   "written_during_early_access": "False",
-                   "author_steamid": "765611990547553801",
-                   "author_num_games_owned": "5",
-                   "author_num_reviews": "3",
-                   "author_playtime_forever": "5587",
-                   "author_playtime_last_two_weeks": "3200",
-                   "author_playtime_at_review": "5524",
-                   "author_last_played": "1611383744"
-                 }
-        listReviews = requests.post(reviewsURL,json = PARAMS)
+        listReviews = requests.get(reviewsURL)
         print(str(listReviews) + "Reviews")
         time.sleep(float(timeSleep))
 
@@ -126,18 +101,18 @@ def stressWish():
 
 
 if __name__ == "__main__":
-    userM = threading.Thread(target=stressUser, args=())
-    admin = threading.Thread(target=stressAdmin, args=())
-    lib = threading.Thread(target=stressLib, args=())
-    rev = threading.Thread(target=stressRev, args=())
-    sea = threading.Thread(target=stressSea, args=())
-    sugg = threading.Thread(target=stressSugg, args=())
-    wish = threading.Thread(target=stressWish, args=())
-
-    userM.start()
-    admin.start()
-    lib.start()
-    rev.start()
-    sea.start()
-    sugg.start()
-    wish.start()
+    for i in range(int(nThread)):
+        userM = threading.Thread(target=stressUser, args=())
+        admin = threading.Thread(target=stressAdmin, args=())
+        lib = threading.Thread(target=stressLib, args=())
+        rev = threading.Thread(target=stressRev, args=())
+        sea = threading.Thread(target=stressSea, args=())
+        sugg = threading.Thread(target=stressSugg, args=())
+        wish = threading.Thread(target=stressWish, args=())
+        userM.start()
+        admin.start()
+        lib.start()
+        rev.start()
+        sea.start()
+        sugg.start()
+        wish.start()
