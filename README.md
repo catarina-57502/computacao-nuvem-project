@@ -145,4 +145,4 @@ Actions with Git CA (Martim)
 5. Creation of NetworkPolicy. (Catarina)
 6. Protection for DoS, each request needs an access token, to monitor maximum requests per user. (Martim/Catarina)
 7. Check for attack Broken Object Level Authorization (when sensitive fields within an object are incorrectly exposed),
-   test for database inputs injection.
+   test for database inputs injection. (Thomas)
