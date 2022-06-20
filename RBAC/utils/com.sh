@@ -10,7 +10,7 @@ kubectl auth can-i create pods --all-namespaces
 cat ~/.kube/config
 rm -r ~/.kube/config
 
-kubectl config use-context adminOperationsTeam
+kubectl config use-context searchesTeam
 
 
 kubectl config get-contexts
