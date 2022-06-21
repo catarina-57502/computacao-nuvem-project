@@ -127,7 +127,7 @@ André Grilo - Searchs
 # Security
 
 
-Check the need for config maps (Catarina/Martim)  
+Check the need for config maps (Todos)  
 Actions with Git CA (Martim)  
 
 
